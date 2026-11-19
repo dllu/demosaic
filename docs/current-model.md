@@ -158,6 +158,11 @@ fine-response/flat-error tradeoff of the Bayer refit on independent
 ISO6400 photos. The strict gate adds 0.33 response points at
 parent-level flat RMS and removes most of the nominal fine-cab lift.
 Moderate gating retains more response and raises flat error.
+[Reserved Bayer waveform checks with a local edge](phase-edge-validation.md)
+reduce false correction in constructed gaps versus the same affine
+fit. The photo-calibrated version retains some nominal right-cab
+diagonals and delivers less natural-photo response than the local
+power gate at similar flat RMS. Fine junctions remain incomplete.
 [Indexed Bayer phase extraction](compact-spectral-witness.md) reproduces
 the earlier transported head and reduces median feature time from 52.6
 to 30.7 ms on a fine-cab query. The added neighbor-pair head lowers

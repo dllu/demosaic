@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Reserved Bayer waveform checks with a local edge](phase-edge-validation.md#standing-gfx100s-comparisons)
+  retain coherent coarse crossings and a visually smooth sky. Fine
+  building wires and foliage stay soft.
 - [Local RAW activity gates](phase-activity.md#standing-gfx100s-comparisons)
   keep the sky smooth and reinforce some existing coarse-fence crossings.
   Fine building lines and foliage remain soft.

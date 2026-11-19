@@ -57,6 +57,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [indexed Fourier extraction and reciprocal Bayer checks](compact-spectral-witness.md) ·
 [Bayer phase on the quieter local 20k model](quiet-parent-phase.md) ·
 [local RAW activity gates and flat error](phase-activity.md) ·
+[reserved Bayer waveform checks against strong edges](phase-edge-validation.md) ·
 [whole-image RAW strength prior](context-strength.md) ·
 [native Bayer green innovation](green-phase-innovation.md) ·
 [separated Bayer green aliases](quincunx-green.md) ·

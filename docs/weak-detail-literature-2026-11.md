@@ -473,6 +473,16 @@ correction. Green cross-power helps detect controlled stronger waves.
 For the weakest waves its center-window detection is close to chance,
 and many independent exact flats contain at least one active window.
 
+[Reserved Bayer waveform checks with a local edge](phase-edge-validation.md)
+keep the exterior nomination and the learned correction fixed
+while comparing two backgrounds inside each 32-pixel window. At
+the same gain, adding the edge reduces false correction in
+constructed gaps from 15.45 to 11.76 DN16 and improves held-out
+planted-wire response by 0.27 points over the affine fit. The
+photo-calibrated contrast retains more nominal right-cab diagonals
+than local power with incomplete crossings. Natural-photo response
+still favors local power at similar flat RMS.
+
 A [dense regional context replay](scene-regional-context.md) gives that
 trial's spatial 12k checkpoint a registered higher-resolution neighborhood.
 In the additional 48 fixed fields, quiet error falls versus coarse,

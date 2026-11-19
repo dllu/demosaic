@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Reserved Bayer waveform checks with a local edge](phase-edge-validation.md#standing-gfx100s-comparisons) | Both ROIs and profiles were inspected with both camera JPEGs and ISO100 AHD. The photo setting preserves nominal right-side diagonals that the local power gate suppresses. Left-side texture is mottled in places and fine junctions stay incomplete |
 | [Local RAW activity gates](phase-activity.md#standing-gfx100s-comparisons) | Both profiles and ROIs were inspected with both JPEGs and ISO100 AHD. Strict gating removes most of the nominal correction. Under the transferred profile, moderate local gates retain some right diagonals with incomplete crossings |
 | [Bayer phase on local 20k](quiet-parent-phase.md#standing-gfx100s-comparisons) | Both ROIs and profiles were inspected with both camera JPEGs and ISO100 AHD. The gate strengthens some existing right diagonals. The left lattice is diffuse and fine junctions stay incomplete |
 | [Matched local and spatial 20k models](scene-full-epoch-20k.md#standing-gfx100s-comparisons) | Both 20k arms, both profiles and both ROIs were viewed with both JPEGs and ISO100 AHD. Some nominal right diagonals look softer than Corpus 100k. Transferred conditioning shows more fragments with incomplete fine crossings |

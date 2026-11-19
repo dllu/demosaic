@@ -1,0 +1,2135 @@
+{
+  "exact": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-edge-validation-v1/render_edge.py",
+      "sha256": "a8f393256a314993fafa57bbe94643cfd8885b83dbd6cdb3b2e5d427883e109b"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "policies": {
+      "Bayer-gated": {
+        "gain": 1.0,
+        "gate": "uniform",
+        "quiet": 0.0
+      },
+      "activity": {
+        "gain": 1.0,
+        "gate": "activity",
+        "quiet": 0.0
+      },
+      "photo-edge": {
+        "gain": 1.31,
+        "gate": "edge-0.55",
+        "quiet": 0.0
+      },
+      "photo-predictive-edge": {
+        "gain": 1.5,
+        "gate": "predictive-edge-0.00",
+        "quiet": 0.0
+      },
+      "wire-edge": {
+        "gain": 0.6,
+        "gate": "edge-0.00",
+        "quiet": 0.0
+      }
+    },
+    "policy_selection": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-edge-validation-v1/selection.json",
+      "sha256": "14a36ac34c9d6d4fd95389a03f5ea653715190bca5c4a62e037483b8c73ffb81"
+    },
+    "prior_exact": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/exact-final/manifest.json",
+      "sha256": "32c16295f37c2cb9a9604daa0d7bfd822a1ef7725f2a1e5568d40bd60934583b"
+    },
+    "rows": [
+      {
+        "ADC_bits": 16,
+        "CFA": "BGGR",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/001-iso6400-independent-comparison.png",
+            "sha256": "2fa0362049cb143957cde48e558216140e7ea700944f47c3f753eae7614a399d"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power gate",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, photo",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, wire",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge prediction, photo",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 2.0,
+        "display_exposure": 3.0303030303030303,
+        "id": "001-iso6400-independent",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/001-iso6400-independent.npz",
+          "sha256": "4471b52c84c9f3f281f0cd6633a8bcc5b2bcb924c810aacaa2e3c121cf1137a5"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-020000/evaluation/predictions/001-iso6400-independent.npz",
+          "sha256": "2496a9a4c36da50fc8fd8f4458c7fac952abb9ef7c0e8abd2f965175a749da34"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "name": "iso6400",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "photo-edge": {
+            "image": {
+              "path": "exact/001-iso6400-independent-photo-edge-triplet.png",
+              "sha256": "05c5c1c78096c31d485f4905c3541501f04df79ea000d2e6a681fff1610aa049"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Edge contrast, photo",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "photo-predictive-edge": {
+            "image": {
+              "path": "exact/001-iso6400-independent-photo-predictive-edge-triplet.png",
+              "sha256": "7929f1ada32724c489e0cf20ccb96da4f44ce6673d69b0aea742265306710927"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Edge prediction, photo",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          22,
+          250,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "Berthold Werner",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/07/076545ab6d57bfb3be7884c3cae690b536090956.npy",
+          "cache_sha256": "02e50df398205439bc361661d3c128e0d974164c4bb06772b2f729cbe4db6b4d",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/07/65/076545ab6d57bfb3be7884c3cae690b536090956.jpg",
+          "dtype": "uint16",
+          "height": 3366,
+          "id": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "license": "Public domain",
+          "license_url": null,
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Limburger_Dom_BW_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg",
+          "sha1": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "sha1_hex": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "shape": [
+            841,
+            541,
+            3
+          ],
+          "split": "val",
+          "title": "File:Limburger Dom BW 1.jpg",
+          "width": 2166
+        },
+        "triplet": {
+          "image": {
+            "path": "exact/001-iso6400-independent-triplet.png",
+            "sha256": "b94ab8c2e3b4cdc87c148ba1d3d1229a31b86b9330220247e3afc5d1698b6f34"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, wire",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "RGGB",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/012-iso6400-comparison.png",
+            "sha256": "fd34ae20c26b8d08c36437f38bb4550ed16cc1402a7396cd4fd77aeaf72ded62"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power gate",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, photo",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, wire",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge prediction, photo",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "ellipse",
+        "id": "012-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/012-iso6400.npz",
+          "sha256": "caeba10076a8701b00589737a870775f791fd45459c9f5b52b24f570f8fc70b0"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/wire-parent/012-iso6400.npy",
+          "sha256": "b0f9b837209d5b8135f9c365be57a7893c2a95e010ec7013b6c88cf08bba6f2e"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "photo-edge": {
+            "image": {
+              "path": "exact/012-iso6400-photo-edge-triplet.png",
+              "sha256": "b89d49b03dffa16dd102a7768d378d33b56f4c4de1368cf9e2bf87f1b725e880"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Edge contrast, photo",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "photo-predictive-edge": {
+            "image": {
+              "path": "exact/012-iso6400-photo-predictive-edge-triplet.png",
+              "sha256": "ea7835e2bfd7ae97a4f8493278b8d219972ce0d74ee2d3759542f15bbc406d65"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Edge prediction, photo",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "GT1976",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ed/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.npy",
+          "cache_sha256": "eb7ec09162ad4d3e87a4bf7548bcd8cd741fecd489cfaeeb6d6b92bceea933e5",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/ed/8a/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.jpg",
+          "dtype": "uint16",
+          "height": 3000,
+          "id": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/2018-05-04_%28217%29_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:2018-05-04_(217)_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg",
+          "sha1": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "sha1_hex": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "shape": [
+            750,
+            1000,
+            3
+          ],
+          "split": "val",
+          "title": "File:2018-05-04 (217) 33 53 9332 586-5 at Bahnhof St. Valentin.jpg",
+          "width": 4000
+        },
+        "source_box": [
+          376,
+          16,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/012-iso6400-triplet.png",
+            "sha256": "e844d3a0addd1b0f323322d5ebc48bf06e5c0a99ae2b95922d158070e8ad24bf"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, wire",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "GRBG",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/014-iso6400-comparison.png",
+            "sha256": "fabbee1e93cf4427814f90aa132681239f0773cecf1c22dead2abe7a17e91e84"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power gate",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, photo",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, wire",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge prediction, photo",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "smooth-dip",
+        "id": "014-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/014-iso6400.npz",
+          "sha256": "b222c3a103b8fcea84dd06550d4de5ecc7db94ebeefef457884f41ec664631f6"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/wire-parent/014-iso6400.npy",
+          "sha256": "fe98f037193ebb2354c807ae2c9a69bb92753e99a22099d94806d2d845fc716e"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "photo-edge": {
+            "image": {
+              "path": "exact/014-iso6400-photo-edge-triplet.png",
+              "sha256": "cbb17cceb9a0dc87d83edcaad548cd8288e70c195dfbc1dfc0ca5f45fbd8b2d3"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Edge contrast, photo",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "photo-predictive-edge": {
+            "image": {
+              "path": "exact/014-iso6400-photo-predictive-edge-triplet.png",
+              "sha256": "626abd58891722dcae7dbca11aa76f031afe29133d0089fa0db3127ca61f665c"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Edge prediction, photo",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "Uoaei1",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/30/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.npy",
+          "cache_sha256": "fab4b796912d34e59e347fad7e5907b1f8c5ac910e44dc43f769762c84ae47fa",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/30/7d/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.jpg",
+          "dtype": "uint16",
+          "height": 2318,
+          "id": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Dianthus_superbus_Auernig_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Dianthus_superbus_Auernig_01.jpg",
+          "sha1": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "sha1_hex": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "shape": [
+            579,
+            579,
+            3
+          ],
+          "split": "val",
+          "title": "File:Dianthus superbus Auernig 01.jpg",
+          "width": 2318
+        },
+        "source_box": [
+          66,
+          32,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/014-iso6400-triplet.png",
+            "sha256": "bfae4c9a44caf6c2c9dcb271ea817b0e5d4a5a5a76562e4a0a8d1efc622f18dd"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast, wire",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/completed.json",
+      "sha256": "914fa11987e56db6ef8e8a76f6ac5c4af6e9026c1548923c46fe5824599b2e12"
+    }
+  },
+  "native_image_review": {
+    "completed": true,
+    "exact_comparisons": 3,
+    "notes": "The sky stays visually smooth, coarse crossings retain contrast, and building wires and foliage remain soft. Photo-calibrated edge evidence retains some nominal right-cab diagonals that the local power gate suppresses. The left is faint and mottled in places; fine junctions stay incomplete under both profiles.",
+    "standing": 8,
+    "triplets": 9
+  },
+  "standing": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-edge-validation-v1/render_edge.py",
+      "sha256": "a8f393256a314993fafa57bbe94643cfd8885b83dbd6cdb3b2e5d427883e109b"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "policies": {
+      "Bayer-gated": {
+        "gain": 1.0,
+        "gate": "uniform",
+        "quiet": 0.0
+      },
+      "activity": {
+        "gain": 1.0,
+        "gate": "activity",
+        "quiet": 0.0
+      },
+      "photo-edge": {
+        "gain": 1.31,
+        "gate": "edge-0.55",
+        "quiet": 0.0
+      },
+      "photo-predictive-edge": {
+        "gain": 1.5,
+        "gate": "predictive-edge-0.00",
+        "quiet": 0.0
+      },
+      "wire-edge": {
+        "gain": 0.6,
+        "gate": "edge-0.00",
+        "quiet": 0.0
+      }
+    },
+    "policy_selection": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-edge-validation-v1/selection.json",
+      "sha256": "14a36ac34c9d6d4fd95389a03f5ea653715190bca5c4a62e037483b8c73ffb81"
+    },
+    "prior_native": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/standing/manifest.json",
+      "sha256": "24341944d8bf4111e89ab783682c0cb0d0b6b0c12e93db9031717966be211a70"
+    },
+    "rows": [
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "64f9b6218e0d16db3365fc03d6e531dbef89933f93ab4ab22a9697067f59b839"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 1.7904884240870702,
+          "activity": 1.0575516812879633,
+          "photo-edge": 1.0960533507736994,
+          "photo-predictive-edge": 0.9137275362147893,
+          "wire-edge": 0.7529341017030821
+        },
+        "display_exposure": 4.0,
+        "id": "main-overcast-sky-main-overcast-sky",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "ea00e14ddb14f021dd099e07c020589af8e132ae02650981b9ee843522f66a95"
+        },
+        "native_box": [
+          5752,
+          1352,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-overcast-sky-RGB-f32.npy",
+          "sha256": "f2527cae11c6621c7b36491310f7a965e7910532842eb765bdcf64fcb07b6c26"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-building-detail-main-building-detail.png",
+            "sha256": "3c6677af048c8efaeb0dd141651d8d53bd887f93c86533cd78b62522be4f8acd"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.8485682396461725,
+          "activity": 9.140948136195233,
+          "photo-edge": 6.596568515180963,
+          "photo-predictive-edge": 5.513048781182503,
+          "wire-edge": 3.2923554219354316
+        },
+        "display_exposure": 4.0,
+        "id": "main-building-detail-main-building-detail",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-building-detail-main-building-detail.png",
+          "sha256": "30d438f8129e23331424dc4e6871ff9a786e6fea635752c98437c43e828858ca"
+        },
+        "native_box": [
+          5742,
+          2642,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-building-detail-RGB-f32.npy",
+          "sha256": "f68f30c44e8a541ccbafdf7a582bf953c973bf57d8bb5b2be4123ac2847cb470"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-foliage-main-foliage.png",
+            "sha256": "d899ab715b0336dcb8625cfcbe1a0dc07e4a0ae79d135cf5a976367ac314fdaf"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.8885571273757815,
+          "activity": 10.190916227475357,
+          "photo-edge": 5.89552851413628,
+          "photo-predictive-edge": 4.396528839670098,
+          "wire-edge": 2.9751862808354
+        },
+        "display_exposure": 4.0,
+        "id": "main-foliage-main-foliage",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-foliage-main-foliage.png",
+          "sha256": "d83c6f7a7ece3241c465f74c8c3aa444230636b15ce552803804ee004f95547c"
+        },
+        "native_box": [
+          8842,
+          5522,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-foliage-RGB-f32.npy",
+          "sha256": "6708ed14ecbce7437f8c4f009cfd03f521f7bfa0842f8f8b40bc0fd235ed1700"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "9a190fddeefa3c26451f4eb42e1ecc98ba033ebd9b1c74eff9b02e481fbec93c"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 15.998412819000286,
+          "activity": 23.99761920240819,
+          "photo-edge": 18.705271509975503,
+          "photo-predictive-edge": 18.873484486481306,
+          "wire-edge": 8.836357315953505
+        },
+        "display_exposure": 4.0,
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "10cee20009a6d396f3e0b8e261c1a8bc2899e40664794a155806ed8b4126955a"
+        },
+        "native_box": [
+          2192,
+          5952,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-chain-link-fence-RGB-f32.npy",
+          "sha256": "ef48b06d7c8d3c39db0db3873590cbbc4ff056edfde5bab1878a8eb6ee955efc"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "2f6951e7088095ddd18754766e4ac43dfcc0b65a83b719ce0c086424aa54c56d"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 3.613730059767534,
+          "activity": 1.4343086110519931,
+          "photo-edge": 4.072547970011784,
+          "photo-predictive-edge": 3.0301783963885,
+          "wire-edge": 2.0213382990603788
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "49aa16a3a7762ea8747bc3b1c423d5840f8fd57cfa22efeaa666ab8ed43297ba"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-nominal-RGB-f32.npy",
+          "sha256": "fce832ace548686fe634da956bafab1cd14ce4995950597b80c441c92d94f511"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "2329200ffc67715bfa5915568ec15038edad029ba06eb133b9ebbbf52665b5a4"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 7.5553929231441375,
+          "activity": 1.2156278137528127,
+          "photo-edge": 9.483675370648086,
+          "photo-predictive-edge": 8.704326863887406,
+          "wire-edge": 4.45268902397588
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "d098cbceaa0bbdd294ccfd8e918f5b70f331571def6da2dba733358ffcae0faf"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-nominal-RGB-f32.npy",
+          "sha256": "fce832ace548686fe634da956bafab1cd14ce4995950597b80c441c92d94f511"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "5d279941b9c63dd236963bfcea9314675993797b8a3beaa697430e3649423fb3"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 4.235374040573767,
+          "activity": 5.071420566562723,
+          "photo-edge": 4.69344617923571,
+          "photo-predictive-edge": 3.5531531895614887,
+          "wire-edge": 2.317367514153226
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "2ffdf9d349bad9b9d43800e366fbbc2d0f431bcc092879ec0f6d98e274ae5fb1"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-profile3879-RGB-f32.npy",
+          "sha256": "fd8ba8fa4b0ff48786e8b679d60cc7b7c85462f276b7e49e412de05a31cf5c98"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "899961e965b0237366556f3f4963aca8753566725768842e8a6c8eceafa1dca7"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power gate",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, photo",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast, wire",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge prediction, photo",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.185193349300662,
+          "activity": 7.44348902872894,
+          "photo-edge": 7.570380478674729,
+          "photo-predictive-edge": 6.757070664376717,
+          "wire-edge": 3.572489240270494
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "e090aab4265494ae78f3e22ab1e1e4d461b4cc4340d0a608590a68a8c9af9904"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-profile3879-RGB-f32.npy",
+          "sha256": "fd8ba8fa4b0ff48786e8b679d60cc7b7c85462f276b7e49e412de05a31cf5c98"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/completed.json",
+      "sha256": "914fa11987e56db6ef8e8a76f6ac5c4af6e9026c1548923c46fe5824599b2e12"
+    }
+  }
+}
