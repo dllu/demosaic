@@ -8,6 +8,8 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Directional gap supervision](directional-gap-training.md#standing-gfx100s-comparisons) | Both profiles and ROIs were viewed with independent AHD and both JPEGs. The nominal right diagonals strengthen, with incomplete fine intersections |
+| [Matched local and spatial 25k models](scene-full-epoch-25k.md#standing-gfx100s-comparisons) | Matched 20k and 25k native views show little change. Transferred conditioning retains more right diagonals than nominal, with incomplete crossings |
 | [Within-window phase localization](local-phase-envelope.md#standing-gfx100s-comparisons) | Both profiles and ROIs were inspected with both JPEGs and ISO100 AHD. Existing right diagonals remain, with little visible change and incomplete fine junctions |
 | [Learned phase gate mixtures](phase-correction-mixture.md#standing-gfx100s-comparisons) | Both ROIs and profiles were inspected with both JPEGs and ISO100 AHD. The mixes retain some nominal right diagonals that local power suppresses, with less definition than fixed edge contrast. Fine junctions remain incomplete |
 | [Reserved Bayer waveform checks with a local edge](phase-edge-validation.md#standing-gfx100s-comparisons) | Both ROIs and profiles were inspected with both camera JPEGs and ISO100 AHD. The photo setting preserves nominal right-side diagonals that the local power gate suppresses. Left-side texture is mottled in places and fine junctions stay incomplete |

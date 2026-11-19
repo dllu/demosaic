@@ -458,8 +458,14 @@ tied, and both standing real scenes retain incomplete fine cab crossings.
 The [matched 25k photo review](scene-full-epoch-25k.md) lowers independent
 ISO6400 flat RMS by about 0.10 DN16 over 20k in both arms. Fine response
 falls another 0.20–0.25 points. The effects of correct and mismatched
-distant context remain nearly tied. Standing GFX review is still running
-at 25k.
+distant context remain nearly tied. Both standing GFX comparisons are
+complete at 25k, with a smooth sky and incomplete fine cab crossings.
+
+[Directional gap supervision](directional-gap-training.md) separates
+strong-wave repair from the missing weak band in exact gaps. It gains
+0.44 intact wire-response points at similar total gap correction.
+Error in the missing weak direction rises slightly and fine real
+intersections remain incomplete.
 
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the

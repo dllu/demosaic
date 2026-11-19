@@ -10,15 +10,15 @@ Follow-up measurements verify five complete ordinary-photo passes and
 fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233).
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
-two arms match through 25,000 updates on 50,000 distinct photos and
-200,000 native queries per arm. Local-only verifies 26,500 updates
-on 53,000 photos. The 25k photo review is complete on 64 exact-target
-sources. Both standing GFX scenes are running at 25k. The spatial
+two arms match through 26,000 updates on 52,000 distinct photos and
+208,000 native queries per arm. Local-only verifies 27,500 updates
+on 55,000 photos. The 25k review covers 64 exact-target photos and both
+standing GFX scenes. The spatial
 arm at 25k has lower independent ISO6400 fine error and weaker true
 recovery than Corpus 100k.
 [Coverage and source audit](scene-full-epoch.md#execution-status) ·
 [25k photo review](scene-full-epoch-25k.md) ·
-[Completed 20k standing GFX review](scene-full-epoch-20k.md#standing-gfx100s-comparisons).
+[Completed 25k standing GFX review](scene-full-epoch-25k.md#standing-gfx100s-comparisons).
 
 At 10,000 updates, the retained loops process 17.01 native queries per
 second locally and 13.19 with spatial features. Reading and CPU

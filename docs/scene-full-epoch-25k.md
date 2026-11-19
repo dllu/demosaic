@@ -5,8 +5,9 @@ On the same 64 independent ISO6400 photo backgrounds, the spatial
 and loses **0.253 percentage points** of fine response. The local
 25k EMA gives a similar tradeoff. Correct and mismatched distant
 views are nearly tied. The 64-photo numerical evaluation and
-exact native image review are complete. The standing GFX review
-is running.
+exact native image review are complete. Both standing GFX scenes
+retain the smooth sky and coherent coarse fence. Fine cab crossings
+remain incomplete at 25k.
 [Training receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [Exact-photo results](results/scene-full-epoch-v1/matched-025000-monitor.json).
 
@@ -99,11 +100,37 @@ Fine molding and brick texture remain soft.
 
 ![Limburg Cathedral, noisy, matching spatial 25k and exact GT](images/scene-full-epoch-v1/evaluation-025000/001-iso6400-independent-role0-triplet.png)
 
-The matched training milestone, numerical replay and exact crop
-viewing are complete. Both standing GFX scenes are running at
-25k. The latest completed review of both real scenes covers
-the matched 20k EMA pair. The broader 427-photo and known/unseen
+
+## Standing GFX100S comparisons
+
+Both 25k EMA arms were viewed alongside V120, Corpus 100k and the
+independent ISO100 references. The direct 20k and 25k boards use the
+same 160 × 160 pixels, conditioning and rendering. The DSCF3879 scene uses
+nominal shot/read `0.00128/6.5536e-6` at display ×4. The sky stays smooth,
+the coarse crossings stay coherent, and fine leaves and building wires
+remain soft. Spatial 25k differs from spatial 20k by 1.05 DN16 RGB RMS in
+the sky and 9.02 DN16 in the coarse fence. The native views show little
+change in the recovered detail.
+[Sky](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-overcast-sky-main-overcast-sky.png) ·
+[Building](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-building-detail-main-building-detail.png) ·
+[Foliage](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-foliage-main-foliage.png) ·
+[Coarse fence](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-chain-link-fence-main-chain-link-fence.png).
+
+In the DSCF3842 cab at display ×16, nominal conditioning leaves a diffuse
+left lattice and faint right diagonals. The transferred profile
+`0.0014635775921166604/1.0715704128646712e-6` shows more right diagonals at
+both milestones, with incomplete junctions and uneven background texture.
+Both cab crops were inspected alongside DSCF3835 ISO100 AHD and both camera
+JPEGs. Aperture, exposure time and subject motion differ between the captures.
+
+| Cab profile | Full native boards with qualitative references | Direct milestone boards |
+| --- | --- | --- |
+| Nominal | [Left](images/scene-full-epoch-v1/standing-025000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-025000/mesh-nominal-fine-green-mesh-right.png) | [Left](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-full-epoch-v1/standing-025000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-025000/mesh-profile3879-fine-green-mesh-right.png) | [Left](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-profile3879-fine-green-mesh-right.png) |
+
+The matched training milestone, numerical replay, exact crop viewing and
+both standing comparisons are complete. The full 427-photo and known/unseen
 camera panels are queued for the final 50k endpoints.
-[Standing and numerical review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json) ·
-[Completed 20k standing review](scene-full-epoch-20k.md#standing-gfx100s-comparisons) ·
+[Standing receipt](results/scene-full-epoch-v1/matched-025000-standing.json) ·
+[Completion record](results/scene-full-epoch-v1/matched-025000-quality-status.json) ·
 [Comparable PSNR history](performance-history.md).

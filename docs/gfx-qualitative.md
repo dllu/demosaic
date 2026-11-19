@@ -3,6 +3,12 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Directional gap supervision](directional-gap-training.md#standing-gfx100s-comparisons)
+  leaves a smooth sky and coherent coarse crossings. Fine foliage and
+  building wires remain soft.
+- [Matched local and spatial 25k models](scene-full-epoch-25k.md#standing-gfx100s-comparisons)
+  show little visible change from 20k in the smooth sky, coarse fence,
+  foliage and building details.
 - [Within-window phase localization](local-phase-envelope.md#standing-gfx100s-comparisons)
   keeps the smooth sky and coherent coarse wires. The fine building and
   foliage details remain soft.

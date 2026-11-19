@@ -1,0 +1,1485 @@
+{
+  "recorded": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-025000/work/render/result.json",
+    "sha256": "90049aaf97809756eeecf6b8977e6eeb5015567534082881347a2822cc15d64f"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/scene-full-epoch-v1/matched-025000-standing.tar.xz",
+    "sha256": "5896287091784e71e12e26d82f426107ea0febd635116967cff4b475ce9de3d2"
+  },
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/matched-025000.json",
+    "sha256": "51b29068fab51a31a42df9ad2e8eec1dada5cadb98b20f80133e0fbef374c425"
+  },
+  "collections": {
+    "V120": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-context-native-review-v1/parent/collection-recovered.json",
+      "sha256": "1a99789d2ce7a8074dd67218746de2f02e6e4134faaa234f39169964efdedfa3"
+    },
+    "parent100k": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/collection.json",
+      "sha256": "42f991cb84233c78000059ab0e7d1bab6085bda3ce0e6448c4858b0e970dae17"
+    },
+    "none": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-025000/none/collection.json",
+      "sha256": "3f0e4e822ee401ab5177178bbb48e891d94b3c3f86e4dc13de769abd6c832acf"
+    },
+    "spatial": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-025000/spatial/collection.json",
+      "sha256": "00ae1a01abf8a3ac3e77787bb61bf97b17dfc8fc10a04e32460afd77bc8f8218"
+    }
+  },
+  "boards": [
+    {
+      "id": "main-overcast-sky-main-overcast-sky",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/main-overcast-sky-main-overcast-sky.png",
+        "sha256": "25719d3f331757a3b8f8cd5c33d66853091aabf002536d9cfd7ddf49664e5ebd"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "main-overcast-sky",
+      "case": {
+        "name": "main-overcast-sky",
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+        "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+      },
+      "display_exposure": 4.0,
+      "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "All four 20k and 25k EMA fields stay smooth at native scale. No new mottling is visible.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 1.046083486906456,
+          "max_camera_RGB_DN16": 6.258449424058199
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 0.7870214495869339,
+          "max_camera_RGB_DN16": 5.686070462688804
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 1.4227533350949269,
+          "max_camera_RGB_DN16": 6.508811814710498
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 3.283868992755405,
+          "max_camera_RGB_DN16": 24.218746656551957
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 2.8516189334303346,
+          "max_camera_RGB_DN16": 24.90782305598259
+        }
+      }
+    },
+    {
+      "id": "main-building-detail-main-building-detail",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/main-building-detail-main-building-detail.png",
+        "sha256": "fbdd58f45914f62cb91277a0aa1a70552604e7d769778e3802ca7722f7fa1b27"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "main-building-detail",
+      "case": {
+        "name": "main-building-detail",
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+        "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+      },
+      "display_exposure": 4.0,
+      "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "The post, diagonal brace and three foreground lines remain visible. Fine wires still look soft at 25k.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 6.0045488171188905,
+          "max_camera_RGB_DN16": 66.53292031958699
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 3.1274257431223536,
+          "max_camera_RGB_DN16": 31.10743548721075
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 6.78298606486546,
+          "max_camera_RGB_DN16": 58.07833741419017
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 11.708751028637138,
+          "max_camera_RGB_DN16": 107.97540318220854
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 8.865151515273038,
+          "max_camera_RGB_DN16": 85.3185223415494
+        }
+      }
+    },
+    {
+      "id": "main-foliage-main-foliage",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/main-foliage-main-foliage.png",
+        "sha256": "7c7b30e72497c7f7b64e7b59e56558123b05e0a1254c6543910438945aa2b52d"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "main-foliage",
+      "case": {
+        "name": "main-foliage",
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+        "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+      },
+      "display_exposure": 4.0,
+      "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "Larger leaves stay coherent. Fine edges and background texture are similarly soft at both milestones.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 6.438900906913734,
+          "max_camera_RGB_DN16": 67.46723223477602
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 2.8669699410862597,
+          "max_camera_RGB_DN16": 34.09908905625343
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 7.06208458011114,
+          "max_camera_RGB_DN16": 81.22629962861538
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 17.55424163008543,
+          "max_camera_RGB_DN16": 423.0970595777035
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 14.874635077649058,
+          "max_camera_RGB_DN16": 341.8707599490881
+        }
+      }
+    },
+    {
+      "id": "main-chain-link-fence-main-chain-link-fence",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/main-chain-link-fence-main-chain-link-fence.png",
+        "sha256": "aabc5bca734b5e36221dae461c2aa7e3f880a626fea0a1e34b75d64f62ee230e"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "main-chain-link-fence",
+      "case": {
+        "name": "main-chain-link-fence",
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+        "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+      },
+      "display_exposure": 4.0,
+      "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "Both lattice directions remain coherent in all four model views. Fine background detail is soft.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 9.020273878089082,
+          "max_camera_RGB_DN16": 145.8600790053606
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 4.774836210128885,
+          "max_camera_RGB_DN16": 221.19389042258263
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 9.202156399198108,
+          "max_camera_RGB_DN16": 369.1139965876937
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 23.30097759904749,
+          "max_camera_RGB_DN16": 2372.1102882921696
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 19.07024846323349,
+          "max_camera_RGB_DN16": 2002.9962917044759
+        }
+      }
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/mesh-nominal-fine-green-mesh-left.png",
+        "sha256": "a20f271ce85e716025e826dd64d9464a68cb2f72d54353a627791167d10717f5"
+      },
+      "panels": [
+        {
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "mesh-nominal",
+      "case": {
+        "name": "fine-green-mesh-left",
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          805,
+          6489,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+              "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+            },
+            "xywh": [
+              760,
+              6500,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+              "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+            },
+            "xywh": [
+              759,
+              6501,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        },
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "display_exposure": 16.0,
+      "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "The strong post and a diffuse diagonal remain. The fine crossings are largely absent at both milestones. ISO100 AHD and both JPEGs were viewed.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 2.1722861645101488,
+          "max_camera_RGB_DN16": 100.11517155915499
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 1.3069990506575526,
+          "max_camera_RGB_DN16": 76.41875579953194
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 2.2051991747171447,
+          "max_camera_RGB_DN16": 62.31276987120509
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 10.87830918980658,
+          "max_camera_RGB_DN16": 1589.4401021674275
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 10.876448694582853,
+          "max_camera_RGB_DN16": 1622.930313795805
+        }
+      }
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/mesh-nominal-fine-green-mesh-right.png",
+        "sha256": "9be753e2ad8c7aa971e225f387853a5312fe414811e2f2fbfaa50fed38e22abd"
+      },
+      "panels": [
+        {
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "mesh-nominal",
+      "case": {
+        "name": "fine-green-mesh-right",
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          1025,
+          6449,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+              "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+            },
+            "xywh": [
+              980,
+              6460,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+              "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+            },
+            "xywh": [
+              979,
+              6461,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        },
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "display_exposure": 16.0,
+      "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "Both diagonals are faint at 20k and 25k. Neither model resolves the missing right-hand crossings. ISO100 AHD and both JPEGs were viewed.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 2.407997099918061,
+          "max_camera_RGB_DN16": 44.54363183118403
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 1.2708114007216404,
+          "max_camera_RGB_DN16": 45.97329751588404
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 2.6823462051242766,
+          "max_camera_RGB_DN16": 58.24410636909306
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 8.851669767161408,
+          "max_camera_RGB_DN16": 415.14808419160545
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 8.790560350610127,
+          "max_camera_RGB_DN16": 356.9039778225124
+        }
+      }
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/mesh-profile3879-fine-green-mesh-left.png",
+        "sha256": "9457216a839c0345dc55c9e0b2b647fc6b9450284affd9391ad0c3997d3aab78"
+      },
+      "panels": [
+        {
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "mesh-profile3879",
+      "case": {
+        "name": "fine-green-mesh-left",
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          805,
+          6489,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+              "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+            },
+            "xywh": [
+              760,
+              6500,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+              "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+            },
+            "xywh": [
+              759,
+              6501,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        },
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "display_exposure": 16.0,
+      "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "The left patch retains fragments of both diagonals with mottled background. No clear increase in visible crossings between milestones. ISO100 AHD and both JPEGs were viewed.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 2.807948863585092,
+          "max_camera_RGB_DN16": 186.4756701886654
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 1.2843235798688188,
+          "max_camera_RGB_DN16": 61.25223917886615
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 2.353217442400402,
+          "max_camera_RGB_DN16": 132.36614428460598
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 10.595540353974013,
+          "max_camera_RGB_DN16": 1756.9116678088903
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 10.25490659939066,
+          "max_camera_RGB_DN16": 1624.5455235242844
+        }
+      }
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/mesh-profile3879-fine-green-mesh-right.png",
+        "sha256": "34c0f849fc6ced843e818d2d4dec8b411f456aadbab56baa3226a655207e8534"
+      },
+      "panels": [
+        {
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Parent 100k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only 25k EMA",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial 25k EMA",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD reference",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "observation": "mesh-profile3879",
+      "case": {
+        "name": "fine-green-mesh-right",
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          1025,
+          6449,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+              "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+            },
+            "xywh": [
+              980,
+              6460,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+              "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+            },
+            "xywh": [
+              979,
+              6461,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        },
+        "crop_index": 0
+      },
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "display_exposure": 16.0,
+      "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+      "actual_native_viewing": "Right diagonals are visibly stronger than nominal at both milestones. The 25k outputs still leave incomplete lattice intersections and uneven texture. ISO100 AHD and both JPEGs were viewed.",
+      "model_differences": {
+        "spatial25_vs_spatial20": {
+          "camera_RGB_RMS_DN16": 3.2364887104895415,
+          "max_camera_RGB_DN16": 74.42879592999816
+        },
+        "local25_vs_local20": {
+          "camera_RGB_RMS_DN16": 1.6249020091101272,
+          "max_camera_RGB_DN16": 18.85328897740692
+        },
+        "spatial_vs_local": {
+          "camera_RGB_RMS_DN16": 3.941842976148406,
+          "max_camera_RGB_DN16": 121.85409765690565
+        },
+        "spatial_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 9.091944064120947,
+          "max_camera_RGB_DN16": 407.36207018606365
+        },
+        "local_vs_Corpus_100k": {
+          "camera_RGB_RMS_DN16": 9.638453802720202,
+          "max_camera_RGB_DN16": 285.507972529158
+        }
+      }
+    }
+  ],
+  "direct_20k_vs_25k": {
+    "main-overcast-sky-main-overcast-sky": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-overcast-sky-main-overcast-sky.png",
+        "sha256": "2d85e2d76bbec751f0ac37e9b3a397ab49711dfe4ccf91c4b32dc77fe6698cd7"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    "main-building-detail-main-building-detail": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-building-detail-main-building-detail.png",
+        "sha256": "fa69d3175bcb4c2822cc1ad06ef33c9823442cdde686d89301512833ebb47b7e"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    "main-foliage-main-foliage": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-foliage-main-foliage.png",
+        "sha256": "4343c76e9c2927f944120e8164d4ce789ecad5dc00d6bdaa1f549c874bdbba2b"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    "main-chain-link-fence-main-chain-link-fence": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-main-chain-link-fence-main-chain-link-fence.png",
+        "sha256": "8084b947ad21686076f67a8a21253310be64b39fd07b0edc0cc8d24fb46fe259"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    "mesh-nominal-fine-green-mesh-left": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-nominal-fine-green-mesh-left.png",
+        "sha256": "f61936a9a707bec391891ba692e1c036178d68f9594c625c4ae12e2bf83f29c5"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    "mesh-nominal-fine-green-mesh-right": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-nominal-fine-green-mesh-right.png",
+        "sha256": "e0ea7d7a0069b57325771ae9e79b61d2bf0f5f9095a08c5aca9a8ac42c72f0a2"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    "mesh-profile3879-fine-green-mesh-left": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-profile3879-fine-green-mesh-left.png",
+        "sha256": "8643b470e448a548cb21e41e084be272a83f6f147816a25234d1eb0cef4899a7"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    "mesh-profile3879-fine-green-mesh-right": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-full-epoch-v1/standing-025000/20k-vs-25k-mesh-profile3879-fine-green-mesh-right.png",
+        "sha256": "fafe42f37e11a6a0eb63cee361a86b1b2b6ec1ae4f49958eadd771558a44cd34"
+      },
+      "panels": [
+        {
+          "name": "Local-only 20k EMA",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 20k EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Local-only 25k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "Spatial 25k EMA",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ]
+    }
+  },
+  "scoped_viewing_complete": true,
+  "torch_policy": "CPU IEEE FP32. Reused control RGB strictly matched to source conditions.",
+  "scope": "Both fixed GFX families at intermediate 25k scene checkpoints. RGB differences compare models. References are qualitatively different captures. Canonical scores reserved for full endpoints."
+}

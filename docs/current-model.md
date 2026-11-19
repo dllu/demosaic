@@ -152,7 +152,12 @@ GFX views retain soft, incomplete fine cab crossings.
 independent ISO6400 flat RMS by about 0.10 DN16 versus 20k in
 both arms, with 0.20–0.25 fewer fine-response points. Matching
 and mismatched distant views remain nearly tied. Exact photo
-viewing is complete and the standing GFX review is running.
+and both standing GFX reviews are complete. The sky stays smooth and
+fine cab crossings remain incomplete.
+[Directional gap supervision](directional-gap-training.md) gains 0.44
+wire response points at similar total gap correction and adds 0.066
+DN16 of weak-band gap error. Nominal right cab diagonals strengthen
+without resolving the missing fine intersections.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
