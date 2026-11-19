@@ -32,6 +32,11 @@ waveform to verify local deficits. It reduces texture continued into
 additional true gaps and attenuates some neighboring intact wire. The
 eight standing GFX crops stay pixel-identical to the preceding fit.
 
+A [dense regional preview](scene-regional-context.md) combined with the
+12k full-image context lowers exact flat-core variation versus coarse,
+resampled and mirrored previews. Native fine response stays close to the
+coarse full-image result. The real fine cab remains incomplete.
+
 Off-grid refinement of the RAW footprint cuts less intact wire on
 fresh ISO400 gap scenes. The fixed audit still admits one of six
 fresh ISO6400 gaps with averaged footprints. The standing sky

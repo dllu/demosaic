@@ -225,12 +225,19 @@ study. Retained training loops total 5,842.76 s local and 7,468.07 s spatial.
 The 12,000-update checkpoints remain the last numerically and visually
 reviewed pair. [Paired 12,500 source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-012500.json).
 
-The local-only arm has also verified **14,000 updates**, covering 28,000
-distinct photos and 112,000 native queries. The controller is continuing
-the local arm toward the next 15,000-update matched milestone. A live
-worker waits for the matched receipt and runs the numerical monitor and
-both standing GFX collections sequentially.
-[Local 14k source and checkpoint audit](results/scene-full-epoch-v1/local-014000-prefix.json) ·
+The next segments verify identical inputs through **13,000 updates** on
+26,000 distinct photos, 26,000 sensor seeds and 104,000 native queries per
+arm. Both training workers retain the original 50,000-update schedule.
+[Paired 13k source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-013000.json).
+
+The local-only arm has verified **15,000 updates**, covering 30,000
+distinct photos, 30,000 noise seeds and 120,000 native queries. Its
+retained training loops total 6,911.95 s. The local checkpoint SHA256 is
+`7d2e041b563651d7dd9af24a18cb32f8cd94b8a094a05005eb55a43bb0fd30cb`.
+The controller is advancing the spatial arm toward the same milestone.
+A live worker waits for the matched receipt and runs the numerical monitor
+and both standing GFX collections sequentially.
+[Local 15k source and checkpoint audit](results/scene-full-epoch-v1/local-015000-prefix.json) ·
 [15k review queue](results/scene-full-epoch-v1/queue-review-015000.json).
 
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·

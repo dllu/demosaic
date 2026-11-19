@@ -11,6 +11,10 @@ little additional gain over interpolation.
 [Paired exact-target measurements](results/scene-preview-scale-v1/preview-paired.json) ·
 [Standing output and native viewing](results/scene-preview-scale-v1/standing-viewing.json).
 
+A [regional-context comparison](scene-regional-context.md) tests a later
+12k checkpoint with dense cropped context, a mean-preserving whole-frame
+blend, and controls for interpolation and spatial placement.
+
 ## Fixed native inputs
 
 The [training geometry audit](scene-local-contrast-2400.md#preview-scale-in-training-and-gfx)

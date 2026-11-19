@@ -446,6 +446,14 @@ with higher whole-core error and incomplete fine crossings. The
 [full-epoch scene trial](scene-full-epoch.md) is training separately on
 the matched larger source schedule.
 
+A [dense regional context replay](scene-regional-context.md) gives that
+trial's spatial 12k checkpoint a registered higher-resolution neighborhood.
+In the additional 48 fixed fields, quiet error falls versus coarse,
+resampled and mirrored context. Fine response remains nearly constant.
+Previously measured fence frequencies fit on the denser preview pixels,
+while the finest scene feature grid cannot represent their native spatial
+oscillation directly. The real fine cab crossings remain incomplete.
+
 The [green alias follow-up](quincunx-green.md) separates two native
 frequency classes missed by one packed plane alone. On 32 planted
 cases with a stronger shared alias, it adds 0.086 percentage points

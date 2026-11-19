@@ -202,6 +202,11 @@ lower-band flat variation relative to masking and gives nearly the same
 fine response as local-only. Coupled fine-increment error remains above
 Corpus 100k. In both standing GFX reviews the sky is smooth, the coarse
 fence survives, and the fine cab crossings remain incomplete.
+[Dense regional context](scene-regional-context.md) above the 12k EMA
+improves quiet regions when the whole preview is sampled at GFX density.
+The result holds on 48 additional development fields relative to coarse,
+resampled and flipped context. Fine recovery stays close to coarse context
+and the real cab crossings remain incomplete.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control
