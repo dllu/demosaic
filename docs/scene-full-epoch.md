@@ -308,16 +308,23 @@ numerical and native review covers 20k.
 [25,000 segment receipts](results/scene-full-epoch-v1/paired-prefix-025000.tar.xz).
 [Earlier local audit](results/scene-full-epoch-v1/local-022500-prefix.json).
 
-The full 64-source numerical review has started from the verified 25k EMA
-pair. Both standing GFX scenes run afterward. The latest completed
-matched quality review uses 20k EMA for both arms.
+The 64-source numerical and exact native photo review is complete at
+25k EMA. Both standing GFX scenes are running at the same checkpoint
+pair. The latest completed matched standing review uses 20k EMA.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
-[Full 25k photo and native review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
+[25k exact-photo review](scene-full-epoch-25k.md) ·
+[Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
 [24,000 local audit](results/scene-full-epoch-v1/local-024000-prefix.json) ·
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
+
+Local-only verifies 26,500 updates, 53,000 distinct photos and
+212,000 native queries on the unchanged 50k schedule.
+[25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
+[26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
+[26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json).
 
 [Earlier local-only 20,000 audit](results/scene-full-epoch-v1/local-020000-prefix.json) ·
 [Matched 20,000 controller receipt](results/scene-full-epoch-v1/matched-020000-training.json) ·

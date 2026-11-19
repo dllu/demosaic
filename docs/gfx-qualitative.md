@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Within-window phase localization](local-phase-envelope.md#standing-gfx100s-comparisons)
+  keeps the smooth sky and coherent coarse wires. The fine building and
+  foliage details remain soft.
 - [Learned phase gate mixtures](phase-correction-mixture.md#standing-gfx100s-comparisons)
   retain a smooth sky and coherent coarse crossings. Fine foliage and
   building wires remain soft.

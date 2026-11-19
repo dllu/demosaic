@@ -455,6 +455,11 @@ matched larger source schedule. At the [64-photo 20k review](scene-full-epoch-20
 both arms lower independent ISO6400 fine error over Corpus 100k with
 lower fine response. The correct and mismatched distant views are nearly
 tied, and both standing real scenes retain incomplete fine cab crossings.
+The [matched 25k photo review](scene-full-epoch-25k.md) lowers independent
+ISO6400 flat RMS by about 0.10 DN16 over 20k in both arms. Fine response
+falls another 0.20–0.25 points. The effects of correct and mismatched
+distant context remain nearly tied. Standing GFX review is still running
+at 25k.
 
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
@@ -491,6 +496,15 @@ with greater change inside the gaps. On independently corrupted
 natural photos, scaled local power retains 0.10 more response points
 at similar flat RMS. The mixture primarily draws on edge evidence
 for the nominal right cab, where the fine crossings remain incomplete.
+
+[Within-window phase localization and directional gap attribution](local-phase-envelope.md)
+finds that 65.02% of the conditional correction energy inside known
+weak-wire gaps belongs to the continuing strong wire. The missing
+weak family accounts for 0.13%, including phase-shifted waves
+of the known bands. Suppressing the entire gap correction would
+discard a useful strong-wire repair. The within-window modulation
+brings little improvement at matched strength and leaves the real
+fine crossings incomplete.
 
 A [dense regional context replay](scene-regional-context.md) gives that
 trial's spatial 12k checkpoint a registered higher-resolution neighborhood.

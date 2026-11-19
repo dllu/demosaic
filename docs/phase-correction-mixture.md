@@ -10,6 +10,12 @@ retain some fine right-cab diagonals. Fine junctions stay incomplete.
 [Checkpoint and results](results/phase-correction-mixture-v1/publication.json) ·
 [Training and evaluation receipts](results/phase-correction-mixture-v1/evidence.tar.xz).
 
+The [directional follow-up](local-phase-envelope.md) attributes
+65.02% of the conditional correction energy inside known weak-wire
+gaps to the strong wire that continues through them. The missing
+weak-wire band accounts for 0.13%. Added gap RMS measures all
+changes in the gap, including repairs to the continuing wire.
+
 ## Fixed estimates and learned gains
 
 The [local power setting](phase-activity.md) has the strongest

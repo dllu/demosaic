@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Within-window phase localization](local-phase-envelope.md#standing-gfx100s-comparisons) | Both profiles and ROIs were inspected with both JPEGs and ISO100 AHD. Existing right diagonals remain, with little visible change and incomplete fine junctions |
 | [Learned phase gate mixtures](phase-correction-mixture.md#standing-gfx100s-comparisons) | Both ROIs and profiles were inspected with both JPEGs and ISO100 AHD. The mixes retain some nominal right diagonals that local power suppresses, with less definition than fixed edge contrast. Fine junctions remain incomplete |
 | [Reserved Bayer waveform checks with a local edge](phase-edge-validation.md#standing-gfx100s-comparisons) | Both ROIs and profiles were inspected with both camera JPEGs and ISO100 AHD. The photo setting preserves nominal right-side diagonals that the local power gate suppresses. Left-side texture is mottled in places and fine junctions stay incomplete |
 | [Local RAW activity gates](phase-activity.md#standing-gfx100s-comparisons) | Both profiles and ROIs were inspected with both JPEGs and ISO100 AHD. Strict gating removes most of the nominal correction. Under the transferred profile, moderate local gates retain some right diagonals with incomplete crossings |

@@ -39,6 +39,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·
 [full-epoch scene context continuation](scene-full-epoch.md) ·
 [matched 20k exact-target and GFX reviews](scene-full-epoch-20k.md) ·
+[matched 25k photo results and native crops](scene-full-epoch-25k.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
 [full and dense regional scene context](scene-regional-context.md) ·
@@ -59,6 +60,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [local RAW activity gates and flat error](phase-activity.md) ·
 [reserved Bayer waveform checks against strong edges](phase-edge-validation.md) ·
 [learned mixtures of local power and edge evidence](phase-correction-mixture.md) ·
+[within-window localization and directional gap attribution](local-phase-envelope.md) ·
 [whole-image RAW strength prior](context-strength.md) ·
 [native Bayer green innovation](green-phase-innovation.md) ·
 [separated Bayer green aliases](quincunx-green.md) ·
