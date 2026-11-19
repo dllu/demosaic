@@ -63,8 +63,12 @@ in the [GFX100S scene](docs/gfx-qualitative.md), plus the difficult
 [green cab mesh](docs/gfx-green-mesh.md). Separate ISO100 captures are qualitative
 references, not exact GT. The [Q2/Sony/GFX50R gallery](docs/cross-camera-qualitative.md)
 currently covers V104/V114/V115; newer models have not been published on that panel.
-The opt-in crop fit shows new crossings in the right cab ROI.
-[Native comparison and measured RAW support](docs/donor-phase-transport.md#standing-gfx100s-review).
+An experimental 64-pixel Bayer fit makes both cab wire directions clearer.
+The native nominal ISO6400 comparison uses shot/read `0.00128/6.5536e-6`
+and display ×16. The ISO100 panel is a separate AHD reference.
+[Crop fit, checkpoint and gap controls](docs/bayer-carrier-scale.md).
+
+![Right cab, distant Bayer gate, 64-pixel fit and independent ISO100 AHD](docs/images/bayer-carrier-scale-v1/cab-right-native-comparison.png)
 
 ## Development
 

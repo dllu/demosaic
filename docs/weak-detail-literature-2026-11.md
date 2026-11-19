@@ -510,6 +510,14 @@ measurements is smaller. Rotating the directional weights changes
 little, suggesting that correctly placed evidence is more important
 than these particular tangent weights.
 
+[64-pixel Bayer carrier fitting](bayer-carrier-scale.md) finds both
+cab spacings in the high-ISO exterior RAW and verifies their support
+on the two green lattices. Target fits over 64 pixels admit the weaker
+direction more often than 32-pixel fits. The resulting constrained
+crop correction adds 12.26 planted ISO6400 response points and visibly
+clarifies the real cab lattice. True-gap weak leakage and over-regular
+lattice contrast remain. The path is inactive on the natural-photo panel.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

@@ -187,6 +187,11 @@ remain incomplete.
 planted-wire improvement while cutting its ISO6400 natural flat penalty from
 0.894 to 0.145 DN16. Fine natural response still falls 0.061 points compared
 with ring8. Both fine cab crossings remain incomplete.
+[64-pixel Bayer carrier fitting](bayer-carrier-scale.md) visibly brings out
+both cab wire directions and some intersections. It gains 12.26 planted
+ISO6400 response points over the distant gate with 2.56 DN16 lower
+intact increment error. The fit stays inactive on the natural holdout and
+adds some weak-family signal in true gaps. The lattice can look overly regular.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
