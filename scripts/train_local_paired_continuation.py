@@ -36,12 +36,14 @@ from demosaic.scene_training_data import _attenuate_local_contrast, scene_seed
 
 SEED = 202611191117
 STABILITY_SEED = 202611191231
+WIRE_RESPONSE_SEED = 202611191309
 PATCH = 256
 BOX = (0, 0, PATCH, PATCH)
 CORE = slice(80, 176)
 FORWARD_ARGS = ("packed", "variance", "colors", "wb", "matrix")
 MODES = ("absolute", "paired")
 STABILITY_MODES = ("mean", "repeat", "repeat-gap")
+WIRE_RESPONSE_MODES = ("repeat", "wire-mean", "wire-aligned")
 PROFILES = {"ISO400": (8e-5, 2.56e-8), "ISO6400": (0.00128, 6.5536e-6)}
 
 
@@ -168,29 +170,35 @@ def prepare_redraw(root, prior):
     )
 
 
-def prepare_stability(root, completed_path, scene_path):
+def prepare_objective_trial(root, completed_path, scene_path, *, wire_response):
     completed = read_json(completed_path)
     previous = read_json(checked(completed["plan"]))
     scene = read_json(scene_path)
+    prior_modes = STABILITY_MODES if wire_response else ("individual", "mean")
     if (
         completed["qualification"]
         or completed["updates_per_arm"] != previous["steps_per_arm"]
-        or tuple(previous["mode_weights"]) != ("individual", "mean")
+        or tuple(previous["mode_weights"]) != prior_modes
         or completed["pair_draws_per_source"] != 2
         or completed["parent"] != previous["parent"]
         or scene["train_manifest"] not in previous["inputs"]
         or scene["DINO_sha256"] != previous["DINO_sha256"]
     ):
-        raise ValueError(
-            "Expected the completed matched mean-redraw training and its source corpus"
-        )
-    parent = completed["checkpoints"]["mean"]
+        raise ValueError("Expected a completed matched parent trial and its source corpus")
+    parent_arm = "repeat" if wire_response else "mean"
+    parent = completed["checkpoints"][parent_arm]
     for binding in [parent, *previous["inputs"]]:
         checked(binding)
+    ancestors = [previous]
+    if wire_response:
+        earlier = read_json(checked(previous["parent_completion"]))
+        assert earlier["checkpoints"]["mean"] == previous["parent"]
+        ancestors.append(read_json(checked(earlier["plan"])))
     excluded = {
         case["source"]["id"]
+        for plan in ancestors
         for key in ("schedule", "qualification_schedule")
-        for case in read_json(checked(previous[key]))
+        for case in read_json(checked(plan[key]))
     }
     rows = [
         json.loads(line)
@@ -199,7 +207,8 @@ def prepare_stability(root, completed_path, scene_path):
     ]
     assert len(rows) == 90692 and all(row["split"] == "train" for row in rows)
     eligible = [row for row in rows if row["id"] not in excluded]
-    rng = random.Random(STABILITY_SEED)
+    seed = WIRE_RESPONSE_SEED if wire_response else STABILITY_SEED
+    rng = random.Random(seed)
     cells = list(product(("natural", "wire"), PROFILES, PATTERNS, ("coupled", "independent")))
     cases = cells * 10
     rng.shuffle(cases)
@@ -220,6 +229,26 @@ def prepare_stability(root, completed_path, scene_path):
                 for row, cell in zip(selected, recipes, strict=True)
             ],
         )
+    objective = {
+        "mode_weights": dict.fromkeys(STABILITY_MODES, 0.8),
+        "repeat_weight": 0.5,
+        "gap_weight": 0.8,
+        "scope": "All arms share absolute and mean-first paired losses. Repeat arms penalize "
+        "signed increment variability on independent Bayer pairs. Repeat-gap also supervises "
+        "the absent weak-wire direction on both present draws. Single-frame inference.",
+    }
+    if wire_response:
+        objective = {
+            "mode_weights": dict.fromkeys(WIRE_RESPONSE_MODES, 0.8),
+            "repeat_weight": previous["repeat_weight"],
+            "gap_weight": 0.0,
+            "response_weight": 1.6,
+            "scope": "All arms retain the independent-pair repeat loss, absolute supervision, "
+            "and the 0.8 mean-first spectral loss. On wire batches, add equal-weight mean-first "
+            "supervision over the full band or along only the exact clean weak increment. "
+            "All three start from the repeat EMA and use the same fresh source schedule. "
+            "The extra losses use no inference inputs or operators.",
+        }
     write_json(
         root / "plan.json",
         previous
@@ -238,19 +267,13 @@ def prepare_stability(root, completed_path, scene_path):
             "schedule": reference(schedule),
             "qualification_schedule": reference(qualification),
             "parent": parent,
+            "parent_arm": parent_arm,
             "parent_completion": reference(completed_path),
             "initial_step": completed["updates_per_arm"],
-            "seed": STABILITY_SEED,
+            "seed": seed,
             "steps_per_arm": len(cases),
-            "mode_weights": dict.fromkeys(STABILITY_MODES, 0.8),
-            "repeat_weight": 0.5,
-            "gap_weight": 0.8,
-            "scope": "All arms use the same absolute and mean-first paired losses. Repeat arms "
-            "penalize signed increment variability on independent Bayer pairs. Repeat-gap also "
-            "supervises the absent weak-wire direction in the exact synthetic gap on both "
-            "present draws. Fresh source photos relative to the two-draw study. Single-frame "
-            "inference remains unchanged.",
-        },
+        }
+        | objective,
     )
 
 
@@ -427,7 +450,7 @@ class PairedBands:
         rms = [((energy * band).mean() + 1e-8).sqrt() - 1e-4 for band in self.bands]
         return (torch.stack(rms).mean() * valid), valid
 
-    def redraw_losses(self, prediction, batch):
+    def redraw_losses(self, prediction, batch, *, align=False):
         """Reduce robust band losses before or after taking the redraw average."""
         clean = batch["sensor_target"][:4, :, CORE, CORE]
         camera_error = prediction[:4, :, CORE, CORE].float() - clean
@@ -442,11 +465,25 @@ class PairedBands:
             rms = [((power * band).mean(dim=(-2, -1)) + 1e-8).sqrt() - 1e-4 for band in self.bands]
             return torch.stack(rms).mean() * valid
 
-        return {
+        mean_spectrum = spectrum.mean(0)
+        losses = {
             "individual": penalty(spectrum),
-            "mean": penalty(spectrum.mean(0)),
+            "mean": penalty(mean_spectrum),
             "repeat": penalty((spectrum[0] - spectrum[1]) / math.sqrt(2)),
-        }, valid
+        }
+        if align:
+            target = ((clean[0] - clean[1]) * weights[:, None, None]).sum(0)
+            template = torch.fft.fft2(target * self.window, norm="ortho")
+            cross = (mean_spectrum * template.conj()).real
+            target_power = template.abs().square()
+            amplitude = torch.stack(
+                [
+                    (cross * band).mean() / (target_power * band).mean().clamp_min(1e-12).sqrt()
+                    for band in self.bands
+                ]
+            )
+            losses["aligned"] = ((amplitude.square() + 1e-8).sqrt() - 1e-4).mean() * valid
+        return losses, valid
 
     def gap_loss(self, prediction, batch, projection):
         """Measure each present draw against the exact clean target inside the gap."""
@@ -495,7 +532,14 @@ def train(plan_path, output, *, qualification):
     pair_draws = plan.get("pair_draws", 1)
     modes = tuple(plan["mode_weights"])
     stability = modes == STABILITY_MODES
-    if (pair_draws, modes) not in ((1, MODES), (2, ("individual", "mean")), (2, STABILITY_MODES)):
+    response = modes == WIRE_RESPONSE_MODES
+    matched = stability or response
+    if (pair_draws, modes) not in (
+        (1, MODES),
+        (2, ("individual", "mean")),
+        (2, STABILITY_MODES),
+        (2, WIRE_RESPONSE_MODES),
+    ):
         raise ValueError("Unexpected paired training mode or draw count")
     models, optimizers, averages = {}, {}, {}
     started = time.monotonic()
@@ -503,12 +547,12 @@ def train(plan_path, output, *, qualification):
         model, state = load_scene_checkpoint(
             checked(parent),
             weights="ema",
-            device="cpu" if stability else "cuda",
+            device="cpu" if matched else "cuda",
             expected_sha256=parent["sha256"],
         )
         assert state["mode"] == "none" and state["step"] == plan.get("initial_step", 50000)
         assert model_hash(model.base.context.backbone) == plan["DINO_sha256"]
-        if stability:
+        if matched:
             _stage_tiled_cuda(model, torch.device("cuda"))
         model.train().to(memory_format=torch.channels_last)
         models[mode] = model
@@ -575,18 +619,24 @@ def train(plan_path, output, *, qualification):
                 )
                 redraw = {}
                 if pair_draws == 2:
-                    redraw, valid = bands.redraw_losses(prediction, batch)
-                    paired = redraw["mean" if stability else mode]
+                    redraw, valid = bands.redraw_losses(
+                        prediction, batch, align=response and wire is not None
+                    )
+                    paired = redraw["mean" if matched else mode]
                 else:
                     paired, valid = bands.loss(prediction, batch)
                 loss = absolute + plan["mode_weights"][mode] * paired
-                if stability:
-                    if mode != "mean" and about["law"] == "independent":
-                        loss += plan["repeat_weight"] * redraw["repeat"]
-                    if gap is not None:
-                        redraw["gap"] = bands.gap_loss(prediction, batch, gap)
-                        if mode == "repeat-gap":
-                            loss += plan["gap_weight"] * redraw["gap"]
+                if matched and mode != "mean" and about["law"] == "independent":
+                    loss += plan["repeat_weight"] * redraw["repeat"]
+                if gap is not None:
+                    redraw["gap"] = bands.gap_loss(prediction, batch, gap)
+                    if mode == "repeat-gap":
+                        loss += plan["gap_weight"] * redraw["gap"]
+                if response and wire is not None and mode != "repeat":
+                    loss += (
+                        plan["response_weight"]
+                        * redraw["aligned" if mode == "wire-aligned" else "mean"]
+                    )
                 if not torch.isfinite(loss):
                     raise FloatingPointError(f"Nonfinite loss in {mode} arm")
                 if step == 1:
@@ -675,8 +725,10 @@ if __name__ == "__main__":
     redraw.add_argument("root", type=Path)
     redraw.add_argument("prior_plan", type=Path)
     stability = subcommands.add_parser("prepare-stability")
-    for key in ("root", "completion", "scene_plan"):
-        stability.add_argument(key, type=Path)
+    response = subcommands.add_parser("prepare-wire-response")
+    for command in (stability, response):
+        for key in ("root", "completion", "scene_plan"):
+            command.add_argument(key, type=Path)
     run = subcommands.add_parser("train")
     run.add_argument("plan", type=Path)
     run.add_argument("output", type=Path)
@@ -692,7 +744,12 @@ if __name__ == "__main__":
         )
     elif args.command == "prepare-redraw":
         prepare_redraw(args.root.absolute(), args.prior_plan)
-    elif args.command == "prepare-stability":
-        prepare_stability(args.root.absolute(), args.completion, args.scene_plan)
+    elif args.command in ("prepare-stability", "prepare-wire-response"):
+        prepare_objective_trial(
+            args.root.absolute(),
+            args.completion,
+            args.scene_plan,
+            wire_response=args.command == "prepare-wire-response",
+        )
     else:
         train(args.plan, args.output, qualification=args.qualification)

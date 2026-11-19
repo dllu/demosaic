@@ -30,10 +30,18 @@ from demosaic.real_suite import measured_sensor_psnr
 from demosaic.scene_inference import load_scene_checkpoint
 
 COUNTS = {"photo": 3108, "known": 24, "unseen": 30}
+POLICY = "CUDA channels-last IEEE FP32. Retain per-case PSNR, input fingerprints and CPU checks."
 
 
 def prepare(
-    root, historic_plan, matched, *, probe=False, continuation=None, only_continuation=False
+    root,
+    historic_plan,
+    matched,
+    *,
+    probe=False,
+    continuation=None,
+    only_continuation=False,
+    reference_replay=None,
 ):
     if only_continuation and continuation is None:
         raise ValueError("A continuation-only replay requires a completed training receipt")
@@ -52,20 +60,28 @@ def prepare(
         extended = read_json(checked(secondary[0]))
         assert not extended["qualification"] and extended["DINO_unchanged"]
         continued_parent = None
-        if extended["parent"] != models["none"]["checkpoint"]:
-            training = read_json(checked(extended["plan"]))
-            origin = read_json(checked(training["parent_completion"]))
-            assert origin["parent"] == models["none"]["checkpoint"]
+        closure = extended
+        chain = set()
+        while closure["parent"] != models["none"]["checkpoint"]:
+            assert closure["plan"]["sha256"] not in chain
+            chain.add(closure["plan"]["sha256"])
+            training = read_json(checked(closure["plan"]))
+            source = training["parent_completion"]
+            origin = read_json(checked(source))
+            parent_arm = training.get("parent_arm", "mean")
             assert not origin["qualification"] and origin["DINO_unchanged"]
-            assert extended["parent"] == training["parent"] == origin["checkpoints"]["mean"]
+            assert closure["parent"] == training["parent"] == origin["checkpoints"][parent_arm]
+            assert closure["updates_per_arm"] == training["steps_per_arm"]
             assert training["initial_step"] == origin["updates_per_arm"]
-            secondary.extend((extended["plan"], training["parent_completion"]))
-            continued_parent = "prior-mean"
-            models[continued_parent] = {
-                "kind": "scene",
-                "checkpoint": extended["parent"],
-                "step": training["initial_step"],
-            }
+            secondary.extend((closure["plan"], source))
+            if continued_parent is None:
+                continued_parent = f"prior-{parent_arm}"
+                models[continued_parent] = {
+                    "kind": "scene",
+                    "checkpoint": extended["parent"],
+                    "step": training["initial_step"],
+                }
+            closure = origin
         for name, checkpoint in extended["checkpoints"].items():
             models[name] = {
                 "kind": "scene",
@@ -75,6 +91,23 @@ def prepare(
         if only_continuation:
             keep = {"V120", continued_parent, *extended["checkpoints"]}
             models = {name: config for name, config in models.items() if name in keep}
+    reusable = None
+    if reference_replay is not None:
+        binding = reference(reference_replay)
+        saved = read_json(checked(binding))
+        for key in ("canonical_inputs", "parent_CPU_probes", "DINO_sha256"):
+            assert saved[key] == template[key]
+        assert saved["policy"] == POLICY
+        mappings = {
+            name: old_name
+            for name, spec in models.items()
+            if name == "V120" or name.startswith("prior-")
+            for old_name, old_spec in saved["models"].items()
+            if spec == old_spec and spec["kind"] in ("parent", "scene")
+        }
+        assert mappings and mappings.get("V120") == "V120"
+        reusable = {"plan": binding, "root": saved["root"], "models": mappings}
+        secondary.append(binding)
     root.mkdir(parents=True)
     work, sources = freeze_sources(Path.cwd(), root, [Path(__file__).name])
     required_keys = (
@@ -103,8 +136,10 @@ def prepare(
         models=models,
         frozen_files=sources,
         driver=reference(work / "scripts" / Path(__file__).name),
-        policy="CUDA channels-last IEEE FP32. Retain per-case PSNR, input fingerprints and CPU checks.",
+        policy=POLICY,
     )
+    if reusable is not None:
+        plan["reference_replay"] = reusable
     write_json(root / "plan.json", plan)
 
 
@@ -164,6 +199,28 @@ def load_models(plan):
     return models
 
 
+def reuse_variants(replay, stage, number, arrays):
+    if replay is None:
+        return {}, None, None
+    path = Path(replay["root"]) / "full" / f"{stage}-{number:05d}.json"
+    if not path.is_file():
+        return {}, None, None
+    binding = reference(path)
+    source = read_json(checked(binding))
+    assert source["plan"] == replay["plan"] and source["arrays"] == arrays
+    assert (source["stage"], source["batch"]) == (stage, number)
+    variants = {}
+    for name, prior_name in replay["models"].items():
+        prior = source["variants"][prior_name]
+        assert all(row["model"] == prior_name for row in prior["rows"])
+        variants[name] = prior | {
+            "rows": [row | {"model": name} for row in prior["rows"]],
+            "forward_seconds": 0.0,
+            "reused_from": {"batch": binding, "model": prior_name},
+        }
+    return variants, source["V120_CPU_check"], binding
+
+
 @torch.inference_mode()
 def collect(plan_path, action):
     plan = read_json(plan_path)
@@ -207,6 +264,7 @@ def replay(plan_path, plan, owner, action):
         )
     ]
     models = load_models(plan)
+    ref_replay = plan.get("reference_replay") if action != "preflight" else None
     fields = (
         ContextFields(plan, owner / "contexts", models["spatial"], [], save_arrays=False)
         if "spatial" in models
@@ -234,8 +292,12 @@ def replay(plan_path, plan, owner, action):
                         memory_format=torch.channels_last
                     )
                 noise = record["context"]["condition" if stage == "photo" else "noise"]
-                variants, cpu_check = {}, None
+                variants, cpu_check, reused = reuse_variants(
+                    ref_replay, stage, number, record["arrays"]
+                )
                 for name, model in models.items():
+                    if name in variants:
+                        continue
                     model_base = model if plan["models"][name]["kind"] == "parent" else model.base
                     model_base.set_noise(noise["shot"], noise["read"])
                     torch.cuda.synchronize()
@@ -289,6 +351,8 @@ def replay(plan_path, plan, owner, action):
                     "variants": variants,
                     "V120_CPU_check": cpu_check,
                 }
+                if reused is not None:
+                    item["reference_replay_batch"] = reused
                 write_json(destination, item)
             cases.append(reference(destination))
             for name, data in item["variants"].items():
@@ -334,6 +398,7 @@ if __name__ == "__main__":
     setup.add_argument("--probe", action="store_true")
     setup.add_argument("--continuation", type=Path)
     setup.add_argument("--only-continuation", action="store_true")
+    setup.add_argument("--reference-replay", type=Path)
     for label in ("preflight", "cameras", "full"):
         action.add_parser(label).add_argument("plan", type=Path)
     args = parser.parse_args()
@@ -345,6 +410,7 @@ if __name__ == "__main__":
             probe=args.probe,
             continuation=args.continuation,
             only_continuation=args.only_continuation,
+            reference_replay=args.reference_replay,
         )
     else:
         collect(args.plan, args.action)

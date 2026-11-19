@@ -50,9 +50,35 @@ def test_redraw_excludes_clipped_cores():
     prediction = target.clone()
     prediction[0] += field
     target[[0, 2], 0, CORE.start, CORE.start] = 1
-    losses, valid = bands.redraw_losses(prediction, batch)
+    losses, valid = bands.redraw_losses(prediction, batch, align=True)
     assert not valid
     assert all(value.item() == 0 for value in losses.values())
+
+
+def test_aligned_redraw_term_is_signed_and_retains_orthogonal_variance_penalty():
+    bands, _, batch = _paired_sinusoid()
+    phase = 2 * torch.pi * (torch.arange(PATCH) - 128) / 8
+    clean, same_band = 1e-3 * phase.cos(), 1e-3 * phase.sin()
+    target = torch.full_like(batch["sensor_target"], 0.2)
+    target[::2][:2] += clean
+    batch["sensor_target"] = target
+    under = target.clone()
+    under[::2][:2] -= clean
+    over = target.clone()
+    over[::2][:2] += clean
+    a, _ = bands.redraw_losses(under.requires_grad_(), batch, align=True)
+    b, _ = bands.redraw_losses(over.requires_grad_(), batch, align=True)
+    torch.testing.assert_close(a["aligned"], a["mean"])
+    torch.testing.assert_close(b["aligned"], a["aligned"])
+    (da,) = torch.autograd.grad(a["aligned"], under)
+    (db,) = torch.autograd.grad(b["aligned"], over)
+    torch.testing.assert_close(da, -db)
+
+    mixed = target.clone()
+    mixed[0] += 2 * same_band
+    v, _ = bands.redraw_losses(mixed, batch, align=True)
+    assert v["aligned"] < 1e-8
+    assert v["mean"] > 1e-4 and v["repeat"] > 1e-4
 
 
 def test_gap_projection_excludes_intact_area_and_the_continuing_direction():
