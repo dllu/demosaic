@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Checked Bayer harmonics](query-checked-junctions.md#standing-gfx100s-comparisons)
+  leave the sky, building and foliage pixel-identical to the preceding wide
+  fit. Both coarse fence directions remain visible, with a small change at crossings.
 - [Three-quarter weak amplitude](query-local-gap.md#standing-gfx100s-comparisons)
   reproduces the previous exterior-checked crops. Sky remains smooth
   and both coarse fence directions stay visible.

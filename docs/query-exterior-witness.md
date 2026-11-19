@@ -16,6 +16,11 @@ The [three-quarter amplitude follow-up](query-local-gap.md) reduces
 fallback-added texture in new unrelated gaps from 2.267 to 1.315 DN16
 at matched calibration strength. Fine standing crossings remain soft.
 
+The [checked-harmonic follow-up](query-checked-junctions.md) uses the
+two directions already measured in the right cab. Supported higher-order
+bands sharpen some crossings under both profiles. The left cab still has
+only faint fragments.
+
 ## What phase transport changes
 
 The [earlier one-sided search](query-contour-support.md#testing-nominations-from-one-visible-side)

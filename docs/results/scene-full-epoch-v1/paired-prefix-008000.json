@@ -1,0 +1,80 @@
+{
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/plan.json",
+    "sha256": "23083ec816deafd7352fb3f3a47d09e25320c31cd0f622bda43da22f8b0ce397"
+  },
+  "last_7500_proof": {
+    "path": "/home/dllu/proj/demosaic/docs/results/scene-full-epoch-v1/matched-007500-training.json",
+    "sha256": "cf49b27f15b03efb5902da660dbd2e3a653c0ed61b90dc8a8710a7bae684dab6"
+  },
+  "matched_update": 8000,
+  "distinct_sources_per_arm": 16000,
+  "distinct_noise_seeds_per_arm": 16000,
+  "native_queries_per_arm": 64000,
+  "latest_quality_review": 7500,
+  "trace_equal_through": 8000,
+  "segments": {
+    "8000": {
+      "none": {
+        "receipt": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-008000/attempt-01/work/completed.json",
+          "sha256": "146e37b985679166a066a4312aed3b2c280c7bc8e81c13b8797b6c38b82074e9"
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-008000/attempt-01/work/step008000.pt",
+          "sha256": "077260b99c17c15e334c04dea8016749c7476d3c31b2f1d8c4605ff5ca466904"
+        },
+        "observations": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-008000/attempt-01/work/observations.jsonl",
+          "sha256": "efde426d904be50b5c4c1e7d769d9d704153d703bcf12a907aef4d7fd1090697"
+        },
+        "seconds": 263.6010582820745,
+        "data_seconds": 59.78898348938674
+      },
+      "spatial": {
+        "receipt": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008000/attempt-01/work/completed.json",
+          "sha256": "0434fce9f894e28ec39d1c0482907572f776d279521452218624b0d7c6e137dc"
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008000/attempt-01/work/step008000.pt",
+          "sha256": "eb75e675f3f15eb7bab23a89573a1c22ce4cdfcd4db0aab283c12e0fff7580e6"
+        },
+        "observations": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008000/attempt-01/work/observations.jsonl",
+          "sha256": "efde426d904be50b5c4c1e7d769d9d704153d703bcf12a907aef4d7fd1090697"
+        },
+        "seconds": 307.09044666809496,
+        "data_seconds": 57.58284962922335
+      }
+    }
+  },
+  "active": {
+    "child": {
+      "pid": 1709590,
+      "created": 1795061488.07
+    },
+    "controller": {
+      "pid": 1229252,
+      "created": 1795052968.82
+    },
+    "command": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/work/scripts/train_scene_context.py",
+      "train",
+      "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/plan.json",
+      "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008500/attempt-01/work",
+      "--mode",
+      "spatial",
+      "--stop-step",
+      "8500",
+      "--resume-receipt",
+      "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008000/attempt-01/work/completed.json"
+    ],
+    "attempt": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008500/attempt-01"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/scene-full-epoch-v1/paired-prefix-008000.tar.xz",
+    "sha256": "0d68c32cd9a8e55d794a1fd8ea9119a9e0761ea91b2b798c2f2e575ab607d92c"
+  }
+}

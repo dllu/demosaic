@@ -123,6 +123,11 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Checked Bayer harmonics](query-checked-junctions.md) use two measured
+directions to nominate junction detail and require evidence in two reserved
+green groups. Some right-cab crossings are clearer under both noise profiles.
+The sky remains smooth, the left cab is unchanged and small false responses
+remain in synthetic gap and pure-fundamental controls.
 [Three-quarter weak amplitude](query-local-gap.md) reduces added texture
 in unrelated gaps at matched intact correction strength. Wide support
 retains more of the intact signal than the compact alternatives. The
@@ -170,6 +175,9 @@ overly regular spacing in places.
 regains a small amount of independent ISO6400 response relative to 5k,
 with more flat variation. Coupled weak response stays below Corpus 100k.
 Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
+The [later training prefix](scene-full-epoch.md#execution-status) has matched
+inputs through 8,000 updates, while local-only has reached 10,000 on 20,000
+distinct photos.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

@@ -21,6 +21,12 @@ reduces some false wire response in synthetic edge controls.
 [Adjacent donors](donor-phase-transport.md) ·
 [Refined edge check](mesh-refined-edge.md).
 
+The [checked-harmonic experiment](query-checked-junctions.md) uses two
+locally measured directions to nominate junction detail. Reserved green
+samples support a second harmonic and a difference band in the right cab.
+Some right crossings become clearer while sky stays smooth. The left cab
+still lacks convincing crossings. This test uses the geometry in the RAW.
+
 Off-grid refinement of the RAW footprint cuts less intact wire on
 fresh ISO400 gap scenes. The fixed audit still admits one of six
 fresh ISO6400 gaps with averaged footprints. The standing sky

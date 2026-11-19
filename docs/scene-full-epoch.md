@@ -153,6 +153,18 @@ extend the verified 5k trace. Numerical and native reviews are complete at
 [Earlier paired 7,000 prefix](results/scene-full-epoch-v1/paired-prefix-007000.json) ·
 [Earlier 6,500 receipt](results/scene-full-epoch-v1/paired-prefix-006500.json).
 
+Both arms subsequently verify **8,000 matched updates**, with byte-identical
+input traces on 16,000 distinct photos and 64,000 native queries each. The local
+arm has reached **10,000 updates**, covering 20,000 photos, 20,000 noise seeds
+and 80,000 native queries. Its retained training loops total 4,702.64 s,
+including 1,280.80 s of reader and CPU fingerprinting. Checkpoint writes take
+11.42 s. The spatial arm tripped the RAM reserve during the next segment
+and automatically restarted from its saved 8k checkpoint. Quality scoring
+and native viewing remain complete through 7,500.
+[Matched 8k source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-008000.json) ·
+[Local 10k source, timing and checkpoint audit](results/scene-full-epoch-v1/local-010000-prefix.json) ·
+[Spatial retry receipt](results/scene-full-epoch-v1/spatial-retry-008500.json).
+
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 

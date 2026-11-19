@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Checked Bayer harmonics](query-checked-junctions.md#standing-gfx100s-comparisons) | Both right profiles support a second harmonic and a difference band. Some crossings look slightly clearer. Mottling and incomplete crossings remain. Both left crops match the previous output |
 | [Three-quarter weak amplitude](query-local-gap.md#standing-gfx100s-comparisons) | Both ROIs and both profiles reproduce the exterior-checked output. The right lattice has faint, incomplete crossings |
 | [Exterior bent-phase witness](query-exterior-witness.md#standing-gfx100s-comparisons) | Both priors, ROIs and camera JPEGs viewed. The adjacent-frequency fallback matches the wide fit, with both right directions visible and fine crossings still soft |
 | [Scene-contour Bayer aggregation](query-contour-support.md#standing-gfx100s-comparisons) | Both cab priors and both ROIs were viewed. Right crops are visually close to the wide fit and crossings remain incomplete. Both left crops equal the parent |

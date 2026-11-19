@@ -397,6 +397,11 @@ matched calibration strength. Direct localized gap nomination fails
 on the new admitted ISO6400 cases. Both standing outputs match the
 preceding exterior-aware fit.
 
+The [checked-harmonic follow-up](query-checked-junctions.md) adds
+reserved-RAW support for second harmonics and junction bands once two
+directions already have support. Some right-cab crossings become clearer
+under both noise profiles. Small false responses remain on exact controls.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
