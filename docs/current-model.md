@@ -142,6 +142,11 @@ when the footprint must be found automatically.
 on supported photographic fixtures at fixed luminance. The gain comes
 with small leakage inside true gaps. Neutral replay and both GFX families
 reproduce the preceding fit.
+[Refined weak-wire phase](subbin-spectral-witness.md) gains 0.50 ISO6400
+intact-response points and lowers absolute gap RMS by 1.30 DN16 versus
+the integer-bin head at similar added gap texture. The trained head
+leaves real cab crossings incomplete and retains higher intact-increment
+error than Corpus 100k.
 [Weak-wire gap supervision](learned-spectral-gaps.md) lowers paired error
 inside exact breaks and attenuates genuine weak wires. Checking estimated
 phases against separate Bayer samples lowers absolute gap error slightly

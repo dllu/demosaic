@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Refined weak-wire phase](subbin-spectral-witness.md#standing-gfx100s-comparisons)
+  preserves the smooth sky and coarse fence crossings. Fine building
+  wires and foliage stay soft.
 - [Exact gap supervision and Bayer witnesses](learned-spectral-gaps.md#standing-gfx100s-comparisons)
   retain a smooth sky and coherent coarse crossings across both sets of
   native comparisons. Fine building lines and foliage remain soft.

@@ -188,3 +188,6 @@ with exact-gap supervision and a small absolute gap-error gain with Bayer
 witnesses. V120 remains the general inference recommendation.
 [Current model guide](current-model.md) ·
 [Comparable PSNR history](performance-history.md).
+
+The [between-bin phase follow-up](subbin-spectral-witness.md) checks whether
+continuous frequency transport improves the independent Bayer measurements.

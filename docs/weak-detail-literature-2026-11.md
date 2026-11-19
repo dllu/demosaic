@@ -492,7 +492,11 @@ texture over Corpus 100k. The native fine cab crossings stay incomplete.
 known breaks and loses signal in continuous dips. Checking a phase from
 disjoint green windows against local Bayer samples lowers absolute gap
 error slightly at comparable added texture and yields an uncertain
-intact-response gain.
+intact-response gain. [Refining the phase between FFT bins](subbin-spectral-witness.md)
+raises held-out ISO6400 intact response 0.50 points and lowers absolute
+gap RMS 1.30 DN16 at similar added gap texture. Direct gating of a
+stronger analytic lift loses signal at matched gap change. Real fine
+crossings remain incomplete.
 
 ## What the existing work establishes
 
