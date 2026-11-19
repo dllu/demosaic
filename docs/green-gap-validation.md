@@ -137,6 +137,9 @@ supports testing frequency search and local support together. The
 qualitative reference cannot establish the recovered phase or intersection
 positions at individual pixels.
 [Earlier input-selected frequency evidence](green-phase-spectrum.md).
+The [exterior peak follow-up](donor-peak-prominence.md) finds eligible
+nearby donor frequencies on the left cab and insufficient two-tile
+evidence on the right.
 
 | GFX cab conditioning | Exterior frequency search | Earlier noisy-RAW frequencies |
 | --- | --- | --- |

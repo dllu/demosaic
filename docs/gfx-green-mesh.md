@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Narrow exterior RAW peaks](donor-peak-prominence.md#standing-gfx100s-comparisons) | Both left-cab bands have nearby exterior candidates but lose the final ranking. The right cab lacks two supporting tiles near either earlier peak. Both ROIs and priors were viewed. Crossings stay incomplete |
 | [Local RAW support and exterior phase](green-gap-validation.md#standing-gfx100s-comparisons) | Automatic exterior frequencies barely change both ROIs. Previously measured cab RAW peaks make both directions visible on more of the right crop. Some crossings remain overly regular or incomplete. Both priors and JPEGs viewed |
 | [Full-epoch scene run at update 2,000](scene-full-epoch.md#standing-gfx100s-at-update-2000) | Both profiles, ROIs and their JPEG references viewed for the matched spatial and local-only checkpoints. The transferred profile retains weak diagonal texture, with incomplete crossings |
 | [Green alias separation and exterior RAW](quincunx-green.md#standing-gfx100s-comparisons) | Both profiles, both ROIs and the separate JPEGs were viewed for both variants. Added modulation at original strength leaves fine junctions missing |

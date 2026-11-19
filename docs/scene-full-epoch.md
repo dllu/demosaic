@@ -102,6 +102,22 @@ scene records match the interrupted attempt byte for byte. Numerical and
 native review remain complete through 2,000.
 [Restart receipt](results/scene-full-epoch-v1/retry-005000.json) ·
 [Original failure and retry logs](results/scene-full-epoch-v1/retry-005000-evidence.tar.xz).
+
+A second memory-floor stop came after local update 4,491. The recovery
+controller now asks the frozen worker to save state every 500 updates
+or sooner at an original milestone. It keeps the original memory
+limits and preserves individual segment receipts. Reaching a matched
+milestone requires identical concatenated observation traces in both
+arms. The frozen 50,000-update learning-rate horizon, source order,
+checkpoints, EMA and validation schedule remain in use. A repeated
+RAM-floor stop now replays at most one 500-update segment.
+The first local segment now has a verified checkpoint at update 3,000.
+Its 1,000 scene records match each interrupted attempt byte for byte.
+The update-3,500 segment has resumed from that stored optimizer and EMA
+state. The last verified matched pair remains at update 2,500.
+[Recovery controller](../scripts/resume_scene_full_epoch.py) ·
+[First durable segment and original worker identity](results/scene-full-epoch-v1/segmented-recovery.json) ·
+[Second failure and durable restart evidence](results/scene-full-epoch-v1/segmented-recovery.tar.xz).
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 

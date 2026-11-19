@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Narrow exterior RAW peaks](donor-peak-prominence.md#standing-gfx100s-comparisons)
+  leave the sky pixel-identical and retain both coarse-fence directions.
+  Building corrections are smaller and fine cables and foliage stay soft.
 - [Local RAW support and exterior phase](green-gap-validation.md#standing-gfx100s-comparisons)
   preserves the overcast sky pixel for pixel. The coarse fence keeps both
   directions, with little change to fine foliage or thin building cables.

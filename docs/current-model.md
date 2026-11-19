@@ -123,6 +123,10 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Narrow peaks in exterior RAW](donor-peak-prominence.md) find planted
+frequencies more often and retain a weak-detail gain with a joint
+calibration limit on flat texture and gap changes. Both standing GFX
+families were viewed. The fine cab crossings remain incomplete.
 [Local support with exterior phase](green-gap-validation.md) recovers more
 of a planted weak carrier than a local free-phase fit while cutting
 added flat variation. Coherent gap leakage rises. The automatic GFX
