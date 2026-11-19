@@ -56,6 +56,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [closer disjoint Bayer donors](bayer-near-donors.md) ·
 [phase-aware local gap checks](bayer-local-deficit.md) ·
 [locally measured phase rotation](bayer-local-phase-transfer.md) ·
+[missing-signal phase and single-direction donors](bayer-phase-residual.md) ·
 [local amplitude checks and crop API replay](bayer-amplitude-envelope.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·

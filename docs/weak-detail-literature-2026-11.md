@@ -585,6 +585,16 @@ donors. The opposite rotation raises error. Rotation changes only
 10 automatic shifted crops and gives little gain on smoothly varying
 carriers. The viewed fine cab intersections stay incomplete.
 
+[Rotation toward the missing signal](bayer-phase-residual.md) subtracts
+the frozen parent's local carrier before choosing the correction angle.
+At matched coefficient magnitude it changes the automatic shifted
+center by +0.007 DN16 RMS and +0.053 response points. The audit of
+single-direction exterior donors recovers six additional planted weak
+frequencies and one unmatched frequency on the later 24-photo replay.
+The reciprocal spatial check keeps four of the six weak frequencies
+and the unmatched one. This is evidence about nomination coverage.
+Standing fine crossings are still incomplete.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

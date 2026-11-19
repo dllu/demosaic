@@ -239,6 +239,10 @@ ISO6400 response points and lowers shifted-center absolute RMS 1.29 DN16
 on 24 planted-shift photos using noisy-only donor proposals. The
 rotation changes 10 shifted queries. Gains are near zero on smoothly
 varying carriers. The two standing fences show no new crossings.
+[Rotating toward the missing signal](bayer-phase-residual.md) produces
+nearly the same errors as the simpler rotation. The one-direction
+donor audit admits six additional planted weak frequencies and one
+unmatched frequency in the later held-out replay, before delivery.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

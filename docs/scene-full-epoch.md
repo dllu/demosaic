@@ -309,8 +309,8 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. Matched training now verifies 39,500 updates on 79,000 distinct
-photos and 316,000 queries per arm.
+pair. Matched training now verifies 40,000 updates on 80,000 distinct
+photos and 320,000 queries per arm.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
@@ -342,6 +342,8 @@ photos and 316,000 queries per arm.
 [38,500 paired audit](results/scene-full-epoch-v1/paired-prefix-038500.json) ·
 [39,000 paired audit](results/scene-full-epoch-v1/paired-prefix-039000.json) ·
 [39,500 paired audit](results/scene-full-epoch-v1/paired-prefix-039500.json) ·
+[40,000 paired audit](results/scene-full-epoch-v1/paired-prefix-040000.json) ·
+[40,000 segment receipts](results/scene-full-epoch-v1/paired-prefix-040000.tar.xz) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
@@ -391,9 +393,10 @@ are complete. The local and spatial EMAs lower independent ISO6400
 fine-increment and quiet-region error versus their 30k EMAs. The
 correct distant view is close to the mismatched view. Fine cab
 crossings remain incomplete. The 35k pair is the latest image-quality
-review. The next 64-photo and standing GFX evaluation waits for the
-matched 40k checkpoint. The 50k fixed photo and camera evaluation and
-native review are also queued.
+review. The matched 40k checkpoints are verified and their 64-photo
+evaluation is running. The standing GFX evaluation follows the photo
+pass. The 50k fixed photo and camera evaluation and native review
+are queued.
 [40k launch receipt](results/scene-full-epoch-v1/queue-full-040000-launch.json) ·
 [40k frozen review drivers](results/scene-full-epoch-v1/queue-full-040000.tar.xz).
 [35k exact-photo and standing GFX review](scene-full-epoch-35k.md) ·
