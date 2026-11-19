@@ -123,6 +123,11 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Exterior donor fallback with checked bands](query-donor-composition.md)
+adds a faint left-cab lattice under both profiles and preserves the
+earlier right-cab result. The extra harmonic makes little visual
+difference above the donor fit. Matching exteriors help three controlled
+draws. Rotated exteriors and exact-flat queries stay at the local output.
 [Checked Bayer harmonics](query-checked-junctions.md) use two measured
 directions to nominate junction detail and require evidence in two reserved
 green groups. Some right-cab crossings are clearer under both noise profiles.
@@ -176,7 +181,7 @@ regains a small amount of independent ISO6400 response relative to 5k,
 with more flat variation. Coupled weak response stays below Corpus 100k.
 Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
 The [later training prefix](scene-full-epoch.md#execution-status) has matched
-inputs through 8,000 updates, while local-only has reached 10,000 on 20,000
+inputs through 9,000 updates, while local-only has reached 10,000 on 20,000
 distinct photos.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,

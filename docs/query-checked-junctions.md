@@ -11,6 +11,11 @@ crossing texture and second harmonics. Some controls admit small false responses
 [Executed sources, original attempts and receipts](results/query-checked-junctions-v1/evidence.tar.xz) ·
 [Native crops and rendering provenance](images/query-checked-junctions-v1/manifest.json).
 
+The [exterior-donor follow-up](query-donor-composition.md) combines the
+right-cab reconstruction with a fallback for the left. The left crop
+shows a faint lattice under both profiles. Most of the change comes
+from the exterior frequency pair.
+
 ## From two directions to a crossing
 
 The [exterior-phase fallback](query-exterior-witness.md) helps when only one

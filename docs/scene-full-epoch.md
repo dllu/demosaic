@@ -165,6 +165,15 @@ and native viewing remain complete through 7,500.
 [Local 10k source, timing and checkpoint audit](results/scene-full-epoch-v1/local-010000-prefix.json) ·
 [Spatial retry receipt](results/scene-full-epoch-v1/spatial-retry-008500.json).
 
+The spatial retry verifies through **8,500** and reproduces all 44 retried
+scene records byte for byte. Two subsequent RAM-reserve stops trigger retries
+from 8,500. The third attempt completes the next segment and reproduces the
+116 and 162 scene records from the two interrupted attempts. Training is
+now matched through **9,000 updates**, covering 18,000 distinct photos and
+72,000 native queries per arm. Local-only remains ahead at 10,000.
+[8,500 retry verification](results/scene-full-epoch-v1/paired-prefix-008500.json) ·
+[9,000 source and checkpoint verification](results/scene-full-epoch-v1/paired-prefix-009000.json).
+
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 

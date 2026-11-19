@@ -402,6 +402,12 @@ reserved-RAW support for second harmonics and junction bands once two
 directions already have support. Some right-cab crossings become clearer
 under both noise profiles. Small false responses remain on exact controls.
 
+The [exterior-donor composition](query-donor-composition.md) tests compatible
+and rotated surrounding RAW with byte-identical native inputs. Matching
+surrounds enable three extra recoveries. The additional checked band changes
+one of them. Both real left-cab profiles show a faint lattice and retain
+most of the appearance from the earlier donor fit.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

@@ -9,6 +9,12 @@ the faint left cab lattice and the coarse fence changes. The sky, building,
 foliage and both right-cab outputs equal their local-only parents.
 [Executed code, inputs and results](results/local-mesh-stability-v1/publication.json).
 
+The [combined checked-band follow-up](query-donor-composition.md) uses this
+fit where the native search lacks a pair. It preserves the earlier
+right-cab result and recovers the faint left-cab lattice in the same
+comparison. Rotated exteriors leave all twelve exact-target cases at
+the local reconstruction.
+
 The [perspective and gap follow-up](local-mesh-projective.md) uses donor
 spacing changes and shorter Bayer support windows. The short fit suppresses
 added texture in synthetic gaps and fades the real left-cab lattice.

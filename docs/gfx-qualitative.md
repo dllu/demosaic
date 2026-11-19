@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Exterior donor fallback with checked bands](query-donor-composition.md#standing-gfx100s-comparisons)
+  preserves all four main crops from the checked-band review. The sky
+  is smooth, the coarse diamonds remain visible and fine wires stay soft.
 - [Checked Bayer harmonics](query-checked-junctions.md#standing-gfx100s-comparisons)
   leave the sky, building and foliage pixel-identical to the preceding wide
   fit. Both coarse fence directions remain visible, with a small change at crossings.
