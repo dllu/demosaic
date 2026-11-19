@@ -263,6 +263,14 @@ advances on the original 50k schedule.
 [Segment receipts](results/scene-full-epoch-v1/paired-prefix-015000.tar.xz) ·
 [15k review queue](results/scene-full-epoch-v1/queue-review-015000.json).
 
+The local-only checkpoint at **17,500 updates** verifies 35,000 distinct
+photos, 35,000 noise seeds and 140,000 native queries. Its retained loops
+total 8,855.37 s. The spatial arm has resumed from its verified 15k state
+toward the same milestone. The matched qualitative and exact-target evidence
+is complete through 15k.
+[Local 17,500 source and checkpoint audit](results/scene-full-epoch-v1/local-017500-prefix.json) ·
+[Segment receipts](results/scene-full-epoch-v1/local-017500-prefix.tar.xz).
+
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 

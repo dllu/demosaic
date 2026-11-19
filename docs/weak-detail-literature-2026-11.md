@@ -480,6 +480,12 @@ evidence and edge-aware local reconstruction. A larger modern restoration
 backbone remains a worthwhile comparison, but it would not by itself explain
 or remove these failures.
 
+A [surrounding RAW spectral prior](scene-spectrum-detail.md) changes the
+native proposal by frequency. Its exact-target test finds a small error
+advantage over transposing the spectrum, with little difference from
+exterior mean power. Matching the retained parent phase reduces false
+texture and leaves fine cab crossings incomplete.
+
 ## What the existing work establishes
 
 | Evidence | Progress | What remains unresolved |

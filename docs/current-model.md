@@ -142,6 +142,10 @@ when the footprint must be found automatically.
 on supported photographic fixtures at fixed luminance. The gain comes
 with small leakage inside true gaps. Neutral replay and both GFX families
 reproduce the preceding fit.
+[Surrounding RAW spectral priors](scene-spectrum-detail.md) offer a small
+additional weak response when both greens support the retained parent phase.
+Present error rises slightly and some texture enters attenuated controls.
+Both fine GFX meshes stay close to the preceding result.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

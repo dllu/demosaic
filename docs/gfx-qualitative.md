@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Surrounding RAW spectral priors](scene-spectrum-detail.md#standing-gfx100s-comparisons)
+  keep the sky visually smooth. The unbounded RAW-mean lift adds foliage
+  and building grain. Matching the retained phase reduces the added grain.
 - [Local and spatial scene context at 15k](scene-full-epoch.md#standing-gfx100s-at-update-15000)
   both keep a smooth sky and visible coarse crossings. Fine building lines
   and foliage remain soft.
