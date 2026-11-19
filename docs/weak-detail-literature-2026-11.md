@@ -467,6 +467,14 @@ strong-wave repair from the missing weak band in exact gaps. It gains
 Error in the missing weak direction rises slightly and fine real
 intersections remain incomplete.
 
+[Competing-wave validation](competing-wave-validation.md) improves
+held-out detection when the weak waveform phase is supplied to the
+controlled test. At native RAW-only inference, the trained router's
+registered feature gains are small and fine crossings remain absent.
+Subtracting the dominant wave separately in each disjoint donor
+reduces validated weak-phase matches at ISO400. The phase nomination
+and the spatial delivery of any extra correction both matter.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

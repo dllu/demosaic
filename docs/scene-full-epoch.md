@@ -310,12 +310,15 @@ numerical and native review covers 25k.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. The latest matched training coverage is 26,000 updates on 52,000
-photos and 208,000 queries per arm.
+pair. The latest matched training coverage is 27,500 updates on 55,000
+photos and 220,000 queries per arm.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
 [26,000 paired audit](results/scene-full-epoch-v1/paired-prefix-026000.json) ·
+[26,500 paired audit](results/scene-full-epoch-v1/paired-prefix-026500.json) ·
+[27,000 paired audit](results/scene-full-epoch-v1/paired-prefix-027000.json) ·
+[27,500 paired audit](results/scene-full-epoch-v1/paired-prefix-027500.json) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
@@ -323,12 +326,14 @@ photos and 208,000 queries per arm.
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
 
-Local-only verifies 27,500 updates, 55,000 distinct photos and
-220,000 native queries on the unchanged 50k schedule.
+Local-only verifies 28,500 updates, 57,000 distinct photos and
+228,000 native queries on the unchanged 50k schedule.
 [25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
 [26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
 [26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json) ·
-[27,500 local audit](results/scene-full-epoch-v1/local-027500-prefix.json).
+[27,500 local audit](results/scene-full-epoch-v1/local-027500-prefix.json) ·
+[28,000 local audit](results/scene-full-epoch-v1/local-028000-prefix.json) ·
+[28,500 local audit](results/scene-full-epoch-v1/local-028500-prefix.json).
 
 [Earlier local-only 20,000 audit](results/scene-full-epoch-v1/local-020000-prefix.json) ·
 [Matched 20,000 controller receipt](results/scene-full-epoch-v1/matched-020000-training.json) ·

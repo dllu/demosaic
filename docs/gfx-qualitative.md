@@ -6,6 +6,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k TensorRT inference](corpus100k-faster-inference.md#standing-gfx100s-comparisons)
   preserves the visually smooth sky and coarse chain-link crossings in
   the FP16 engine. Fine foliage and building wires stay soft.
+- [Competing-wave validation](competing-wave-validation.md#standing-gfx100s-comparisons)
+  retains a smooth sky and coherent coarse crossings. Fine building
+  lines and foliage stay soft.
 - [Directional gap supervision](directional-gap-training.md#standing-gfx100s-comparisons)
   leaves a smooth sky and coherent coarse crossings. Fine foliage and
   building wires remain soft.

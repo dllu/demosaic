@@ -162,6 +162,10 @@ fine cab crossings remain incomplete.
 wire response points at similar total gap correction and adds 0.066
 DN16 of weak-band gap error. Nominal right cab diagonals strengthen
 without resolving the missing fine intersections.
+[Competing-wave validation](competing-wave-validation.md) lowers exact-flat
+RMS slightly and loses 0.31 ISO6400 wire-response points versus directional
+training. Removing a strong wave in each donor reduces valid ISO400
+weak-phase matches. Fine real crossings remain incomplete.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
