@@ -226,6 +226,11 @@ with higher absolute gap RMS and no new standing fine crossings.
 on the eight-photo bent subset and raise coherent gap response by
 0.95 DN16. The gain disappears on the later 24-photo panel.
 A small coarse-fence refit passes while fine-cab changes fail the crop check.
+[Local Bayer deficit checks](bayer-local-deficit.md) lower known-gap
+projection by 0.107 DN16 over matched attenuation on 24 bent fields
+with a phase veto. The veto also prevents cuts of a continuing
+quarter-cycle-shifted wire. Native fine-cab changes stay below
+0.19 DN16 RGB RMS and crossings remain incomplete.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

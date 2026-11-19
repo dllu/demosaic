@@ -568,6 +568,15 @@ Nearby RAW supports the inherited right-cab frequencies, while the
 reserved crop rejects new fine geometry. The checked refit gives a
 small change to the coarse fence.
 
+[Local Bayer deficit checks](bayer-local-deficit.md) compare inner and
+surrounding carrier coefficients across reserved greens. A large phase
+shift can look like an amplitude loss. Evidence in the perpendicular
+phase rejects all 48 false cuts on the controlled shift and preserves
+the true-gap attenuation. On 24 bent backgrounds the veto retains a
+0.107 DN16 coherent-gap reduction versus equally strong uniform
+attenuation. Absolute gap error changes little, and real fine crossings
+stay incomplete.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

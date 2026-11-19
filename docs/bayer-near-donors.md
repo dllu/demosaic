@@ -12,6 +12,8 @@ slightly. The fine cab still lacks complete crossings.
 [Machine results](results/bayer-near-donors-v1/publication.json) ·
 [Frozen drivers and receipts](results/bayer-near-donors-v1/evidence.tar.xz) ·
 [Native crop provenance](images/bayer-near-donors-v1/manifest.json).
+The [local phase-veto follow-up](bayer-local-deficit.md) tests whether
+reducing the existing correction can preserve the signal outside gaps.
 
 ## Donor distance and controls
 

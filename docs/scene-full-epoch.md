@@ -309,9 +309,8 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. Matched training now verifies 37,500 updates on 75,000 distinct
-photos and 300,000 queries per arm. The retained training loops total
-18,277.59 s local and 24,094.89 s spatial.
+pair. Matched training now verifies 38,000 updates on 76,000 distinct
+photos and 304,000 queries per arm.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
@@ -339,6 +338,7 @@ photos and 300,000 queries per arm. The retained training loops total
 [36,500 paired audit](results/scene-full-epoch-v1/paired-prefix-036500.json) ·
 [37,000 paired audit](results/scene-full-epoch-v1/paired-prefix-037000.json) ·
 [37,500 paired audit](results/scene-full-epoch-v1/paired-prefix-037500.json) ·
+[38,000 paired audit](results/scene-full-epoch-v1/paired-prefix-038000.json) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
@@ -346,9 +346,9 @@ photos and 300,000 queries per arm. The retained training loops total
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
 
-Local-only verifies 39,000 updates, 78,000 distinct photos and
-312,000 native queries on the 50k schedule. The retained loop took
-18,864.01 s.
+Local-only verifies 40,000 updates, 80,000 distinct photos and
+320,000 native queries on the 50k schedule. The retained loop took
+19,280.83 s.
 [25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
 [26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
 [26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json) ·
@@ -371,7 +371,9 @@ Local-only verifies 39,000 updates, 78,000 distinct photos and
 [37,500 local audit](results/scene-full-epoch-v1/local-037500-prefix.json) ·
 [38,000 local audit](results/scene-full-epoch-v1/local-038000-prefix.json) ·
 [38,500 local audit](results/scene-full-epoch-v1/local-038500-prefix.json) ·
-[39,000 local audit](results/scene-full-epoch-v1/local-039000-prefix.json).
+[39,000 local audit](results/scene-full-epoch-v1/local-039000-prefix.json) ·
+[39,500 local audit](results/scene-full-epoch-v1/local-039500-prefix.json) ·
+[40,000 local audit](results/scene-full-epoch-v1/local-040000-prefix.json).
 
 The verified matched 30k pair completes the 64-photo numerical evaluation,
 native exact-crop viewing and both standing GFX reviews. Its scoring driver
@@ -386,7 +388,11 @@ are complete. The local and spatial EMAs lower independent ISO6400
 fine-increment and quiet-region error versus their 30k EMAs. The
 correct distant view is close to the mismatched view. Fine cab
 crossings remain incomplete. The 35k pair is the latest image-quality
-review. The 50k fixed photo and camera evaluation and native review are queued.
+review. The next 64-photo and standing GFX evaluation waits for the
+matched 40k checkpoint. The 50k fixed photo and camera evaluation and
+native review are also queued.
+[40k launch receipt](results/scene-full-epoch-v1/queue-full-040000-launch.json) ·
+[40k frozen review drivers](results/scene-full-epoch-v1/queue-full-040000.tar.xz).
 [35k exact-photo and standing GFX review](scene-full-epoch-35k.md) ·
 [35k launch receipt](results/scene-full-epoch-v1/queue-full-035000-launch.json) ·
 [35k review drivers](results/scene-full-epoch-v1/queue-full-035000.tar.xz).

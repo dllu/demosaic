@@ -6,6 +6,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons)
   reproduces the ordinary FP16 values in all four viewed crops. The sky is
   smooth, coarse crossings are coherent and fine wires and leaves are soft.
+- [Local Bayer deficit checks](bayer-local-deficit.md#standing-gfx100s-comparisons)
+  reproduce sky, building and foliage and change the coarse fence by
+  0.191 DN16 RMS with the phase veto. Coarse crossings remain coherent.
 - [Closer disjoint Bayer donors](bayer-near-donors.md#standing-gfx100s-comparisons)
   change the coarse fence by at most one display code. Sky stays
   smooth and the fine building cables and foliage stay soft.
