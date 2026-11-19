@@ -27,6 +27,14 @@ fresh ISO6400 gaps with averaged footprints. The standing sky
 stays smooth, and the fine cab crossings remain incomplete.
 [Reserved Bayer footprint refinement](mesh-refined-footprint.md).
 
+A separate [phase and gap diagnostic](green-gap-validation.md) uses exterior
+RAW to estimate weak-carrier phase and disjoint local samples to check support.
+On planted aliases it adds 2.62 percentage points over a local fit while
+reducing flat variation and increasing coherent gap leakage. The automatic
+standing replay misses the cab's fine frequencies. Previously measured RAW
+peaks make both directions visible on more of the right cab crop, with
+incomplete crossings and overly regular spacing in places.
+
 The [matched ordinary-data controls](scene-local-contrast-2400.md#plain-spatial-control)
 compare whole-image features against the local-only arm after training
 on byte-identical observations from 4,800 photos. Their eight-photo

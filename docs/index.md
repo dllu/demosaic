@@ -50,6 +50,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [whole-image RAW strength prior](context-strength.md) ·
 [native Bayer green innovation](green-phase-innovation.md) ·
 [separated Bayer green aliases](quincunx-green.md) ·
+[local RAW support and exterior phase](green-gap-validation.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
 [distant RAW row references](distant-row-reference.md) ·
 [measured RAW donors for natural weak detail](natural-raw-donor-evidence.md) ·

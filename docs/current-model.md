@@ -123,6 +123,12 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Local support with exterior phase](green-gap-validation.md) recovers more
+of a planted weak carrier than a local free-phase fit while cutting
+added flat variation. Coherent gap leakage rises. The automatic GFX
+frequency search misses the fine mesh. Supplying prior noisy-RAW peaks
+makes more of the right cab lattice visible, with irregular coverage and
+overly regular spacing in places.
 [Full-epoch scene training at update 2,000](scene-full-epoch.md#first-matched-quality-comparison-at-2000-updates)
 finds lower coupled flat-core variation with the matched preview
 versus masking, with higher fine-increment error. The first standing

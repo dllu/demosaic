@@ -93,7 +93,15 @@ targets. Both production arms completed eight updates using the same 16 photos
 and 64 crops, including two exact-flat and five weak-texture scenes. The local
 arm then restored its update-eight checkpoint and continued from scene index 16.
 Long-run training and quality review are in progress. Both arms
-have completed the first 2,000 updates.
+have completed 2,500 updates, with verified matching inputs for 5,000
+distinct scenes and 20,000 native queries each. The local worker reached
+update 4,500 on its way to the 5,000 milestone before the runtime RAM
+reserve stopped it. Its phase had no saved checkpoint. The controller
+restarted from the verified 2,500 checkpoint and the first 942 replayed
+scene records match the interrupted attempt byte for byte. Numerical and
+native review remain complete through 2,000.
+[Restart receipt](results/scene-full-epoch-v1/retry-005000.json) ·
+[Original failure and retry logs](results/scene-full-epoch-v1/retry-005000-evidence.tar.xz).
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 
