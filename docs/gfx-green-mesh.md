@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Corpus 100k TensorRT kernel selection](corpus100k-trt-tactics.md#standing-gfx100s-comparisons) | The four native crops change by 0.078–0.109 DN16 RGB RMS versus eager FP16. Both ROIs, both priors, JPEGs and AHD were viewed, with incomplete crossings |
 | [Corpus 100k FP16 cuDNN tuning](corpus100k-cudnn-fp16.md#standing-gfx100s-comparisons) | All four native crops differ by 0.031–0.037 DN16 RGB RMS. Fine intersections stay incomplete. Both priors, ROIs, JPEGs and AHD were viewed |
 | [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons) | All FP16 transport variants reproduce the same native pixel values in both ROIs and profiles. The transferred right diagonals are clearest and fine intersections are incomplete. Both JPEGs and ISO100 AHD were viewed |
 | [Complementary Bayer checks](split-bayer-neural.md#standing-gfx100s-comparisons) | Full-input changes are 0.11–0.39 DN16 RGB RMS. Both priors, ROIs, JPEGs and AHD were viewed. Fine crossings remain incomplete |

@@ -1,0 +1,1052 @@
+{
+  "level": 3,
+  "settings": {
+    "tile": 512,
+    "overlap": 64,
+    "batch_size": 4,
+    "device": "cuda",
+    "precision": "float16",
+    "shot": 0.00128,
+    "read": 6.5536e-06
+  },
+  "medians": {
+    "eager": 35.1848593474715,
+    "dynamic": 33.977761109068524,
+    "static": 28.08810201851884
+  },
+  "paired": {
+    "dynamic_vs_eager": {
+      "channels": 305987556,
+      "fraction_exact": 0.868201774192412,
+      "fraction_within_one": 0.9933943686258927,
+      "RMS_DN16": 0.5516602009863214,
+      "p95_99_999_DN16": [
+        1,
+        1,
+        5
+      ],
+      "max_DN16_and_sensor_xy_channel": [
+        216,
+        [
+          5436,
+          2582,
+          0
+        ]
+      ],
+      "seam_RMS_DN16": 0.48176323354694095,
+      "interior_RMS_DN16": 0.5567186535265867
+    },
+    "static_vs_eager": {
+      "channels": 305987556,
+      "fraction_exact": 0.8683618950830798,
+      "fraction_within_one": 0.9932847334484413,
+      "RMS_DN16": 0.5533827191415237,
+      "p95_99_999_DN16": [
+        1,
+        1,
+        5
+      ],
+      "max_DN16_and_sensor_xy_channel": [
+        248,
+        [
+          5436,
+          2582,
+          0
+        ]
+      ],
+      "seam_RMS_DN16": 0.4861233437765459,
+      "interior_RMS_DN16": 0.5582645432261003
+    },
+    "static_vs_dynamic": {
+      "channels": 305987556,
+      "fraction_exact": 0.8543683292793777,
+      "fraction_within_one": 0.9922954546556789,
+      "RMS_DN16": 0.6010385982695413,
+      "p95_99_999_DN16": [
+        1,
+        1,
+        5
+      ],
+      "max_DN16_and_sensor_xy_channel": [
+        167,
+        [
+          8231,
+          2991,
+          0
+        ]
+      ],
+      "seam_RMS_DN16": 0.5196427990848479,
+      "interior_RMS_DN16": 0.6069000950880233
+    },
+    "static_vs_ieee-fp32": {
+      "channels": 305987556,
+      "fraction_exact": 0.8690123659800074,
+      "fraction_within_one": 0.9936464115553771,
+      "RMS_DN16": 0.5409210254267058,
+      "p95_99_999_DN16": [
+        1,
+        1,
+        5
+      ],
+      "max_DN16_and_sensor_xy_channel": [
+        180,
+        [
+          5436,
+          2582,
+          0
+        ]
+      ],
+      "seam_RMS_DN16": 0.47474754017332366,
+      "interior_RMS_DN16": 0.545721878821163
+    }
+  },
+  "versions": {
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "torch-tensorrt": null,
+      "tensorrt": null,
+      "nvidia-modelopt": null,
+      "torchao": null,
+      "rawpy": "0.26.1"
+    },
+    "cuda": "13.0",
+    "cudnn": 92400,
+    "hardware": "NVIDIA GB10",
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "TensorRT": "11.4.0.106"
+  },
+  "plans": {
+    "dynamic": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt-fp16-pyramid-b4-512-opt2.plan",
+      "sha256": "e4add621bf1344b1604c6a30e485445a13bf5e9e1dd1b72ee19709d61a7ad3f3"
+    },
+    "static": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/static-l3-b4-512.plan",
+      "sha256": "3d233a76d37d5cbd8944c724cb8ecc74d92c30b4ed280cda88da0b95c322aa10"
+    }
+  },
+  "FP32_anchor": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-mixed-precision-v1/first-fp32.tiff",
+    "sha256": "a1ee4419651f98c83fb30ac62553117574e0def6132d1396e4b60ad2a85ca4d9"
+  },
+  "runs": [
+    {
+      "arm": "eager",
+      "restore": {
+        "seconds": 40.54910489800386,
+        "tile_seconds": 39.96327209495939,
+        "compute_transfer_seconds": 39.25203474215232,
+        "blend_seconds": 0.6533906235126778,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "tile_grid_alignment": 2,
+        "tile_stride": 448,
+        "batch_size": 4,
+        "self_ensemble": "none",
+        "model_views_per_tile": 1,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.391897088
+      },
+      "export_seconds": 0.593141900957562,
+      "export": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full-0-eager.tiff",
+        "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+      }
+    },
+    {
+      "arm": "dynamic",
+      "restore": {
+        "seconds": 27.286042474093847,
+        "tile_seconds": 27.225339864962734,
+        "compute_transfer_seconds": 26.527625221642666,
+        "blend_seconds": 0.6473920211428776,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "tile_grid_alignment": 2,
+        "tile_stride": 448,
+        "batch_size": 4,
+        "self_ensemble": "none",
+        "model_views_per_tile": 1,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.136044544
+      },
+      "export_seconds": 0.8248998840572312,
+      "export": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full-1-dynamic.tiff",
+        "sha256": "40025cc2f6d427f5b2bf4d4aaca0cea64fdad18e91594fc733179070573d48b7"
+      }
+    },
+    {
+      "arm": "static",
+      "restore": {
+        "seconds": 28.754713119007647,
+        "tile_seconds": 28.69129690004047,
+        "compute_transfer_seconds": 28.059304611058906,
+        "blend_seconds": 0.5777579420246184,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "tile_grid_alignment": 2,
+        "tile_stride": 448,
+        "batch_size": 4,
+        "self_ensemble": "none",
+        "model_views_per_tile": 1,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.136044544
+      },
+      "export_seconds": 0.9317134689772502,
+      "export": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full-2-static.tiff",
+        "sha256": "637166d050d686b1a8b09dbdd4adf0a117505946e159c5056055fd060bcc04f2"
+      }
+    },
+    {
+      "arm": "static",
+      "restore": {
+        "seconds": 27.42149091803003,
+        "tile_seconds": 27.35004104010295,
+        "compute_transfer_seconds": 26.740704070194624,
+        "blend_seconds": 0.5608328834641725,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "tile_grid_alignment": 2,
+        "tile_stride": 448,
+        "batch_size": 4,
+        "self_ensemble": "none",
+        "model_views_per_tile": 1,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.136044544
+      },
+      "export_seconds": 1.154865902964957,
+      "export": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full-3-static.tiff",
+        "sha256": "637166d050d686b1a8b09dbdd4adf0a117505946e159c5056055fd060bcc04f2"
+      }
+    },
+    {
+      "arm": "dynamic",
+      "restore": {
+        "seconds": 40.6694797440432,
+        "tile_seconds": 40.56868072494399,
+        "compute_transfer_seconds": 39.161953825037926,
+        "blend_seconds": 1.3434272897429764,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "tile_grid_alignment": 2,
+        "tile_stride": 448,
+        "batch_size": 4,
+        "self_ensemble": "none",
+        "model_views_per_tile": 1,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.136044544
+      },
+      "export_seconds": 1.1716902020853013,
+      "export": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full-4-dynamic.tiff",
+        "sha256": "40025cc2f6d427f5b2bf4d4aaca0cea64fdad18e91594fc733179070573d48b7"
+      }
+    },
+    {
+      "arm": "eager",
+      "restore": {
+        "seconds": 29.820613796939142,
+        "tile_seconds": 28.308900358038954,
+        "compute_transfer_seconds": 27.76124781521503,
+        "blend_seconds": 0.5027516661211848,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "tile_grid_alignment": 2,
+        "tile_stride": 448,
+        "batch_size": 4,
+        "self_ensemble": "none",
+        "model_views_per_tile": 1,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.391897088
+      },
+      "export_seconds": 0.5415644769091159,
+      "export": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full-5-eager.tiff",
+        "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+      }
+    }
+  ],
+  "implementation": {
+    "builds": [
+      {
+        "driver": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/tactics.py",
+          "sha256": "cd3ffb0408d9dfa5ec03f5430543e2771a3064320e1d9462da5761b076df986b"
+        },
+        "base_builder": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt_hidden.py",
+          "sha256": "977cea9c16263a46b28fd949f12c4344a0b8cd8006f6463a21ed152b2ad08fa7"
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+        },
+        "backend": {
+          "packages": {
+            "torch": "2.14.1+cu130",
+            "torch-tensorrt": null,
+            "tensorrt": null,
+            "nvidia-modelopt": null,
+            "torchao": null,
+            "rawpy": "0.26.1"
+          },
+          "cuda": "13.0",
+          "cudnn": 92400,
+          "hardware": "NVIDIA GB10",
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "TensorRT": "11.4.0.106"
+        },
+        "jobs_before": [
+          [
+            327018,
+            "693"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3560892,
+            "2913"
+          ],
+          [
+            3563999,
+            "575"
+          ]
+        ],
+        "jobs_after": [
+          [
+            327018,
+            "693"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3560892,
+            "2913"
+          ],
+          [
+            3563999,
+            "1423"
+          ]
+        ],
+        "tile": 512,
+        "batch": 4,
+        "level": 3,
+        "timing_iterations": 5,
+        "workspace_bytes": 2147483648,
+        "max_aux_streams": 0,
+        "build_seconds": 44.3675648230128,
+        "plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/static-l3-b4-512.plan",
+          "sha256": "3d233a76d37d5cbd8944c724cb8ecc74d92c30b4ed280cda88da0b95c322aa10"
+        },
+        "layers": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/static-l3-b4-512.layers.json",
+          "sha256": "06a2aba6039183e579806cdb59c89b1f85f7cd012314b3776239089c78c7679c"
+        },
+        "types": {
+          "custom_layer": 2,
+          "kgen": 9,
+          "correlation": 53,
+          "fusion": 6,
+          "deconv": 3
+        }
+      },
+      {
+        "driver": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/tactics.py",
+          "sha256": "cd3ffb0408d9dfa5ec03f5430543e2771a3064320e1d9462da5761b076df986b"
+        },
+        "base_builder": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt_hidden.py",
+          "sha256": "977cea9c16263a46b28fd949f12c4344a0b8cd8006f6463a21ed152b2ad08fa7"
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+        },
+        "backend": {
+          "packages": {
+            "torch": "2.14.1+cu130",
+            "torch-tensorrt": null,
+            "tensorrt": null,
+            "nvidia-modelopt": null,
+            "torchao": null,
+            "rawpy": "0.26.1"
+          },
+          "cuda": "13.0",
+          "cudnn": 92400,
+          "hardware": "NVIDIA GB10",
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "TensorRT": "11.4.0.106"
+        },
+        "jobs_before": [
+          [
+            327018,
+            "693"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3565572,
+            "2985"
+          ],
+          [
+            3565877,
+            "575"
+          ]
+        ],
+        "jobs_after": [
+          [
+            327018,
+            "693"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3565572,
+            "2985"
+          ],
+          [
+            3565877,
+            "1423"
+          ]
+        ],
+        "tile": 512,
+        "batch": 4,
+        "level": 5,
+        "timing_iterations": 5,
+        "workspace_bytes": 2147483648,
+        "max_aux_streams": 0,
+        "build_seconds": 43.49266434297897,
+        "plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/static-l5-b4-512.plan",
+          "sha256": "3a32e3f5b7898a4905a770777e2ee3118fc3defe576cec04407ad5bbe043ba3a"
+        },
+        "layers": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/static-l5-b4-512.layers.json",
+          "sha256": "49a17368c9a650014758969aa6739e0470257b3790595c58572be12c76f478b0"
+        },
+        "types": {
+          "custom_layer": 2,
+          "kgen": 6,
+          "correlation": 50,
+          "fusion": 9,
+          "deconv": 3
+        }
+      }
+    ],
+    "resident_medians": {
+      "eager-fp16": 0.3295343994977884,
+      "dynamic-2": 0.28964834194630384,
+      "static-3": 0.30429509707028046,
+      "static-5": 0.2993242554948665
+    },
+    "resident_quality": {
+      "eager-fp16": {
+        "vs_ieee_fp32": {
+          "rms_DN16": 0.2107271076175846,
+          "mean_abs_DN16": 0.10311685509359499,
+          "absolute_percentile_DN16": [
+            0.287104994058609,
+            0.5170819535851479,
+            1.2383956540750969,
+            36.960373520851135
+          ],
+          "ROI_RMS_DN16": [
+            0.1043284754397404,
+            0.1573660073626138,
+            0.10757868945105367,
+            0.13336169175392465
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              -0.024723615089533267,
+              0.03885300478214049,
+              0.00658631288279139
+            ],
+            [
+              -0.0600003051571548,
+              0.024315757457679867,
+              -0.0062313285324307795
+            ],
+            [
+              -0.03050028394509354,
+              0.017679347635385055,
+              0.001027093503478227
+            ],
+            [
+              -0.04049455900399153,
+              0.022653322259247943,
+              0.008741173876842367
+            ]
+          ]
+        },
+        "vs_eager_fp16": {
+          "rms_DN16": 0.0,
+          "mean_abs_DN16": 0.0,
+          "absolute_percentile_DN16": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "ROI_RMS_DN16": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ]
+        }
+      },
+      "dynamic-2": {
+        "vs_ieee_fp32": {
+          "rms_DN16": 0.5726290687362532,
+          "mean_abs_DN16": 0.2148586886145005,
+          "absolute_percentile_DN16": [
+            0.6071684695780277,
+            1.1096022091805935,
+            2.7671142706835026,
+            101.94375693798065
+          ],
+          "ROI_RMS_DN16": [
+            0.2001612956507868,
+            0.3268204712608631,
+            0.23904513816691775,
+            0.32556235826452284
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              -0.01565943665045779,
+              0.04759849396941718,
+              0.01418676424818841
+            ],
+            [
+              -0.06543596435412838,
+              0.0231738845941436,
+              -0.014871810839076715
+            ],
+            [
+              -0.026916922876989702,
+              0.018906079528915144,
+              0.0064526154461646
+            ],
+            [
+              -0.04474898481876153,
+              0.0197621942043952,
+              0.01326427634319316
+            ]
+          ]
+        },
+        "vs_eager_fp16": {
+          "rms_DN16": 0.5768065733549237,
+          "mean_abs_DN16": 0.22266042897986052,
+          "absolute_percentile_DN16": [
+            0.6282252771779895,
+            1.1528144404292107,
+            2.886674702167511,
+            99.9594122171402
+          ],
+          "ROI_RMS_DN16": [
+            0.21506663828440503,
+            0.3420157654877716,
+            0.24897756590027145,
+            0.33189506032567223
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              0.009064178439075476,
+              0.00874548918727669,
+              0.007600451365397021
+            ],
+            [
+              -0.005435659196973574,
+              -0.0011418728635362641,
+              -0.008640482306645936
+            ],
+            [
+              0.003583361068103841,
+              0.0012267318935300863,
+              0.005425521942686373
+            ],
+            [
+              -0.004254425814770002,
+              -0.0028911280548527428,
+              0.004523102466350792
+            ]
+          ]
+        }
+      },
+      "static-3": {
+        "vs_ieee_fp32": {
+          "rms_DN16": 0.544094399910046,
+          "mean_abs_DN16": 0.21485106501590281,
+          "absolute_percentile_DN16": [
+            0.609365701675415,
+            1.1159497685730457,
+            2.797032271195577,
+            106.27181589603424
+          ],
+          "ROI_RMS_DN16": [
+            0.20822824127077783,
+            0.32357959868153163,
+            0.2440811760338758,
+            0.3300855581915313
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              -0.005215660617977846,
+              0.05869741041860834,
+              0.021430639843492826
+            ],
+            [
+              -0.06605402767127089,
+              0.01837934939949264,
+              -0.011720553010263757
+            ],
+            [
+              -0.038555541314531185,
+              0.022541120015694104,
+              -0.0007374399133027509
+            ],
+            [
+              -0.03550674618090852,
+              0.02183238570833055,
+              0.007769504545717609
+            ]
+          ]
+        },
+        "vs_eager_fp16": {
+          "rms_DN16": 0.5423527843928827,
+          "mean_abs_DN16": 0.22220517554546163,
+          "absolute_percentile_DN16": [
+            0.6306056119501591,
+            1.1613592319190502,
+            2.9545005715083343,
+            120.26378989219666
+          ],
+          "ROI_RMS_DN16": [
+            0.22206194986566352,
+            0.34031271352263637,
+            0.24877336174310793,
+            0.33095980331012764
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              0.01950795447155542,
+              0.019844405636467853,
+              0.014844326960701437
+            ],
+            [
+              -0.006053722514116089,
+              -0.005936408058187226,
+              -0.005489224477832977
+            ],
+            [
+              -0.00805525736943764,
+              0.0048617723803090485,
+              -0.0017645334167809778
+            ],
+            [
+              0.004987812823083004,
+              -0.0008209365509173949,
+              -0.0009716693311247581
+            ]
+          ]
+        }
+      },
+      "static-5": {
+        "vs_ieee_fp32": {
+          "rms_DN16": 0.8424872923366782,
+          "mean_abs_DN16": 0.2185348275372757,
+          "absolute_percentile_DN16": [
+            0.6089994963258505,
+            1.1081373877823353,
+            2.6994441606854416,
+            173.88015925884247
+          ],
+          "ROI_RMS_DN16": [
+            0.21622981948132164,
+            0.3315186555562201,
+            0.2415080576831507,
+            0.3189231174264439
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              -0.01559580608682154,
+              0.05310295614217466,
+              0.009364028142226744
+            ],
+            [
+              -0.06351504563690469,
+              0.006343638658745476,
+              -0.004985309466201215
+            ],
+            [
+              -0.02160899299462926,
+              0.020318236854791394,
+              0.017555543375749494
+            ],
+            [
+              -0.026769367273891474,
+              0.021187511438984074,
+              -0.002336523940607549
+            ]
+          ]
+        },
+        "vs_eager_fp16": {
+          "rms_DN16": 0.8754627517965047,
+          "mean_abs_DN16": 0.22677653666926734,
+          "absolute_percentile_DN16": [
+            0.6295069959014654,
+            1.1474434286355972,
+            2.8749561309814453,
+            173.96609544754028
+          ],
+          "ROI_RMS_DN16": [
+            0.2242692314579099,
+            0.34170057562755324,
+            0.2487690423915926,
+            0.32405524570365235
+          ],
+          "ROI_channel_mean_DN16": [
+            [
+              0.009127809002711729,
+              0.014249951360034175,
+              0.002777715259435354
+            ],
+            [
+              -0.0035147404797498893,
+              -0.01797211879893439,
+              0.0012460190662295645
+            ],
+            [
+              0.008891290950464282,
+              0.0026388892194063374,
+              0.016528449872271266
+            ],
+            [
+              0.013725191730100051,
+              -0.0014658108202638687,
+              -0.011077697817449916
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "sources": {
+    "screen": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/screen.json",
+      "sha256": "d7e9ef915f17cfaad03aa4706b886c0e00a38a9cbb87bfe7a114822b06bf5576"
+    },
+    "screen-default-stream": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/screen-default-stream.json",
+      "sha256": "39fa6eb92f1ba7aa5db1ab9ee708badbea44bb5c3ac3ee186b26ea3e2839f2d9"
+    },
+    "full": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full.json",
+      "sha256": "3ad9469a131dc4d9c714409b36a2e54b3b8d140c970d0ca8ffd075a66302f32b"
+    },
+    "quality": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/quality.json",
+      "sha256": "532f5caa85d1b8a357fc8a54faebb92f16d4671ca7b5d5056471d7ccd73a3f92"
+    },
+    "paired-tiles": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/paired-tiles.json",
+      "sha256": "3649d5eff7d3ee7363902452e5de52b7460c9f0bf3b84f610b6a28e86718e320"
+    },
+    "outliers": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/outliers.json",
+      "sha256": "fb6a7aa7d2a420aea6bf3550b6353ec90a6f2cf0bc0ee272da28551c77eca95c"
+    },
+    "wires": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/wires.json",
+      "sha256": "8aa77616dd4f8a9d9f5c950caae53cd8f580c2bfe1fac1269c9c8653649a2fc0"
+    }
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/corpus100k-trt-tactics-v1/evidence.tar.xz",
+    "sha256": "82ce6c643cdd6a528db05da71211960d9cf1e5f8b5321df1ab0e9baa239c586e"
+  },
+  "paired_tile_timings": {
+    "wall_seconds": {
+      "eager": {
+        "total": 25.831913072732277,
+        "median": 0.19636535801691934
+      },
+      "dynamic": {
+        "total": 22.631488364073448,
+        "median": 0.1720526340068318
+      },
+      "static": {
+        "total": 22.63304181525018,
+        "median": 0.17228778696153313
+      },
+      "dynamic_vs_eager": {
+        "mean_relative_percent": -12.389421951241953,
+        "bootstrap_interval_percent": [
+          -12.640795709197533,
+          -12.166636225990356
+        ],
+        "fraction_batches_faster": 1.0
+      },
+      "static_vs_eager": {
+        "mean_relative_percent": -12.383408261228524,
+        "bootstrap_interval_percent": [
+          -12.66076449770875,
+          -12.10259090557326
+        ],
+        "fraction_batches_faster": 1.0
+      },
+      "static_vs_dynamic": {
+        "mean_relative_percent": 0.006864114068605431,
+        "bootstrap_interval_percent": [
+          -0.39472557590947366,
+          0.40160296955210956
+        ],
+        "fraction_batches_faster": 0.4846153846153846
+      }
+    },
+    "CUDA_seconds": {
+      "eager": {
+        "total": 25.827743804931643,
+        "median": 0.19635079956054688
+      },
+      "dynamic": {
+        "total": 22.61896089172363,
+        "median": 0.17204017639160157
+      },
+      "static": {
+        "total": 22.62449726867676,
+        "median": 0.17227392578125
+      },
+      "dynamic_vs_eager": {
+        "mean_relative_percent": -12.423783267492816,
+        "bootstrap_interval_percent": [
+          -12.68116510891188,
+          -12.19601009649888
+        ],
+        "fraction_batches_faster": 1.0
+      },
+      "static_vs_eager": {
+        "mean_relative_percent": -12.402347492866351,
+        "bootstrap_interval_percent": [
+          -12.673588640092172,
+          -12.13016105615949
+        ],
+        "fraction_batches_faster": 1.0
+      },
+      "static_vs_dynamic": {
+        "mean_relative_percent": 0.024476707748122273,
+        "bootstrap_interval_percent": [
+          -0.36878019007166946,
+          0.4087463600370467
+        ],
+        "fraction_batches_faster": 0.4846153846153846
+      }
+    }
+  },
+  "wire_score_changes": {
+    "iso400": {
+      "dynamic": {
+        "weak_response_pct": {
+          "mean": -0.0030367504067830473,
+          "min": -0.04427149180131096,
+          "max": 0.04912460246336536
+        },
+        "strong_response_pct": {
+          "mean": 0.001384013906726267,
+          "min": -0.014430641072095796,
+          "max": 0.039225410134449135
+        },
+        "increment_RMS_DN16": {
+          "mean": 0.017564557756020466,
+          "min": -0.0354120430972813,
+          "max": 0.2766704650977516
+        },
+        "flat_luma_RMS_DN16": {
+          "mean": 0.012969138242870382,
+          "min": -0.0359902302975561,
+          "max": 0.08426674216485974
+        },
+        "flat_chroma_RMS_DN16": {
+          "mean": 0.03609387699841082,
+          "min": -0.023719145151936516,
+          "max": 0.17551461560361226
+        },
+        "worst_flat_bias_DN16": {
+          "mean": 0.025110894953127665,
+          "min": -0.09527095391910123,
+          "max": 0.48678762719616486
+        }
+      },
+      "static": {
+        "weak_response_pct": {
+          "mean": -0.006891810751341747,
+          "min": -0.10466905029937834,
+          "max": 0.03292931406879518
+        },
+        "strong_response_pct": {
+          "mean": 0.0034460763685159415,
+          "min": -0.025546272046256036,
+          "max": 0.038257480786654696
+        },
+        "increment_RMS_DN16": {
+          "mean": 0.016446649766877226,
+          "min": -0.053223631752956635,
+          "max": 0.24048257236327686
+        },
+        "flat_luma_RMS_DN16": {
+          "mean": 0.01457204422666869,
+          "min": -0.0327049072542378,
+          "max": 0.07362883591909775
+        },
+        "flat_chroma_RMS_DN16": {
+          "mean": 0.02667165865876105,
+          "min": -0.050248051687605155,
+          "max": 0.13761490122075948
+        },
+        "worst_flat_bias_DN16": {
+          "mean": 0.016953678320437315,
+          "min": -0.07263252081374283,
+          "max": 0.3966364628711716
+        }
+      }
+    },
+    "iso6400": {
+      "dynamic": {
+        "weak_response_pct": {
+          "mean": 0.006158476844253673,
+          "min": -0.055335921259221266,
+          "max": 0.21149279320833614
+        },
+        "strong_response_pct": {
+          "mean": -0.006255262988848227,
+          "min": -0.04032592383470046,
+          "max": 0.024950072520127264
+        },
+        "increment_RMS_DN16": {
+          "mean": 0.003981382641044935,
+          "min": -0.05275826533375039,
+          "max": 0.1910191535365584
+        },
+        "flat_luma_RMS_DN16": {
+          "mean": 0.010150462960656137,
+          "min": -0.13007324891045258,
+          "max": 0.08715412322561278
+        },
+        "flat_chroma_RMS_DN16": {
+          "mean": 0.005301491179040922,
+          "min": -0.17633799354787527,
+          "max": 0.10884486257349124
+        },
+        "worst_flat_bias_DN16": {
+          "mean": 0.003879999803360956,
+          "min": -0.14008751522101193,
+          "max": 0.1357449718392445
+        }
+      },
+      "static": {
+        "weak_response_pct": {
+          "mean": 0.012501345309591905,
+          "min": -0.06236759351428134,
+          "max": 0.21537706847890092
+        },
+        "strong_response_pct": {
+          "mean": 0.003293359314824181,
+          "min": -0.043304975877290985,
+          "max": 0.07519496426760952
+        },
+        "increment_RMS_DN16": {
+          "mean": 0.010574304578793678,
+          "min": -0.05390788680901437,
+          "max": 0.0991375895616784
+        },
+        "flat_luma_RMS_DN16": {
+          "mean": 0.028646339085931876,
+          "min": -0.016984749469830973,
+          "max": 0.11634713888349779
+        },
+        "flat_chroma_RMS_DN16": {
+          "mean": 0.02087460698374703,
+          "min": -0.05220883921786168,
+          "max": 0.10744950661797681
+        },
+        "worst_flat_bias_DN16": {
+          "mean": 0.008382793917726413,
+          "min": -0.1218151280737736,
+          "max": 0.2544325373949441
+        }
+      }
+    }
+  },
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-trt-tactics-v1/manifest.json",
+    "sha256": "07c3f3c14e5be5328e84de0d8a39e188b48c34dbb3d9ebd99bb857ef59537a80"
+  },
+  "notes": "Same trained EMA. Native quality uses six exact-target contexts, 48 exact weak-wire inputs and both GFX families."
+}

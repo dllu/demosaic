@@ -26,7 +26,8 @@ For Corpus 100k on CUDA, use `--precision float16 --tile 512 --overlap 64
 --batch-size 4` without the FP32-only cuDNN benchmark flag. The paired GB10
 test cuts 102 MP restoration from 287 to 53 seconds.
 [100k scores and native comparisons](docs/full-corpus-long100k.md) ·
-[Fast FP16 inference and quality](docs/corpus100k-fp16-throughput.md).
+[Fast FP16 inference and quality](docs/corpus100k-fp16-throughput.md) ·
+[Paired TensorRT timings](docs/corpus100k-trt-tactics.md).
 
 ## Setup and inference
 

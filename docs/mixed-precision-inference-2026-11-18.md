@@ -19,7 +19,11 @@ grid fixed and measures device-resident blending, CUDA Graph replay and
 fresh-process cuDNN FP16 tuning. In the
 [full-frame tuning follow-up](corpus100k-cudnn-fp16.md), warm repeats
 show no speed gain and separate searches produce slightly different
-RGB16 exports.
+RGB16 exports. The [fixed-batch TensorRT follow-up](corpus100k-trt-tactics.md)
+interleaves the engines on every batch of the full 102 MP tile grid. The
+previous TensorRT FP16 plan cuts forward time by 12.4% versus eager FP16.
+The new fixed plan ties its time. Its largest changes versus eager FP16
+are on two exact-target contexts.
 
 ## Where the time and precision go
 

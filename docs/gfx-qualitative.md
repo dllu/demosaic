@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Corpus 100k TensorRT kernel selection](corpus100k-trt-tactics.md#standing-gfx100s-comparisons)
+  keeps a smooth sky and coherent coarse crossings. The four native crops
+  change by 0.201–0.305 DN16 RGB RMS versus eager FP16.
 - [Corpus 100k FP16 cuDNN tuning](corpus100k-cudnn-fp16.md#standing-gfx100s-comparisons)
   keeps a smooth sky and coherent coarse crossings. All four native crops
   differ by at most 0.110 DN16 RGB RMS from ordinary FP16.

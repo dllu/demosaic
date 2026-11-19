@@ -38,7 +38,10 @@ tiles save 19.5% in a paired screen and change clipped colors. Selective FP8
 adds chroma variation on quiet fields. Keeping the full RAW and FP32 blend
 on CUDA roughly doubles peak CUDA allocation for similar restore time.
 Fresh cuDNN FP16 searches give no repeatable full-frame gain and
-differ by 0.242 DN16 RMS between processes.
+differ by 0.242 DN16 RMS between processes. The existing TensorRT engine
+reduces paired forward time by 12.4% across all 520 GFX tiles. A fixed-batch
+engine with a wider search gives the same forward time. Its camera-RGB differences versus eager
+FP16 are largest in two exact-target contexts. [Paired TensorRT test](corpus100k-trt-tactics.md).
 [Tile geometry and TensorRT quality](corpus100k-fp16-throughput.md) ·
 [CUDA tile transport](corpus100k-device-tiles.md) ·
 [Full-frame cuDNN search](corpus100k-cudnn-fp16.md).

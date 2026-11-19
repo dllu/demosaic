@@ -8,7 +8,10 @@ TensorRT FP16 also reduces warmed restoration by **11.9%** in a separate
 test. Selective FP8 saves a further 1.44 s on that frame and raises
 quiet-region chroma error. The 100 MP in 10 seconds target remains unmet.
 [Machine results](results/corpus100k-faster-inference-v1/publication.json) ·
-[Frozen drivers and receipts](results/corpus100k-faster-inference-v1/evidence.tar.xz).
+[Frozen drivers and receipts](results/corpus100k-faster-inference-v1/evidence.tar.xz). A
+[paired 520-tile follow-up](corpus100k-trt-tactics.md) measures 12.4%
+less forward time with the same TensorRT FP16 plan and finds similar
+forward time after a wider fixed-batch search.
 
 ## Cold RAW to RGB16
 

@@ -1,0 +1,3167 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full_quality.py",
+    "sha256": "b516174b9cd27d37e722bd4038a5ff21901229edc6f9b5cecdbcd2666f1b1b44"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "plans": {
+    "dynamic": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt-fp16-pyramid-b4-512-opt2.plan",
+      "sha256": "e4add621bf1344b1604c6a30e485445a13bf5e9e1dd1b72ee19709d61a7ad3f3"
+    },
+    "static": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/static-l3-b4-512.plan",
+      "sha256": "3d233a76d37d5cbd8944c724cb8ecc74d92c30b4ed280cda88da0b95c322aa10"
+    }
+  },
+  "sources": {
+    "cab": {
+      "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-long100k-native-v1/manifest.json",
+      "sha256": "f402856d5ec3d58f95c8887cb8f3086ffe000312f18b5d850934caec952d66ea"
+    },
+    "main": {
+      "path": "/home/dllu/proj/demosaic/configs/gfx-qualitative-20231231.json",
+      "sha256": "23efd86ccf2b39ec8b37af21d7d7908c19b868a890544a454c88bdb6a056399a"
+    },
+    "exact": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-fp16-throughput-v1/overlap.json",
+      "sha256": "b2750437c7b884f56f1a609589e23d02230ba37d015f74d5688c52285574f5d4"
+    }
+  },
+  "full_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full.json",
+    "sha256": "3ad9469a131dc4d9c714409b36a2e54b3b8d140c970d0ca8ffd075a66302f32b"
+  },
+  "cab": [
+    {
+      "id": "mesh-nominal-fine-green-mesh-left",
+      "provenance": {
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-review-v1/native/report/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "f3a0dd1fd1e49f51f6cf20caa70ae50638e63a53b5ae1a0568e189b749403ad0"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "observation_id": "mesh-nominal",
+        "input_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "511cc9a2ca48cc87c1fc5cc5050256467ae6e6bd3840c9ff838dd1bc9ff2dde5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "models": {
+          "V120": {
+            "checkpoint": {
+              "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "step": 20000,
+            "weights": "EMA",
+            "display_label": "V120 EMA"
+          },
+          "scale-long86k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+              "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+            },
+            "weights": "EMA",
+            "step": 86000,
+            "display_label": "Long schedule 86k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "training_horizon": 100000,
+            "retained_progress": true,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA"
+          }
+        },
+        "weights": {
+          "V120": "EMA",
+          "scale-long86k": "EMA",
+          "scale-long100k": "EMA"
+        },
+        "no_resize": true,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "source_id": null,
+        "source_case": null,
+        "actual_retained_noise_draw": 0,
+        "selection": "Fixed RGGB ordinary/faint and deepest ISO12800 shadows; all standing GFX regions/profiles/ROIs/JPEGs; prior failure hue BGGR and neutral RGGB. No selection from current outcomes.",
+        "case": {
+          "name": "fine-green-mesh-left",
+          "ROI_xywh": [
+            206,
+            229,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            806,
+            6489,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            805,
+            6489,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+              },
+              "xywh": [
+                760,
+                6500,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+              },
+              "xywh": [
+                759,
+                6501,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          }
+        },
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ]
+      },
+      "board": {
+        "image": {
+          "path": "mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "7e0353eb75c7f0d272f9319960122e2d5d4881f86123c56f7ce98db3e99923e8"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 ref, not GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "delta_eager": {
+        "rms_DN16": 0.09764385146590149,
+        "max_DN16": 5.563391670584679,
+        "channel_mean_DN16": [
+          -0.0024121738954818285,
+          -0.011812135937634593,
+          -0.0048872547652536015
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.1120752561899522,
+        "max_DN16": 6.892961226403713,
+        "channel_mean_DN16": [
+          -0.04573185249967082,
+          -0.031221328807941973,
+          -0.03131562459932411
+        ]
+      }
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-right",
+      "provenance": {
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-review-v1/native/report/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "678fcd309547a64b740e30f650bada3c1934ba6d71038059e68b002ff2b15451"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "observation_id": "mesh-nominal",
+        "input_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "511cc9a2ca48cc87c1fc5cc5050256467ae6e6bd3840c9ff838dd1bc9ff2dde5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "models": {
+          "V120": {
+            "checkpoint": {
+              "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "step": 20000,
+            "weights": "EMA",
+            "display_label": "V120 EMA"
+          },
+          "scale-long86k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+              "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+            },
+            "weights": "EMA",
+            "step": 86000,
+            "display_label": "Long schedule 86k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "training_horizon": 100000,
+            "retained_progress": true,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA"
+          }
+        },
+        "weights": {
+          "V120": "EMA",
+          "scale-long86k": "EMA",
+          "scale-long100k": "EMA"
+        },
+        "no_resize": true,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "source_id": null,
+        "source_case": null,
+        "actual_retained_noise_draw": 0,
+        "selection": "Fixed RGGB ordinary/faint and deepest ISO12800 shadows; all standing GFX regions/profiles/ROIs/JPEGs; prior failure hue BGGR and neutral RGGB. No selection from current outcomes.",
+        "case": {
+          "name": "fine-green-mesh-right",
+          "ROI_xywh": [
+            426,
+            189,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            1026,
+            6449,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            1025,
+            6449,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+              },
+              "xywh": [
+                980,
+                6460,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+              },
+              "xywh": [
+                979,
+                6461,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          }
+        },
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ]
+      },
+      "board": {
+        "image": {
+          "path": "mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "17947ae1132e02f7063e0efce3be4b73a882baa5f70e5aa4340af75e1d184a2e"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 ref, not GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "delta_eager": {
+        "rms_DN16": 0.10857842116866492,
+        "max_DN16": 2.4618764966726303,
+        "channel_mean_DN16": [
+          0.008402004781601136,
+          -0.0007436746130224492,
+          0.006492793430061284
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.11194956627773867,
+        "max_DN16": 3.8057280611246824,
+        "channel_mean_DN16": [
+          -0.013546916361838158,
+          -0.015630175984733798,
+          0.016973157811480632
+        ]
+      }
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-left",
+      "provenance": {
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-review-v1/native/report/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "4a60a818e408d71493a61c90352d810eb68fe25c308e2f6b649bdddac4873d64"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "observation_id": "mesh-profile3879",
+        "input_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "db217f5e774c6b4f1665be9c9a9b3e10f45d023290a52c0b0df5f802d5ecb129"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "models": {
+          "V120": {
+            "checkpoint": {
+              "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "step": 20000,
+            "weights": "EMA",
+            "display_label": "V120 EMA"
+          },
+          "scale-long86k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+              "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+            },
+            "weights": "EMA",
+            "step": 86000,
+            "display_label": "Long schedule 86k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "training_horizon": 100000,
+            "retained_progress": true,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA"
+          }
+        },
+        "weights": {
+          "V120": "EMA",
+          "scale-long86k": "EMA",
+          "scale-long100k": "EMA"
+        },
+        "no_resize": true,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "source_id": null,
+        "source_case": null,
+        "actual_retained_noise_draw": 0,
+        "selection": "Fixed RGGB ordinary/faint and deepest ISO12800 shadows; all standing GFX regions/profiles/ROIs/JPEGs; prior failure hue BGGR and neutral RGGB. No selection from current outcomes.",
+        "case": {
+          "name": "fine-green-mesh-left",
+          "ROI_xywh": [
+            206,
+            229,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            806,
+            6489,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            805,
+            6489,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+              },
+              "xywh": [
+                760,
+                6500,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+              },
+              "xywh": [
+                759,
+                6501,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          }
+        },
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ]
+      },
+      "board": {
+        "image": {
+          "path": "mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "f04c99fff619e74add350880888b55ff3370e4e89b26d5d6d4629735eabba2bf"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 ref, not GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "delta_eager": {
+        "rms_DN16": 0.07844151996447561,
+        "max_DN16": 3.6259212344884872,
+        "channel_mean_DN16": [
+          0.002208462335170225,
+          0.0031405589583300753,
+          -0.002858660708170646
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.07926925922381961,
+        "max_DN16": 3.109327554702759,
+        "channel_mean_DN16": [
+          -0.0235087410611186,
+          -0.0004711067315838591,
+          -0.014283040671693925
+        ]
+      }
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-right",
+      "provenance": {
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-review-v1/native/report/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "017cf8481d1651556fa6ad8c18437cba21cdd32b346e234d6eb4303ed7b083a9"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Long schedule 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "observation_id": "mesh-profile3879",
+        "input_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "db217f5e774c6b4f1665be9c9a9b3e10f45d023290a52c0b0df5f802d5ecb129"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "models": {
+          "V120": {
+            "checkpoint": {
+              "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "step": 20000,
+            "weights": "EMA",
+            "display_label": "V120 EMA"
+          },
+          "scale-long86k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+              "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+            },
+            "weights": "EMA",
+            "step": 86000,
+            "display_label": "Long schedule 86k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "training_horizon": 100000,
+            "retained_progress": true,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA"
+          }
+        },
+        "weights": {
+          "V120": "EMA",
+          "scale-long86k": "EMA",
+          "scale-long100k": "EMA"
+        },
+        "no_resize": true,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "source_id": null,
+        "source_case": null,
+        "actual_retained_noise_draw": 0,
+        "selection": "Fixed RGGB ordinary/faint and deepest ISO12800 shadows; all standing GFX regions/profiles/ROIs/JPEGs; prior failure hue BGGR and neutral RGGB. No selection from current outcomes.",
+        "case": {
+          "name": "fine-green-mesh-right",
+          "ROI_xywh": [
+            426,
+            189,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            1026,
+            6449,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            1025,
+            6449,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+              },
+              "xywh": [
+                980,
+                6460,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+              },
+              "xywh": [
+                979,
+                6461,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          }
+        },
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ]
+      },
+      "board": {
+        "image": {
+          "path": "mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "480fb754b3a11b80f8e6e903df05d354fb74bf1da89b0720a931c4b80182a655"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 ref, not GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO6400 JPEG",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "SOOC ISO100 JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "delta_eager": {
+        "rms_DN16": 0.09642348559323526,
+        "max_DN16": 1.0936722764745355,
+        "channel_mean_DN16": [
+          0.002103546946273127,
+          -0.004782327753628124,
+          -0.001856794038621956
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.10020980146797122,
+        "max_DN16": 1.6348627489060163,
+        "channel_mean_DN16": [
+          -0.009218750295872269,
+          -0.005635179720638916,
+          0.008749413199188894
+        ]
+      }
+    }
+  ],
+  "exact": [
+    {
+      "provenance": {
+        "photo": {
+          "attribution": null,
+          "author": "AuHaidhausen",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/5b/5b8ca4bc4835c5f41065d0a2aa3e165be166cd26.npy",
+          "cache_sha256": "ff4f90d7859b4757cca33430e3886439845a64f6215bacbde2ed59e6dd3bddcf",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/5b/8c/5b8ca4bc4835c5f41065d0a2aa3e165be166cd26.jpg",
+          "dtype": "uint16",
+          "height": 4696,
+          "id": "5b8ca4bc4835c5f41065d0a2aa3e165be166cd26",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Alte_Pinakothek_lateral.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Alte_Pinakothek_lateral.jpg",
+          "sha1": "5b8ca4bc4835c5f41065d0a2aa3e165be166cd26",
+          "sha1_hex": "5b8ca4bc4835c5f41065d0a2aa3e165be166cd26",
+          "shape": [
+            1174,
+            1740,
+            3
+          ],
+          "split": "test",
+          "title": "File:Alte Pinakothek lateral.jpg",
+          "width": 6960
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/5b/5b8ca4bc4835c5f41065d0a2aa3e165be166cd26.npy",
+          "sha256": "ff4f90d7859b4757cca33430e3886439845a64f6215bacbde2ed59e6dd3bddcf"
+        },
+        "cache_box_xywh": [
+          102,
+          10,
+          1536,
+          1152
+        ],
+        "recipe": {
+          "pattern": "GBRG",
+          "wb": [
+            1.758608146886318,
+            1.0,
+            2.7647089300129557
+          ],
+          "camera_inverse": [
+            [
+              0.8713114674308837,
+              0.08491638045323743,
+              0.04377215211587889
+            ],
+            [
+              0.06946692439707054,
+              0.8886093079514121,
+              0.04192376765151735
+            ],
+            [
+              0.09134273984741982,
+              0.04749454559934336,
+              0.8611627145532368
+            ]
+          ],
+          "exposure": 1.0,
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "black": 0.03,
+          "noise_seed": 3923436788138139966
+        },
+        "ADC_bits": 16,
+        "display_exposure": 1.0,
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              640
+            ],
+            [
+              0,
+              448,
+              896,
+              1024
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              704,
+              768
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              736,
+              768
+            ]
+          ]
+        }
+      },
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "sRGB_PSNR": {
+        "ieee-fp32": 33.86011555384946,
+        "eager": 33.86013914156116,
+        "dynamic": 33.86013178780787,
+        "static": 33.86011690613084
+      },
+      "delta_eager": {
+        "rms_DN16": 1.8101314559060946,
+        "max_DN16": 68.08685168623924,
+        "channel_mean_DN16": [
+          -0.0008084076337174563,
+          0.004264417523533983,
+          0.009950142809470541
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 1.75619874162562,
+        "max_DN16": 67.34272241592407,
+        "channel_mean_DN16": [
+          -0.10421168954832154,
+          0.011297097137997404,
+          0.06313070919531344
+        ]
+      },
+      "id": "pinakothek",
+      "board": {
+        "id": "pinakothek",
+        "ROI_xywh": [
+          680,
+          480,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "photo": {
+          "attribution": null,
+          "author": "AuHaidhausen",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/5b/5b8ca4bc4835c5f41065d0a2aa3e165be166cd26.npy",
+          "cache_sha256": "ff4f90d7859b4757cca33430e3886439845a64f6215bacbde2ed59e6dd3bddcf",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/5b/8c/5b8ca4bc4835c5f41065d0a2aa3e165be166cd26.jpg",
+          "dtype": "uint16",
+          "height": 4696,
+          "id": "5b8ca4bc4835c5f41065d0a2aa3e165be166cd26",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Alte_Pinakothek_lateral.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Alte_Pinakothek_lateral.jpg",
+          "sha1": "5b8ca4bc4835c5f41065d0a2aa3e165be166cd26",
+          "sha1_hex": "5b8ca4bc4835c5f41065d0a2aa3e165be166cd26",
+          "shape": [
+            1174,
+            1740,
+            3
+          ],
+          "split": "test",
+          "title": "File:Alte Pinakothek lateral.jpg",
+          "width": 6960
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/5b/5b8ca4bc4835c5f41065d0a2aa3e165be166cd26.npy",
+          "sha256": "ff4f90d7859b4757cca33430e3886439845a64f6215bacbde2ed59e6dd3bddcf"
+        },
+        "cache_box_xywh": [
+          102,
+          10,
+          1536,
+          1152
+        ],
+        "recipe": {
+          "pattern": "GBRG",
+          "wb": [
+            1.758608146886318,
+            1.0,
+            2.7647089300129557
+          ],
+          "camera_inverse": [
+            [
+              0.8713114674308837,
+              0.08491638045323743,
+              0.04377215211587889
+            ],
+            [
+              0.06946692439707054,
+              0.8886093079514121,
+              0.04192376765151735
+            ],
+            [
+              0.09134273984741982,
+              0.04749454559934336,
+              0.8611627145532368
+            ]
+          ],
+          "exposure": 1.0,
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "black": 0.03,
+          "noise_seed": 3923436788138139966
+        },
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              640
+            ],
+            [
+              0,
+              448,
+              896,
+              1024
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              704,
+              768
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              736,
+              768
+            ]
+          ]
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+        },
+        "native_roi": [
+          680,
+          480,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "pinakothek-comparison.png",
+            "sha256": "eb8e71d189f83edb6d1384a17a5a7f974578ae3d3fa7ec484faf2eaa8b41914a"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "IEEE FP32",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eager FP16",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Previous TensorRT FP16",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Static TensorRT FP16",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "pinakothek-triplet.png",
+            "sha256": "5a1277be1a85249443ac74ef9a5b3059014c5152cc8c6025fdd705fb6afd06dd"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Static TensorRT FP16",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "provenance": {
+        "photo": {
+          "attribution": null,
+          "author": "Granada",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/039a221ab23b6e79f59111752337744617f857f8.npy",
+          "cache_sha256": "235b5b7262d3b386db424425013c72ff5b2846c0b77c822e1e66feee8188368c",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/03/9a/039a221ab23b6e79f59111752337744617f857f8.jpg",
+          "dtype": "uint16",
+          "height": 5504,
+          "id": "039a221ab23b6e79f59111752337744617f857f8",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg",
+          "sha1": "039a221ab23b6e79f59111752337744617f857f8",
+          "sha1_hex": "039a221ab23b6e79f59111752337744617f857f8",
+          "shape": [
+            1376,
+            2064,
+            3
+          ],
+          "split": "val",
+          "title": "File:20180925 UCI Road World Championships Innsbruck Women Elite ITT Elisa Longo Borghini 850 8800.jpg",
+          "width": 8256
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/039a221ab23b6e79f59111752337744617f857f8.npy",
+          "sha256": "235b5b7262d3b386db424425013c72ff5b2846c0b77c822e1e66feee8188368c"
+        },
+        "cache_box_xywh": [
+          264,
+          112,
+          1536,
+          1152
+        ],
+        "recipe": {
+          "pattern": "RGGB",
+          "wb": [
+            0.6918992323102745,
+            1.0,
+            2.9796937802617904
+          ],
+          "camera_inverse": [
+            [
+              0.8434002173117895,
+              0.10880593948232048,
+              0.04779384320589001
+            ],
+            [
+              0.06371422141518968,
+              0.8685916246102774,
+              0.06769415397453293
+            ],
+            [
+              0.11663820116325069,
+              0.013092980114402514,
+              0.8702688187223468
+            ]
+          ],
+          "exposure": 4.0,
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "black": 0.03,
+          "noise_seed": 897617674983617182
+        },
+        "ADC_bits": 16,
+        "display_exposure": 0.25,
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              640
+            ],
+            [
+              0,
+              448,
+              896,
+              1024
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              704,
+              768
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              736,
+              768
+            ]
+          ]
+        }
+      },
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "sRGB_PSNR": {
+        "ieee-fp32": 27.743753750741792,
+        "eager": 27.757625268218554,
+        "dynamic": 27.79277061606336,
+        "static": 27.811939669351954
+      },
+      "delta_eager": {
+        "rms_DN16": 183.72072523053166,
+        "max_DN16": 1851.0186302661896,
+        "channel_mean_DN16": [
+          -121.97116511963307,
+          -52.63456286916273,
+          0.06618419843464528
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 203.59410814601242,
+        "max_DN16": 1986.6728103160858,
+        "channel_mean_DN16": [
+          -164.16143600615155,
+          -43.65014285024316,
+          1.0573211091740842
+        ]
+      },
+      "id": "highlight",
+      "board": {
+        "id": "highlight",
+        "ROI_xywh": [
+          680,
+          480,
+          160,
+          160
+        ],
+        "display_exposure": 0.25,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "photo": {
+          "attribution": null,
+          "author": "Granada",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/039a221ab23b6e79f59111752337744617f857f8.npy",
+          "cache_sha256": "235b5b7262d3b386db424425013c72ff5b2846c0b77c822e1e66feee8188368c",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/03/9a/039a221ab23b6e79f59111752337744617f857f8.jpg",
+          "dtype": "uint16",
+          "height": 5504,
+          "id": "039a221ab23b6e79f59111752337744617f857f8",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg",
+          "sha1": "039a221ab23b6e79f59111752337744617f857f8",
+          "sha1_hex": "039a221ab23b6e79f59111752337744617f857f8",
+          "shape": [
+            1376,
+            2064,
+            3
+          ],
+          "split": "val",
+          "title": "File:20180925 UCI Road World Championships Innsbruck Women Elite ITT Elisa Longo Borghini 850 8800.jpg",
+          "width": 8256
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/039a221ab23b6e79f59111752337744617f857f8.npy",
+          "sha256": "235b5b7262d3b386db424425013c72ff5b2846c0b77c822e1e66feee8188368c"
+        },
+        "cache_box_xywh": [
+          264,
+          112,
+          1536,
+          1152
+        ],
+        "recipe": {
+          "pattern": "RGGB",
+          "wb": [
+            0.6918992323102745,
+            1.0,
+            2.9796937802617904
+          ],
+          "camera_inverse": [
+            [
+              0.8434002173117895,
+              0.10880593948232048,
+              0.04779384320589001
+            ],
+            [
+              0.06371422141518968,
+              0.8685916246102774,
+              0.06769415397453293
+            ],
+            [
+              0.11663820116325069,
+              0.013092980114402514,
+              0.8702688187223468
+            ]
+          ],
+          "exposure": 4.0,
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "black": 0.03,
+          "noise_seed": 897617674983617182
+        },
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              640
+            ],
+            [
+              0,
+              448,
+              896,
+              1024
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              704,
+              768
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              736,
+              768
+            ]
+          ]
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+        },
+        "native_roi": [
+          680,
+          480,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "highlight-comparison.png",
+            "sha256": "65e8305cb87dbf02ddef13365658c4a6eeb95500127f09ca07f0d68be674978f"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "IEEE FP32",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eager FP16",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Previous TensorRT FP16",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Static TensorRT FP16",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "highlight-triplet.png",
+            "sha256": "1f6c111b1328f76069ffb8912faaff92cf5e237fde9ec108193f5b543740951a"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Static TensorRT FP16",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "provenance": {
+        "photo": {
+          "attribution": null,
+          "author": "Granada",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/76/76d1a2eddeb4a06657eb7145ac7be9f7954b50d0.npy",
+          "cache_sha256": "9587ddc0b3900e15af39930491cdfcdf022519e6a974abedd1ed51bdda4c1c9a",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/76/d1/76d1a2eddeb4a06657eb7145ac7be9f7954b50d0.jpg",
+          "dtype": "uint16",
+          "height": 5167,
+          "id": "76d1a2eddeb4a06657eb7145ac7be9f7954b50d0",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/20181208_Retro_Classic_Bavaria_Mercedes_Benz_300SL_R107_850_3316.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:20181208_Retro_Classic_Bavaria_Mercedes_Benz_300SL_R107_850_3316.jpg",
+          "sha1": "76d1a2eddeb4a06657eb7145ac7be9f7954b50d0",
+          "sha1_hex": "76d1a2eddeb4a06657eb7145ac7be9f7954b50d0",
+          "shape": [
+            1291,
+            1937,
+            3
+          ],
+          "split": "test",
+          "title": "File:20181208 Retro Classic Bavaria Mercedes Benz 300SL R107 850 3316.jpg",
+          "width": 7750
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/76/76d1a2eddeb4a06657eb7145ac7be9f7954b50d0.npy",
+          "sha256": "9587ddc0b3900e15af39930491cdfcdf022519e6a974abedd1ed51bdda4c1c9a"
+        },
+        "cache_box_xywh": [
+          200,
+          68,
+          1536,
+          1152
+        ],
+        "recipe": {
+          "pattern": "RGGB",
+          "wb": [
+            3.0854061594302773,
+            1.0,
+            0.7561202161610187
+          ],
+          "camera_inverse": [
+            [
+              0.8728681635670293,
+              0.11293070676911826,
+              0.014201129663852409
+            ],
+            [
+              0.048666542815137756,
+              0.9091925274333087,
+              0.04214092975155352
+            ],
+            [
+              0.06573098443700476,
+              0.00031351979269440556,
+              0.9339554957703008
+            ]
+          ],
+          "exposure": 0.4,
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "black": 0.03,
+          "noise_seed": 1688744131617452965
+        },
+        "ADC_bits": 16,
+        "display_exposure": 1.0,
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              640
+            ],
+            [
+              0,
+              448,
+              896,
+              1024
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              704,
+              768
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              736,
+              768
+            ]
+          ]
+        }
+      },
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "sRGB_PSNR": {
+        "ieee-fp32": 40.40444859664987,
+        "eager": 40.40430464303233,
+        "dynamic": 40.404332934345504,
+        "static": 40.40424475170708
+      },
+      "delta_eager": {
+        "rms_DN16": 1.2267613227586855,
+        "max_DN16": 47.40162044763565,
+        "channel_mean_DN16": [
+          0.0012550426945877689,
+          -0.0024386300718075024,
+          0.014717999359881011
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 1.178632183026631,
+        "max_DN16": 43.4016814827919,
+        "channel_mean_DN16": [
+          0.005237579129455931,
+          -0.01693252801337453,
+          0.054072640385544594
+        ]
+      }
+    },
+    {
+      "provenance": {
+        "photo": {
+          "attribution": null,
+          "author": "Roger Culos",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/5b/5ba1e3f7baafb7e7a1534e38fc75c956efede3a8.npy",
+          "cache_sha256": "35457c5320b8cb2db5bcf4b147a7eb2e99bdc431a09102e72e744038d95ef8ac",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/5b/a1/5ba1e3f7baafb7e7a1534e38fc75c956efede3a8.jpg",
+          "dtype": "uint16",
+          "height": 5184,
+          "id": "5ba1e3f7baafb7e7a1534e38fc75c956efede3a8",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Statuette_Karaj%C3%A0_MHNT.ETH.2010.24.44-45-46.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Statuette_Karaj%C3%A0_MHNT.ETH.2010.24.44-45-46.jpg",
+          "sha1": "5ba1e3f7baafb7e7a1534e38fc75c956efede3a8",
+          "sha1_hex": "5ba1e3f7baafb7e7a1534e38fc75c956efede3a8",
+          "shape": [
+            1296,
+            1724,
+            3
+          ],
+          "split": "test",
+          "title": "File:Statuette Karaj\u00e0 MHNT.ETH.2010.24.44-45-46.jpg",
+          "width": 6898
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/5b/5ba1e3f7baafb7e7a1534e38fc75c956efede3a8.npy",
+          "sha256": "35457c5320b8cb2db5bcf4b147a7eb2e99bdc431a09102e72e744038d95ef8ac"
+        },
+        "cache_box_xywh": [
+          94,
+          72,
+          1536,
+          1152
+        ],
+        "recipe": {
+          "pattern": "GBRG",
+          "wb": [
+            0.6740128481773888,
+            1.0,
+            0.7861712716062658
+          ],
+          "camera_inverse": [
+            [
+              0.37669494772298096,
+              0.46882817488339923,
+              0.15447687739361982
+            ],
+            [
+              0.04336916640288188,
+              0.6089185956493738,
+              0.3477122379477443
+            ],
+            [
+              0.09763238556610976,
+              0.086519448635091,
+              0.8158481657987993
+            ]
+          ],
+          "exposure": 1.0,
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "black": 0.03,
+          "noise_seed": 4044068837577052987
+        },
+        "ADC_bits": 16,
+        "display_exposure": 1.0,
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              640
+            ],
+            [
+              0,
+              448,
+              896,
+              1024
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              704,
+              768
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              736,
+              768
+            ]
+          ]
+        }
+      },
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "sRGB_PSNR": {
+        "ieee-fp32": 25.220784011265515,
+        "eager": 25.222360308157405,
+        "dynamic": 25.21335417271919,
+        "static": 25.213213065590978
+      },
+      "delta_eager": {
+        "rms_DN16": 80.91281571177196,
+        "max_DN16": 2749.0283650159836,
+        "channel_mean_DN16": [
+          -22.860635257998794,
+          -2.291714880458073,
+          -27.127588852623585
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 86.05605288244641,
+        "max_DN16": 2280.707386136055,
+        "channel_mean_DN16": [
+          -28.340889188345972,
+          -3.4064042688895086,
+          -33.74497266275536
+        ]
+      }
+    },
+    {
+      "provenance": {
+        "photo": {
+          "attribution": null,
+          "author": "Granada",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/8e/8e90ecdbc4d91c54916e3babc8502986aa86584b.npy",
+          "cache_sha256": "ab85e91a24aeee19787289c6f79cf992ec11fa5fd24b501675e6cfa3be3b1562",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/8e/90/8e90ecdbc4d91c54916e3babc8502986aa86584b.jpg",
+          "dtype": "uint16",
+          "height": 4769,
+          "id": "8e90ecdbc4d91c54916e3babc8502986aa86584b",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Kelly_Murphy_850_8922.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Kelly_Murphy_850_8922.jpg",
+          "sha1": "8e90ecdbc4d91c54916e3babc8502986aa86584b",
+          "sha1_hex": "8e90ecdbc4d91c54916e3babc8502986aa86584b",
+          "shape": [
+            1192,
+            1788,
+            3
+          ],
+          "split": "test",
+          "title": "File:20180925 UCI Road World Championships Innsbruck Women Elite ITT Kelly Murphy 850 8922.jpg",
+          "width": 7153
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/8e/8e90ecdbc4d91c54916e3babc8502986aa86584b.npy",
+          "sha256": "ab85e91a24aeee19787289c6f79cf992ec11fa5fd24b501675e6cfa3be3b1562"
+        },
+        "cache_box_xywh": [
+          126,
+          20,
+          1536,
+          1152
+        ],
+        "recipe": {
+          "pattern": "GRBG",
+          "wb": [
+            0.8648579649980762,
+            1.0,
+            0.9995958524430197
+          ],
+          "camera_inverse": [
+            [
+              0.7960721506398224,
+              0.11084477171721578,
+              0.09308307764296185
+            ],
+            [
+              0.11841601193408101,
+              0.7987317013596213,
+              0.08285228670629764
+            ],
+            [
+              0.10748890635066397,
+              0.14079493847477917,
+              0.7517161551745568
+            ]
+          ],
+          "exposure": 1.0,
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "black": 0.03,
+          "noise_seed": 2389541967517194632
+        },
+        "ADC_bits": 16,
+        "display_exposure": 1.0,
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              640
+            ],
+            [
+              0,
+              448,
+              896,
+              1024
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              704,
+              768
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              384
+            ],
+            [
+              0,
+              736,
+              768
+            ]
+          ]
+        }
+      },
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "sRGB_PSNR": {
+        "ieee-fp32": 38.98049656563835,
+        "eager": 38.980412944877365,
+        "dynamic": 38.98038333138012,
+        "static": 38.98030016330503
+      },
+      "delta_eager": {
+        "rms_DN16": 3.1891853358238245,
+        "max_DN16": 178.12228202819824,
+        "channel_mean_DN16": [
+          -0.025364058941015327,
+          -0.02441128106294772,
+          0.006094691861037404
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 3.0278595491268994,
+        "max_DN16": 176.41137063503265,
+        "channel_mean_DN16": [
+          -0.2146282177404967,
+          -0.04654876105961435,
+          0.11460650586279988
+        ]
+      }
+    },
+    {
+      "provenance": {
+        "photo": {
+          "attribution": "Diego Delso",
+          "author": "Diego Delso",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/88/8835b1fbebefaba19f9234ffbd2f0a15d05cf9ee.npy",
+          "cache_sha256": "ed7e59acc44aa998a80c851e8dd7cae1789cf830db90b7782772aa7667ac2080",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/88/35/8835b1fbebefaba19f9234ffbd2f0a15d05cf9ee.jpg",
+          "dtype": "uint16",
+          "height": 8688,
+          "id": "8835b1fbebefaba19f9234ffbd2f0a15d05cf9ee",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Pepino_de_mar_%28Bohadschia_argus%29%2C_Anilao%2C_Filipinas%2C_2023-08-22%2C_DD_151.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Pepino_de_mar_(Bohadschia_argus),_Anilao,_Filipinas,_2023-08-22,_DD_151.jpg",
+          "sha1": "8835b1fbebefaba19f9234ffbd2f0a15d05cf9ee",
+          "sha1_hex": "8835b1fbebefaba19f9234ffbd2f0a15d05cf9ee",
+          "shape": [
+            2172,
+            1448,
+            3
+          ],
+          "split": "test",
+          "title": "File:Pepino de mar (Bohadschia argus), Anilao, Filipinas, 2023-08-22, DD 151.jpg",
+          "width": 5792
+        },
+        "source": {
+          "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/88/8835b1fbebefaba19f9234ffbd2f0a15d05cf9ee.npy",
+          "sha256": "ed7e59acc44aa998a80c851e8dd7cae1789cf830db90b7782772aa7667ac2080"
+        },
+        "cache_box_xywh": [
+          148,
+          318,
+          1152,
+          1536
+        ],
+        "recipe": {
+          "pattern": "RGGB",
+          "wb": [
+            0.718343901805338,
+            1.0,
+            3.125614036919908
+          ],
+          "camera_inverse": [
+            [
+              0.9482292382882532,
+              0.0394888224626266,
+              0.012281939249120173
+            ],
+            [
+              0.07662126324149608,
+              0.8201765577118751,
+              0.10320217904662875
+            ],
+            [
+              0.050282944248581804,
+              0.06504255197148164,
+              0.8846745037799366
+            ]
+          ],
+          "exposure": 1.0,
+          "shot": 0.0,
+          "read": 0.0,
+          "black": 0.03,
+          "noise_seed": 3483772710141676952
+        },
+        "ADC_bits": 16,
+        "display_exposure": 1.0,
+        "first_tile_origins_y_x": {
+          "control": [
+            [
+              0,
+              448,
+              896,
+              1024
+            ],
+            [
+              0,
+              448,
+              640
+            ]
+          ],
+          "larger": [
+            [
+              0,
+              704,
+              768
+            ],
+            [
+              0,
+              384
+            ]
+          ],
+          "reduced": [
+            [
+              0,
+              736,
+              768
+            ],
+            [
+              0,
+              384
+            ]
+          ]
+        }
+      },
+      "roi": [
+        480,
+        680,
+        160,
+        160
+      ],
+      "sRGB_PSNR": {
+        "ieee-fp32": 39.381587291854615,
+        "eager": 39.38046081259448,
+        "dynamic": 39.380369622856165,
+        "static": 39.380255902299446
+      },
+      "delta_eager": {
+        "rms_DN16": 3.0377851829439266,
+        "max_DN16": 66.23336434364319,
+        "channel_mean_DN16": [
+          -0.03195512393331738,
+          0.003806276877353539,
+          0.017032802270989737
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 2.9072074464760456,
+        "max_DN16": 63.717777729034424,
+        "channel_mean_DN16": [
+          -0.26164846051563534,
+          0.08403997509248183,
+          0.1902392183903519
+        ]
+      }
+    }
+  ],
+  "main": [
+    {
+      "id": "overcast-sky",
+      "board": {
+        "image": {
+          "path": "overcast-sky.png",
+          "sha256": "902771fd4a146ed0fa301cca9be625bb2d9c3a237b5fe89dc38885cf5616a655"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "coordinates": [
+        5800,
+        1400,
+        160,
+        160
+      ],
+      "reference_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-mixed-precision-v1/overcast-sky.png",
+        "sha256": "09377777fdf284fc83c179fbe185aac50e651d1dd2184331b077cd12aa1f9b8e"
+      },
+      "exposure": 4,
+      "delta_eager": {
+        "rms_DN16": 0.20061601487581476,
+        "max_DN16": 0.9726414084434509,
+        "channel_mean_DN16": [
+          0.0011387388991352053,
+          0.008499263772682753,
+          0.02066647227420617
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.18990946531821554,
+        "max_DN16": 0.8404412772506475,
+        "channel_mean_DN16": [
+          -0.026854267430462642,
+          0.031042040176180306,
+          0.010715211442948203
+        ]
+      }
+    },
+    {
+      "id": "building-detail",
+      "board": {
+        "image": {
+          "path": "building-detail.png",
+          "sha256": "95936073209ea2ed91da1f89571321e3f1dd6580cacdfc4f30ca24e24c5477d0"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "coordinates": [
+        5790,
+        2690,
+        160,
+        160
+      ],
+      "reference_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-mixed-precision-v1/building-detail.png",
+        "sha256": "43dc742f4439b0b4973259687da7c0abf4a6b6f58cb6e645bc76222db92d06f3"
+      },
+      "exposure": 4,
+      "delta_eager": {
+        "rms_DN16": 0.2886111015335236,
+        "max_DN16": 3.0570822581648827,
+        "channel_mean_DN16": [
+          0.00018172582849729224,
+          0.0013136901670804946,
+          0.004811837562965593
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.2771670800233077,
+        "max_DN16": 2.392541617155075,
+        "channel_mean_DN16": [
+          -0.05729362443735227,
+          0.018302479654175842,
+          0.000824612313272155
+        ]
+      }
+    },
+    {
+      "id": "foliage",
+      "board": {
+        "image": {
+          "path": "foliage.png",
+          "sha256": "e1b503138b9e2d73dd252303d2ff84e34e9392a675964f0b7778d7f0ef54be6d"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "coordinates": [
+        8890,
+        5570,
+        160,
+        160
+      ],
+      "reference_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-mixed-precision-v1/foliage.png",
+        "sha256": "14c057f5549f657921113bd1d5476b67319b13351f446083b2a9145a9cdc5c2c"
+      },
+      "exposure": 4,
+      "delta_eager": {
+        "rms_DN16": 0.23434846216473762,
+        "max_DN16": 5.068282037973404,
+        "channel_mean_DN16": [
+          -0.008619660039744303,
+          -0.002147973782439294,
+          -0.0011284740928545034
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.22906758083155523,
+        "max_DN16": 4.795825257897377,
+        "channel_mean_DN16": [
+          -0.02654391435708021,
+          0.024028032346359397,
+          0.006922769859068012
+        ]
+      }
+    },
+    {
+      "id": "chain-link-fence",
+      "board": {
+        "image": {
+          "path": "chain-link-fence.png",
+          "sha256": "71f5559c41e07f5c11120fb898e549b0ec7d8b9301cffa6cdaeea418d39caa41"
+        },
+        "panels": [
+          {
+            "name": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Eager FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Previous TensorRT FP16",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Static TensorRT FP16",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "coordinates": [
+        2240,
+        6000,
+        160,
+        160
+      ],
+      "reference_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-mixed-precision-v1/chain-link-fence.png",
+        "sha256": "90b645518e08d29c046fa057c91dd9df9b1160b0714ff5dd12e75a7332458ac8"
+      },
+      "exposure": 4,
+      "delta_eager": {
+        "rms_DN16": 0.30479469130241915,
+        "max_DN16": 11.253734529018402,
+        "channel_mean_DN16": [
+          -0.006486341325717149,
+          -0.0034067623529153933,
+          -0.009315577457891777
+        ]
+      },
+      "delta_IEEE32": {
+        "rms_DN16": 0.30280072152396287,
+        "max_DN16": 11.020339652895927,
+        "channel_mean_DN16": [
+          -0.04326885718128324,
+          0.019660643744373374,
+          -0.0030856919318921427
+        ]
+      }
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/quality.json",
+    "sha256": "532f5caa85d1b8a357fc8a54faebb92f16d4671ca7b5d5056471d7ccd73a3f92"
+  },
+  "RGB16_outliers": {
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/inspect_exports.py",
+      "sha256": "73dd8274ea259445deec104e4fdb53869b93dfc59d0e035651c7f71792bc2cf5"
+    },
+    "full": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full.json",
+      "sha256": "3ad9469a131dc4d9c714409b36a2e54b3b8d140c970d0ca8ffd075a66302f32b"
+    },
+    "rows": {
+      "static_vs_eager": {
+        "difference_DN16": 248,
+        "coordinate": [
+          5436,
+          2582,
+          0
+        ],
+        "xywh": [
+          5356,
+          2502,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "board": {
+          "image": {
+            "path": "static_vs_eager-outlier.png",
+            "sha256": "ddd8cf17e08903fe10ad7b94d5b602821fbd694a073bd867f86a01d1b2c6ac44"
+          },
+          "panels": [
+            {
+              "name": "IEEE FP32",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eager FP16",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Previous TRT FP16",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Static TRT FP16",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      "static_vs_dynamic": {
+        "difference_DN16": 167,
+        "coordinate": [
+          8231,
+          2991,
+          0
+        ],
+        "xywh": [
+          8151,
+          2911,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "board": {
+          "image": {
+            "path": "static_vs_dynamic-outlier.png",
+            "sha256": "c379bbefbd5d762ad6d8cd937cc8b7f4b0129b8c24aaa4d38c54d599c267da60"
+          },
+          "panels": [
+            {
+              "name": "IEEE FP32",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eager FP16",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Previous TRT FP16",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Static TRT FP16",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "native_review_local": "2026-11-19T08:58:55.866340-08:00"
+}
