@@ -79,7 +79,8 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
 
 
 @pytest.mark.parametrize("pattern", tuple(PATTERNS))
-def test_pooled_weak_phase_on_an_odd_native_origin(pattern):
+@pytest.mark.parametrize("method", ("pooled", "pooled-color"))
+def test_pooled_weak_phase_on_an_odd_native_origin(pattern, method):
     y, x = np.indices((480, 480), dtype=np.float32)
     x, y = x - 230, y - 228
     envelope = np.clip((122 - np.maximum(abs(x), abs(y))) / 33, 0, 1)
@@ -97,7 +98,7 @@ def test_pooled_weak_phase_on_an_odd_native_origin(pattern):
         read=6.5536e-6,
         white_balance=np.ones(3),
         camera_to_srgb=np.eye(3),
-        method="pooled",
+        method=method,
         parent_context=context,
     )
 
@@ -109,7 +110,8 @@ def test_pooled_weak_phase_on_an_odd_native_origin(pattern):
     assert result.dtype == parent.dtype
 
 
-def test_pooled_fit_requires_context_and_independent_donors():
+@pytest.mark.parametrize("method", ("pooled", "pooled-color"))
+def test_pooled_fit_requires_context_and_independent_donors(method):
     raw = scene_fixture()
     raw[133:325, 135:327] = 0.08
     context = np.full((3, 192, 192), 0.08, dtype=np.float32)
@@ -125,7 +127,7 @@ def test_pooled_fit_requires_context_and_independent_donors():
             read=6.5536e-6,
             white_balance=np.ones(3),
             camera_to_srgb=np.eye(3),
-            method="pooled",
+            method=method,
             **kwargs,
         )
 
@@ -138,3 +140,30 @@ def test_pooled_fit_requires_context_and_independent_donors():
         refine(center, parent_context=context, donor_clearance=15)
     assert refine(center, parent_context=context) is parent
     assert refine((16, 16, 160, 160), parent_context=context) is parent
+
+
+def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():
+    raw = scene_fixture()
+    packed = pack(raw)
+    colors = PATTERNS["BGGR"]
+    for phase, color in enumerate(colors):
+        if color == 1:
+            # The halo starts on an odd native row and column.
+            row, col = 67 - phase // 2, 68 - phase % 2
+            packed[phase, row : row + 96, col : col + 96] = 0.08
+    context = np.full((3, 192, 192), 0.08, dtype=np.float32)
+    parent = context[:, 16:-16, 16:-16]
+    assert _spacing(packed, colors, 151, 149, clearance=16) is not None
+    restored = refine_raw_mesh_carriers(
+        parent,
+        packed,
+        colors,
+        (151, 149, 160, 160),
+        shot=0.00128,
+        read=6.5536e-6,
+        white_balance=np.ones(3),
+        camera_to_srgb=np.eye(3),
+        method="pooled-color",
+        parent_context=context,
+    )
+    np.testing.assert_array_equal(restored, parent)

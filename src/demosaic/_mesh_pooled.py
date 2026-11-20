@@ -39,6 +39,7 @@ _INTERPOLATION = (np.indices((_POOLED_FOOTPRINT, _POOLED_FOOTPRINT)) - (_NODE - 
 _ABSOLUTE = (6.0, 1.5)
 _RELATIVE = np.array((1.0, 0.2))
 _GAIN = 0.73
+_COLOR_NEIGHBORS = np.outer([0.5, 1.0, 0.5], [0.5, 1.0, 0.5])
 
 
 def _wave(size, frequencies):
@@ -121,6 +122,42 @@ def _phase_template(wave, coeff, precision):
     )
     field /= np.linalg.norm(field, axis=-1, keepdims=True).clip(min=1e-12)
     return np.sum(field * wave, axis=-1)
+
+
+def _color_phase_nodes(green, auxiliary, direction):
+    """Use a color phase only where it agrees with nearby fitting-green nodes."""
+    from scipy.signal import convolve2d
+
+    coeff = green[0][:, direction]
+    precision = green[1][:, direction]
+    energy = np.sum(coeff**2, axis=1)
+    green_noise = 1 / precision
+    extra_moment = np.zeros_like(coeff)
+    extra_precision = np.zeros_like(precision)
+    for other_coeff, other_precision in auxiliary:
+        values = other_coeff[:, direction]
+        info = other_precision[:, direction]
+        noise = 1 / info
+        weight = 1 / (noise + green_noise)
+        joint = np.einsum("ni,ni->n", coeff, values)
+        null_variance = weight**2 * noise * energy
+        agreement = weight @ joint
+        power = weight @ (energy - 2 * green_noise)
+        if agreement <= 2 * np.sqrt(np.sum(null_variance)) or power <= 0:
+            continue
+        ratio = min(2.0, agreement / power)
+        nearby = convolve2d((weight * joint).reshape(_SIDE, _SIDE), _COLOR_NEIGHBORS, mode="same")
+        var = convolve2d(null_variance.reshape(_SIDE, _SIDE), _COLOR_NEIGHBORS**2, mode="same")
+        share = np.clip(nearby.ravel() / (2 * np.sqrt(var.ravel()).clip(min=1e-12)), 0, 1)
+        info = info * share
+        extra_moment += (info * ratio)[:, None] * values
+        extra_precision += info * ratio**2
+
+    # The combined auxiliary precision may contribute at most the green weight.
+    limit = np.minimum(1, precision / extra_precision.clip(min=1e-12))
+    combined = precision + extra_precision * limit
+    moment = precision[:, None] * coeff + extra_moment * limit[:, None]
+    return moment / combined[:, None], combined
 
 
 def _windows(plane, size, stride):
@@ -290,15 +327,29 @@ def _rgb(patches, neutral, dtype):
     return rgb.astype(dtype)
 
 
-def _refine(parent, parent_green, scene, colors, origin, frequencies, shot, read, neutral):
+def _footprint(scene, origin, position):
+    x, y = origin
+    return _sites(scene, x - _POOLED_HALO, y - _POOLED_HALO, _POOLED_FOOTPRINT, *position).astype(
+        np.float64
+    )
+
+
+def _refine(
+    parent,
+    parent_green,
+    scene,
+    colors,
+    origin,
+    frequencies,
+    shot,
+    read,
+    neutral,
+    *,
+    regional_color=False,
+):
     x, y = origin
     positions = _positions(colors, x, y)
-    greens = tuple(
-        _sites(scene, x - _POOLED_HALO, y - _POOLED_HALO, _POOLED_FOOTPRINT, row, col).astype(
-            np.float64
-        )
-        for row, col in positions
-    )
+    greens = tuple(_footprint(scene, origin, p) for p in positions)
     if not all(np.isfinite(plane).all() for plane in greens):
         return parent
     global_wave = _wave(_POOLED_FOOTPRINT, frequencies)
@@ -308,11 +359,33 @@ def _refine(parent, parent_green, scene, colors, origin, frequencies, shot, read
     )
     first, second = (_dominant(*terms) for terms in nodes)
     weak = 1 - first if first is not None and first == second else None
-    templates = None
-    if weak is not None:
-        templates = tuple(
-            _phase_template(global_wave[..., weak, :], coeff[:, weak], precision[:, weak])
-            for coeff, precision in nodes
+    auxiliary = ()
+    if regional_color:
+        by_color = {
+            colors[2 * ((y + row) % 2) + ((x + col) % 2)]: (row, col)
+            for row, col in np.ndindex(2, 2)
+        }
+        color_positions = (by_color[0], by_color[2])
+        samples = tuple(_footprint(scene, origin, p) for p in color_positions)
+        if all(np.isfinite(plane).all() for plane in samples):
+            auxiliary = tuple(
+                _measure_nodes(plane, global_wave, p, shot, read)
+                for plane, p in zip(samples, color_positions, strict=True)
+            )
+
+    templates = {}
+    for direction in range(2):
+        if direction != weak and (weak is not None or not auxiliary):
+            continue
+        terms = (
+            _color_phase_nodes(node, auxiliary, direction)
+            if auxiliary
+            else (node[0][:, direction], node[1][:, direction])
+            for node in nodes
+        )
+        templates[direction] = tuple(
+            _phase_template(global_wave[..., direction, :], coeff, precision)
+            for coeff, precision in terms
         )
 
     local_wave = _wave(_WINDOW, frequencies)
@@ -327,7 +400,7 @@ def _refine(parent, parent_green, scene, colors, origin, frequencies, shot, read
             d,
             positions,
             observed,
-            templates if d == weak else None,
+            templates.get(d),
             parent_patches,
             prior[:, d],
             shot,

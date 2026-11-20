@@ -89,11 +89,11 @@ automatic input estimation and its nominal-prior fallback.
 The experimental carrier fits are available through
 `demosaic.mesh_carrier_fit.refine_raw_mesh_carriers` with the `eval` extra.
 The callable refines a 160×160 linear camera RGB crop using the same
-exposure's native Bayer measurements. The pooled option uses a 16-pixel
-halo of restored RGB to estimate what the parent already recovered. It
-uses the surrounding 192×192 RAW region to estimate the weaker carrier's
-phase and checks each proposed correction on held green samples. Both
-methods use four nearby 128-pixel RAW donor patches. Weak or incomplete
+exposure's native Bayer measurements. The pooled options use a 16-pixel
+halo of restored RGB to estimate what the parent already recovered. They
+use the surrounding 192×192 RAW region to estimate carrier phase and
+check each proposed correction on held green samples. All three fits
+use four nearby 128-pixel RAW donor patches. Weak or incomplete
 donor support returns the input crop.
 
 ```python
@@ -110,7 +110,7 @@ refined = refine_raw_mesh_carriers(
     read=read,
     white_balance=metadata.white_balance,
     camera_to_srgb=metadata.camera_to_srgb,
-    method="pooled",
+    method="pooled-color",
     parent_context=camera_rgb[:, y - halo:y + size + halo, x - halo:x + size + halo],
 )
 ```
@@ -118,12 +118,14 @@ refined = refine_raw_mesh_carriers(
 `camera_rgb` is the restored RGB in unrotated sensor coordinates and
 `packed_bayer` has shape `[4, H/2, W/2]` in top-left, top-right,
 bottom-left, bottom-right order. The example coordinates identify the
-standing right cab crop. For the original 64-pixel fit, use the default
-`method="local64"` and omit `parent_context`. The pooled method showed small
-gains on exact weak-wire targets with the frozen Local 50k parent. Fine
-crossings on the real cab still remain incomplete. Both fits can add weak
-response across true gaps.
-[Pooled results and crop timing](local-pooled-carrier.md#packaged-crop-fit) ·
+standing right cab crop. Use `method="pooled"` for the green-only fit
+with the same context. `pooled-color` adds nearby red and blue phase
+evidence and tests both directions when rank is ambiguous. It still
+delivers a neutral correction, which can distort strand color when the
+channels have different phase. The original 64-pixel fit is the default
+`method="local64"` and uses just the 160×160 parent.
+[Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
+[Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Original 64-pixel fit](bayer-carrier-scale.md).
 
 ## Environment and storage

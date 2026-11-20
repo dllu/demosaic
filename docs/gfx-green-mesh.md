@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Regional Bayer color phase](cfa-regional-phase.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed at ×4 and ×16 with the ISO100 AHD and JPEG references. Regional weighting changes each ROI by at most 0.334 DN16 RGB RMS versus the crop-wide color fit. Fine crossings remain incomplete |
 | [Bayer phase across colors](cfa-phase-sharing.md#standing-gfx100s-comparisons) | Both ROIs and noise profiles viewed at ×4 and ×16. Opening the direction rank adds subtle diagonal structure on the left. Sharing red and blue phase changes each ROI by less than 1 DN16 RGB RMS versus green weak-only. Fine crossings remain incomplete |
 | [Pooling Bayer phase for the weaker direction](local-pooled-carrier.md#standing-gfx100s-comparisons) | Both ROIs, profiles and references viewed at ×4 and ×16. The weaker-only fit falls back to the fixed correction on the left and changes seven right windows under each prior. Fine crossings remain incomplete |
 | [Spatially varying carrier phase](local-carrier-envelope.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed at ×4 and ×16 with AHD and camera JPEGs. The adaptive fit changes four nominal left and three nominal right direction windows. Fine crossings remain incomplete |

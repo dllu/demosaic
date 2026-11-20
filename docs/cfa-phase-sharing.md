@@ -9,6 +9,9 @@ On 32 straight backgrounds the difference is uncertain. A local
 phase reversal across colors defeats the crop-wide agreement check.
 The real cab changes are subtle and fine crossings remain incomplete.
 
+The [regional follow-up](cfa-regional-phase.md) reduces the phase error
+from medium and wide local color reversals and tests a fresh photo panel.
+
 ## Fit and controls
 
 The four exterior RAW patches nominate the same frequency pair in all

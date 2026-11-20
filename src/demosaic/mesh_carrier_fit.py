@@ -174,9 +174,11 @@ def refine_raw_mesh_carriers(
     inside it. It pools the weaker carrier's phase across this footprint
     and validates it on held Bayer samples inside each delivery window.
     It retains the planar fit where the direction ranking or evidence is
-    ambiguous. Donor clearance defaults to 16 pixels for this method and
-    zero otherwise. Supply a larger integer clearance to move donors farther
-    from the ROI.
+    ambiguous. The experimental `"pooled-color"` method also uses nearby red
+    and blue phase evidence and lets each direction qualify when the rank
+    is ambiguous. The final fit still requires reciprocal green support.
+    Donor clearance defaults to 16 pixels for both pooled methods and zero
+    for `"local64"`. Supply a larger clearance to move donors farther away.
 
     Requires the eval extra. Calibrated for a repeating two-family mesh.
     """
@@ -211,9 +213,10 @@ def refine_raw_mesh_carriers(
     x, y, w, h = map(int, (x, y, w, h))
     if min(x, y) < 0 or x + w > 2 * scene.shape[2] or y + h > 2 * scene.shape[1]:
         raise ValueError("roi must be contained in the Bayer scene")
-    if method not in ("local64", "pooled"):
-        raise ValueError("method must be 'local64' or 'pooled'")
-    minimum_clearance = _POOLED_HALO if method == "pooled" else 0
+    if method not in ("local64", "pooled", "pooled-color"):
+        raise ValueError("method must be 'local64', 'pooled', or 'pooled-color'")
+    pooled = method != "local64"
+    minimum_clearance = _POOLED_HALO if pooled else 0
     clearance = minimum_clearance if donor_clearance is None else donor_clearance
     if (
         isinstance(clearance, (bool, np.bool_))
@@ -221,7 +224,7 @@ def refine_raw_mesh_carriers(
         or clearance < minimum_clearance
     ):
         raise ValueError(f"donor_clearance must be an integer of at least {minimum_clearance}")
-    if method == "pooled":
+    if pooled:
         if parent_context is None:
             raise ValueError("pooled method requires a 192×192 parent_context")
         parent_context = np.asarray(parent_context)
@@ -244,7 +247,7 @@ def refine_raw_mesh_carriers(
         neutral = np.linalg.solve(matrix, np.ones(3)) / wb
         if neutral[1] == 0:
             return parent
-        if method == "pooled":
+        if pooled:
             from ._mesh_pooled import _refine
 
             return _refine(
@@ -257,6 +260,7 @@ def refine_raw_mesh_carriers(
                 shot,
                 read,
                 neutral / neutral[1],
+                regional_color=method == "pooled-color",
             )
         angle = (
             2
