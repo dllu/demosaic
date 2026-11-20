@@ -346,12 +346,14 @@ Both final artifacts contain raw and EMA weights. The local-only
 scoped numerical and native review is complete. The matched native
 development and standing GFX review is complete. Both fixed camera
 panels and the 64-photo controlled weak-detail review are complete.
-The fixed 427-photo replay is running.
+The fixed 427-photo panel is complete. Local 50k gains 0.03205 dB
+versus Corpus 100k. The Spatial 50k mean differs from Local 50k
+by −0.00067 dB.
 [Matched completion receipt](results/scene-full-epoch-v1/paired-prefix-050000.json) ·
 [Final segment evidence](results/scene-full-epoch-v1/paired-prefix-050000.tar.xz) ·
 [Local 50k scoped review](local-50000-scoped.md) ·
 [Matched native review](scene-50000-native.md) ·
-[Fixed camera panels](scene-50000-cameras.md) ·
+[Fixed photo and camera panels](scene-50000-cameras.md) ·
 [Controlled distant-context review](scene-50000-controlled.md).
 
 ### Compact fixed-panel evaluation
@@ -367,8 +369,8 @@ retained V120 IEEE FP32 CPU outputs, the largest per-batch RMS was
 maximum score shift was 0.0000077 dB. The qualification used about 171
 KiB of JSON, excluding model weights and already-cached inputs. The
 50k run passes the same eight-batch check with the final EMAs and the
-two paired continuations. Its fixed camera panels are published.
-The fixed 427-photo replay continues.
+two paired continuations. The [completed photo and camera
+panels](scene-50000-cameras.md) bind the final checkpoints.
 [Preflight audit](results/scene-full-epoch-v1/compact-cuda-preflight.json) ·
 [Frozen receipts](results/scene-full-epoch-v1/compact-cuda-preflight.tar.xz) ·
 [Paired continuations](local-paired-continuation.md).

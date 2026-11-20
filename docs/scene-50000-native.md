@@ -29,11 +29,11 @@ and rendering policy. The new native-query forwards total 11.09 s
 local-only and 15.62 s spatial, with full scene preparation and
 load timed separately in the receipt. Both endpoints completed the
 native review below. Both fixed measured-camera panels and the separate
-64-photo controlled review are complete. The canonical 427-photo panel
-is running.
+64-photo controlled review are complete. On the canonical 427-photo
+panel, Local 50k reaches 37.27953 dB and Spatial 50k 37.27886 dB.
 [Matched training recipe](scene-full-epoch.md) ·
 [Local-only scope on 48 backgrounds](local-50000-scoped.md) ·
-[Fixed camera panels](scene-50000-cameras.md) ·
+[Fixed photo and camera panels](scene-50000-cameras.md) ·
 [64-photo distant-context review](scene-50000-controlled.md) ·
 [Comparable PSNR history](performance-history.md).
 

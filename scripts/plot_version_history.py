@@ -14,7 +14,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 MODEL_SELECTION = REPO / "configs/current-model.json"
 COVERAGE_NOTE = (
-    "**Coverage reviewed November 19, 2026.** Corpus 20k and Corpus 100k have "
+    "**Coverage reviewed November 20, 2026.** Corpus 20k and Corpus 100k have "
     "completed the fixed photo and both camera panels. "
     "Corpus 100k gains 0.20739 dB on the 427-photo panel over V120, with "
     "a 0.03046 dB unseen-camera loss. "
@@ -23,7 +23,7 @@ COVERAGE_NOTE = (
     "Both matched scene 12k endpoints have [completed fixed camera panels](expanded-scene-12000-cameras.md). "
     "The matched near-ADC 800-update endpoints also have [completed camera panels](near-adc-bridge-cameras.md). "
     "The matched scene 50k pair and two 512-update continuations have "
-    "[completed fixed camera panels](scene-50000-cameras.md). "
+    "[completed fixed photo and camera panels](scene-50000-cameras.md). "
     "The two independent-redraw endpoints also have "
     "[completed fixed camera panels](local-redraw-average.md#fixed-camera-panels). "
     "The mean-redraw parent and three repeat and gap continuations have completed "
@@ -36,7 +36,8 @@ COVERAGE_NOTE = (
     "[completed fixed camera panels](local-continuing-wire.md#fixed-camera-panels). "
     "Both regional weak-wire endpoints have "
     "[completed fixed camera panels](local-regional-wire-1024.md#fixed-camera-panels). "
-    "Thirteen full427 scores are pending. "
+    "The mixed-optics arm also has "
+    "[completed fixed camera panels](local-optical-mixture-1024.md#fixed-camera-panels). "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -678,9 +679,11 @@ def collect_compact_scene_endpoints():
         "absolute": ("Absolute +512", 512),
         "paired": ("Paired +512", 512),
     }
-    return collect_compact_camera_endpoints(
-        path, "scene-50000-cameras.md", "scene-050000", names
-    )
+    report = "scene-50000-cameras.md"
+    points, evidence = collect_compact_camera_endpoints(path, report, "scene-050000", names)
+    photo = REPO / "docs/results/scene-050000-primary-v1/publication.json"
+    evidence.extend(attach_compact_photo_endpoints(points, photo, path, names, report))
+    return points, evidence
 
 
 def attach_compact_photo_endpoints(points, source, camera_source, names, report):
@@ -838,6 +841,14 @@ def collect_regional_wire_endpoints():
     )
 
 
+def collect_mixed_optics_endpoints():
+    path = REPO / "docs/results/local-optical-mixture-camera-v1/publication.json"
+    names = {"regional-optical-mix": ("Mixed optics +1024", 1024)}
+    return collect_compact_camera_endpoints(
+        path, "local-optical-mixture-1024.md", "local-optical-mixture", names
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -861,11 +872,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v12.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v13.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v11.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v12.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v11.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v10.json"
         if not destination.exists():
@@ -926,6 +939,9 @@ def main():
         regional_points, regional_evidence = collect_regional_wire_endpoints()
         points.extend(regional_points)
         evidence.extend(regional_evidence)
+        optical_points, optical_evidence = collect_mixed_optics_endpoints()
+        points.extend(optical_points)
+        evidence.extend(optical_evidence)
         result = {
             "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",

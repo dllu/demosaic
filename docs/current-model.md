@@ -141,10 +141,10 @@ fixed natural fine-flat RMS by 0.085 DN16 and raises fine-increment
 RMS by 0.251 DN16 versus sharp regional. Fixed wire response and gap
 errors are close to sharp regional. The continuing strand is more
 accurate than with Local 50k, with weaker crossing response and more
-flat error. Across 24 fresh sources at σ 0.85, the sharp-normalized
-weak-response difference versus sharp regional spans zero, with
-0.677 DN16 higher exact-flat RMS. Both cab ROIs still have incomplete
-fine crossings. The canonical panels are queued.
+flat error. At matched weak response the mixed blend adds 0.296 DN16
+of exact-flat RMS on 24 fresh sources. It loses 0.02032 dB on the
+unseen camera panel versus sharp regional. Both cab ROIs still have
+incomplete fine crossings. The fixed photo panel is running.
 
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the
@@ -338,9 +338,11 @@ upper-band flat cost. Both GFX reviews are complete at that EMA.
 The [matched spatial 50k arm](scene-50000-native.md) gains 0.015 dB on
 shadow development queries and 0.020 dB at ISO12800 over local-only.
 In both standing GFX scenes it keeps a smooth sky and coarse crossings.
-Fine cab intersections remain incomplete. Its fixed camera scores
-are −0.12252 dB known and +0.00638 dB unseen versus Corpus 100k.
-[Fixed camera panels](scene-50000-cameras.md).
+Fine cab intersections remain incomplete. Local 50k gains 0.03205 dB
+over Corpus 100k on the fixed 427-photo panel, with nearly the same
+mean as Spatial 50k. Spatial's camera scores are −0.12252 dB known
+and +0.00638 dB unseen versus Corpus 100k.
+[Fixed photo and camera panels](scene-50000-cameras.md).
 The [64-photo distant-context test](scene-50000-controlled.md) finds
 0.378 points more ISO6400 fine response for matching versus swapped
 context in the faintest third. Spatial response remains 0.106 points
@@ -364,7 +366,9 @@ control under independent noise. It raises exact-flat fine RMS by
 falls 5.98 points. Both GFX scenes were reviewed and the fine cab
 crossings remain incomplete. On the fixed camera panels it gains
 0.04198 dB known and 0.07490 dB unseen over its matched control.
-The fixed photo evaluation continues. [Camera scores](scene-50000-cameras.md).
+The paired arm loses 0.00852 dB versus its matched control on the
+fixed 427-photo panel. Its largest loss versus Local 50k is 0.08497 dB
+in highlights. [Fixed photo and camera scores](scene-50000-cameras.md).
 [Mean redraw loss](local-redraw-average.md) raises natural and wire
 response by 3.07 and 3.31 points over its matched individual-loss
 control. Under independent noise it reduces error shared by repeated

@@ -48,8 +48,9 @@ interleaved arms took **322.31 s** including the shared reader and input
 hashes. The scoped evaluation used EMA with CUDA IEEE FP32. Exact-target
 and actual native-image reviews are complete. The fixed known/unseen
 camera panels gain 0.04198/0.07490 dB against the absolute continuation.
-The fixed 427-photo evaluation is running with the matched 50k endpoints.
-[Fixed camera panels](scene-50000-cameras.md) ·
+The paired arm loses 0.00852 dB on the fixed 427-photo panel against
+the absolute control and 0.03369 dB against its Local 50k parent.
+[Fixed photo and camera panels](scene-50000-cameras.md) ·
 [Comparable PSNR history](performance-history.md) ·
 [Full-epoch training](scene-full-epoch.md).
 

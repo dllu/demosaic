@@ -39,10 +39,10 @@ combined. The retained training loop takes **24,213.00 s**.
 
 Training is complete for both 50k arms. A scoped numerical and actual
 native review is complete at this local-only EMA. The known/unseen
-measured-camera panels score 54.22726/53.97844 dB. The common fixed
-427-photo evaluation is running.
+measured-camera panels score 54.22726/53.97844 dB. The fixed 427-photo
+panel scores 37.27953 dB, up 0.03205 dB versus Corpus 100k.
 [Two-arm training audit](results/scene-full-epoch-v1/paired-prefix-050000.json) ·
-[Fixed camera panels](scene-50000-cameras.md) ·
+[Fixed photo and camera panels](scene-50000-cameras.md) ·
 [Paired 47.5k review](green-covariance-refit.md) ·
 [Comparable performance history](performance-history.md).
 

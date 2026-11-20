@@ -1247,7 +1247,9 @@ endpoint](local-optical-mixture-1024.md) has completed the 24 fresh
 optical sources. At σ 0.85 its primary weak-response difference versus
 sharp regional is −0.030 points [−0.219, +0.167], with 0.677 DN16
 higher flat RMS. Fine cab crossings remain incomplete in both native
-GFX reviews.
+GFX reviews. Blending to equal weak response on the earlier sources still
+adds 0.296 DN16 flat RMS on the 24 fresh sources. The fixed unseen-camera
+mean falls 0.02032 dB versus sharp regional.
 
 ### 7. Revisit the backbone and DINO role after these discriminating tests
 

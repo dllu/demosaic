@@ -183,13 +183,57 @@ contrast change on the right and fine crossings stay incomplete
 on both sides. Both regional outputs are close at display scale.
 The four mixed-versus-sharp differences span 3.09–4.52 DN16 RGB RMS.
 
-## Remaining panels
+## Earlier optical replay and response matching
 
-Training, the 48 fixed exact cases, the 24 fresh optical sources and
-both standing GFX reviews are complete. The 32-source optical
-replay and the matched-response diagnostic are in progress. The
-fixed 427-photo and two measured camera panels are queued in the
-same endpoint review.
+On the 32 earlier development sources at σ 0.85, the mixed-minus-sharp
+weak response is −0.011 points [−0.202, +0.195]. Continuing-strand
+RMS falls 2.569 DN16 [−5.017, −0.338] and flat RMS rises 0.558 DN16
+[+0.002, +1.144]. The continuing-strand benefit has an interval
+spanning zero on the 24 fresh sources.
+
+The response-matched diagnostic blends each model with the same
+Local 50k prediction. Calibration on the earlier 32 photos at
+σ 0.85 selects 0.500 sharp-regional weight and 0.498 mixed-optics
+weight for equal mean recovery. Applying those weights to the
+24 separate confirmation photos gives the following paired effects.
+
+| Mixed blend minus sharp blend | Difference and 95% CI |
+| --- | ---: |
+| Weak response, percentage points of sharp clean | −0.008 [−0.101, +0.089] |
+| Continuing-strand RMS inside true gaps, DN16 | −0.398 [−1.740, +0.738] |
+| False weak projection inside true gaps, DN16 | +0.023 [−0.016, +0.063] |
+| Exact-flat luma RMS, DN16 | +0.296 [+0.147, +0.452] |
+
+The extra flat error persists at matched response. The optical
+blend diagnostic uses two model forwards in each arm.
+[Earlier replay and matched response](results/local-optical-mixture-v1/optical-replay-1024.json) ·
+[Replay archive](results/local-optical-mixture-v1/optical-replay-1024-evidence.tar.xz).
+
+## Fixed camera panels
+
+Both complete camera panels use the final CUDA IEEE FP32 EMA and the
+canonical measured-CFA samples. The known panel balances four scenes
+and 72 native crops. The unseen panel balances five scenes and 90
+crops. Every comparison reuses only control observations whose
+checkpoint, input and measured reference match the archive.
+
+| EMA | Known CFA PSNR | Unseen CFA PSNR |
+| --- | ---: | ---: |
+| V120 | 54.31272 dB | 54.00872 dB |
+| Corpus 100k | 54.33708 dB | 53.97826 dB |
+| Local 50k | 54.22726 dB | 53.97844 dB |
+| Sharp regional | 54.22037 dB | 53.99397 dB |
+| Mixed optics | 54.22068 dB | 53.97366 dB |
+
+Mixed minus sharp is +0.00031 dB known and −0.02032 dB unseen.
+The largest unseen differences are −0.07010 dB on *Coulicoco* and
+−0.04612 dB on *top of Expedit*. Both mixed means trail V120 by
+0.09204 and 0.03507 dB. These are small measured-camera panels.
+[Camera audit](results/local-optical-mixture-camera-v1/publication.json) ·
+[Camera cases](results/local-optical-mixture-camera-v1/evidence.tar.xz).
+
+The fixed 427-photo panel is running. The training, fixed exact, both
+optical panels, both standing GFX reviews and both camera panels are complete.
 [Training trace archive](results/local-optical-mixture-v1/training-1024-evidence.tar.xz) ·
 [Fixed-panel and native evidence](results/local-optical-mixture-v1/fixed-1024-evidence.tar.xz) ·
 [Fresh optical evidence](results/local-optical-mixture-v1/confirmation-1024-evidence.tar.xz).
