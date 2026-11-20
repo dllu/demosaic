@@ -4,6 +4,8 @@ The new `weak-phase-guard` crop option uses nearby RAW patches to predict the ph
 
 The [curved phase follow-up](local-curved-phase-transport.md) improves agreement with the known phase on new curved fields. The gain in recovered contrast is small, and the phase fit remains ineligible on both right cab profiles.
 
+The [weak contrast option](local-weak-contrast.md) uses the same guard with a stronger fit on its existing admitted windows. It gains 0.401 points over the full weak posterior at equal added gap texture on 48 new photos. The fixed phase guard retains lower gap texture at its original strength.
+
 ## Separate the phase from the local support check
 
 The [previous support replay](local-weak-support.md) used a weak waveform already fitted at the center or tested red/blue ratios against a green fitted there. This check estimates the entire complex phase for each Bayer site from four separate 128-pixel RAW patches. The frequency, weak/strong rank and applied weak correction come from the existing pipeline. An inverse-noise weighted phase consensus must have a magnitude of at least 65% of the weighted mean magnitude and squared signal-to-noise of at least 16 on both green lattices. Red and blue join the check individually when they satisfy the same criteria.

@@ -3,6 +3,7 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Weak phase contrast](local-weak-contrast.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The coarse fence keeps connected crossings and changes by 4.601 DN16 RGB RMS from the combined check, versus 4.596 for the fixed phase guard.
 - [Curved phase transport](local-curved-phase-transport.md#standing-gfx100s-comparisons) returns Local 50k for sky, building and foliage. The coarse fence changes by 4.70 DN16 RGB RMS versus combined and keeps its crossings.
 - [Exterior phase guard](local-phase-extent.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The eligible coarse fence changes by 4.60 DN16 RGB RMS from the combined check and keeps its crossings.
 - [Local support for the weak correction](local-weak-support.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The donor color check changes the coarse fence by 4.22 DN16 RGB RMS versus the combined check and retains connected crossings.

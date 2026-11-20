@@ -2,6 +2,8 @@
 
 Allowing the exterior phase to curve raises mean agreement with the known weak phase from **0.799 to 0.999** on 15 comparable ISO6400 photo-based fixtures. Using that phase to taper the weak correction raises recovered contrast by **0.102 percentage points** versus the [fixed phase guard](local-phase-extent.md) on all 24 new fixtures, with an interval spanning zero. Refitting the weak correction in the curved basis adds a further 0.053 points in a diagnostic. Both real right cab profiles still lack a dependable phase prediction.
 
+The [weak contrast follow-up](local-weak-contrast.md) finds a larger recovery gain by changing delivered amplitude within the existing support check.
+
 ## Predict phase from the exterior
 
 The experiment keeps the existing two carrier directions, local rank and strong correction. Four 128-pixel RAW patches each supply 16 disjoint 32-pixel stations. Each station removes a quadratic background and the strong fundamental, then fits the weak direction's sine and cosine coefficients on each Bayer lattice. A refined planar model fits two phase gradients about the query center. The curved model adds three quadratic terms. Both fit inverse-noise-weighted coherent phase on the two green lattices and retain separate phase offsets for each Bayer site.

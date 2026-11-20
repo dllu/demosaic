@@ -1011,6 +1011,13 @@ relative to the fixed guard on 24 new photos. Both right cab profiles
 still fail because only one side shows repeatable evidence and its two
 extrapolations disagree at the query.
 
+In the [weak contrast study](local-weak-contrast.md), the amplitude cap
+engages in one of 1,634 admitted windows. Using full fitted amplitude
+within the same windows under the exterior phase check gains 0.401 points
+at equal added gap luma on 48 new photos. Both right cab profiles still
+use the fixed fallback. In the planted-exterior mismatch control, its
+added RGB texture falls between the fixed guard and full weak posterior.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

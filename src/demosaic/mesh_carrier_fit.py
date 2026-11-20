@@ -189,6 +189,9 @@ def refine_raw_mesh_carriers(
     the stronger correction from the combined broad and central check.
     The experimental `"weak-phase-guard"` method also uses an exterior RAW
     phase to taper the new weak correction with 16-pixel local measurements.
+    The experimental `"weak-phase-contrast"` method uses full fitted strength
+    on the same admitted windows when the exterior phase is reliable, with the
+    same local taper and measured amplitude cap.
     Donor clearance defaults to zero for `"local64"` and 16 pixels for
     the other methods.
 
@@ -232,11 +235,13 @@ def refine_raw_mesh_carriers(
         "ring-posterior",
         "weak-posterior",
         "weak-phase-guard",
+        "weak-phase-contrast",
     )
     if method not in methods:
         raise ValueError(f"method must be one of {methods}")
     pooled = method in ("pooled", "pooled-color")
-    weak_posterior = method in ("weak-posterior", "weak-phase-guard")
+    phase_guarded = method in ("weak-phase-guard", "weak-phase-contrast")
+    weak_posterior = method == "weak-posterior" or phase_guarded
     needs_context = pooled or weak_posterior
     minimum_clearance = 0 if method == "local64" else _POOLED_HALO
     clearance = minimum_clearance if donor_clearance is None else donor_clearance
@@ -288,7 +293,8 @@ def refine_raw_mesh_carriers(
                 shot,
                 read,
                 neutral / neutral[1],
-                guard_clearance=int(clearance) if method == "weak-phase-guard" else None,
+                guard_clearance=int(clearance) if phase_guarded else None,
+                full_weak_strength=method == "weak-phase-contrast",
             )
         if pooled:
             from ._mesh_pooled import _refine

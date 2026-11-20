@@ -92,7 +92,15 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
 
 @pytest.mark.parametrize("pattern", tuple(PATTERNS))
 @pytest.mark.parametrize(
-    "method", ("pooled", "pooled-color", "ring-posterior", "weak-posterior", "weak-phase-guard")
+    "method",
+    (
+        "pooled",
+        "pooled-color",
+        "ring-posterior",
+        "weak-posterior",
+        "weak-phase-guard",
+        "weak-phase-contrast",
+    ),
 )
 def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
     y, x = np.indices((480, 480), dtype=np.float32)
@@ -124,7 +132,10 @@ def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
     assert result.dtype == parent.dtype
 
 
-@pytest.mark.parametrize("method", ("pooled", "pooled-color", "weak-posterior", "weak-phase-guard"))
+@pytest.mark.parametrize(
+    "method",
+    ("pooled", "pooled-color", "weak-posterior", "weak-phase-guard", "weak-phase-contrast"),
+)
 def test_pooled_fit_requires_context_and_independent_donors(method):
     raw = scene_fixture()
     raw[133:325, 135:327] = 0.08
@@ -177,6 +188,26 @@ def test_weak_phase_guard_transports_absolute_cfa_phase_at_odd_clearance():
     assert even[:, :32].mean() > 0.9
     assert even[:, 68:92].mean() < 0.1
     np.testing.assert_allclose(odd, even, rtol=1e-8, atol=1e-8)
+
+
+def test_weak_phase_contrast_falls_back_to_guard_when_exterior_phase_is_unreliable(monkeypatch):
+    from demosaic import _mesh_weak_phase
+
+    monkeypatch.setattr(_mesh_weak_phase, "_taper", lambda *args: _mesh_weak_phase._GAIN)
+    context = np.full((3, 192, 192), 0.08, dtype=np.float32)
+    parent = context[:, 16:-16, 16:-16]
+    args = (parent, pack(scene_fixture()), PATTERNS["RGGB"], (151, 149, 160, 160))
+    kwargs = {
+        "shot": 0.00128,
+        "read": 6.5536e-6,
+        "white_balance": np.ones(3),
+        "camera_to_srgb": np.eye(3),
+        "parent_context": context,
+    }
+    guarded = refine_raw_mesh_carriers(*args, method="weak-phase-guard", **kwargs)
+    contrast = refine_raw_mesh_carriers(*args, method="weak-phase-contrast", **kwargs)
+    assert np.any(guarded != parent)
+    np.testing.assert_array_equal(contrast, guarded)
 
 
 def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():

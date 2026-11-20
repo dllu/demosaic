@@ -25,7 +25,9 @@ _LOG_PRIOR_ODDS = -5.0
 _INCLUSION_CUTOFF = 0.20
 
 
-def _weak_correction(parent, wave, direction, positions, windows, shot, read, previous):
+def _weak_correction(
+    parent, wave, direction, positions, windows, shot, read, previous, *, full_strength=False
+):
     outer = wave.reshape(_WINDOW, _WINDOW, 4)
     means, deviations = _ring_prior(
         *_evidence(windows, positions, outer, _SMOOTH, _RING, shot, read)
@@ -49,6 +51,8 @@ def _weak_correction(parent, wave, direction, positions, windows, shot, read, pr
     selected = strength > 0
     if not selected.any():
         return previous
+    if full_strength:
+        strength = selected.astype(strength.dtype)
 
     design = np.concatenate((background, carrier), axis=-1).reshape(_CENTER**2, -1)
     samples = _windows(parent[1], _CENTER, _STRIDE).reshape(-1, _CENTER**2)
@@ -74,6 +78,7 @@ def _refine(
     neutral,
     *,
     guard_clearance=None,
+    full_weak_strength=False,
 ):
     positions = _positions(colors, *origin)
     greens = tuple(_footprint(scene, origin, position) for position in positions)
@@ -105,6 +110,19 @@ def _refine(
 
             baseline = parent + _rgb(sum(corrections), neutral, parent.dtype)
             taper = _taper(scene, origin, positions, frequencies, weak, shot, read, guard_clearance)
+            # A scalar taper is the fallback for an unreliable exterior phase.
+            if full_weak_strength and isinstance(taper, np.ndarray):
+                revised = _weak_correction(
+                    parent,
+                    wave,
+                    weak,
+                    positions,
+                    observed,
+                    shot,
+                    read,
+                    corrections[weak],
+                    full_strength=True,
+                )
         corrections[weak] = revised
     combined = corrections[0] + corrections[1]
     if taper is None and not combined.any():

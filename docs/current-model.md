@@ -200,6 +200,12 @@ added gap luma RMS by 0.122 DN16 on 32 new ISO6400 photos, with most of the
 gain from one source. Both right cab profiles fall back to a uniform blend
 because exterior phase is inconsistent.
 
+The opt-in [weak phase contrast](local-weak-contrast.md) keeps the fixed
+guard and uses the full fitted amplitude on its existing weak windows. It
+gains 0.921 weak-response points on 48 new ISO6400 photos, or 0.401 at equal
+added gap luma. The stricter fixed guard has lower gap luma at its original
+strength. Fine cab crossings remain incomplete.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

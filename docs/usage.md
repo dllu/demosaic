@@ -132,6 +132,9 @@ shown above to apply that prior only to the weaker direction.
 For repeating mesh with coherent surrounding phase, `method="weak-phase-guard"`
 uses the same inputs and tapers that additional weak correction using local
 RAW evidence. [Results and timing](local-phase-extent.md#packaged-crop-fit).
+`method="weak-phase-contrast"` uses the same inputs, with full fitted strength
+on the same admitted windows when the surrounding phase is reliable. It recovers
+more faint contrast on exact targets, with some increase in gap texture. [Results and timing](local-weak-contrast.md#packaged-crop-fit).
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·
