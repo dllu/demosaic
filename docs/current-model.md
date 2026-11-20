@@ -51,6 +51,10 @@ compiling both networks at the same 512/64 geometry. Reducing overlap to
 lights. The full-frame RMS difference rises to 11.50 DN16 versus the
 matched compiled 512/64 export. [Compiled DINO review](corpus100k-trt-dino.md) ·
 [Fixed-tile overlap review](corpus100k-overlap.md).
+At that fixed geometry, eager batch eight ties batch four while raising
+PyTorch CUDA allocation from 2.31 to 4.06 GB. The compiled batch-two
+path uses 1.21 GB of PyTorch CUDA memory and takes 3.7% longer than
+compiled batch four. [Full-frame batch replay](corpus100k-fp16-batch.md).
 [Tile geometry and TensorRT quality](corpus100k-fp16-throughput.md) ·
 [CUDA tile transport](corpus100k-device-tiles.md) ·
 [Full-frame cuDNN search](corpus100k-cudnn-fp16.md).

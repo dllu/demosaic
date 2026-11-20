@@ -32,6 +32,10 @@ paired tile-loop reduction for the compiled trunk and DINO versus eager
 FP16 at overlap 64. Reducing overlap to 32 saves another 8.9% and
 changes the full-frame tile origins. The follow-up checks those origins
 on highlights, exact wire gaps and the fine cab mesh.
+The [fixed-grid batch follow-up](corpus100k-fp16-batch.md) confirms a
+15.8% tile-loop reduction with the same compiled networks. Eager batch
+eight ties batch four and uses more memory. Compiled batch two uses less
+memory and takes 3.7% longer than compiled batch four.
 The [local 50k FP16 replay](local-50000-scoped.md#fp16-inference-at-fixed-geometry)
 also preserves the measured ISO6400 weak responses and both standing
 GFX crop sets. Resident 512-pixel batch-four forward time falls 6.19×

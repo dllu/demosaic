@@ -80,6 +80,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k with compiled DINO](corpus100k-trt-dino.md#standing-gfx100s-comparisons)
   keeps the sky smooth and coarse crossings coherent. The four native
   crops differ from IEEE FP32 by 0.186–0.301 DN16 RGB RMS.
+- [Corpus 100k FP16 batch replay](corpus100k-fp16-batch.md#standing-gfx100s-comparisons)
+  keeps all tile origins fixed. The sky remains smooth and coarse
+  crossings stay connected. Building wires and leaf subdivisions stay soft.
 - [Corpus 100k overlap sweep](corpus100k-overlap.md#standing-gfx100s-comparisons)
   keeps the sky smooth and coarse crossings coherent. Overlap 32 changes
   the four native crops by 4.16–9.89 DN16 RGB RMS versus compiled 64,

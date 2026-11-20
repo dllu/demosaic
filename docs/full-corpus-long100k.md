@@ -9,7 +9,8 @@ materials, the mean improves by 0.575 dB versus V120 and 0.006 dB
 versus 86k.
 Standard FP16 reaches 53.40 s for 102 MP tiled inference on GB10, with
 near-identical native detail to IEEE FP32.
-[Precision benchmark and quality review](corpus100k-mixed-precision.md).
+[Precision benchmark and quality review](corpus100k-mixed-precision.md) ·
+[TensorRT and batch-size follow-up](corpus100k-fp16-batch.md).
 
 [Fixed-panel receipts](results/full-corpus-long100k-primary-v1/primary.json) ·
 [Audited target and GFX comparisons](results/full-corpus-long100k-native-v1/publication.json).

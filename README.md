@@ -27,7 +27,7 @@ For Corpus 100k on CUDA, use `--precision float16 --tile 512 --overlap 64
 test cuts 102 MP restoration from 287 to 53 seconds.
 [100k scores and native comparisons](docs/full-corpus-long100k.md) ·
 [Fast FP16 inference and quality](docs/corpus100k-fp16-throughput.md) ·
-[Paired TensorRT timings](docs/corpus100k-trt-dino.md).
+[Paired TensorRT and batch timings](docs/corpus100k-fp16-batch.md).
 
 ## Setup and inference
 
