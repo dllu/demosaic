@@ -1025,6 +1025,14 @@ distant phase, it gains 0.719 points over weak phase contrast and changes
 mean added gap luma by −0.025 DN16. The gap interval spans zero. The new
 mode uses nearby phase in both right cab views, with incomplete crossings.
 
+The [independent direction replay](local-unranked-phase.md) checks each wire
+when the green lattices disagree on rank. On 32 near-balanced fixtures it
+gains 0.863 second-direction response points. At equal recovery the collar
+reduces false projection into gaps by 0.015 DN16 versus an unchecked update.
+The full collar exceeds the held gap and flat-core budgets. Tracking each
+direction separately attributes most of the gap change to the continuing
+strand. The left cab's diagonals shift subtly while crossings remain incomplete.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

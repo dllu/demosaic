@@ -212,6 +212,12 @@ photos it gains 0.719 response points over weak phase contrast, with 0.025
 DN16 lower mean added gap luma and an interval spanning zero. It changes
 both right cab views. Fine crossings remain incomplete.
 
+[Independent direction checks](local-unranked-phase.md) recover 0.863
+second-direction response points on 32 new photo fixtures with similar wire
+amplitudes. The collar exceeds the quiet and gap budgets; most added gap
+luma follows the strand that remains present. Both left cab crops change
+subtly and crossings remain incomplete.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over
