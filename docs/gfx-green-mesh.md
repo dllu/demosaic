@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Exterior phase transfer and ring-guided correction](local-exterior-phase-transfer.md#standing-gfx100s-comparisons) | Both ROIs, profiles and references viewed at ×4 and ×16. The nearby exterior guide differs from the first local phase by 87.8° on the left at 64 pixels. The ring correction adds less diagonal contrast than the wider local fit, with only small changes to the fine cab mesh |
 | [Mixed-optics endpoint](local-optical-mixture-1024.md#standing-gfx100s-comparisons) | Both ROIs, profiles, AHD and both JPEGs viewed at ×4 and ×16. Mixed changes the four crops by 3.09–4.52 DN16 RGB RMS versus sharp regional. The transferred profile shows stronger fragmented diagonals, with broad green-gray patches and incomplete fine crossings |
 | [Completed regional weak-wire training](local-regional-wire-1024.md#standing-gfx100s-comparisons) | Both ROIs, profiles, AHD and JPEGs viewed at ×4 and ×16. In the transferred right crop, the regional arm strengthens the first measured direction and retains less of the second than Local 50k. Both arms still show incomplete crossings and broad mottle |
 | [Regional weak-wire training at 512 updates](local-regional-wire-512.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The transferred right shows a stronger first diagonal and a soft second family. Broad patches and missing fine crossings remain |

@@ -35,7 +35,8 @@ Start with the [README](../README.md) for installation and inference.
 [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) ·
 [Training scale review](training-scale-pipeline-review-2026-11-17.md) ·
 [Weak-wire sensitivity to optical blur](sensor-optical-transfer.md) ·
-[Local Bayer evidence with exterior phase](optical-raw-evidence.md).
+[Local Bayer evidence with exterior phase](optical-raw-evidence.md) ·
+[Exterior phase transfer and ring-guided restoration](local-exterior-phase-transfer.md).
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·

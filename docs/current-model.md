@@ -146,6 +146,14 @@ of exact-flat RMS on 24 fresh sources. It loses 0.02032 dB on the
 unseen camera panel versus sharp regional. Both cab ROIs still have
 incomplete fine crossings. The fixed photo panel is running.
 
+The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
+uses separate RAW pixels for phase estimation and validation. At comparable
+weak response it lowers continuing-strand RMS by 2.361 DN16 versus
+a same-width local fit on the 24 optical cases. The nominal 64-pixel
+local fit recovers more weak signal, with clearer but more regular
+right-cab crossings. The ring correction leaves the sky, building and
+foliage pixels equal to Local 50k.
+
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the
 64-photo panel above Corpus 100k. Fine-increment RMS drops 1.09 DN16

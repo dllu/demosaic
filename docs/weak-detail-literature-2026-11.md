@@ -931,6 +931,14 @@ strength test. Local validation still leaves the crossings incomplete.
 This separates better exterior frequency estimates from evidence for
 the spatial extent and amplitude of the wire inside the query.
 
+The [exterior-phase transfer measurement](local-exterior-phase-transfer.md)
+finds good phase transfer on the right cab and an 87.8° median local
+discrepancy for the first left direction in 64-pixel windows. A closer
+ring supplies the phase for a separate 32-pixel delivery area. At
+similar weak response it lowers continuing-strand error by 2.361 DN16
+versus a local fit at the same width. Nominal local64 recovers more
+weak signal, and the ring leaves fine GFX crossings incomplete.
+
 Calibrate the complete selection-and-validation procedure on fresh exact flats
 and edge-only scenes, including the search over all candidates. Measure false
 activation per patch/frame, not just per chosen coefficient. Formal risk control
