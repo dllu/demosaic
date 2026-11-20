@@ -971,6 +971,15 @@ adding more window sizes would repeat earlier work. Excessively flexible
 nuisance models can absorb true wire detail, while insufficiently flexible ones
 leave edge leakage. Sweep that tradeoff on exact known targets before training.
 
+The [directional support comparison](wire-segment-support.md) removes
+the competing wave in each CFA phase and estimates local support across
+and along the candidate wire. On 48 new photos with partial and staggered
+breaks, ISO6400 localization loses 0.323 weak-response points and adds
+0.178 DN16 false projection versus uniform at matched correction RMS.
+Giving the same lift the exact break mask adds only 0.55 points.
+The real left cab still lacks connected crossings under both profiles.
+More usable signed amplitude is needed alongside improved placement.
+
 ### 4. Compare measurement aggregation with wave synthesis
 
 Adapt the useful part of NLFeMF/IDF: infer where to aggregate, but reconstruct

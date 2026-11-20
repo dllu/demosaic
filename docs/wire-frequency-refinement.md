@@ -15,6 +15,11 @@ regular right aperture and incomplete crossings on both sides.
 [Native boards and provenance](images/wire-guide-refinement-v1/manifest.json) ·
 [Previous exterior verifier](wire-exterior-verification.md).
 
+[Directional support windows](wire-segment-support.md) test the same
+camera nominations on short sections of each wire and add a fresh
+partial-break panel. At equal correction RMS the directional and uniform
+controls have mixed error and response changes.
+
 ## Keeping the fit outside the aperture
 
 Each packed Bayer checkerboard fold nominates two wavevectors from

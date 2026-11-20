@@ -392,6 +392,12 @@ adds 0.42 response points with 0.37 DN16 higher continuing-gap RMS
 versus the fixed guide. Both left-cab directions have exterior support
 with the archived donor pair, and local verification still leaves
 connected crossings missing.
+[Directional windows for weak-wire breaks](wire-segment-support.md)
+lower ISO400 false-line projection by 0.108 DN16 versus equal-RMS
+uniform delivery. At ISO6400, response falls 0.323 points and false
+projection rises 0.178 DN16. Both left-cab profiles receive small
+corrections without visible connected crossings. A known-break
+diagnostic adds just 0.55 ISO6400 response points at this lift strength.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

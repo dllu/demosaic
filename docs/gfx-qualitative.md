@@ -11,6 +11,10 @@ historical boards. Use these reports for the current completed comparisons:
   preserves the sky and foliage with empty banks. The innovation fit
   reduces the existing building correction from 3.98 to 2.01 DN16 RGB
   RMS. Coarse fence crossings stay coherent and fine cables stay soft.
+- [Directional support windows](wire-segment-support.md#standing-gfx100s-comparisons)
+  reduce the building aperture's previous hard-gate correction from
+  3.98 to 1.61 DN16 RGB RMS. The sky stays smooth and the coarse fence
+  keeps its crossings.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.
