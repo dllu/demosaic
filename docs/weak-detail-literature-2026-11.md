@@ -1218,6 +1218,16 @@ in three replays at the matched natural limits. A supplement confined
 to weak center scores has smaller regressions and little separation
 from its phase-rotated control.
 
+[Context-conditioned detail retention](context-conditioned-detail.md)
+uses similar whole-photo Bayer patches to route a bounded luminance
+difference between noise-conditioning strengths. On 32 separate
+natural photos it gains 0.645 points with essentially equal flat
+RMS and 0.220 DN16 more independent fine-increment error. The whole
+atlas adds 0.016 points over the local Bayer gate. The direct RAW
+error proxy favors the much noisier 0.65× branch. A perturbation
+correction improves the proxy's relation to exact risk and still
+misclassifies many windows.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

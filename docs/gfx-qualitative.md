@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Context-conditioned detail retention](context-conditioned-detail.md#standing-gfx100s-comparisons) keeps the sky smooth and coarse crossings connected with the bounded gate. The low-variance branch leaves visible sky grain and building texture.
+
 - [Red and blue evidence for junctions](cfa-junction-phase.md#standing-gfx100s-comparisons) reproduces the green-only sky, building and foliage. The coarse fence retains its connected crossings.
 
 - [Local wire check for a junction sideband](local-junction-support.md#standing-gfx100s-comparisons) leaves sky, building and foliage at masked internal phase. The coarse fence keeps connected crossings and gains a small change in modulation.

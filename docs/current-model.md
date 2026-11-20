@@ -62,6 +62,13 @@ compiled batch four. [Full-frame batch replay](corpus100k-fp16-batch.md).
 [CUDA tile transport](corpus100k-device-tiles.md) ·
 [Full-frame cuDNN search](corpus100k-cudnn-fp16.md).
 
+A [conditioning sweep on Local 50k](context-conditioned-detail.md)
+finds that supplying 65% of the physical variance adds visible texture to
+quiet regions. A bounded three-forward blend retains about 0.65 points of
+natural fine contrast at similar flat error and higher independent
+increment error. Whole-image Bayer context contributes 0.016 points over
+local support. Use the physical noise profile for normal inference.
+
 ## Full-model choices
 
 | Model | Useful result | Limits and intended use |

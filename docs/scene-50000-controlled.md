@@ -15,6 +15,11 @@ measured response is lower than local-only in that subset.
 [Frozen measurements](results/scene-050000-controlled-v1/evidence.tar.xz) ·
 [Native provenance](images/scene-050000-controlled-v1/manifest.json).
 
+The [later conditioning replay](context-conditioned-detail.md) uses
+whole-photo Bayer texture statistics to choose where to retain more
+detail at the same physical capture noise. It adds little beyond a
+local Bayer check and does not bring back fine cab crossings.
+
 ## Matched sensor observations and context interventions
 
 The 64 source photos are excluded from the 50k training manifests.
