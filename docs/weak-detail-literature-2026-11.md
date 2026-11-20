@@ -1174,6 +1174,14 @@ The continuing stronger direction through a weak gap has higher RMS
 error, and the weak direction loses signed response. The endpoint
 comparison is pending.
 
+On 32 groups from that recipe, the weak terms are orthogonal to the
+exact-flat and strong-gap controls at the restored pixels. Through the
+shared parameter weights, both terms frequently oppose the flat and
+weak-absence controls. Removing all three control directions leaves
+median fractions of 64.4% and 77.3% of the whole-core and regional
+gradient norms, respectively. The optimizer update and held-out effect
+remain open. [Regional wire gradient audit](local-regional-wire-gradient-audit.md).
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate

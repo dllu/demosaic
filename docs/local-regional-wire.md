@@ -11,6 +11,11 @@ Local 50k. The 1,024-update run and its endpoint review are pending.
 [Launch receipt](results/local-regional-wire-v1/launch.json) ·
 [Frozen protocol and qualification](results/local-regional-wire-v1/launch-evidence.tar.xz).
 
+The [32-group gradient audit](local-regional-wire-gradient-audit.md)
+finds that the weak terms often oppose the exact-flat and absent-direction
+losses through the shared weights. Both 512-update checkpoint states
+are verified and their image review is underway.
+
 ## Parent and matched training data
 
 Both arms start from Local 50k EMA

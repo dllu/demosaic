@@ -1,0 +1,5459 @@
+{
+  "scope": "Matched training-gradient diagnosis. No weights were changed and no inference quality was measured.",
+  "recorded": "2026-11-19T22:48:07.694328-08:00",
+  "result": {
+    "path": "/mnt/external/demosaic/local-regional-wire-v1/gradient-audit/result.json",
+    "sha256": "4248d0975102496cd09f17a61b84c9eb93df6c02fe2e298d0d7d456f9fb13ea9"
+  },
+  "summary": {
+    "path": "/mnt/external/demosaic/local-regional-wire-v1/gradient-audit/summary.json",
+    "sha256": "cd1476875abae9c4fa405cb86ed1ac014e8e20330b9a9094af8fab5372004174"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-regional-wire-v1/launch.json",
+    "sha256": "54461a45304e1091024821176fbdf9dc5956841e91bb3e1cc4f688aa0896b30b"
+  },
+  "weights": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+    "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+  },
+  "precision": "training BF16 autocast with FP32 residuals and losses",
+  "samples": 32,
+  "samples_matching_run_trace": 19,
+  "strata": {
+    "all": {
+      "output": {
+        "matched_valid": 32,
+        "all": 32,
+        "whole_to_regional": {
+          "n": 32,
+          "arithmetic_mean": 0.28351239179026494,
+          "q10_median_q90": [
+            0.015237047134106348,
+            0.28908753491703343,
+            0.47914519691390456
+          ],
+          "negative": 3,
+          "positive": 29
+        },
+        "shared_to_whole": {
+          "n": 32,
+          "arithmetic_mean": 0.1176136387415884,
+          "q10_median_q90": [
+            0.01880736540569079,
+            0.07586592150827794,
+            0.2390203657722942
+          ],
+          "negative": 1,
+          "positive": 31
+        },
+        "shared_to_regional": {
+          "n": 32,
+          "arithmetic_mean": 0.07915922013885887,
+          "q10_median_q90": [
+            0.030446146409042096,
+            0.05778133217496449,
+            0.16141094338899487
+          ],
+          "negative": 0,
+          "positive": 32
+        },
+        "whole_total_to_regional_total": {
+          "n": 32,
+          "arithmetic_mean": 0.9144989415570643,
+          "q10_median_q90": [
+            0.7918031421884141,
+            0.9414313392005479,
+            0.9816616797012454
+          ],
+          "negative": 0,
+          "positive": 32
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 32,
+            "arithmetic_mean": 2.683174943962107,
+            "q10_median_q90": [
+              0.3886858638499679,
+              2.092522689851103,
+              5.2849512098421
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction": {
+            "n": 32,
+            "arithmetic_mean": 0.9988313441147911,
+            "q10_median_q90": [
+              0.9968531347451046,
+              0.9992742633821474,
+              0.9999690919336767
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction_all_three": {
+            "n": 32,
+            "arithmetic_mean": 0.9988313441147911,
+            "q10_median_q90": [
+              0.9968531347451046,
+              0.9992742633821474,
+              0.9999690919336767
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.0026547835715420762,
+              "q10_median_q90": [
+                -0.00013337044992918587,
+                0.001407250301274463,
+                0.008891385940013765
+              ],
+              "negative": 5,
+              "positive": 27
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.3331303731549742,
+              "q10_median_q90": [
+                0.03953848087220536,
+                0.1493833995392787,
+                0.8402878413869385
+              ],
+              "negative": 1,
+              "positive": 31
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": -2.360569733376654e-09,
+              "q10_median_q90": [
+                -1.0055518793229655e-08,
+                -2.848839433264641e-09,
+                5.665195822138473e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.016316485558643522,
+              "q10_median_q90": [
+                -0.044257136763828475,
+                0.012898007564082822,
+                0.07914314230565675
+              ],
+              "negative": 15,
+              "positive": 17
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": -6.291308114163887e-11,
+              "q10_median_q90": [
+                -9.907444624873628e-10,
+                -1.279725679482751e-11,
+                9.948636173335405e-10
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.21128495522307947,
+              "q10_median_q90": [
+                0.08774914699272461,
+                0.19123139283425006,
+                0.3889701181429221
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.37230865332353397,
+              "q10_median_q90": [
+                0.1556187292252347,
+                0.327659018219437,
+                0.6554096102111557
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.20071898535509547,
+              "q10_median_q90": [
+                -0.0022556932527818757,
+                0.11068430578581206,
+                0.5801408699687507
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.2960660110273313,
+              "q10_median_q90": [
+                0.18309076160614063,
+                0.2679259163644515,
+                0.444666169290666
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.734816638613975,
+              "q10_median_q90": [
+                0.33215621231024917,
+                0.8434707915146579,
+                0.9494522003933819
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.009906171032947001,
+              "q10_median_q90": [
+                0.004721598142700719,
+                0.007648159900517082,
+                0.020701166361908982
+              ],
+              "negative": 0,
+              "positive": 32
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.18447777722829384,
+              "q10_median_q90": [
+                0.08399445301051534,
+                0.1370852307960685,
+                0.2564814104152195
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.4335290334862243,
+              "q10_median_q90": [
+                0.2411699851722035,
+                0.3804876926253786,
+                0.6331331718610976
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.1723049851968645,
+              "q10_median_q90": [
+                -0.002183696014200084,
+                0.10325664733094647,
+                0.4360437447053
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.2586524854734281,
+              "q10_median_q90": [
+                0.1865583289377899,
+                0.24830713393378262,
+                0.3707493680087462
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.6625923819214505,
+              "q10_median_q90": [
+                0.23417434820691535,
+                0.7789006687327197,
+                0.9308683022831092
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.008403733250873876,
+              "q10_median_q90": [
+                0.004400298080002996,
+                0.006674833871763195,
+                0.013866059034602442
+              ],
+              "negative": 0,
+              "positive": 32
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 32,
+            "arithmetic_mean": 2.303998838238411,
+            "q10_median_q90": [
+              0.7946685992784184,
+              1.9243791465911868,
+              4.242874644514546
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction": {
+            "n": 32,
+            "arithmetic_mean": 0.9907746513111397,
+            "q10_median_q90": [
+              0.9728412405061455,
+              0.9969801491383923,
+              0.9998830201585698
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction_all_three": {
+            "n": 32,
+            "arithmetic_mean": 0.9907746513111397,
+            "q10_median_q90": [
+              0.9728412405061455,
+              0.9969801491383923,
+              0.9998830201585698
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.0036933447564432703,
+              "q10_median_q90": [
+                0.0003811004496380499,
+                0.002754752217891945,
+                0.009461444904367481
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.16097059504323513,
+              "q10_median_q90": [
+                0.047615718653627966,
+                0.12182328690982594,
+                0.3732731183040194
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 4.21729809147456e-10,
+              "q10_median_q90": [
+                -4.818074028406223e-09,
+                4.9546777646365025e-12,
+                6.103257753104386e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.08474790531644305,
+              "q10_median_q90": [
+                -0.028526535453488728,
+                0.07444822079850621,
+                0.2312676204829432
+              ],
+              "negative": 8,
+              "positive": 24
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.21128495522307947,
+              "q10_median_q90": [
+                0.08774914699272461,
+                0.19123139283425006,
+                0.3889701181429221
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.37230865332353397,
+              "q10_median_q90": [
+                0.1556187292252347,
+                0.327659018219437,
+                0.6554096102111557
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.20071898535509547,
+              "q10_median_q90": [
+                -0.0022556932527818757,
+                0.11068430578581206,
+                0.5801408699687507
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.2960660110273313,
+              "q10_median_q90": [
+                0.18309076160614063,
+                0.2679259163644515,
+                0.444666169290666
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.734816638613975,
+              "q10_median_q90": [
+                0.33215621231024917,
+                0.8434707915146579,
+                0.9494522003933819
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.009906171032947001,
+              "q10_median_q90": [
+                0.004721598142700719,
+                0.007648159900517082,
+                0.020701166361908982
+              ],
+              "negative": 0,
+              "positive": 32
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.19069714145539718,
+              "q10_median_q90": [
+                0.0857145207306417,
+                0.15585861631672718,
+                0.2787354706361265
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.37674843402256664,
+              "q10_median_q90": [
+                0.20513186840669093,
+                0.3423554283462917,
+                0.58987429726896
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.17575367979570727,
+              "q10_median_q90": [
+                -0.0021398596458720876,
+                0.10790582016714756,
+                0.4621053550831826
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.29202654455256216,
+              "q10_median_q90": [
+                0.2028315055255913,
+                0.27171559803861545,
+                0.46337750068561406
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.6853378111615408,
+              "q10_median_q90": [
+                0.25659931741075637,
+                0.8075734328994635,
+                0.9269847954506444
+              ],
+              "negative": 0,
+              "positive": 32
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.008779420108702782,
+              "q10_median_q90": [
+                0.0046028100633749465,
+                0.006891791640217743,
+                0.015091928350974395
+              ],
+              "negative": 0,
+              "positive": 32
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 32,
+          "arithmetic_mean": 1.382924216094339,
+          "q10_median_q90": [
+            0.5103288121827402,
+            0.817442196186212,
+            2.3253348167157606
+          ],
+          "negative": 0,
+          "positive": 32
+        }
+      },
+      "parameters": {
+        "matched_valid": 32,
+        "all": 32,
+        "whole_to_regional": {
+          "n": 32,
+          "arithmetic_mean": 0.5860024608189707,
+          "q10_median_q90": [
+            -0.4110423586706668,
+            0.8440557164813697,
+            0.9961195116011664
+          ],
+          "negative": 5,
+          "positive": 27
+        },
+        "shared_to_whole": {
+          "n": 32,
+          "arithmetic_mean": -0.015172872792437286,
+          "q10_median_q90": [
+            -0.8373758192690421,
+            0.012253149499812134,
+            0.8675563514621372
+          ],
+          "negative": 16,
+          "positive": 16
+        },
+        "shared_to_regional": {
+          "n": 32,
+          "arithmetic_mean": 0.003050871211180785,
+          "q10_median_q90": [
+            -0.5277589286093078,
+            -0.04802684327758163,
+            0.8221046244548422
+          ],
+          "negative": 16,
+          "positive": 16
+        },
+        "whole_total_to_regional_total": {
+          "n": 32,
+          "arithmetic_mean": 0.9953987691427515,
+          "q10_median_q90": [
+            0.9874790100281977,
+            0.9996499758763442,
+            0.9999873991713834
+          ],
+          "negative": 0,
+          "positive": 32
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 32,
+            "arithmetic_mean": 0.17632828309376228,
+            "q10_median_q90": [
+              0.010871279115988702,
+              0.119954813933007,
+              0.48096896085471713
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction": {
+            "n": 32,
+            "arithmetic_mean": 0.6564803657078826,
+            "q10_median_q90": [
+              0.37384687467080324,
+              0.7016931000628692,
+              0.9173029444863984
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction_all_three": {
+            "n": 32,
+            "arithmetic_mean": 0.634007109479978,
+            "q10_median_q90": [
+              0.372288189476902,
+              0.6437604781312092,
+              0.8863187364289705
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": -0.11734496279870194,
+              "q10_median_q90": [
+                -0.6517741246179507,
+                -0.1280568462123381,
+                0.3809769657442231
+              ],
+              "negative": 19,
+              "positive": 13
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.13858570293487338,
+              "q10_median_q90": [
+                -0.9716482100141708,
+                0.1630685516273386,
+                0.9983960083809469
+              ],
+              "negative": 14,
+              "positive": 18
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": -0.39475078177165873,
+              "q10_median_q90": [
+                -0.9796252402714846,
+                -0.7824969045604915,
+                0.9098653043581328
+              ],
+              "negative": 24,
+              "positive": 8
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": -0.23684718495948173,
+              "q10_median_q90": [
+                -0.9267211638453283,
+                -0.29645523875389107,
+                0.5500091118504895
+              ],
+              "negative": 22,
+              "positive": 10
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.284166866818194,
+              "q10_median_q90": [
+                -0.24801349287377653,
+                0.3502335334657848,
+                0.7429940741283483
+              ],
+              "negative": 7,
+              "positive": 25
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": -0.15620279091152037,
+              "q10_median_q90": [
+                -0.5040200111239269,
+                -0.13610322170329342,
+                0.08167132846651674
+              ],
+              "negative": 23,
+              "positive": 9
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.5314684206778656,
+              "q10_median_q90": [
+                -0.005054697772604436,
+                0.6755840123913686,
+                0.9691428785980425
+              ],
+              "negative": 4,
+              "positive": 28
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.37285763032410557,
+              "q10_median_q90": [
+                -0.43871258101601796,
+                0.4867974288857375,
+                0.9450625444037631
+              ],
+              "negative": 8,
+              "positive": 24
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.35813775212755317,
+              "q10_median_q90": [
+                -0.4188911683197162,
+                0.47230886443183784,
+                0.943408512929086
+              ],
+              "negative": 9,
+              "positive": 23
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.23766790223405143,
+              "q10_median_q90": [
+                -0.4639951048000831,
+                0.30565172560754206,
+                0.8008751177989917
+              ],
+              "negative": 11,
+              "positive": 21
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.3677980289667548,
+              "q10_median_q90": [
+                -0.325768605374002,
+                0.46165270190464214,
+                0.9209678242404236
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.1472553100442881,
+              "q10_median_q90": [
+                -0.2760937336899568,
+                0.1578890679947756,
+                0.6158019933333997
+              ],
+              "negative": 12,
+              "positive": 20
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.5212545554131796,
+              "q10_median_q90": [
+                -0.003460183579843977,
+                0.5976713272384002,
+                0.959335113331247
+              ],
+              "negative": 4,
+              "positive": 28
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.3978611067629807,
+              "q10_median_q90": [
+                -0.31439031988280547,
+                0.5138502856388653,
+                0.9483464587385089
+              ],
+              "negative": 7,
+              "positive": 25
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.3351365492161903,
+              "q10_median_q90": [
+                -0.426326513309195,
+                0.4746218213889469,
+                0.9470863758292285
+              ],
+              "negative": 9,
+              "positive": 23
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.20839349002739976,
+              "q10_median_q90": [
+                -0.466186471798845,
+                0.2221430348559693,
+                0.7993178231968477
+              ],
+              "negative": 10,
+              "positive": 22
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.3871670166272412,
+              "q10_median_q90": [
+                -0.2498819901310274,
+                0.4814182056628049,
+                0.9237482710055988
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.13365575159410975,
+              "q10_median_q90": [
+                -0.28909951648382887,
+                0.15318458326351123,
+                0.6123255845639504
+              ],
+              "negative": 13,
+              "positive": 19
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 32,
+            "arithmetic_mean": 0.12066534016535149,
+            "q10_median_q90": [
+              0.005477658394162314,
+              0.06392850523231182,
+              0.23309554220267817
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction": {
+            "n": 32,
+            "arithmetic_mean": 0.6932056528910178,
+            "q10_median_q90": [
+              0.37425728676503367,
+              0.7900904110247943,
+              0.9312759076307936
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "protected_fraction_all_three": {
+            "n": 32,
+            "arithmetic_mean": 0.679735687383583,
+            "q10_median_q90": [
+              0.3739284784871172,
+              0.7730132383836108,
+              0.9000230242450074
+            ],
+            "negative": 0,
+            "positive": 32
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": -0.18989041425123543,
+              "q10_median_q90": [
+                -0.585506014135099,
+                -0.18945069834767653,
+                0.23142424456277755
+              ],
+              "negative": 21,
+              "positive": 11
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.24320425653882255,
+              "q10_median_q90": [
+                -0.8094446284220455,
+                0.34774727122178606,
+                0.9940527079990297
+              ],
+              "negative": 14,
+              "positive": 18
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": -0.22449002816255792,
+              "q10_median_q90": [
+                -0.9323728978645688,
+                -0.3338481745087267,
+                0.8788385305562969
+              ],
+              "negative": 21,
+              "positive": 11
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": -0.22126088343148834,
+              "q10_median_q90": [
+                -0.9215251638978329,
+                -0.31486935144737094,
+                0.524132457753999
+              ],
+              "negative": 23,
+              "positive": 9
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.13535566702969296,
+              "q10_median_q90": [
+                -0.45793420421183306,
+                0.18414803371129124,
+                0.741475894737296
+              ],
+              "negative": 11,
+              "positive": 21
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": -0.091743652511699,
+              "q10_median_q90": [
+                -0.43344743485099263,
+                -0.09121843279033157,
+                0.19286723622697913
+              ],
+              "negative": 20,
+              "positive": 12
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.5314684206778656,
+              "q10_median_q90": [
+                -0.005054697772604436,
+                0.6755840123913686,
+                0.9691428785980425
+              ],
+              "negative": 4,
+              "positive": 28
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.37285763032410557,
+              "q10_median_q90": [
+                -0.43871258101601796,
+                0.4867974288857375,
+                0.9450625444037631
+              ],
+              "negative": 8,
+              "positive": 24
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.35813775212755317,
+              "q10_median_q90": [
+                -0.4188911683197162,
+                0.47230886443183784,
+                0.943408512929086
+              ],
+              "negative": 9,
+              "positive": 23
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.23766790223405143,
+              "q10_median_q90": [
+                -0.4639951048000831,
+                0.30565172560754206,
+                0.8008751177989917
+              ],
+              "negative": 11,
+              "positive": 21
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.3677980289667548,
+              "q10_median_q90": [
+                -0.325768605374002,
+                0.46165270190464214,
+                0.9209678242404236
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.1472553100442881,
+              "q10_median_q90": [
+                -0.2760937336899568,
+                0.1578890679947756,
+                0.6158019933333997
+              ],
+              "negative": 12,
+              "positive": 20
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 32,
+              "arithmetic_mean": 0.5311036407198324,
+              "q10_median_q90": [
+                -0.006702292044331121,
+                0.6627240089437682,
+                0.9519978640704777
+              ],
+              "negative": 4,
+              "positive": 28
+            },
+            "paired": {
+              "n": 32,
+              "arithmetic_mean": 0.3930228129606693,
+              "q10_median_q90": [
+                -0.28729198938140044,
+                0.5013048680436922,
+                0.9500404702082109
+              ],
+              "negative": 7,
+              "positive": 25
+            },
+            "repeat": {
+              "n": 32,
+              "arithmetic_mean": 0.35516501085071156,
+              "q10_median_q90": [
+                -0.42214997528153125,
+                0.47151686125577924,
+                0.9481587358897684
+              ],
+              "negative": 8,
+              "positive": 24
+            },
+            "weak_absence": {
+              "n": 32,
+              "arithmetic_mean": 0.22339127919980523,
+              "q10_median_q90": [
+                -0.46605855915993777,
+                0.24792552495999332,
+                0.7999606162496944
+              ],
+              "negative": 9,
+              "positive": 23
+            },
+            "continuing": {
+              "n": 32,
+              "arithmetic_mean": 0.3758647076436923,
+              "q10_median_q90": [
+                -0.30789960660197385,
+                0.47818990697294866,
+                0.9240711522103647
+              ],
+              "negative": 6,
+              "positive": 26
+            },
+            "flat": {
+              "n": 32,
+              "arithmetic_mean": 0.13825686301633855,
+              "q10_median_q90": [
+                -0.2945383278907743,
+                0.15492517708734976,
+                0.6143368299064371
+              ],
+              "negative": 13,
+              "positive": 19
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 32,
+          "arithmetic_mean": 1.3791246314252983,
+          "q10_median_q90": [
+            0.25868559261648416,
+            0.7404188055751375,
+            1.9727228702534083
+          ],
+          "negative": 0,
+          "positive": 32
+        }
+      }
+    },
+    "ISO400-double_gap": {
+      "output": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.1906948129448055,
+          "q10_median_q90": [
+            -0.012408731348569837,
+            0.053570867613818074,
+            0.4816935645880302
+          ],
+          "negative": 3,
+          "positive": 5
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": 0.17220265711654736,
+          "q10_median_q90": [
+            -0.000399201357300958,
+            0.03915937031289199,
+            0.5141226746211881
+          ],
+          "negative": 1,
+          "positive": 7
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.11562051548238375,
+          "q10_median_q90": [
+            0.028069361895217027,
+            0.10201779680484274,
+            0.2303929995397507
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.9039138974077051,
+          "q10_median_q90": [
+            0.8343585938108798,
+            0.8909812646253178,
+            0.9907533863609492
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 1.9957031229967748,
+            "q10_median_q90": [
+              0.2383185770118592,
+              1.0916178970433152,
+              5.004181229453233
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.9984183748873934,
+            "q10_median_q90": [
+              0.9961668201402152,
+              0.9991636110123384,
+              0.9999628683779739
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.9984183748873934,
+            "q10_median_q90": [
+              0.9961668201402152,
+              0.9991636110123384,
+              0.9999628683779739
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.0019744789877928107,
+              "q10_median_q90": [
+                -0.0001695199964059734,
+                0.0010706498241396327,
+                0.004777962076776396
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.28177028171337903,
+              "q10_median_q90": [
+                0.010935967866827372,
+                0.083551355472858,
+                0.8659662030433198
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -3.566747355553192e-09,
+              "q10_median_q90": [
+                -8.76782457676155e-09,
+                -3.3017147373194743e-09,
+                1.5887248601759037e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.026728802941170606,
+              "q10_median_q90": [
+                -0.022607901471527084,
+                0.015754399862640246,
+                0.08708642456465429
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 1.5967891152308494e-10,
+              "q10_median_q90": [
+                -2.6566063777905066e-10,
+                -1.279725679482751e-11,
+                6.891993680455221e-10
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.2649155247783625,
+              "q10_median_q90": [
+                0.0929849903382101,
+                0.2008944814665297,
+                0.513676074775514
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.43815180271143994,
+              "q10_median_q90": [
+                0.1812212962607399,
+                0.44703840578997434,
+                0.6573495982037154
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.2130750189223224,
+              "q10_median_q90": [
+                -0.006297606717879539,
+                0.14369616885801995,
+                0.567384331540243
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.340585922842276,
+              "q10_median_q90": [
+                0.2445004927901931,
+                0.3167268197998599,
+                0.4510422320113553
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.6236443488072531,
+              "q10_median_q90": [
+                0.35203055876203443,
+                0.57028697188251,
+                0.9445147422763411
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.009880644714413946,
+              "q10_median_q90": [
+                0.005367092950178514,
+                0.007577635033670165,
+                0.015913683076672014
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.21942816629086564,
+              "q10_median_q90": [
+                0.09290869762897172,
+                0.13440860361287943,
+                0.385816960882859
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.49584521913053015,
+              "q10_median_q90": [
+                0.1824058830254748,
+                0.47201924567132897,
+                0.8418639425387582
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.18737239981497542,
+              "q10_median_q90": [
+                -0.003848426347403484,
+                0.13844708600682523,
+                0.44303588203474764
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.27857938274882027,
+              "q10_median_q90": [
+                0.24061836839326436,
+                0.25359098740300684,
+                0.3642859121264371
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.5413418127347129,
+              "q10_median_q90": [
+                0.27721940517410065,
+                0.3720907855857135,
+                0.9439049204896952
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0073315640280826,
+              "q10_median_q90": [
+                0.005363648142904475,
+                0.006647166324649881,
+                0.00958020698034474
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 2.2533503618371373,
+            "q10_median_q90": [
+              0.8477778758560633,
+              2.370753486935985,
+              3.3008105351793438
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.988506322600606,
+            "q10_median_q90": [
+              0.9713136479074709,
+              0.995566026199002,
+              0.9999636698888775
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.988506322600606,
+            "q10_median_q90": [
+              0.9713136479074709,
+              0.995566026199002,
+              0.9999636698888775
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.0030741356752554258,
+              "q10_median_q90": [
+                0.0004359680571338794,
+                0.0022317920201510148,
+                0.006867901903485518
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.16756500844541994,
+              "q10_median_q90": [
+                0.047047524166351946,
+                0.09571349429018997,
+                0.3945000355467313
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 5.941878639638917e-10,
+              "q10_median_q90": [
+                -5.321400840329103e-09,
+                -2.8319100779950413e-10,
+                5.913116114403878e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.09821915163249817,
+              "q10_median_q90": [
+                -0.015685961168007613,
+                0.09315527105705027,
+                0.22470783193546406
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.2649155247783625,
+              "q10_median_q90": [
+                0.0929849903382101,
+                0.2008944814665297,
+                0.513676074775514
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.43815180271143994,
+              "q10_median_q90": [
+                0.1812212962607399,
+                0.44703840578997434,
+                0.6573495982037154
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.2130750189223224,
+              "q10_median_q90": [
+                -0.006297606717879539,
+                0.14369616885801995,
+                0.567384331540243
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.340585922842276,
+              "q10_median_q90": [
+                0.2445004927901931,
+                0.3167268197998599,
+                0.4510422320113553
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.6236443488072531,
+              "q10_median_q90": [
+                0.35203055876203443,
+                0.57028697188251,
+                0.9445147422763411
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.009880644714413946,
+              "q10_median_q90": [
+                0.005367092950178514,
+                0.007577635033670165,
+                0.015913683076672014
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.2209621190406161,
+              "q10_median_q90": [
+                0.09222899148241294,
+                0.16243676007682128,
+                0.3868079186010746
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.43489241828190994,
+              "q10_median_q90": [
+                0.18954346434681682,
+                0.45654635977561026,
+                0.6392936433611857
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.18016385463640971,
+              "q10_median_q90": [
+                -0.004124909086429235,
+                0.13103621293358408,
+                0.4516083195858106
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.3147266745546627,
+              "q10_median_q90": [
+                0.25413554161009194,
+                0.2768281053012507,
+                0.4251916100002657
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.5498074165491201,
+              "q10_median_q90": [
+                0.2856413726397984,
+                0.40599207769253387,
+                0.9312951008521309
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.007721250903645796,
+              "q10_median_q90": [
+                0.00529094700866364,
+                0.006592005173283107,
+                0.010968032231700679
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 2.645193211757044,
+          "q10_median_q90": [
+            0.7303839155069414,
+            2.1504567361717255,
+            4.782318051034539
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      },
+      "parameters": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.43737081517576815,
+          "q10_median_q90": [
+            -0.4137385884125567,
+            0.5598760927851663,
+            0.9979820532243759
+          ],
+          "negative": 2,
+          "positive": 6
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": 0.011423015770807114,
+          "q10_median_q90": [
+            -0.7663223237231354,
+            0.19540968625980826,
+            0.6800993153658361
+          ],
+          "negative": 3,
+          "positive": 5
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": -0.1280703327653686,
+          "q10_median_q90": [
+            -0.6024804792192724,
+            -0.11886946805810839,
+            0.3465416534759124
+          ],
+          "negative": 4,
+          "positive": 4
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.9989516489425958,
+          "q10_median_q90": [
+            0.9972614193264501,
+            0.9993653124919857,
+            0.9999466106432652
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.15180475024761386,
+            "q10_median_q90": [
+              0.007883826882340243,
+              0.09721744114576689,
+              0.3612726889579864
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.6621912349391337,
+            "q10_median_q90": [
+              0.4199583281492797,
+              0.75287734103145,
+              0.8604552358338972
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.6434947513005259,
+            "q10_median_q90": [
+              0.3754893506939252,
+              0.7213000043347186,
+              0.8558845121025247
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": -0.011998829344725431,
+              "q10_median_q90": [
+                -0.44828467156623075,
+                0.0994769798013625,
+                0.3203790723429291
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.10261865438811335,
+              "q10_median_q90": [
+                -0.9617737498200903,
+                0.2872477724102296,
+                0.9994469424726832
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -0.17329320197791412,
+              "q10_median_q90": [
+                -0.9693949185641774,
+                -0.31705759371356046,
+                0.9236188198349805
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": -0.2489301453694084,
+              "q10_median_q90": [
+                -0.7905348074441639,
+                -0.395884095977166,
+                0.3945695120483999
+              ],
+              "negative": 6,
+              "positive": 2
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.381197952290412,
+              "q10_median_q90": [
+                0.004512675723752496,
+                0.49434377466652557,
+                0.7353854647575824
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.19538017297923094,
+              "q10_median_q90": [
+                -0.4554671868097569,
+                -0.2475292435310034,
+                0.09412981460885585
+              ],
+              "negative": 6,
+              "positive": 2
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.7404449750530155,
+              "q10_median_q90": [
+                0.3190509687788638,
+                0.8755059449151485,
+                0.9907732240516562
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.435738494985885,
+              "q10_median_q90": [
+                -0.17944671382318447,
+                0.5992296699539897,
+                0.8350732200916083
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5302225220579214,
+              "q10_median_q90": [
+                0.18650559505945272,
+                0.5851405447700668,
+                0.8363664093440759
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.24773531449930689,
+              "q10_median_q90": [
+                -0.18404977113934162,
+                0.22148830958409282,
+                0.7112055081989068
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.06492011089359194,
+              "q10_median_q90": [
+                -0.4525755376851224,
+                -0.019661013786417103,
+                0.7111903763030769
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.09082039058036064,
+              "q10_median_q90": [
+                -0.4253695938732184,
+                -0.16354415528052418,
+                0.2872106056051126
+              ],
+              "negative": 5,
+              "positive": 3
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.7557608076107492,
+              "q10_median_q90": [
+                0.4148508758375876,
+                0.8791353269846549,
+                0.9692350487339445
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.4551547537347044,
+              "q10_median_q90": [
+                -0.14968405310493813,
+                0.5961435683796616,
+                0.8130440785576557
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5206688880380219,
+              "q10_median_q90": [
+                0.16928118256025887,
+                0.5827089069291396,
+                0.8183704168835396
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.19664765889750443,
+              "q10_median_q90": [
+                -0.30232625969842214,
+                0.189199008349439,
+                0.710714394673099
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.10382057136264987,
+              "q10_median_q90": [
+                -0.41495166606241946,
+                -0.0034572369747163517,
+                0.7112177613275577
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.11583056930044414,
+              "q10_median_q90": [
+                -0.4552897945339253,
+                -0.16566448540825354,
+                0.2834738394267121
+              ],
+              "negative": 6,
+              "positive": 2
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.14462386092171675,
+            "q10_median_q90": [
+              0.0058731143513342295,
+              0.07127705580045543,
+              0.3286234501250892
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.7328032462814986,
+            "q10_median_q90": [
+              0.42845331065380454,
+              0.8189891655998476,
+              0.933524816167898
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.7204413155718639,
+            "q10_median_q90": [
+              0.37329299353479944,
+              0.818588405715574,
+              0.9239306317967176
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.00012925965566507047,
+              "q10_median_q90": [
+                -0.34311963406620605,
+                0.042806283114387056,
+                0.31370283452931225
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.1437519557987672,
+              "q10_median_q90": [
+                -0.6940263595958558,
+                0.17428157104505362,
+                0.9975229483076726
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -0.0754849039622262,
+              "q10_median_q90": [
+                -0.8479129588719494,
+                0.12373083037384125,
+                0.5875225162813643
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": -0.37177444863921444,
+              "q10_median_q90": [
+                -0.7910863999530247,
+                -0.3752905320849851,
+                -0.02458080673392138
+              ],
+              "negative": 7,
+              "positive": 1
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.1334752740912475,
+              "q10_median_q90": [
+                -0.33078810803381165,
+                0.03978831116304787,
+                0.6013346234290224
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.030651179486765264,
+              "q10_median_q90": [
+                -0.359390384413115,
+                0.018358016035273882,
+                0.24111319580124352
+              ],
+              "negative": 4,
+              "positive": 4
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.7404449750530155,
+              "q10_median_q90": [
+                0.3190509687788638,
+                0.8755059449151485,
+                0.9907732240516562
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.435738494985885,
+              "q10_median_q90": [
+                -0.17944671382318447,
+                0.5992296699539897,
+                0.8350732200916083
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5302225220579214,
+              "q10_median_q90": [
+                0.18650559505945272,
+                0.5851405447700668,
+                0.8363664093440759
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.24773531449930689,
+              "q10_median_q90": [
+                -0.18404977113934162,
+                0.22148830958409282,
+                0.7112055081989068
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.06492011089359194,
+              "q10_median_q90": [
+                -0.4525755376851224,
+                -0.019661013786417103,
+                0.7111903763030769
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.09082039058036064,
+              "q10_median_q90": [
+                -0.4253695938732184,
+                -0.16354415528052418,
+                0.2872106056051126
+              ],
+              "negative": 5,
+              "positive": 3
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.7546672415468216,
+              "q10_median_q90": [
+                0.4167556518531418,
+                0.8805620221342135,
+                0.9593236068098733
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.46650048386001314,
+              "q10_median_q90": [
+                -0.1245202834757611,
+                0.6076150873807591,
+                0.8109264570652349
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5176389455772525,
+              "q10_median_q90": [
+                0.1381932716312361,
+                0.5923646545696171,
+                0.8155994073899737
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.19147110573938592,
+              "q10_median_q90": [
+                -0.2838543423182198,
+                0.1971894369438736,
+                0.712139550028286
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.10285149185722663,
+              "q10_median_q90": [
+                -0.4070519972266358,
+                0.0018564946670370924,
+                0.7090933506212046
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.11759286821168838,
+              "q10_median_q90": [
+                -0.4316503601438121,
+                -0.16465892135292662,
+                0.28686203592773274
+              ],
+              "negative": 6,
+              "positive": 2
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 1.5393630961934937,
+          "q10_median_q90": [
+            0.4788322866280563,
+            1.068120488997753,
+            2.893458127568209
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      }
+    },
+    "ISO400-true_continuation": {
+      "output": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.3511722644288852,
+          "q10_median_q90": [
+            0.16283365468700045,
+            0.3708038658312509,
+            0.5037621038766792
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": 0.1343254343586613,
+          "q10_median_q90": [
+            0.04385757777983101,
+            0.13024717096529276,
+            0.23546663424542896
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.07618456800613145,
+          "q10_median_q90": [
+            0.032724652198812,
+            0.05743340973169115,
+            0.15931708108524822
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.9248800330706066,
+          "q10_median_q90": [
+            0.864195191241385,
+            0.9488657948531509,
+            0.9653851596345431
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 3.0035759109858304,
+            "q10_median_q90": [
+              1.4581007477505272,
+              2.617817610898694,
+              4.929038461284198
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.9989760691813329,
+            "q10_median_q90": [
+              0.9982489937999468,
+              0.9989790384608999,
+              0.9997629661652263
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.9989760691813329,
+            "q10_median_q90": [
+              0.9982489937999468,
+              0.9989790384608999,
+              0.9997629661652263
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.004357169523209865,
+              "q10_median_q90": [
+                0.001103698034312103,
+                0.002465178812625758,
+                0.010407495903929446
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.42116479074516466,
+              "q10_median_q90": [
+                0.11555763819674465,
+                0.34907807256176565,
+                0.8446092774239751
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -3.917196451447707e-09,
+              "q10_median_q90": [
+                -1.1703858228801347e-08,
+                -2.6291463977834375e-09,
+                3.026324113356904e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.024581427157616336,
+              "q10_median_q90": [
+                -0.03064796775234232,
+                0.03825996457938212,
+                0.05870047431323353
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": -9.046159299577471e-11,
+              "q10_median_q90": [
+                -6.694292582510923e-10,
+                -1.1161333857091179e-10,
+                5.635102535417399e-10
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.1803343753357506,
+              "q10_median_q90": [
+                0.11567193994230564,
+                0.1671533540665951,
+                0.253800550427914
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.36526082427681483,
+              "q10_median_q90": [
+                0.19968718899830512,
+                0.35412624917266666,
+                0.5028392519299598
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.19737150846181822,
+              "q10_median_q90": [
+                0.00015587823592024355,
+                0.1523644288093053,
+                0.4494051291326626
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.23757369101441594,
+              "q10_median_q90": [
+                0.09178339530492231,
+                0.25724386918647546,
+                0.3304879984283007
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.7996982772361387,
+              "q10_median_q90": [
+                0.6205130264955054,
+                0.8724771065510106,
+                0.9449848915845973
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.009830538832696143,
+              "q10_median_q90": [
+                0.005399095870433966,
+                0.009172358251239871,
+                0.014210672682834045
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.15536204744890175,
+              "q10_median_q90": [
+                0.10606482849036467,
+                0.13900901395594378,
+                0.22846408079087946
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.45059268950908726,
+              "q10_median_q90": [
+                0.32962203792681727,
+                0.40954501461345816,
+                0.6181908068696289
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.16390386642662008,
+              "q10_median_q90": [
+                -5.1428705424487985e-05,
+                0.14346715082575273,
+                0.35475428784631086
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.20627560839729767,
+              "q10_median_q90": [
+                0.09558233254287729,
+                0.22695027325756228,
+                0.28458273548621127
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.7081610618127347,
+              "q10_median_q90": [
+                0.45928695227044325,
+                0.8137088555337106,
+                0.8757469266484011
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.008442467144144922,
+              "q10_median_q90": [
+                0.00498213247404093,
+                0.007359266649706049,
+                0.012253826297879408
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 2.07964354684448,
+            "q10_median_q90": [
+              0.9666697304717102,
+              1.5193066149469574,
+              3.496089995343352
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.9889064524137046,
+            "q10_median_q90": [
+              0.9625238395643712,
+              0.9966487540145863,
+              0.99968331733261
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.9889064524137046,
+            "q10_median_q90": [
+              0.9625238395643712,
+              0.9966487540145863,
+              0.99968331733261
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.005256187937090378,
+              "q10_median_q90": [
+                0.001524955789103047,
+                0.0036133343499827214,
+                0.010791789202284553
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.17099469200663447,
+              "q10_median_q90": [
+                0.06137579582389345,
+                0.13402406457262295,
+                0.3256062397457195
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 8.695333305725748e-10,
+              "q10_median_q90": [
+                -2.524522447673705e-09,
+                -5.463052745704797e-10,
+                6.095920324642534e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.08955310988423995,
+              "q10_median_q90": [
+                -0.010833827854073226,
+                0.052968505202808464,
+                0.27110397025638244
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.1803343753357506,
+              "q10_median_q90": [
+                0.11567193994230564,
+                0.1671533540665951,
+                0.253800550427914
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.36526082427681483,
+              "q10_median_q90": [
+                0.19968718899830512,
+                0.35412624917266666,
+                0.5028392519299598
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.19737150846181822,
+              "q10_median_q90": [
+                0.00015587823592024355,
+                0.1523644288093053,
+                0.4494051291326626
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.23757369101441594,
+              "q10_median_q90": [
+                0.09178339530492231,
+                0.25724386918647546,
+                0.3304879984283007
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.7996982772361387,
+              "q10_median_q90": [
+                0.6205130264955054,
+                0.8724771065510106,
+                0.9449848915845973
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.009830538832696143,
+              "q10_median_q90": [
+                0.005399095870433966,
+                0.009172358251239871,
+                0.014210672682834045
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.16974595020162025,
+              "q10_median_q90": [
+                0.11069464715364499,
+                0.1494890390052805,
+                0.24414007087955278
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.37649543993619383,
+              "q10_median_q90": [
+                0.24159097803262303,
+                0.3631626805423283,
+                0.5170229802258349
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.17588391647975138,
+              "q10_median_q90": [
+                0.0001084178001547559,
+                0.14670239896667156,
+                0.38875828920953404
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.24682841454013524,
+              "q10_median_q90": [
+                0.08694803167513256,
+                0.2708949644616523,
+                0.34246634270458276
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.7573489086806799,
+              "q10_median_q90": [
+                0.5493617528095481,
+                0.8382174948085852,
+                0.924211965626708
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.009199975007669049,
+              "q10_median_q90": [
+                0.005273090457196813,
+                0.008168803320516383,
+                0.013379299849613707
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 0.717844657516558,
+          "q10_median_q90": [
+            0.45366185321985647,
+            0.6845851728356821,
+            1.013545986221002
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      },
+      "parameters": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.90721918534526,
+          "q10_median_q90": [
+            0.775460560138865,
+            0.9670753134778864,
+            0.9963946078032875
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": -0.4218624565615709,
+          "q10_median_q90": [
+            -0.7731255479301662,
+            -0.45398489214024024,
+            -0.09122488825751746
+          ],
+          "negative": 7,
+          "positive": 1
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": -0.4129791026906153,
+          "q10_median_q90": [
+            -0.7802823926346566,
+            -0.43778285540112616,
+            -0.05424136668438845
+          ],
+          "negative": 7,
+          "positive": 1
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.984952386653321,
+          "q10_median_q90": [
+            0.9546843693590217,
+            0.9992142779712021,
+            0.9999564579774126
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.3061897361427216,
+            "q10_median_q90": [
+              0.07880900244288574,
+              0.17238646699268423,
+              0.7048655009125828
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.5096056347384859,
+            "q10_median_q90": [
+              0.24162570644141543,
+              0.5239731430903622,
+              0.7436530523324176
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.49821759610751293,
+            "q10_median_q90": [
+              0.24148481501256175,
+              0.49320968578884455,
+              0.740990706864691
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": -0.36512958544373825,
+              "q10_median_q90": [
+                -0.6317453595215459,
+                -0.3488349352976888,
+                -0.07608293563503733
+              ],
+              "negative": 7,
+              "positive": 1
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 2.9905529694451705e-05,
+              "q10_median_q90": [
+                -0.9865403897236188,
+                -0.017451269835027317,
+                0.9990304501639969
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -0.8384345290741086,
+              "q10_median_q90": [
+                -0.9901332995945968,
+                -0.9792976234371162,
+                -0.5644144161634165
+              ],
+              "negative": 8,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": -0.5673306059290536,
+              "q10_median_q90": [
+                -0.9688918595278583,
+                -0.8069661415917924,
+                0.04992850556920739
+              ],
+              "negative": 7,
+              "positive": 1
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.1257538204501996,
+              "q10_median_q90": [
+                -0.11791029943116743,
+                0.17397969291865187,
+                0.35445257307380523
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.2774209120693153,
+              "q10_median_q90": [
+                -0.5014668175024383,
+                -0.2580499106453941,
+                -0.07266431814925627
+              ],
+              "negative": 8,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.45649953578717145,
+              "q10_median_q90": [
+                -0.04413646740549594,
+                0.6098182776721272,
+                0.8578002500261289
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.12626999099306327,
+              "q10_median_q90": [
+                -0.5366843704417201,
+                0.10287265377778426,
+                0.8150233420380744
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.34727769728159624,
+              "q10_median_q90": [
+                -0.09182112620877032,
+                0.32223824099387727,
+                0.8164437532331572
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.4630690609321022,
+              "q10_median_q90": [
+                -0.04122819739684108,
+                0.5167823404056568,
+                0.8005064111141337
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.42443811871621445,
+              "q10_median_q90": [
+                0.0010404580674748254,
+                0.47071704867381864,
+                0.8566017303004267
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.11191089733845995,
+              "q10_median_q90": [
+                -0.42510199314239927,
+                0.2332599680505672,
+                0.5332104842027063
+              ],
+              "negative": 3,
+              "positive": 5
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.40521660263703085,
+              "q10_median_q90": [
+                -0.03501469533345164,
+                0.47776004540128714,
+                0.8118892658020884
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.20147661758420143,
+              "q10_median_q90": [
+                -0.37258337073641074,
+                0.1729445357535854,
+                0.7890702453444222
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.2700792094090291,
+              "q10_median_q90": [
+                -0.12031849065622234,
+                0.21571991763680637,
+                0.7906493705394624
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.39676107790838533,
+              "q10_median_q90": [
+                0.022302473631709965,
+                0.37032290457727574,
+                0.7854113071798121
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.45767464146345865,
+              "q10_median_q90": [
+                0.025763301202712724,
+                0.4979853113167284,
+                0.8721358719048115
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.08358686675579236,
+              "q10_median_q90": [
+                -0.43385272527820695,
+                0.20354261270495133,
+                0.5385876090429449
+              ],
+              "negative": 3,
+              "positive": 5
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.1781102602703829,
+            "q10_median_q90": [
+              0.020726404959896718,
+              0.051515072527063166,
+              0.42881567332280085
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.5749889288389802,
+            "q10_median_q90": [
+              0.32368514191891,
+              0.5808428336140825,
+              0.8648606736232258
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.5662425710780183,
+            "q10_median_q90": [
+              0.3214106605369683,
+              0.5672524708226674,
+              0.8536360136722568
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": -0.3914889825461049,
+              "q10_median_q90": [
+                -0.6663761952710415,
+                -0.4435223275777297,
+                -0.08934245290252874
+              ],
+              "negative": 7,
+              "positive": 1
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.09115471813013903,
+              "q10_median_q90": [
+                -0.9128674674527946,
+                0.22763896453671906,
+                0.9943191662849856
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -0.7297963058243986,
+              "q10_median_q90": [
+                -0.9805466074405821,
+                -0.8651911580477201,
+                -0.3014984593471544
+              ],
+              "negative": 7,
+              "positive": 1
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": -0.5369609642400711,
+              "q10_median_q90": [
+                -0.9435829358528794,
+                -0.7154680515308829,
+                0.040032866620961366
+              ],
+              "negative": 7,
+              "positive": 1
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.046540514444929494,
+              "q10_median_q90": [
+                -0.3744739412155276,
+                0.07599724746690059,
+                0.3193190907533864
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.2882859064522545,
+              "q10_median_q90": [
+                -0.4787464368222624,
+                -0.277544888506639,
+                -0.09532637080205966
+              ],
+              "negative": 8,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.45649953578717145,
+              "q10_median_q90": [
+                -0.04413646740549594,
+                0.6098182776721272,
+                0.8578002500261289
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.12626999099306327,
+              "q10_median_q90": [
+                -0.5366843704417201,
+                0.10287265377778426,
+                0.8150233420380744
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.34727769728159624,
+              "q10_median_q90": [
+                -0.09182112620877032,
+                0.32223824099387727,
+                0.8164437532331572
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.4630690609321022,
+              "q10_median_q90": [
+                -0.04122819739684108,
+                0.5167823404056568,
+                0.8005064111141337
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.42443811871621445,
+              "q10_median_q90": [
+                0.0010404580674748254,
+                0.47071704867381864,
+                0.8566017303004267
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.11191089733845995,
+              "q10_median_q90": [
+                -0.42510199314239927,
+                0.2332599680505672,
+                0.5332104842027063
+              ],
+              "negative": 3,
+              "positive": 5
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.4451401209292243,
+              "q10_median_q90": [
+                -0.028561098511539235,
+                0.6002596918315377,
+                0.8516297859265592
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.15342712730232821,
+              "q10_median_q90": [
+                -0.509869063681272,
+                0.10211089549510576,
+                0.8111147367903714
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.330897303508519,
+              "q10_median_q90": [
+                -0.10283110686853192,
+                0.2982215038389431,
+                0.8126469624890669
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.44224641149645616,
+              "q10_median_q90": [
+                -0.028854889453615248,
+                0.48799503207505324,
+                0.7971908145476413
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.43484740325936866,
+              "q10_median_q90": [
+                0.008114955572654459,
+                0.49405291429591014,
+                0.863334606075049
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.10311566763803257,
+              "q10_median_q90": [
+                -0.4337883534510317,
+                0.22829131328425492,
+                0.5294538259528812
+              ],
+              "negative": 3,
+              "positive": 5
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 0.49439608756245707,
+          "q10_median_q90": [
+            0.1766597884715056,
+            0.3838713108589722,
+            1.0234285729048198
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      }
+    },
+    "ISO6400-double_gap": {
+      "output": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.23035052573357453,
+          "q10_median_q90": [
+            0.027313938284017434,
+            0.2526002756384363,
+            0.3925548634248592
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": 0.08449306121865245,
+          "q10_median_q90": [
+            0.020441010247172903,
+            0.08135379257492341,
+            0.14053904974714265
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.06757517045606562,
+          "q10_median_q90": [
+            0.031112543540489247,
+            0.06110367764507887,
+            0.10520507581813221
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.8954655268376461,
+          "q10_median_q90": [
+            0.7716922398623816,
+            0.9360952066279694,
+            0.9628908961174246
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 2.3275604692976675,
+            "q10_median_q90": [
+              1.114483036345598,
+              1.9500528615889827,
+              4.089616885731279
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.9992088320491028,
+            "q10_median_q90": [
+              0.9980888672104634,
+              0.9995693335832043,
+              0.999979993009417
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.9992088320491028,
+            "q10_median_q90": [
+              0.9980888672104634,
+              0.9995693335832043,
+              0.999979993009417
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.001799708124124055,
+              "q10_median_q90": [
+                -0.0003889772861440773,
+                0.0008231135371255635,
+                0.004704738344998578
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.30884954319733654,
+              "q10_median_q90": [
+                0.047090491771688295,
+                0.257553035408013,
+                0.6600491742085536
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -6.190743015246232e-10,
+              "q10_median_q90": [
+                -5.594453743308322e-09,
+                -2.7267753864342956e-09,
+                7.806971825956454e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.004921146426088174,
+              "q10_median_q90": [
+                -0.03545816702264631,
+                -0.004163473337281202,
+                0.060388008111225765
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 2.0100826339666848e-11,
+              "q10_median_q90": [
+                -5.187778096256858e-10,
+                5.89414986922136e-11,
+                6.750371990467442e-10
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.22745420290745044,
+              "q10_median_q90": [
+                0.09547417917396807,
+                0.24083110591280849,
+                0.34015049758692095
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.3586317011718483,
+              "q10_median_q90": [
+                0.2063169901803345,
+                0.3036080612933333,
+                0.635665818515423
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.2074540833027027,
+              "q10_median_q90": [
+                -0.003507653706249334,
+                0.13663812326968858,
+                0.5417472251590272
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.3434141381698148,
+              "q10_median_q90": [
+                0.20692829941468555,
+                0.3459352115206612,
+                0.4577480750877706
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.7142840378582928,
+              "q10_median_q90": [
+                0.35572734358169433,
+                0.811468903161255,
+                0.914321334937616
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.012960921885124967,
+              "q10_median_q90": [
+                0.005246189271379338,
+                0.010333605360740218,
+                0.024580651414418637
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.20520243723419962,
+              "q10_median_q90": [
+                0.09127602521124697,
+                0.1986820705562634,
+                0.31385636509697185
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.3935232078944816,
+              "q10_median_q90": [
+                0.27521026492876627,
+                0.33003102623421426,
+                0.5563963356906017
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.17457268793517244,
+              "q10_median_q90": [
+                -0.0032036935558129205,
+                0.12151741930485721,
+                0.443375534218031
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.30739709874804494,
+              "q10_median_q90": [
+                0.20063800418373318,
+                0.29275539303377224,
+                0.4308504657794961
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.6593228864189934,
+              "q10_median_q90": [
+                0.2956447239528475,
+                0.7538581617981368,
+                0.8807784184165613
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.011578090335558816,
+              "q10_median_q90": [
+                0.004909132544051971,
+                0.008553578976099692,
+                0.02213492615515955
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 2.28951158751079,
+            "q10_median_q90": [
+              0.776180752395645,
+              1.4627238574196393,
+              4.637832855783566
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.9906049193409494,
+            "q10_median_q90": [
+              0.97814541024573,
+              0.9939519178572225,
+              0.9996968381020954
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.9906049193409494,
+            "q10_median_q90": [
+              0.97814541024573,
+              0.9939519178572225,
+              0.9996968381020954
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.0025152635566905793,
+              "q10_median_q90": [
+                0.0002959755781090146,
+                0.00077293110889953,
+                0.005728634759760284
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.13245434177367144,
+              "q10_median_q90": [
+                0.04765103096183443,
+                0.12583661289238743,
+                0.23598635324766867
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -1.7634100823360116e-09,
+              "q10_median_q90": [
+                -6.2865002211852e-09,
+                -5.6309976956528315e-11,
+                1.8204827288792791e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.09530438078464004,
+              "q10_median_q90": [
+                -0.03007629454284645,
+                0.1054185812707195,
+                0.20710965496962613
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.22745420290745044,
+              "q10_median_q90": [
+                0.09547417917396807,
+                0.24083110591280849,
+                0.34015049758692095
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.3586317011718483,
+              "q10_median_q90": [
+                0.2063169901803345,
+                0.3036080612933333,
+                0.635665818515423
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.2074540833027027,
+              "q10_median_q90": [
+                -0.003507653706249334,
+                0.13663812326968858,
+                0.5417472251590272
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.3434141381698148,
+              "q10_median_q90": [
+                0.20692829941468555,
+                0.3459352115206612,
+                0.4577480750877706
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.7142840378582928,
+              "q10_median_q90": [
+                0.35572734358169433,
+                0.811468903161255,
+                0.914321334937616
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.012960921885124967,
+              "q10_median_q90": [
+                0.005246189271379338,
+                0.010333605360740218,
+                0.024580651414418637
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.20900209888086832,
+              "q10_median_q90": [
+                0.09125262773235888,
+                0.20627332680589444,
+                0.32018051258912406
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.35765702751854667,
+              "q10_median_q90": [
+                0.24195811414449483,
+                0.3140910395781179,
+                0.5522222006641315
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.18100561609844185,
+              "q10_median_q90": [
+                -0.003287189654294925,
+                0.13156931934332922,
+                0.4609857967034641
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.3410115899254903,
+              "q10_median_q90": [
+                0.20769708813833615,
+                0.31617653807655255,
+                0.47509726302749933
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.6692697957300081,
+              "q10_median_q90": [
+                0.3086670333955336,
+                0.7752771644980538,
+                0.8580333610568157
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0117561215760477,
+              "q10_median_q90": [
+                0.005117080831097201,
+                0.008633823423708073,
+                0.023037781907538926
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 1.0924168348904413,
+          "q10_median_q90": [
+            0.6196847871827127,
+            0.7951006921695036,
+            2.069875913944587
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      },
+      "parameters": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.4491781694854472,
+          "q10_median_q90": [
+            -0.4399932700578228,
+            0.6597274752488314,
+            0.8813353756407449
+          ],
+          "negative": 2,
+          "positive": 6
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": 0.01692015290596109,
+          "q10_median_q90": [
+            -0.8227096183459898,
+            0.03943059251166772,
+            0.901488903369613
+          ],
+          "negative": 4,
+          "positive": 4
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.051123124099353996,
+          "q10_median_q90": [
+            -0.47589859071490936,
+            -0.05356581850462832,
+            0.6432252491010253
+          ],
+          "negative": 4,
+          "positive": 4
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.9995946566328169,
+          "q10_median_q90": [
+            0.9987566579165772,
+            0.9998846667444947,
+            0.9999822637578949
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.15030619718795413,
+            "q10_median_q90": [
+              0.009950236105536065,
+              0.09762779896317664,
+              0.3256949497937095
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.7437624975009356,
+            "q10_median_q90": [
+              0.4543824100273442,
+              0.8010130500793116,
+              0.9456170965791076
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.6898018330305575,
+            "q10_median_q90": [
+              0.45391674482532973,
+              0.6918897149210455,
+              0.8787995783887209
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": -0.10944190021708441,
+              "q10_median_q90": [
+                -0.7058110382377707,
+                -0.08098267680961488,
+                0.2798748667901073
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.22338767191371722,
+              "q10_median_q90": [
+                -0.8656059728991481,
+                0.43040453406486817,
+                0.9697082164776833
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -0.2905869184564515,
+              "q10_median_q90": [
+                -0.8744929375126819,
+                -0.7618895331532436,
+                0.8552829859416164
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.11867702748078916,
+              "q10_median_q90": [
+                -0.5356499245943291,
+                0.3575371583955707,
+                0.5702996019481977
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.05241989654485722,
+              "q10_median_q90": [
+                -0.4299013595277119,
+                -0.09085443237477048,
+                0.6573603113789642
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.012005539547367626,
+              "q10_median_q90": [
+                -0.33202653609465776,
+                -0.007617885183769999,
+                0.38695239175757146
+              ],
+              "negative": 4,
+              "positive": 4
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.6605654063884796,
+              "q10_median_q90": [
+                0.1700976156042524,
+                0.8208659440097167,
+                0.9649149785025902
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.48412013026740885,
+              "q10_median_q90": [
+                -0.2091005282182044,
+                0.635352057100622,
+                0.9784210245292361
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5412306234567271,
+              "q10_median_q90": [
+                -0.1125710469454966,
+                0.6733968513023423,
+                0.9760434818155047
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.19838276383473188,
+              "q10_median_q90": [
+                -0.7012760625575858,
+                0.43480525978952267,
+                0.6976645880262529
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.49977978028730136,
+              "q10_median_q90": [
+                0.10832043198926662,
+                0.5551053279198324,
+                0.8276788302510321
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.3931877291925103,
+              "q10_median_q90": [
+                -0.02839067180103647,
+                0.43060602749235843,
+                0.7820581108999813
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.6617390506983276,
+              "q10_median_q90": [
+                0.18942260276752143,
+                0.8162602656512237,
+                0.9633314910445254
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.486113680215913,
+              "q10_median_q90": [
+                -0.20660961678138356,
+                0.6396147030896724,
+                0.9781202237437917
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5379994466616551,
+              "q10_median_q90": [
+                -0.11653320038956533,
+                0.67760562742211,
+                0.975436213339573
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.20212531531265343,
+              "q10_median_q90": [
+                -0.6991235772006356,
+                0.44316028012573283,
+                0.700869688202897
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.5000203937250132,
+              "q10_median_q90": [
+                0.10424252446296886,
+                0.5685431941145149,
+                0.8249702968065376
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.3963399294329709,
+              "q10_median_q90": [
+                -0.02720019107781939,
+                0.44281566311787324,
+                0.782536923797095
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.07064980050390575,
+            "q10_median_q90": [
+              0.005388507359879575,
+              0.05082903848203977,
+              0.14717533024483997
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.818842742370288,
+            "q10_median_q90": [
+              0.6620780821185963,
+              0.8645019967828993,
+              0.9686175570656756
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.7889149362196306,
+            "q10_median_q90": [
+              0.6614589418171651,
+              0.821851483976016,
+              0.8991082204043105
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": -0.2314537152933247,
+              "q10_median_q90": [
+                -0.5065885096608604,
+                -0.22894553494909498,
+                0.08450777149144775
+              ],
+              "negative": 6,
+              "positive": 2
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.19163005661848748,
+              "q10_median_q90": [
+                -0.2944338765641033,
+                0.19871171884010802,
+                0.686075681915079
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -0.17909413021224593,
+              "q10_median_q90": [
+                -0.6741877187006535,
+                -0.36398028799774673,
+                0.5747007167180751
+              ],
+              "negative": 6,
+              "positive": 2
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": -0.07778137721755657,
+              "q10_median_q90": [
+                -0.504914041463529,
+                -0.14453877788903335,
+                0.3685232700042942
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.1086269939124864,
+              "q10_median_q90": [
+                -0.49931974670852575,
+                0.21441325694559377,
+                0.5831282859113921
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.07253894597915936,
+              "q10_median_q90": [
+                -0.4972017027000418,
+                -0.01708420381999626,
+                0.19702629654372408
+              ],
+              "negative": 4,
+              "positive": 4
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.6605654063884796,
+              "q10_median_q90": [
+                0.1700976156042524,
+                0.8208659440097167,
+                0.9649149785025902
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.48412013026740885,
+              "q10_median_q90": [
+                -0.2091005282182044,
+                0.635352057100622,
+                0.9784210245292361
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5412306234567271,
+              "q10_median_q90": [
+                -0.1125710469454966,
+                0.6733968513023423,
+                0.9760434818155047
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.19838276383473188,
+              "q10_median_q90": [
+                -0.7012760625575858,
+                0.43480525978952267,
+                0.6976645880262529
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.49977978028730136,
+              "q10_median_q90": [
+                0.10832043198926662,
+                0.5551053279198324,
+                0.8276788302510321
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.3931877291925103,
+              "q10_median_q90": [
+                -0.02839067180103647,
+                0.43060602749235843,
+                0.7820581108999813
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.6585451245384883,
+              "q10_median_q90": [
+                0.16906140812622839,
+                0.8173379508697902,
+                0.9645352389557648
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.4850735801398978,
+              "q10_median_q90": [
+                -0.2092017250781729,
+                0.6382030350410897,
+                0.9784010148692721
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.5404509021392702,
+              "q10_median_q90": [
+                -0.11632543449604918,
+                0.675867814847601,
+                0.9758246413976545
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.1992052784529358,
+              "q10_median_q90": [
+                -0.6982396544002022,
+                0.43411510443948953,
+                0.6998207777814243
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.4990529329693893,
+              "q10_median_q90": [
+                0.10472839100856086,
+                0.5596033580193291,
+                0.8296477196591968
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.3925145474998299,
+              "q10_median_q90": [
+                -0.027304816707950978,
+                0.4318053250837026,
+                0.781141696527216
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 0.9222161963972386,
+          "q10_median_q90": [
+            0.29068685185870274,
+            0.4645662855806678,
+            1.7753814482176744
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      }
+    },
+    "ISO6400-true_continuation": {
+      "output": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.3618319640537945,
+          "q10_median_q90": [
+            0.21753998286582912,
+            0.3592016602541929,
+            0.494311618638029
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": 0.07943340227249246,
+          "q10_median_q90": [
+            0.02248216266955078,
+            0.06753070065751099,
+            0.14022620932036875
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.057256626610854594,
+          "q10_median_q90": [
+            0.02444471401645038,
+            0.04965991162362339,
+            0.10763533611769975
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.9337363089122998,
+          "q10_median_q90": [
+            0.8918808844870603,
+            0.942945322065936,
+            0.9837327920425616
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 3.4058602725681553,
+            "q10_median_q90": [
+              0.8576321758404606,
+              2.55748603697939,
+              6.598583997838284
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.9987221003413352,
+            "q10_median_q90": [
+              0.9974643202137253,
+              0.9991474082170192,
+              0.9997554857423638
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.9987221003413352,
+            "q10_median_q90": [
+              0.9974643202137253,
+              0.9991474082170192,
+              0.9997554857423638
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.0024877776510415757,
+              "q10_median_q90": [
+                4.671472592459562e-05,
+                0.0009459518059647448,
+                0.006199186370832702
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.32073687696401665,
+              "q10_median_q90": [
+                0.05970968878120382,
+                0.1493833995392787,
+                0.7737701413929173
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -1.3392608249810932e-09,
+              "q10_median_q90": [
+                -7.374296995214161e-09,
+                -1.6949391162524485e-09,
+                5.085822366253797e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.009034565709698973,
+              "q10_median_q90": [
+                -0.051896886259174366,
+                0.014515555386112232,
+                0.06961898739653012
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": -3.409704694335324e-10,
+              "q10_median_q90": [
+                -2.581542376206791e-09,
+                -2.624539808834062e-11,
+                1.9625553432414303e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.17243571787075437,
+              "q10_median_q90": [
+                0.07654569676894178,
+                0.11604277854714852,
+                0.3059388731395145
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.32719028513403275,
+              "q10_median_q90": [
+                0.19570699532096494,
+                0.27151117066313013,
+                0.5029317532696865
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.18497533073353864,
+              "q10_median_q90": [
+                -0.0012833234152259216,
+                0.10196642703103284,
+                0.42565953334771467
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.26269029208281836,
+              "q10_median_q90": [
+                0.20502146031061594,
+                0.23489786226064516,
+                0.35017662229904384
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.8016398905542157,
+              "q10_median_q90": [
+                0.6105449197082065,
+                0.8681371486702301,
+                0.9603435266136889
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.006952578699552957,
+              "q10_median_q90": [
+                0.00442566052240766,
+                0.005459329002735177,
+                0.011760434424784343
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.1579184579392084,
+              "q10_median_q90": [
+                0.07015250092621961,
+                0.11510297143394285,
+                0.2680119887153346
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.39415501741079817,
+              "q10_median_q90": [
+                0.24722004767902644,
+                0.389294033898392,
+                0.5812110484154567
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.16337098661069005,
+              "q10_median_q90": [
+                -0.0012299514191333894,
+                0.09546770603089758,
+                0.37296579669518093
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.24235785199954968,
+              "q10_median_q90": [
+                0.19318052638105265,
+                0.23674886051968191,
+                0.29067647065452434
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.741543766719361,
+              "q10_median_q90": [
+                0.5424751018945794,
+                0.8021817813332517,
+                0.9340845013857129
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.006262811495709163,
+              "q10_median_q90": [
+                0.003884309686556941,
+                0.005338018073009609,
+                0.009983328706256577
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 2.593489856761238,
+            "q10_median_q90": [
+              0.9066903530349453,
+              2.356952896828778,
+              4.675232676380419
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.9950809108892987,
+            "q10_median_q90": [
+              0.9860381088618564,
+              0.9982532684410226,
+              0.9997864359287859
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.9950809108892987,
+            "q10_median_q90": [
+              0.9860381088618564,
+              0.9982532684410226,
+              0.9997864359287859
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.003927791856736699,
+              "q10_median_q90": [
+                0.00019935961783340404,
+                0.0023917378411797024,
+                0.009959608777764571
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.1728683379472148,
+              "q10_median_q90": [
+                0.04473894648343761,
+                0.12289626209896613,
+                0.3466564768153582
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 1.986608124389369e-09,
+              "q10_median_q90": [
+                -1.3950979703959603e-09,
+                4.2394546774204343e-10,
+                7.683315866673536e-09
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.05591497896439403,
+              "q10_median_q90": [
+                -0.03391060217679144,
+                0.04104040223303201,
+                0.16442986276625854
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.0,
+              "q10_median_q90": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "negative": 0,
+              "positive": 0
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.17243571787075437,
+              "q10_median_q90": [
+                0.07654569676894178,
+                0.11604277854714852,
+                0.3059388731395145
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.32719028513403275,
+              "q10_median_q90": [
+                0.19570699532096494,
+                0.27151117066313013,
+                0.5029317532696865
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.18497533073353864,
+              "q10_median_q90": [
+                -0.0012833234152259216,
+                0.10196642703103284,
+                0.42565953334771467
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.26269029208281836,
+              "q10_median_q90": [
+                0.20502146031061594,
+                0.23489786226064516,
+                0.35017662229904384
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.8016398905542157,
+              "q10_median_q90": [
+                0.6105449197082065,
+                0.8681371486702301,
+                0.9603435266136889
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.006952578699552957,
+              "q10_median_q90": [
+                0.00442566052240766,
+                0.005459329002735177,
+                0.011760434424784343
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.16307839769848398,
+              "q10_median_q90": [
+                0.07542162483582804,
+                0.11239880867507254,
+                0.2797309710929108
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.33794885035361616,
+              "q10_median_q90": [
+                0.21901357654656645,
+                0.3388567762281537,
+                0.46706837357311515
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.16596133196822624,
+              "q10_median_q90": [
+                -0.0012674694717191195,
+                0.09943852975687922,
+                0.3742975050407191
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.2655394991899606,
+              "q10_median_q90": [
+                0.20567078408039158,
+                0.24139766776740534,
+                0.33822339728465944
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.764925123686355,
+              "q10_median_q90": [
+                0.5481488895037832,
+                0.8291498400115975,
+                0.9402489390680457
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.006440332947448588,
+              "q10_median_q90": [
+                0.004228163388104891,
+                0.005240381813113409,
+                0.01040943053922969
+              ],
+              "negative": 0,
+              "positive": 8
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 1.076242160213312,
+          "q10_median_q90": [
+            0.5526754387888774,
+            0.6762947487393008,
+            1.8628379631165344
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      },
+      "parameters": {
+        "matched_valid": 8,
+        "all": 8,
+        "whole_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.5502416732694074,
+          "q10_median_q90": [
+            -0.1392741790453379,
+            0.8445030206757675,
+            0.947945875905471
+          ],
+          "negative": 1,
+          "positive": 7
+        },
+        "shared_to_whole": {
+          "n": 8,
+          "arithmetic_mean": 0.33282779671505347,
+          "q10_median_q90": [
+            -0.27087629048144385,
+            0.35154284982694844,
+            0.9088021125057916
+          ],
+          "negative": 2,
+          "positive": 6
+        },
+        "shared_to_regional": {
+          "n": 8,
+          "arithmetic_mean": 0.502129796201353,
+          "q10_median_q90": [
+            0.10177781330680437,
+            0.5720386713216601,
+            0.8242333512320326
+          ],
+          "negative": 1,
+          "positive": 7
+        },
+        "whole_total_to_regional_total": {
+          "n": 8,
+          "arithmetic_mean": 0.9980963843422723,
+          "q10_median_q90": [
+            0.9953356922564036,
+            0.9998333084702332,
+            0.9999905475807033
+          ],
+          "negative": 0,
+          "positive": 8
+        },
+        "whole": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.09701244879675952,
+            "q10_median_q90": [
+              0.010142277213928963,
+              0.04665691914493636,
+              0.20552375212348387
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.7103620956529757,
+            "q10_median_q90": [
+              0.43738939529125853,
+              0.7425004116574935,
+              0.9427898042772351
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.7045142574813151,
+            "q10_median_q90": [
+              0.43588267657586277,
+              0.7383361943018445,
+              0.9354425669153846
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.017190463810740353,
+              "q10_median_q90": [
+                -0.4115656579953299,
+                -0.001989020317029813,
+                0.5148596084890107
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.22830657990796838,
+              "q10_median_q90": [
+                -0.3307772318617559,
+                -0.012183639682861501,
+                0.9791530268631741
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": -0.2766884775781609,
+              "q10_median_q90": [
+                -0.8706186932337866,
+                -0.2876663286302876,
+                0.2754996701271877
+              ],
+              "negative": 7,
+              "positive": 1
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": -0.24980501602025412,
+              "q10_median_q90": [
+                -0.67318364932766,
+                -0.2102287147174905,
+                0.09935477680514376
+              ],
+              "negative": 6,
+              "positive": 2
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.5772957979873072,
+              "q10_median_q90": [
+                0.26912623501358085,
+                0.6313570046205158,
+                0.8730406922258334
+              ],
+              "negative": 0,
+              "positive": 8
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": -0.14000453905016758,
+              "q10_median_q90": [
+                -0.40691248029991334,
+                -0.0718104039508202,
+                0.038814666714211174
+              ],
+              "negative": 5,
+              "positive": 3
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.2683637654827956,
+              "q10_median_q90": [
+                -0.46662539509313905,
+                0.42175010051336326,
+                0.758826910252899
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.44530190505006517,
+              "q10_median_q90": [
+                -0.17445693998396333,
+                0.6315870876530763,
+                0.9418326735120776
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.01382016571396777,
+              "q10_median_q90": [
+                -0.706369922682135,
+                -0.24223909291249546,
+                0.9407997335409714
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.04148446967006472,
+              "q10_median_q90": [
+                -0.35481391062109086,
+                -0.07724326696109517,
+                0.5938149466189124
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.4820541059699114,
+              "q10_median_q90": [
+                0.014141016729250167,
+                0.6132103443676302,
+                0.9500627727702159
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.17474300422654274,
+              "q10_median_q90": [
+                -0.13400623256764335,
+                0.19934202176637858,
+                0.42695341375068085
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.2623017607066104,
+              "q10_median_q90": [
+                -0.4705442641358418,
+                0.403355124449362,
+                0.7570717747997749
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.4486993755171041,
+              "q10_median_q90": [
+                -0.17436320754740772,
+                0.6419195078626456,
+                0.9428108781857589
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.01179865275605492,
+              "q10_median_q90": [
+                -0.7111174831347518,
+                -0.24255858257329305,
+                0.9411044947336895
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.038039907991055985,
+              "q10_median_q90": [
+                -0.36660229888744694,
+                -0.07915103289089986,
+                0.5896772891638726
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.48715245995784306,
+              "q10_median_q90": [
+                0.017971886062793707,
+                0.6213404830640468,
+                0.9520890634294029
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.17052677948811984,
+              "q10_median_q90": [
+                -0.13332170541006208,
+                0.18942707148686289,
+                0.42157456880148336
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          }
+        },
+        "regional": {
+          "norm_over_absolute": {
+            "n": 8,
+            "arithmetic_mean": 0.08927743896540061,
+            "q10_median_q90": [
+              0.023408654900769602,
+              0.07020288895077761,
+              0.16628326143211242
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction": {
+            "n": 8,
+            "arithmetic_mean": 0.6461876940733042,
+            "q10_median_q90": [
+              0.3936512832690015,
+              0.6861889190067256,
+              0.863933354017013
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "protected_fraction_all_three": {
+            "n": 8,
+            "arithmetic_mean": 0.6433439266648192,
+            "q10_median_q90": [
+              0.39363007504270736,
+              0.6777941373149343,
+              0.8604694263740387
+            ],
+            "negative": 0,
+            "positive": 8
+          },
+          "cosine_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": -0.1367482188211772,
+              "q10_median_q90": [
+                -0.6721378948595131,
+                -0.09450751856474583,
+                0.2737236139812402
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.5462802956078965,
+              "q10_median_q90": [
+                -0.05302194206733068,
+                0.8787702665242777,
+                0.9292542095565182
+              ],
+              "negative": 3,
+              "positive": 5
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.08641522734863899,
+              "q10_median_q90": [
+                -0.7750479145418693,
+                -0.11758915253986638,
+                0.8982306718511571
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.10147325637088875,
+              "q10_median_q90": [
+                -0.49653166298528734,
+                0.022555019218688035,
+                0.8989050753312103
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.25277988567010845,
+              "q10_median_q90": [
+                -0.7922385511306717,
+                0.49152132577666974,
+                0.833762782579196
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.024501421871383086,
+              "q10_median_q90": [
+                -0.21532755766785733,
+                0.0091557026490615,
+                0.2618011395750296
+              ],
+              "negative": 4,
+              "positive": 4
+            }
+          },
+          "shared_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.2683637654827956,
+              "q10_median_q90": [
+                -0.46662539509313905,
+                0.42175010051336326,
+                0.758826910252899
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.44530190505006517,
+              "q10_median_q90": [
+                -0.17445693998396333,
+                0.6315870876530763,
+                0.9418326735120776
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.01382016571396777,
+              "q10_median_q90": [
+                -0.706369922682135,
+                -0.24223909291249546,
+                0.9407997335409714
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.04148446967006472,
+              "q10_median_q90": [
+                -0.35481391062109086,
+                -0.07724326696109517,
+                0.5938149466189124
+              ],
+              "negative": 5,
+              "positive": 3
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.4820541059699114,
+              "q10_median_q90": [
+                0.014141016729250167,
+                0.6132103443676302,
+                0.9500627727702159
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.17474300422654274,
+              "q10_median_q90": [
+                -0.13400623256764335,
+                0.19934202176637858,
+                0.42695341375068085
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          },
+          "total_to": {
+            "absolute": {
+              "n": 8,
+              "arithmetic_mean": 0.2660620758647958,
+              "q10_median_q90": [
+                -0.47486847572270785,
+                0.40872294694926536,
+                0.7656518165609388
+              ],
+              "negative": 2,
+              "positive": 6
+            },
+            "paired": {
+              "n": 8,
+              "arithmetic_mean": 0.46709006054043833,
+              "q10_median_q90": [
+                -0.07804634554627961,
+                0.635792965261086,
+                0.9467649047637173
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "repeat": {
+              "n": 8,
+              "arithmetic_mean": 0.031672892177804474,
+              "q10_median_q90": [
+                -0.7108782762942139,
+                -0.16566913857954915,
+                0.945667540759294
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "weak_absence": {
+              "n": 8,
+              "arithmetic_mean": 0.06064232111044299,
+              "q10_median_q90": [
+                -0.3619649621717456,
+                -0.002505491081572192,
+                0.5954663721691587
+              ],
+              "negative": 4,
+              "positive": 4
+            },
+            "continuing": {
+              "n": 8,
+              "arithmetic_mean": 0.4667070024887847,
+              "q10_median_q90": [
+                -0.0872340309931195,
+                0.6198384787333693,
+                0.9524610427861814
+              ],
+              "negative": 1,
+              "positive": 7
+            },
+            "flat": {
+              "n": 8,
+              "arithmetic_mean": 0.17499010513918017,
+              "q10_median_q90": [
+                -0.13336602700670766,
+                0.19552482996768572,
+                0.419399120576358
+              ],
+              "negative": 2,
+              "positive": 6
+            }
+          }
+        },
+        "regional_to_whole_norm": {
+          "n": 8,
+          "arithmetic_mean": 2.5605231455480046,
+          "q10_median_q90": [
+            0.4973232190916114,
+            0.9728137276653215,
+            5.269731469915766
+          ],
+          "negative": 0,
+          "positive": 8
+        }
+      }
+    }
+  },
+  "wall_seconds": 353.5098535720026,
+  "parameter_tensors": 89,
+  "trainable_parameters": 32904704,
+  "figure": {
+    "path": "/home/dllu/proj/demosaic/docs/images/local-regional-wire-v1/gradient-audit/wire-loss-gradients.png",
+    "sha256": "bffb9fc6c55f7200385153795576e39524ea709ce5061965a36bfc8ab16f15f4"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-regional-wire-v1/gradient-audit-evidence.tar.xz",
+    "sha256": "9d4e9c4ce9fd970d0e309c36e6321f0ee87e5e2f309a0161f34a6ffa0112b09e"
+  },
+  "members": {
+    "external/local-regional-wire-v1/gradient-audit/result.json": "4248d0975102496cd09f17a61b84c9eb93df6c02fe2e298d0d7d456f9fb13ea9",
+    "external/local-regional-wire-v1/gradient-audit/summary.json": "cd1476875abae9c4fa405cb86ed1ac014e8e20330b9a9094af8fab5372004174",
+    "external/local-regional-wire-v1/gradient-audit/wire-0965.json": "b583077bc035eae63f286df707412d7822b1b684146a16d7c5e073666197a7fc",
+    "external/local-regional-wire-v1/gradient-audit/wire-0549.json": "844d6367b253ca591b0d476ebb20813eed628e57832bd2364b9f753a34672102",
+    "external/local-regional-wire-v1/gradient-audit/wire-0478.json": "752f64a82b9ffa4aba2bda75f71ffcf7cd57ae97605e4537210cb98a5338f5b4",
+    "external/local-regional-wire-v1/gradient-audit/wire-0188.json": "919fdb8a9e54eb3cbdc31c20ea4536ec8d9e188a6a362d08f1908bf0d539c947",
+    "external/local-regional-wire-v1/gradient-audit/wire-0288.json": "a3f612314c089961c64f5f347c1a4d94d2249ae711c0d0df0360b74a5f403e7c",
+    "external/local-regional-wire-v1/gradient-audit/wire-0064.json": "d098e7d4fe7b95e310558f89b8ad0bfa191d741057ebb2586cd4d8125d6c23e4",
+    "external/local-regional-wire-v1/gradient-audit/wire-0006.json": "f11d4571e54688169c10f1619733ec9e9c6cd94ea47a333fcf1d7c51460007ab",
+    "external/local-regional-wire-v1/gradient-audit/wire-0309.json": "203b288a76f8226664b6a8f57add021d1609e00f7b9852ba868b1c5c9bca982a",
+    "external/local-regional-wire-v1/gradient-audit/wire-0255.json": "c0aba429274253da9721292466dc29be745f6b48026351c646ba3d51034e821c",
+    "external/local-regional-wire-v1/gradient-audit/wire-0155.json": "6ea0555d53b7d4d098541b863f91b05c782174545fd85d9c9506fa0e9995ec9b",
+    "external/local-regional-wire-v1/gradient-audit/wire-0110.json": "5df15c53c663b79c50d676bcd07a147de319afe4aa8646bf4cf1fdd981a00966",
+    "external/local-regional-wire-v1/gradient-audit/wire-0757.json": "6807d93423f38d140b7bd758311d62b23d974abfe06f2c965bde2906e2ae60f4",
+    "external/local-regional-wire-v1/gradient-audit/wire-0527.json": "f01cd22715481abf66ca3bbb8f453714088120414df07065e488fd31ff0ef49c",
+    "external/local-regional-wire-v1/gradient-audit/wire-0772.json": "6a78cfd784badd8b6f9181d9a6f3038d011a16391e2687e527d328d94d783cdb",
+    "external/local-regional-wire-v1/gradient-audit/wire-0002.json": "c1be53d3e229321d6d846f38f37d4d4fa77de643f74a406b212504ca72fab1bb",
+    "external/local-regional-wire-v1/gradient-audit/wire-0282.json": "d5804e2da48074ee3f91903246b901f419309a3522d65f8de2ecc410345fb05d",
+    "external/local-regional-wire-v1/gradient-audit/wire-0940.json": "d00599c3afc87545139cdfd3bfda0931df0e123940101207bc2bd653346c6491",
+    "external/local-regional-wire-v1/gradient-audit/wire-0985.json": "230711d6751f7c8eae54dfc51963d1866a71035882d683b765567915623353cf",
+    "external/local-regional-wire-v1/gradient-audit/wire-0690.json": "7ed8e23f6a67d1b0ae90d7b2ac65f3799a5eb2779bcc2692c8eb611d35a6148e",
+    "external/local-regional-wire-v1/gradient-audit/wire-0033.json": "412873811cdea571cfdfd975ed47a38c877072d9477ea821cfe6230d70829ace",
+    "external/local-regional-wire-v1/gradient-audit/wire-0999.json": "2b3280334adff28c17f4e8a43291aeafc78e3b2e96e2c432bc0bb22c5b0b76d7",
+    "external/local-regional-wire-v1/gradient-audit/wire-0086.json": "14ab998ec1332ed2b55b9ae970f1bcb732f5d07bd02a89e88b68edc22cd6339b",
+    "external/local-regional-wire-v1/gradient-audit/wire-0754.json": "ba6c6269186eec7ffe2cfe49ec76dbff23052de4d6fb8d61d77b35970cd51c87",
+    "external/local-regional-wire-v1/gradient-audit/wire-0851.json": "0fc80a4b60f1c925bb7d90dc176deaf9dd9bed48b013af21c64105b682e3acea",
+    "external/local-regional-wire-v1/gradient-audit/wire-0753.json": "532ade0af82d9aeff34357dc66900d4df6991e3739686912454739d54c8cbb31",
+    "external/local-regional-wire-v1/gradient-audit/wire-0306.json": "ece3b9377bc33641a8687add011d2b137ad407decbc27a9774309fa9da344e8f",
+    "external/local-regional-wire-v1/gradient-audit/wire-0676.json": "878139d11973976746e5b4274b5b90798bd6bff8e60780703a858c60759fbe08",
+    "external/local-regional-wire-v1/gradient-audit/wire-0511.json": "1e4133aacb0ac824a0443b0c0579bb908218d80eb741a09fb88487461e0865cf",
+    "external/local-regional-wire-v1/gradient-audit/wire-0130.json": "b4cbb3c1048e14d839e764e21584371720082fd8ea14311093dd26fe31ab0c10",
+    "external/local-regional-wire-v1/gradient-audit/wire-0031.json": "51237719499eba104ae1102c7e32004e590071c4cbf8061c33ba447d2deb092f",
+    "external/local-regional-wire-v1/gradient-audit/wire-0521.json": "9a90d538957b8204a218a0def6d6c7e376193774226535a067ee07153fab5c2c",
+    "external/local-regional-wire-v1/gradient-audit/wire-0937.json": "9e04b37d0e2ce72cf44c647656e389f8be24f44114a203e15328847e05fc65c5",
+    ".cache/experiments/local-regional-wire-v1/gradient-audit/plan.json": "cd5147ca6e8a4910c603cef43ce64679705013533fcf591de69db5cfec736dd6",
+    ".cache/experiments/local-regional-wire-v1/gradient-audit/audit.py": "f5c36ee601447f90d410773f8bec733e4522017deac186ced50400cbfcce6ce9",
+    ".cache/experiments/local-regional-wire-v1/regional_objective.py": "0402ea4cb79b14941c16f3c5e52418e57dcc51f55eb949c808f7a07a89fa3490",
+    ".cache/experiments/local-regional-wire-v1/gradient-audit/summarize.py": "70552c5bf558d26872c16d93315537108eb6887409afcc18d8245b7bb50107d9",
+    ".cache/experiments/local-regional-wire-v1/gradient-audit/publish.py": "794acac458370ad7cff83e2828fa1f7f8ca86cac159b1e11e23cddc69d845068",
+    ".cache/experiments/local-regional-wire-v1/gradient-audit/plot.py": "d49ba4128d8d1b9463f0c15d962d03e5061d9d5a5caf440a99ab3e6008902a65",
+    "docs/results/local-regional-wire-v1/launch.json": "54461a45304e1091024821176fbdf9dc5956841e91bb3e1cc4f688aa0896b30b"
+  }
+}
