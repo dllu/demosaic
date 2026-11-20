@@ -147,6 +147,13 @@ points with 0.012 DN16 weak residue in true gaps. The single nomination
 recovers more contrast and has lower gap residue on those same sources.
 [Multiple wide Bayer nominations](detail-phase-shortlist.md).
 
+Using both local Bayer greens to bound an amplitude increase adds 0.078
+weak contrast points over the fixed cap on fresh fixtures. At equal
+recovery the measured allowance cuts intact paired error 0.381 DN16
+against a blanket cap increase. The second nominal right-cab diagonal
+gets no additional supported amplitude, and fine crossings remain
+incomplete. [Measured weak-wire amplitude](detail-phase-amplitude.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

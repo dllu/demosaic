@@ -8,6 +8,11 @@ with **+0.012 DN16** weak-gap residue. The earlier single-nomination
 method gains 1.153 points and lowers weak-gap residue by 0.013 DN16
 on the same fixtures.
 
+An [amplitude follow-up](detail-phase-amplitude.md) preserves the same
+search and gap check. It recovers slightly more weak detail on another
+fresh panel. The local evidence for a larger second-direction correction
+in the real nominal right cab remains insufficient.
+
 ## Method
 
 The [reserved-fold phase experiment](detail-crossfit-phase.md) found that

@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Measured weak-wire amplitude](detail-phase-amplitude.md#standing-gfx100s-comparisons) reproduces the Local 50k sky at both strengths. At the lock the measured allowance matches the existing coarse-fence correction, with connected crossings.
+
 - [Multiple wide Bayer nominations](detail-phase-shortlist.md#standing-gfx100s-comparisons) produces the nominal sky exactly at both strengths. The calibrated continuation check changes the coarse fence by 1.840 DN16 RGB RMS and keeps its crossings connected.
 
 - [Validated wide Bayer nominations](detail-crossfit-phase.md#standing-gfx100s-comparisons) produces the Local 50k sky exactly at both strengths and changes the coarse fence by 4.770 DN16 RGB RMS at the calibrated strength. Crossings stay connected.

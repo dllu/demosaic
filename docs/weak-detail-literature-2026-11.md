@@ -1382,6 +1382,13 @@ weak-gap residue on 32 fresh wires. The single nomination gains 1.153
 with lower gap residue. Added real coverage still gives incomplete
 crossings. [Multiple wide Bayer nominations](detail-phase-shortlist.md).
 
+A measured amplitude allowance recovers 0.078 additional weak contrast
+points on fresh fixtures and improves intact paired error by 0.381 DN16
+against a blanket cap increase at equal response. The local witness limits
+extra amplitude at all 20 eligible nominal right-cab stations for the
+second direction. The higher cap changes the existing diagonals subtly
+at full strength. [Measured weak-wire amplitude](detail-phase-amplitude.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,
