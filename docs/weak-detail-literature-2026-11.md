@@ -1190,6 +1190,10 @@ weak-absence controls. Removing all three control directions leaves
 median fractions of 64.4% and 77.3% of the whole-core and regional
 gradient norms, respectively. The optimizer update and held-out effect
 remain open. [Regional wire gradient audit](local-regional-wire-gradient-audit.md).
+The [finite AdamW follow-up](local-adam-protected.md) starts from the
+completed raw checkpoint and its saved moments. It isolates the weak
+term's contribution to the update and compares direction correction
+with a norm-matched control on separate photos.
 
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 

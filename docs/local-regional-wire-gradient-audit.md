@@ -84,6 +84,7 @@ a blanket projection could remove. It remains to measure whether
 protecting the actual AdamW update helps on independent images.
 A follow-up should keep the unprojected weak-loss dose matched and
 measure all three controls alongside signed response.
+[Finite AdamW comparison with a norm-matched control](local-adam-protected.md).
 
 This audit made zero optimizer updates. It covered 32,904,704
 parameters in 89 tensors and took 353.51 s on the shared GPU.
