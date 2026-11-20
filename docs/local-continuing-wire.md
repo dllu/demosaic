@@ -17,6 +17,10 @@ The [factored-luminance follow-up](local-factored-wire.md) freezes this
 study's aligned control and measures a separate post-gate detail lift,
 including apparent continuations in double gaps and both standing fences.
 
+[Regional weak-wire training](local-regional-wire.md) extends the
+matched comparison to 1,024 distinct sources and adds explicit
+weak-direction absence supervision to both arms.
+
 ## Matched training
 
 Both arms start from the repeat-loss EMA

@@ -1164,6 +1164,12 @@ response at matched natural flat error. Gate confidence distinguishes
 background activity much more strongly than continuation in this trial.
 [Separate phase and support](local-wire-gate-support.md).
 
+[Regional weak-wire training](local-regional-wire.md) starts both
+full-trunk arms from Local 50k with 1,024 distinct sources each.
+The local weak-response term compares nine subregions against the
+whole-core term. Both arms explicitly penalize the absent direction.
+Training is underway and the endpoint comparison is pending.
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate
