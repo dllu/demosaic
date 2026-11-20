@@ -52,6 +52,7 @@ Start with the [README](../README.md) for installation and inference.
 [Local wire checks for a junction sideband](local-junction-support.md) ·
 [Red and blue evidence for junctions](cfa-junction-phase.md) ·
 [Context-conditioned detail retention](context-conditioned-detail.md) ·
+[Regional junction refit](junction-regional-refit.md) ·
 [Learned Bayer gains](local-bayer-gain.md) ·
 [Spatially varying Bayer carrier phase](local-carrier-envelope.md) ·
 [Pooled Bayer phase](local-pooled-carrier.md) ·

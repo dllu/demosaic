@@ -1062,6 +1062,13 @@ red and blue votes add 0.118 contrast points at the fixed dose on 24 fresh
 photo fixtures. A continuing red wire raises peak green-gap addition at
 full dose. The fine cab differences are small.
 
+The [regional junction refit](junction-regional-refit.md) keeps the
+measured sideband phase and adds 0.724 contrast points by remeasuring
+amplitude after delivery on 24 new photo fixtures. Added gap luma is
+0.015 DN16. The screened lower-noise proposal attains nearly the same
+junction error at matched contrast, with an extra neural forward.
+Real fine mesh crossings remain incomplete.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

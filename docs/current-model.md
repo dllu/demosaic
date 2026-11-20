@@ -244,6 +244,13 @@ thread, down from 125 ms on a paired run. The [red and blue follow-up](cfa-junct
 adds 0.118 interaction points at its locked dose. The real change is
 small, and a continuing red strand raises peak green-gap error at full dose.
 
+The opt-in [regional junction refit](junction-regional-refit.md) adds
+0.724 interaction points on 24 new photos over the checked sideband.
+It lowers junction error by 0.216 DN16 and adds 0.015 DN16 of mean gap
+luma. The screened low-noise neural forward contributes little at equal
+contrast. The RAW refit adds about 20 ms CPU time on crops it changes,
+with subtle right-cab gains and incomplete crossings.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

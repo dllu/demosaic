@@ -207,7 +207,9 @@ def refine_raw_mesh_carriers(
     The experimental `"weak-junction-phase"` method also checks a signed
     difference frequency between the two fundamental wires. It requires a
     256×256 `parent_context` and limits the added term to stations with
-    evidence for both wire directions.
+    evidence for both wire directions. The experimental
+    `"weak-junction-refit"` method also measures remaining sideband
+    contrast after the first fit with a narrower local window.
     Donor clearance defaults to zero for `"local64"` and 16 pixels for
     the other methods.
 
@@ -256,11 +258,12 @@ def refine_raw_mesh_carriers(
         "weak-replicated-phase",
         "weak-internal-phase",
         "weak-junction-phase",
+        "weak-junction-refit",
     )
     if method not in methods:
         raise ValueError(f"method must be one of {methods}")
     pooled = method in ("pooled", "pooled-color")
-    junction = method == "weak-junction-phase"
+    junction = method in ("weak-junction-phase", "weak-junction-refit")
     internal_phase = junction or method == "weak-internal-phase"
     replicated_phase = internal_phase or method == "weak-replicated-phase"
     near_phase = replicated_phase or method == "weak-near-phase"
@@ -343,6 +346,7 @@ def refine_raw_mesh_carriers(
                         shot,
                         read,
                         neutral / neutral[1],
+                        regional_refit=method == "weak-junction-refit",
                     )
                 except np.linalg.LinAlgError:
                     return result

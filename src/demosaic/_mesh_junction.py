@@ -247,16 +247,16 @@ def _local_wire_support(obs, known):
     return np.minimum(_pixel_map(support), own)
 
 
-def _amplitudes(obs, columns, index, sign, maximum, parent_green):
+def _amplitudes(obs, columns, index, sign, maximum, parent_green, *, sigma=35, radius=80):
     result = []
     core = np.maximum(abs(obs.x), abs(obs.y)) <= 101
     measured = np.column_stack((obs.raw, parent_green))
     for y, x in _NODES:
         distance = (obs.x - x) ** 2 + (obs.y - y) ** 2
-        window = np.exp(-0.5 * distance / 35**2) / obs.variance
+        window = np.exp(-0.5 * distance / sigma**2) / obs.variance
         votes, variances = [], []
         for fold in (1, 2, 3):
-            selected = core & (obs.fold == fold) & (distance <= 80**2)
+            selected = core & (obs.fold == fold) & (distance <= radius**2)
             a = columns[selected]
             weights = window[selected]
             cov = np.linalg.pinv((a.T * weights) @ a, hermitian=True, rcond=1e-9)
@@ -277,7 +277,19 @@ def _amplitudes(obs, columns, index, sign, maximum, parent_green):
     )
 
 
-def _refine(parent, context, scene, colors, origin, frequencies, shot, read, neutral):
+def _refine(
+    parent,
+    context,
+    scene,
+    colors,
+    origin,
+    frequencies,
+    shot,
+    read,
+    neutral,
+    *,
+    regional_refit=False,
+):
     bands = _distinct_bands(frequencies)
     if _DIFFERENCE not in bands:
         return parent
@@ -300,15 +312,32 @@ def _refine(parent, context, scene, colors, origin, frequencies, shot, read, neu
         return parent
     rgb = context[1].copy()
     rgb[_CORE] = parent[1]
-    inherited = rgb[(observations.y + _CENTER).astype(int), (observations.x + _CENTER).astype(int)]
+    at_green = ((observations.y + _CENTER).astype(int), (observations.x + _CENTER).astype(int))
     columns = np.column_stack((base, harmonics.reshape(len(base), -1)))
-    amplitudes = _amplitudes(
-        observations, columns, base.shape[1] + 2 * index, sign, maximum, inherited
-    )
+    index = base.shape[1] + 2 * index
+    amplitudes = _amplitudes(observations, columns, index, sign, maximum, rgb[at_green])
     angle = _wave_angles(_GRID_X, _GRID_Y, frequencies) + phase
-    carrier = angle[..., 0] - angle[..., 1]
-    residual = amplitudes * (sign * np.cos(carrier)) * (_FIELD_EDGE[:, None] * _FIELD_EDGE)
+    carrier = sign * np.cos(angle[..., 0] - angle[..., 1])
+    edge = _FIELD_EDGE[:, None] * _FIELD_EDGE
+    residual = amplitudes * carrier * edge
     # Match the inherited crop's first rounding before applying the held support.
     field = (residual[None] * neutral[:, None, None]).astype(np.float32)
     result = (parent + support * (_GAINS * field[_CORE].astype(np.float64))).astype(parent.dtype)
-    return result if np.isfinite(result).all() else parent
+    if not np.isfinite(result).all():
+        return parent
+    if not regional_refit:
+        return result
+
+    # Re-measure excess above the delivered result, using a narrower local fit.
+    rgb[_CORE] = result[1]
+    try:
+        excess = _amplitudes(
+            observations, columns, index, sign, maximum, rgb[at_green], sigma=30, radius=72
+        )
+    except np.linalg.LinAlgError:
+        return result
+    if not excess.any():
+        return result
+    update = _GAINS * support * (excess * (carrier * edge))[_CORE]
+    refined = (result + neutral[:, None, None] * update).astype(result.dtype)
+    return refined if np.isfinite(refined).all() else result

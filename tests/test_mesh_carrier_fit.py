@@ -370,12 +370,16 @@ def test_junction_phase_recovers_signed_interaction_and_leaves_additive_mesh(pat
         refine(additive, "weak-junction-phase", 16)
     no_interaction = refine(additive, "weak-internal-phase", 16)
     np.testing.assert_array_equal(refine(additive, "weak-junction-phase", 48), no_interaction)
+    np.testing.assert_array_equal(refine(additive, "weak-junction-refit", 48), no_interaction)
 
     old = refine(additive + interaction, "weak-internal-phase", 16)
     new = refine(additive + interaction, "weak-junction-phase", 48)
     truth = interaction[y + 16 : y + 144, x + 16 : x + 144]
     change = new[1, 16:144, 16:144] - old[1, 16:144, 16:144]
     assert (change * truth).sum() > 0.35 * (truth**2).sum()
+    refit = refine(additive + interaction, "weak-junction-refit", 48)
+    additional = refit[1, 16:144, 16:144] - new[1, 16:144, 16:144]
+    assert (additional * truth).sum() > 0.1 * (truth**2).sum()
 
 
 def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():

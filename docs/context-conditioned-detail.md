@@ -9,6 +9,10 @@ paired fine-increment RMS. Supplying whole-photo Bayer context adds
 only **0.016 points** over the local Bayer gate. The fine cab crossings
 remain incomplete. Both routes remain experimental.
 
+The [junction follow-up](junction-regional-refit.md) projects the sharper
+branch onto an independently measured crossing band. A RAW-only
+refit attains similar junction error at matched contrast.
+
 ## Same RAW, different conditioning
 
 All branches use Local 50k EMA SHA256

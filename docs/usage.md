@@ -153,6 +153,11 @@ term and limits it to stations with both wire directions. This mode
 requires a 48-pixel halo. Set `halo = 48` in the example to supply a
 256×256 `parent_context`. [Results and timing](local-junction-support.md#packaged-crop-fit).
 
+`method="weak-junction-refit"` takes the same inputs. It fits remaining
+contrast in the already checked difference band with a narrower window.
+The second fit runs after the original junction correction.
+[Results and timing](junction-regional-refit.md#packaged-crop-fit).
+
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·

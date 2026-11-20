@@ -6,6 +6,11 @@ The [red and blue follow-up](cfa-junction-phase.md) measures a small contrast
 gain with shared green admission. Its batched green-only station projection
 speeds up the packaged fit with identical pixels on the parity panel.
 
+The [regional refit](junction-regional-refit.md) adds a narrower RAW
+amplitude fit after delivery. It recovers 0.724 points of interaction
+contrast on 24 new photos, with little benefit from a second neural
+forward at lower noise conditioning.
+
 ## A fixed sideband and a separate check on the wires
 
 The [checked Bayer harmonic study](query-checked-junctions.md) found evidence for a difference-frequency term on the real right cab. The newer [native RAW witness](local-internal-phase.md#what-the-two-camera-exposures-support) finds that this term predicts both held folds, while the quarter-cycle control loses support. This study reuses the checked harmonic estimator with the current crop's exterior frequency pair and the masked internal phase restoration. It delivers the difference term only. The second harmonics and sum term remain available as nuisance regressors.
