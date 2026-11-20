@@ -1188,12 +1188,15 @@ exact-flat and strong-gap controls at the restored pixels. Through the
 shared parameter weights, both terms frequently oppose the flat and
 weak-absence controls. Removing all three control directions leaves
 median fractions of 64.4% and 77.3% of the whole-core and regional
-gradient norms, respectively. The optimizer update and held-out effect
-remain open. [Regional wire gradient audit](local-regional-wire-gradient-audit.md).
+gradient norms, respectively. These are first-order predictions
+at the starting checkpoint. [Regional wire gradient audit](local-regional-wire-gradient-audit.md).
 The [finite AdamW follow-up](local-adam-protected.md) starts from the
-completed raw checkpoint and its saved moments. It isolates the weak
-term's contribution to the update and compares direction correction
-with a norm-matched control on separate photos.
+completed raw checkpoint and its saved moments. Relative to a
+norm-matched control, direction correction lowers flat RMS by
+0.00299 DN16 on 32 separate photos. Both gap intervals span zero.
+The weakest half loses 0.00500 weak-response points. This separates
+a transferable flat effect from the gap gains on the photos used
+to compute the update.
 
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 

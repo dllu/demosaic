@@ -80,11 +80,11 @@ whole-core norm and **77.3%** of the regional norm. The regional
 10th–90th percentile spans **37.4–90.0%**. This identifies
 directions that preserve all three control losses to first order
 on the same batch. It also shows how much directional strength
-a blanket projection could remove. It remains to measure whether
-protecting the actual AdamW update helps on independent images.
-A follow-up should keep the unprojected weak-loss dose matched and
-measure all three controls alongside signed response.
-[Finite AdamW comparison with a norm-matched control](local-adam-protected.md).
+a blanket projection could remove. The
+[completed AdamW follow-up](local-adam-protected.md) measures
+a small transferred flat-error reduction at matched norm. It
+also finds lower response on the weakest held-out wires and
+no clear gap improvement on the separate photos.
 
 This audit made zero optimizer updates. It covered 32,904,704
 parameters in 89 tensors and took 353.51 s on the shared GPU.
