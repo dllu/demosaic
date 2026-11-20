@@ -1,8 +1,12 @@
 # GFX100S qualitative comparisons
 
-**Review map updated November 19, 2026.** This page retains checkpoint-specific
+**Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Mixed-optics endpoint](local-optical-mixture-1024.md#standing-gfx100s-comparisons)
+  keeps the sky smooth and coarse crossings connected. The mixed arm
+  changes sky by 1.73 DN16 camera-RGB RMS and the coarse fence by 7.41
+  versus sharp regional. Thin building cables and leaf details remain soft.
 - [Completed regional weak-wire training](local-regional-wire-1024.md#standing-gfx100s-comparisons)
   keeps the overcast sky smooth and coarse crossings connected. The
   regional arm changes the sky by 3.90 DN16 RGB RMS and the fence by

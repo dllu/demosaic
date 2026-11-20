@@ -1,6 +1,6 @@
 # Fine green fence beside the red train
 
-**Review map updated November 19, 2026.** The optional adjacent-donor
+**Review map updated November 20, 2026.** The optional adjacent-donor
 fit shows both directions in the right cab ROI, with uneven contrast and
 an overly regular lattice in places. The version-specific gallery below
 preserves its original comparison pixels and provenance.
@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Mixed-optics endpoint](local-optical-mixture-1024.md#standing-gfx100s-comparisons) | Both ROIs, profiles, AHD and both JPEGs viewed at ×4 and ×16. Mixed changes the four crops by 3.09–4.52 DN16 RGB RMS versus sharp regional. The transferred profile shows stronger fragmented diagonals, with broad green-gray patches and incomplete fine crossings |
 | [Completed regional weak-wire training](local-regional-wire-1024.md#standing-gfx100s-comparisons) | Both ROIs, profiles, AHD and JPEGs viewed at ×4 and ×16. In the transferred right crop, the regional arm strengthens the first measured direction and retains less of the second than Local 50k. Both arms still show incomplete crossings and broad mottle |
 | [Regional weak-wire training at 512 updates](local-regional-wire-512.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The transferred right shows a stronger first diagonal and a soft second family. Broad patches and missing fine crossings remain |
 | [Regional weak-wire training at 128 updates](local-regional-wire-128.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The regional arm changes the crops by 0.74–1.50 DN16 RGB RMS versus Local 50k. The transferred right has the clearest diagonals and fine crossings stay incomplete |

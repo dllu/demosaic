@@ -59,8 +59,11 @@ exactly. The mixed copies preserve camera and geometry metadata and
 pixel-identical flat-core ground truth. The first full-run update
 matches the sharp control's losses and gradient norm exactly. The
 launch receipt verifies the first 60 full-run updates against the
-frozen optical schedule. Training is running. Endpoint numerical and
-native-image reviews are pending.
+frozen optical schedule. The [1,024-update endpoint](local-optical-mixture-1024.md)
+now has a verified training receipt, both fixed exact panels, the 24
+fresh optical sources and native reviews of both GFX scenes. The earlier
+optical replay and matched-response diagnostic are running, with
+the canonical panels queued.
 
 At σ 0.85, the mixed EMA changes from a 0.247-point weak-response gain
 over the sharp regional control at [128 updates](local-optical-mixture-128.md)

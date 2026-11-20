@@ -1237,6 +1237,18 @@ arm loses 0.361 weak-response points at σ 0.85, with higher quiet RMS
 and less false weak projection. The data preflight increases the
 blurred wire coverage in that period range from 21 to 63 groups.
 
+The [Bayer evidence replay](optical-raw-evidence.md) separates sampling
+from restoration. At σ 0.85, detection with phase fitted on separate
+exterior pixels rises from 49.2% to 90.2% when the local window grows
+from 32 to 64 pixels. The larger window also improves detection in the
+lowest-SNR half. This replay supplies frequency, masks and nuisance
+geometry, and uses a strong synthetic exterior carrier. The [trained
+endpoint](local-optical-mixture-1024.md) has completed the 24 fresh
+optical sources. At σ 0.85 its primary weak-response difference versus
+sharp regional is −0.030 points [−0.219, +0.167], with 0.677 DN16
+higher flat RMS. Fine cab crossings remain incomplete in both native
+GFX reviews.
+
 ### 7. Revisit the backbone and DINO role after these discriminating tests
 
 Use one modern supervised comparison—e.g. a NAFNet/Restormer-style native RAW

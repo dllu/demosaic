@@ -1,6 +1,6 @@
 # Current model choices
 
-Reviewed November 19, 2026. **V120 Small is the general inference recommendation.**
+Reviewed November 20, 2026. **V120 Small is the general inference recommendation.**
 The [Corpus 100k EMA](full-corpus-long100k.md#broader-evaluation) scores
 37.24747 dB on the fixed photo benchmark, +0.20739 dB over V120.
 It loses 0.03046 dB on unseen measured CFA and has a visible
@@ -135,6 +135,16 @@ Wire exact-flat RMS is 2.065 DN16 higher than Local 50k. The transferred
 right cab shows a stronger first diagonal and incomplete crossings.
 Regional gains 0.01553 dB unseen and loses 0.00689 dB known versus
 Local 50k. Both arms use the Local 50k inference path.
+
+The [mixed-optics endpoint](local-optical-mixture-1024.md) lowers
+fixed natural fine-flat RMS by 0.085 DN16 and raises fine-increment
+RMS by 0.251 DN16 versus sharp regional. Fixed wire response and gap
+errors are close to sharp regional. The continuing strand is more
+accurate than with Local 50k, with weaker crossing response and more
+flat error. Across 24 fresh sources at σ 0.85, the sharp-normalized
+weak-response difference versus sharp regional spans zero, with
+0.677 DN16 higher exact-flat RMS. Both cab ROIs still have incomplete
+fine crossings. The canonical panels are queued.
 
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the
