@@ -7,6 +7,11 @@ cost, and gains just 0.032 points with nominations from the wrong photo.
 The real coarse fence and sky remain visually close to Local 50k. Fine
 cab crossings remain incomplete.
 
+A [reserved-fold follow-up](detail-crossfit-phase.md) reduces the wider
+search's exact-flat error at equal response and recovers over one contrast
+point on new fixtures. The weak residue in true gaps still exceeds
+the calibration limit.
+
 ## Scope and method
 
 The [64-pixel phase study](detail-phase-routing.md) found that a correct

@@ -1367,6 +1367,14 @@ and better protects the continuing strand. Both admit more exact-flat
 stations, and the fine cab crossings remain incomplete.
 [Wider Bayer frequency nomination](detail-wide-phase.md).
 
+A reserved exterior Bayer fold validates the signed phase of the nominated
+weaker frequency. It adds 1.752 weak-contrast points on 32 fresh wires
+and lowers intact paired error by 0.409 DN16. The flat-region benefit
+survives at equal response, while weak-gap residue rises above the
+calibration limit. Supplying earlier measured cab frequencies increases
+local admissions, implicating frequency nomination in the remaining real
+failure. [Validated wide Bayer nominations](detail-crossfit-phase.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,

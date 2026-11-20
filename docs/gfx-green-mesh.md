@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Validated wide Bayer nominations](detail-crossfit-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. Calibrated changes to transferred left/right are 0.496/1.497 DN16 RGB RMS. Earlier measured right frequencies pass at 22/20 of 25 stations when supplied, versus 8/4 in the ordinary search. Fine crossings remain incomplete |
 | [Wider Bayer frequency nomination](detail-wide-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The harmonic-aware lock changes the transferred left/right by 0.213/0.435 DN16 RGB RMS. Changes to existing diagonals are subtle and visible crossings remain incomplete |
 | [Reserved Bayer phase for weak-wire routing](detail-phase-routing.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The full local check changes transferred left/right by 0.769/2.184 DN16 RGB RMS. Visible fine crossings remain incomplete |
 | [Shared-target and continuing-wire gains](detail-shared-oracle.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. Shared lock changes the transferred left/right crops by 0.739/0.888 DN16 RGB RMS. Full strength changes their existing diagonals and mottling, with crossings still incomplete |

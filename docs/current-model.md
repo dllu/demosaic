@@ -133,6 +133,13 @@ flat penalty and loses most of that gain with wrong-photo nominations.
 Both locks add some weak-gap residue, and the real cab crossings remain
 incomplete. [Wider Bayer frequency nomination](detail-wide-phase.md).
 
+Validating wide frequencies on reserved Bayer blocks gains 1.752 points
+of weak contrast with 0.409 DN16 lower intact paired error on fresh
+optical fixtures. At equal response it reduces exact-flat error by
+0.029 DN16 from unchecked folds. The standing sky matches Local 50k
+and the fine cab crossings remain incomplete. Added weak-gap residue
+exceeds the calibration limit. [Validated wide Bayer nominations](detail-crossfit-phase.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

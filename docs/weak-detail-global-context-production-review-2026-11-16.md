@@ -70,6 +70,12 @@ a separate Bayer center check. Wrong-photo nominations give 0.032
 points. Wider search also admits more exact-flat stations, and the standing
 real cab still has incomplete crossings. [Wider Bayer frequency nomination](detail-wide-phase.md).
 
+A separate exterior Bayer fold checks the signed phase after nomination.
+It recovers 1.752 weak contrast points on 32 new fixtures, with lower
+intact paired error and a larger weak-gap cost than calibration allowed.
+The standing sky matches Local 50k and fine cab crossings remain
+incomplete. [Validated wide Bayer nominations](detail-crossfit-phase.md).
+
 **Start production optimization of V120 now. For the next quality architecture,
 test whole-image context once per photograph, coupled to a smaller native-detail
 path that still requires RAW evidence.** The strongest recent result is improved
