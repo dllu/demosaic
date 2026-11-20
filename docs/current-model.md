@@ -174,6 +174,11 @@ crop API reproduces the replay and accepts a 16-pixel halo of restored RGB.
 [Usage](usage.md#repeating-mesh-crops) ·
 [Parity and CPU timing](local-pooled-carrier.md#packaged-crop-fit).
 
+[Sharing phase across Bayer colors](cfa-phase-sharing.md) adds 0.100
+weak-response points on the warped crop panel with unchanged flat RMS.
+A locally reversed red/blue phase degrades the proposed green phase
+despite crop-wide agreement. Fine cab crossings remain incomplete.
+
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
 weak response it lowers continuing-strand RMS by 2.361 DN16 versus

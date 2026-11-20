@@ -268,3 +268,6 @@ as the original 64-pixel fit on those crops. Both left cab profiles
 use the planar fallback because the direction ranking is ambiguous.
 [Replay and timing manifest](results/local-pooled-carrier-api-v1/publication.json) ·
 [Receipts and benchmark source](results/local-pooled-carrier-api-v1/evidence.tar.xz).
+
+A [cross-color phase follow-up](cfa-phase-sharing.md) measures a small warped-wire
+gain and identifies a failure when phase disagrees locally across colors.
