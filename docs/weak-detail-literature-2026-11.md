@@ -1350,6 +1350,15 @@ where corrections occur with nearly equal aggregate weak response. Stronger
 evidence of location-specific support is still needed.
 [Shared-target and continuing-wire gains](detail-shared-oracle.md).
 
+A reserved Bayer center check of a fixed exterior carrier reduces
+continuing-strand error by 0.452 DN16 on 16 fresh gaps. The aligned
+witness outperforms a shifted witness on the fresh weak response, with
+little recovery in either arm. The search nominates the planted weak
+frequency in just 7 of 324 intact stations. Knowing the planted
+frequencies raises the full-strength held response from 0.141 to 0.636
+points and leaves the same check limited by local signal.
+[Reserved Bayer phase for weak-wire routing](detail-phase-routing.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,

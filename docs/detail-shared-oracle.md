@@ -8,6 +8,11 @@ strand through a gap. Both heads slightly reduce natural faint contrast.
 The native overcast sky stays smooth and the coarse fence stays connected.
 The fine green cab crossings remain incomplete.
 
+A [reserved Bayer phase follow-up](detail-phase-routing.md) holds phase
+fixed and checks local measurements before delivery. It preserves more of
+the continuing strand on a fresh set. The exterior search seldom nominates
+the weaker direction, and overall weak contrast improves less than here.
+
 ## Shared gains and exact targets
 
 Local 50k EMA supplies the nominal answer and three unchanged correction

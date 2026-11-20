@@ -119,6 +119,13 @@ preserves the stronger strand. Both lose some natural faint contrast and
 the native fine cab crossings remain incomplete.
 [Shared-target and continuing-wire gains](detail-shared-oracle.md).
 
+A separate Bayer phase check cuts continuing-strand error by 0.452 DN16
+on 16 fresh gaps and leaves the real sky at Local 50k. Weak-wire contrast
+gains 0.042 points with an interval spanning zero. The exterior search
+finds the weak frequency in only 7 of 324 intact stations, and the native
+cab crossings remain incomplete.
+[Reserved Bayer phase for weak-wire routing](detail-phase-routing.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of
