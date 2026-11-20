@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Broad fit with a central support check](local-center-guard.md#standing-gfx100s-comparisons)
+  keeps the coarse crossings and the Local 50k sky, building and foliage pixels.
 - [Exterior phase transfer and ring-guided correction](local-exterior-phase-transfer.md#standing-gfx100s-comparisons)
   reproduces Local 50k on sky, building and foliage. The ring changes
   the coarse fence by 15.31 DN16 camera-RGB RMS, with connected crossings.

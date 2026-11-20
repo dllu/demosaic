@@ -154,6 +154,13 @@ local fit recovers more weak signal, with clearer but more regular
 right-cab crossings. The ring correction leaves the sky, building and
 foliage pixels equal to Local 50k.
 
+[Central validation of broad Bayer fits](local-center-guard.md)
+loses most of the weak-response gain at the original cutoff.
+A cutoff of three gives 1.927 points over the parent and no
+activations on 56 reused exact-flat crops. At comparable response
+it reduces continuing-strand RMS by 2.650 DN16 versus scaled broad
+validation. The fine real cab crossings remain incomplete.
+
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the
 64-photo panel above Corpus 100k. Fine-increment RMS drops 1.09 DN16

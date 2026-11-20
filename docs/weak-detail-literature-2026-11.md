@@ -939,6 +939,18 @@ similar weak response it lowers continuing-strand error by 2.361 DN16
 versus a local fit at the same width. Nominal local64 recovers more
 weak signal, and the ring leaves fine GFX crossings incomplete.
 
+A [wide-fit support replay](local-center-guard.md) holds the 64-pixel
+training lattice and 32-pixel delivery fixed. Testing the wider
+coefficient only on the central held green loses 4.152 weak-response
+points versus a broad held-green check. At matched low response it
+lowers continuing-strand error by 4.596 DN16, with similar false
+projection. The standing center check makes smaller corrections to
+the fine cab mesh, whose crossings remain incomplete.
+An exploratory lower cutoff retains 1.927 points over Local 50k
+with no activation in 56 reused exact-flat crops. Lowering it
+further gains more response and admits 37 flats. This frames the
+tradeoff at the level of the complete selection procedure.
+
 Calibrate the complete selection-and-validation procedure on fresh exact flats
 and edge-only scenes, including the search over all candidates. Measure false
 activation per patch/frame, not just per chosen coefficient. Formal risk control
