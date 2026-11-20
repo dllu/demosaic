@@ -9,6 +9,10 @@ false gap projection change little. At the earlier wire-flat
 calibration, the same checks deliver more wire detail and raise
 natural flat error. Fine cab crossings remain incomplete.
 
+[Follow-up on pooling center and neighboring phase](scene-pooled-phase.md)
+tests admitting more marginal center coefficients at the same
+natural-photo error limits.
+
 [Machine results](results/scene-phase-neighbors-v1/publication.json) ·
 [Frozen drivers and receipts](results/scene-phase-neighbors-v1/evidence.tar.xz) ·
 [Native crop provenance](images/scene-phase-neighbors-v1/manifest.json).

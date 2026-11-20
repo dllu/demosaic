@@ -83,6 +83,12 @@ has repeatedly come with extra flat-region error or false color. The
    calibration. A quarter-cycle phase control fails to repeat this
    gain. Natural flat error rises slightly and the fine real
    crossings remain incomplete.
+   [Pooled center and neighboring phase](scene-pooled-phase.md)
+   tests opening the local gate when both greens have weak positive
+   evidence. Pooling slightly improves intact response on one
+   replay and raises continuing-wire error across all three.
+   A supplement limited to weak center measurements adds little
+   separation from the wrong-phase control.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

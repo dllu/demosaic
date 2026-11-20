@@ -52,6 +52,10 @@ historical boards. Use these reports for the current completed comparisons:
   changes sky by 0.010 DN16 RGB RMS and coarse fence by 2.312 with
   the across-wire check. The sky stays smooth, coarse crossings
   stay connected, and fine cables and leaf subdivisions remain soft.
+- [Pooled center and neighboring phase](scene-pooled-phase.md#standing-gfx100s-comparisons)
+  changes sky by 0.009 DN16 RGB RMS and coarse fence by 2.194 with
+  the threshold supplement. The sky stays smooth, coarse links
+  stay connected and fine foliage stays soft.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.

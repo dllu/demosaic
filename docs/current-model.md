@@ -506,6 +506,11 @@ calibration the across-wire check lowers continuing-wire error in
 three off-grid replays with little change in weak response.
 Natural error still favors the frozen parent, and the cab
 crossings remain incomplete.
+[Pooled center and neighboring phase](scene-pooled-phase.md)
+adds little intact response at the matched natural limits and
+worsens continuing-wire error across three replays. The
+below-threshold supplement stays close to the across-wire gate
+and brings no visible gain on the real cab crossings.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

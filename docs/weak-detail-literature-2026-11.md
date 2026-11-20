@@ -1080,6 +1080,13 @@ separate photos. False weak projection changes little. The gains
 are larger at the wire-flat calibration, where natural flat error
 also rises. No clear real cab crossing gain is visible.
 
+[Pooled center and neighboring phase](scene-pooled-phase.md) lets
+disjoint neighboring samples strengthen a marginal positive center
+measurement. Fully pooling the scores raises continuing-wire error
+in three replays at the matched natural limits. A supplement confined
+to weak center scores has smaller regressions and little separation
+from its phase-rotated control.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between
