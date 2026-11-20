@@ -62,7 +62,19 @@ def _weak_correction(parent, wave, direction, positions, windows, shot, read, pr
     return np.where(selected[:, None, None], revised, previous)
 
 
-def _refine(parent, context, scene, colors, origin, frequencies, shot, read, neutral):
+def _refine(
+    parent,
+    context,
+    scene,
+    colors,
+    origin,
+    frequencies,
+    shot,
+    read,
+    neutral,
+    *,
+    guard_clearance=None,
+):
     positions = _positions(colors, *origin)
     greens = tuple(_footprint(scene, origin, position) for position in positions)
     if any(not np.isfinite(lattice).all() for lattice in greens):
@@ -82,13 +94,22 @@ def _refine(parent, context, scene, colors, origin, frequencies, shot, read, neu
         _dominant(*_measure_nodes(plane, guides, site, shot, read))
         for plane, site in zip(greens, positions, strict=True)
     )
+    taper = None
     if first is not None and first == second:
         weak = 1 - first
-        corrections[weak] = _weak_correction(
+        revised = _weak_correction(
             parent, wave, weak, positions, observed, shot, read, corrections[weak]
         )
+        if guard_clearance is not None and not np.array_equal(revised, corrections[weak]):
+            from ._mesh_weak_phase import _taper
+
+            baseline = parent + _rgb(sum(corrections), neutral, parent.dtype)
+            taper = _taper(scene, origin, positions, frequencies, weak, shot, read, guard_clearance)
+        corrections[weak] = revised
     combined = corrections[0] + corrections[1]
-    if not combined.any():
+    if taper is None and not combined.any():
         return parent
     result = parent + _rgb(combined, neutral, parent.dtype)
+    if taper is not None:
+        result = (baseline + taper * (result.astype(np.float64) - baseline)).astype(parent.dtype)
     return result if np.isfinite(result).all() else parent

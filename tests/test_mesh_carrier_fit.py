@@ -91,7 +91,9 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
 
 
 @pytest.mark.parametrize("pattern", tuple(PATTERNS))
-@pytest.mark.parametrize("method", ("pooled", "pooled-color", "ring-posterior", "weak-posterior"))
+@pytest.mark.parametrize(
+    "method", ("pooled", "pooled-color", "ring-posterior", "weak-posterior", "weak-phase-guard")
+)
 def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
     y, x = np.indices((480, 480), dtype=np.float32)
     x, y = x - 230, y - 228
@@ -122,7 +124,7 @@ def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
     assert result.dtype == parent.dtype
 
 
-@pytest.mark.parametrize("method", ("pooled", "pooled-color", "weak-posterior"))
+@pytest.mark.parametrize("method", ("pooled", "pooled-color", "weak-posterior", "weak-phase-guard"))
 def test_pooled_fit_requires_context_and_independent_donors(method):
     raw = scene_fixture()
     raw[133:325, 135:327] = 0.08
@@ -152,6 +154,29 @@ def test_pooled_fit_requires_context_and_independent_donors(method):
         refine(center, parent_context=context, donor_clearance=15)
     assert refine(center, parent_context=context) is parent
     assert refine((16, 16, 160, 160), parent_context=context) is parent
+
+
+def test_weak_phase_guard_transports_absolute_cfa_phase_at_odd_clearance():
+    from demosaic._mesh_weak_phase import _taper
+
+    origin = (151, 149)
+    y, x = np.indices((480, 480), dtype=np.float64)
+    frequencies = np.array(((0.1171875, 0.07421875), (0.08984375, -0.072265625)))
+    strong = 0.014 * np.cos(2 * np.pi * (frequencies[0, 0] * x + frequencies[0, 1] * y))
+    phase = 2 * np.pi * (frequencies[1, 0] * x + frequencies[1, 1] * y)
+    gap = (abs(x - 232) < 20) & (y >= origin[1]) & (y < origin[1] + 160)
+    weak_amplitude = np.where(gap, 0.0, 0.005)
+    raw = 0.08 + strong
+    for angle, (r, c) in zip((0, 0.7, 2, 3), np.ndindex(2, 2), strict=True):
+        raw[r::2, c::2] += (weak_amplitude * np.cos(phase + angle))[r::2, c::2]
+    scene = pack(raw)
+    greens = ((0, 1), (1, 0))
+    even = _taper(scene, origin, greens, frequencies, 1, 0.00128, 6.5536e-6, 16)
+    odd = _taper(scene, origin, greens, frequencies, 1, 0.00128, 6.5536e-6, 17)
+
+    assert even[:, :32].mean() > 0.9
+    assert even[:, 68:92].mean() < 0.1
+    np.testing.assert_allclose(odd, even, rtol=1e-8, atol=1e-8)
 
 
 def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():

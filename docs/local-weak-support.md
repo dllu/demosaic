@@ -1,5 +1,7 @@
 # Locating the weak Bayer correction
 
+The [exterior-phase follow-up](local-phase-extent.md) checks a waveform fixed entirely outside the query. A 16-pixel local check reduces several large gap errors at equal recovery, while wider pooling gives little benefit on 32 new photos.
+
 On 24 new ISO6400 photo-based fixtures, the [weak-only posterior](local-conditional-posterior.md) recovers **2.135 percentage points** more weak contrast than the combined check and lowers intact weak error by **1.576 DN16**. It adds **0.307 DN16** luma RMS in true gaps. Tests using reciprocal green or independent red and blue measurements leave as much or more added gap texture as uniformly scaling the weak correction at equal recovery. Supplying the true spatial support in a diagnostic lowers added gap RMS to **0.008 DN16** at nearly the full recovery.
 
 ## Measuring local support

@@ -64,17 +64,20 @@ def _peaks(power):
     return np.asarray([(_FX[c], _FY[c]) for c in coords])
 
 
-def _spacing(scene, colors, x, y, *, clearance=0):
-    from scipy.fft import fft2
-
-    # A verifier may sample beyond the delivery ROI. Keep its entire footprint
-    # clear of the frequency donors when running a held-sample experiment.
-    boxes = (
+def _donor_boxes(x, y, clearance):
+    return (
         (x - _DONOR - clearance, y + 16),
         (x + _ROI_SIZE + clearance, y + 16),
         (x + 16, y - _DONOR - clearance),
         (x + 16, y + _ROI_SIZE + clearance),
     )
+
+
+def _spacing(scene, colors, x, y, *, clearance=0):
+    from scipy.fft import fft2
+
+    # Keep the frequency donors clear of the verifier's footprint.
+    boxes = _donor_boxes(x, y, clearance)
     if any(
         a < 0 or b < 0 or a + _DONOR > 2 * scene.shape[2] or b + _DONOR > 2 * scene.shape[1]
         for a, b in boxes
@@ -184,6 +187,8 @@ def refine_raw_mesh_carriers(
     192×192 parent context and uses the ring prior only in the weaker
     direction when both green lattices agree on the ranking. It preserves
     the stronger correction from the combined broad and central check.
+    The experimental `"weak-phase-guard"` method also uses an exterior RAW
+    phase to taper the new weak correction with 16-pixel local measurements.
     Donor clearance defaults to zero for `"local64"` and 16 pixels for
     the other methods.
 
@@ -220,11 +225,19 @@ def refine_raw_mesh_carriers(
     x, y, w, h = map(int, (x, y, w, h))
     if min(x, y) < 0 or x + w > 2 * scene.shape[2] or y + h > 2 * scene.shape[1]:
         raise ValueError("roi must be contained in the Bayer scene")
-    methods = ("local64", "pooled", "pooled-color", "ring-posterior", "weak-posterior")
+    methods = (
+        "local64",
+        "pooled",
+        "pooled-color",
+        "ring-posterior",
+        "weak-posterior",
+        "weak-phase-guard",
+    )
     if method not in methods:
         raise ValueError(f"method must be one of {methods}")
     pooled = method in ("pooled", "pooled-color")
-    needs_context = pooled or method == "weak-posterior"
+    weak_posterior = method in ("weak-posterior", "weak-phase-guard")
+    needs_context = pooled or weak_posterior
     minimum_clearance = 0 if method == "local64" else _POOLED_HALO
     clearance = minimum_clearance if donor_clearance is None else donor_clearance
     if (
@@ -248,7 +261,7 @@ def refine_raw_mesh_carriers(
                 "parent_context must contain the exact RGB parent and its 16-pixel halo"
             )
     elif parent_context is not None:
-        raise ValueError("parent_context is used by the pooled and weak-posterior methods")
+        raise ValueError("parent_context is used by the pooled and weak-direction methods")
     frequencies = _spacing(scene, colors, x, y, clearance=int(clearance))
     if frequencies is None:
         return parent
@@ -262,7 +275,7 @@ def refine_raw_mesh_carriers(
             return _refine(
                 parent, scene, colors, (x, y), frequencies, shot, read, neutral / neutral[1]
             )
-        if method == "weak-posterior":
+        if weak_posterior:
             from ._mesh_weak_posterior import _refine
 
             return _refine(
@@ -275,6 +288,7 @@ def refine_raw_mesh_carriers(
                 shot,
                 read,
                 neutral / neutral[1],
+                guard_clearance=int(clearance) if method == "weak-phase-guard" else None,
             )
         if pooled:
             from ._mesh_pooled import _refine

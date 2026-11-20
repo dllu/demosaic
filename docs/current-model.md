@@ -194,6 +194,12 @@ Held green and held red/blue tapers add at least as much gap texture as a
 uniform reduction at equal response. Supplying exact support lowers added
 gap luma RMS from 0.289 to 0.008 DN16 at equal recovery in a diagnostic.
 
+The opt-in [weak phase guard](local-phase-extent.md) fixes phase from
+exterior RAW and checks it in 16-pixel stations. At equal recovery it reduces
+added gap luma RMS by 0.122 DN16 on 32 new ISO6400 photos, with most of the
+gain from one source. Both right cab profiles fall back to a uniform blend
+because exterior phase is inconsistent.
+
 [Regional Bayer color pooling](cfa-regional-phase.md) adds 0.504
 weak-response points over green-only on 24 fresh warped backgrounds with
 equal flat RMS. Nearby checks reduce errors from local color reversals.

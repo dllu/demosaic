@@ -42,6 +42,7 @@ Start with the [README](../README.md) for installation and inference.
 [Ring phase prior for weak Bayer detail](local-bayer-presence.md) ·
 [Separate fit for the weaker Bayer direction](local-conditional-posterior.md) ·
 [Local support for the weak Bayer correction](local-weak-support.md) ·
+[Exterior phase to check weak Bayer detail](local-phase-extent.md) ·
 [Learned Bayer gains](local-bayer-gain.md) ·
 [Spatially varying Bayer carrier phase](local-carrier-envelope.md) ·
 [Pooled Bayer phase](local-pooled-carrier.md) ·

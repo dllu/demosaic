@@ -996,6 +996,13 @@ reduces added gap RMS from 0.289 to 0.008 DN16. This separates the question
 of where to apply the weak correction from whether the recovered carrier
 matches the measurements.
 
+The [exterior phase guard](local-phase-extent.md) fixes the complete
+phase on disjoint RAW patches, then tests local support. At matched
+response it lowers added gap luma RMS by 0.122 DN16 on 32 new photos,
+primarily on one background. Wider pooling with coarse-color affinity
+provides little gain there. Coherence across the four donors fails in both
+right cab profiles, so the real crop uses uniform attenuation.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

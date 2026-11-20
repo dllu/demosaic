@@ -129,6 +129,9 @@ the ring phase prior. It estimates weak support in the center
 from both green lattices and the surrounding RAW ring.
 Use `method="weak-posterior"` with the 192×192 `parent_context`
 shown above to apply that prior only to the weaker direction.
+For repeating mesh with coherent surrounding phase, `method="weak-phase-guard"`
+uses the same inputs and tapers that additional weak correction using local
+RAW evidence. [Results and timing](local-phase-extent.md#packaged-crop-fit).
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·
