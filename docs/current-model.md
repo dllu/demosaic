@@ -257,6 +257,14 @@ The simpler affine candidate has more held evidence on the right
 cab. The native change is subtle, and pooling contrast across the
 crop raises gap residue. This remains a research fit.
 
+[Independent phase selection](adaptive-junction-phase.md) preserves
+most of the fixed curve’s contrast gain and reduces peak added gap
+luma from 0.328 to 0.145 DN16 on new fixtures. The equal-gap
+response difference is uncertain. Preferring affine when curvature
+has little evidence changes the right cab subtly, with incomplete
+crossings. The station gate gives less response than scaling the
+whole-region pool at equal measured gap luma.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

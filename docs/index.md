@@ -53,6 +53,7 @@ Start with the [README](../README.md) for installation and inference.
 [Red and blue evidence for junctions](cfa-junction-phase.md) ·
 [Context-conditioned detail retention](context-conditioned-detail.md) ·
 [Regional junction refit](junction-regional-refit.md) ·
+[Independent phase selection](adaptive-junction-phase.md) ·
 [Spatial junction phase](spatial-junction-phase.md) ·
 [Learned Bayer gains](local-bayer-gain.md) ·
 [Spatially varying Bayer carrier phase](local-carrier-envelope.md) ·

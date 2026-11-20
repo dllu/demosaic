@@ -1076,6 +1076,14 @@ the curved field gains 0.215 points. Supplying exact geometry gains
 1.191 points. Pooled amplitude exceeds the held gap limit and
 the real fine crossings remain incomplete.
 
+[Independent selection of junction phase](adaptive-junction-phase.md)
+reserves a Bayer fold to choose a phase shape before two other folds
+check it. On a new affine/curved panel, it lowers peak added gap luma
+from 0.328 to 0.145 DN16 versus the fixed curve. A small affine
+preference changes the right cab subtly. Local signed support on
+the difference band gives less contrast recovery than scaling the
+whole-region pool to the same mean gap luma.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

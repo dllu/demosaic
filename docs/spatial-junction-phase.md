@@ -8,6 +8,11 @@ to improve phase measurement and validation. The fitted curved
 term gives no change in either fine cab ROI, and a simpler affine
 phase changes the right cab slightly. The method remains experimental.
 
+The [independent selection follow-up](adaptive-junction-phase.md) tests
+when to choose affine or curved phase and whether a local check for
+the difference band improves pooled amplitude. It uses new affine,
+curved and stationary photo fixtures.
+
 ## Predict the difference phase from the two wires
 
 The [regional junction refit](junction-regional-refit.md) uses one

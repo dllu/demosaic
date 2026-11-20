@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Independent phase selection](adaptive-junction-phase.md#standing-gfx100s-comparisons) returns the regional refit on sky, building and foliage. The selected affine phase changes the coarse fence by 0.775 DN16 RGB RMS and keeps connected crossings.
+
 - [Spatial junction phase](spatial-junction-phase.md#standing-gfx100s-comparisons) reproduces the regional refit on sky, building and foliage. The curved test changes the coarse fence by 0.80 DN16 RGB RMS and preserves its intersections.
 
 - [Regional junction refit](junction-regional-refit.md#standing-gfx100s-comparisons) reproduces the checked sideband on sky, building and foliage. The coarse fence retains its connected crossings.
