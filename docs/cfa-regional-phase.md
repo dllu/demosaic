@@ -99,6 +99,9 @@ and 30% of the exact weak signal. Neutral delivery can still put the
 wrong phase into red and blue. The regional RGB RMS on that reversal
 is 136.31 DN16, above the synthetic parent's 105.74 DN16.
 
+The [channel-delivery follow-up](cfa-signed-color-delivery.md) reduces
+this error by checking the neutral assumption on held red/blue samples.
+
 ## Native exact crops
 
 Each triplet shows noisy Malvar, Local 50k plus regional phase, and the

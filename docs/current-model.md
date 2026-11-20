@@ -180,6 +180,11 @@ equal flat RMS. Nearby checks reduce errors from local color reversals.
 Neutral RGB delivery still distorts color in those controls. The opt-in
 crop fit takes 39 ms on the right cab and leaves fine crossings incomplete.
 
+[Held red/blue channel checks](cfa-signed-color-delivery.md) reduce
+local signed-photo RGB RMS by 0.471 DN16 over regional color pooling.
+The photos show gains from suppressing unsupported neutral color.
+Weak-increment error and fine real cab crossings remain unresolved.
+
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
 weak response it lowers continuing-strand RMS by 2.361 DN16 versus
