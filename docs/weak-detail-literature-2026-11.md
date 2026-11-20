@@ -1232,6 +1232,10 @@ The [128-update development review](local-optical-mixture-128.md) finds
 matched regional control, with 0.031 DN16 higher false projection. The
 gain on sharp inputs is 0.381 points. The training audit finds only 21
 of 256 blurred wire groups in the test's 7.2–9.25-pixel period range.
+At the [512-update midpoint](local-optical-mixture-512.md), the mixed
+arm loses 0.361 weak-response points at σ 0.85, with higher quiet RMS
+and less false weak projection. The data preflight increases the
+blurred wire coverage in that period range from 21 to 63 groups.
 
 ### 7. Revisit the backbone and DINO role after these discriminating tests
 
