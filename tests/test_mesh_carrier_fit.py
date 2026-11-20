@@ -44,7 +44,8 @@ def test_measured_mesh_with_odd_native_origin(pattern):
     assert restored.dtype == previous.dtype
 
 
-def test_ring_of_donors_does_not_fill_measured_flat_center():
+@pytest.mark.parametrize("method", ("local64", "ring-posterior"))
+def test_ring_of_donors_does_not_fill_measured_flat_center(method):
     image = scene_fixture()
     image[149:309, 151:311] = 0.08
     previous = np.full((3, 160, 160), 0.08, dtype=np.float32)
@@ -53,6 +54,7 @@ def test_ring_of_donors_does_not_fill_measured_flat_center():
         "read": 6.5536e-6,
         "white_balance": np.ones(3),
         "camera_to_srgb": np.eye(3),
+        "method": method,
     }
     result = refine_raw_mesh_carriers(
         previous, pack(image), PATTERNS["RGGB"], (151, 149, 160, 160), **args
@@ -62,6 +64,16 @@ def test_ring_of_donors_does_not_fill_measured_flat_center():
         previous, pack(image), PATTERNS["RGGB"], (16, 16, 160, 160), **args
     )
     np.testing.assert_array_equal(edge, previous)
+    if method == "ring-posterior":
+        with pytest.raises(ValueError, match="at least 16"):
+            refine_raw_mesh_carriers(
+                previous,
+                pack(image),
+                PATTERNS["RGGB"],
+                (151, 149, 160, 160),
+                donor_clearance=15,
+                **args,
+            )
 
 
 @pytest.mark.parametrize("pattern", tuple(PATTERNS))
@@ -79,8 +91,8 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
 
 
 @pytest.mark.parametrize("pattern", tuple(PATTERNS))
-@pytest.mark.parametrize("method", ("pooled", "pooled-color"))
-def test_pooled_weak_phase_on_an_odd_native_origin(pattern, method):
+@pytest.mark.parametrize("method", ("pooled", "pooled-color", "ring-posterior"))
+def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
     y, x = np.indices((480, 480), dtype=np.float32)
     x, y = x - 230, y - 228
     envelope = np.clip((122 - np.maximum(abs(x), abs(y))) / 33, 0, 1)
@@ -99,7 +111,7 @@ def test_pooled_weak_phase_on_an_odd_native_origin(pattern, method):
         white_balance=np.ones(3),
         camera_to_srgb=np.eye(3),
         method=method,
-        parent_context=context,
+        parent_context=None if method == "ring-posterior" else context,
     )
 
     core = np.s_[165:293, 167:295]

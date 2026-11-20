@@ -177,8 +177,11 @@ def refine_raw_mesh_carriers(
     ambiguous. The experimental `"pooled-color"` method also uses nearby red
     and blue phase evidence and lets each direction qualify when the rank
     is ambiguous. The final fit still requires reciprocal green support.
-    Donor clearance defaults to 16 pixels for both pooled methods and zero
-    for `"local64"`. Supply a larger clearance to move donors farther away.
+    The experimental `"ring-posterior"` method uses an exterior Bayer
+    prior and averages the no-wire, one-wire and two-wire models in each
+    delivery window. It estimates the inherited correction on the parent
+    crop itself. Donor clearance defaults to zero for `"local64"` and
+    16 pixels for the other methods.
 
     Requires the eval extra. Calibrated for a repeating two-family mesh.
     """
@@ -213,10 +216,10 @@ def refine_raw_mesh_carriers(
     x, y, w, h = map(int, (x, y, w, h))
     if min(x, y) < 0 or x + w > 2 * scene.shape[2] or y + h > 2 * scene.shape[1]:
         raise ValueError("roi must be contained in the Bayer scene")
-    if method not in ("local64", "pooled", "pooled-color"):
-        raise ValueError("method must be 'local64', 'pooled', or 'pooled-color'")
-    pooled = method != "local64"
-    minimum_clearance = _POOLED_HALO if pooled else 0
+    if method not in ("local64", "pooled", "pooled-color", "ring-posterior"):
+        raise ValueError("method must be 'local64', 'pooled', 'pooled-color', or 'ring-posterior'")
+    pooled = method in ("pooled", "pooled-color")
+    minimum_clearance = 0 if method == "local64" else _POOLED_HALO
     clearance = minimum_clearance if donor_clearance is None else donor_clearance
     if (
         isinstance(clearance, (bool, np.bool_))
@@ -247,6 +250,12 @@ def refine_raw_mesh_carriers(
         neutral = np.linalg.solve(matrix, np.ones(3)) / wb
         if neutral[1] == 0:
             return parent
+        if method == "ring-posterior":
+            from ._mesh_presence import _refine
+
+            return _refine(
+                parent, scene, colors, (x, y), frequencies, shot, read, neutral / neutral[1]
+            )
         if pooled:
             from ._mesh_pooled import _refine
 

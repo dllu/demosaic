@@ -11,6 +11,11 @@ of 64 crops with a flat core and detail farther out. At full
 strength the broad check retains more of the faint strand. The
 real fine cab crossings remain incomplete.
 
+The [ring phase follow-up](local-bayer-presence.md) measures a small
+nominal weak-response gain with higher false projection in fresh
+gaps. Combined verification has lower continuing-strand error at
+similar response.
+
 ## Fit and verification
 
 All arms estimate the same sinusoidal coefficients in a 64-pixel

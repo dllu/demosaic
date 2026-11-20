@@ -174,6 +174,13 @@ crop API reproduces the replay and accepts a 16-pixel halo of restored RGB.
 [Usage](usage.md#repeating-mesh-crops) ·
 [Parity and CPU timing](local-pooled-carrier.md#packaged-crop-fit).
 
+The [ring phase prior](local-bayer-presence.md) is an opt-in 160-pixel
+crop fit. It gains 0.506 ISO6400 weak-response points on 24 fresh
+photos, with an interval spanning zero and 0.026 DN16 more false
+projection in true gaps. At similar weak response, continuing-strand
+error rises 4.353 DN16 versus the combined check. The real right cab
+has a more pronounced diagonal and incomplete crossings.
+
 [Regional Bayer color pooling](cfa-regional-phase.md) adds 0.504
 weak-response points over green-only on 24 fresh warped backgrounds with
 equal flat RMS. Nearby checks reduce errors from local color reversals.

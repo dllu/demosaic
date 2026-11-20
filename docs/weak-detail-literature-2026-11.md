@@ -975,6 +975,13 @@ but a misspecified prior can still favor a false lattice. Learn/calibrate model
 preferences on independent data; evaluate both missed-detail and false-detail
 rates instead of treating posterior labels as guarantees.
 
+The [ring phase prior](local-bayer-presence.md) compares these four
+states on the same donor frequencies and tests 24 source-disjoint
+ISO6400 photos. It yields +0.506 weak-response points at nominal strength
+and +0.026 DN16 false projection into gaps. At matched response the
+combined check has lower continuing-strand error. Substituting exact
+frequencies changes weak recovery by just 0.021 points for the ring fit.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

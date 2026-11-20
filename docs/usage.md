@@ -124,8 +124,12 @@ evidence and tests both directions when rank is ambiguous. It still
 delivers a neutral correction, which can distort strand color when the
 channels have different phase. The original 64-pixel fit is the default
 `method="local64"` and uses just the 160×160 parent.
+Use `method="ring-posterior"` with `parent_context=None` for
+the ring phase prior. It estimates weak support in the center
+from both green lattices and the surrounding RAW ring.
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
+[Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·
 [Original 64-pixel fit](bayer-carrier-scale.md).
 
 ## Environment and storage
