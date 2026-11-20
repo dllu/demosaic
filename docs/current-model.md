@@ -70,6 +70,15 @@ with another photo changes little. Sharing the local encoder
 cuts median three-setting crop forward time from 524 to 495 ms
 with identical RGB in the audit.
 
+The bounded blend trained with a direct detail objective gains 0.526
+fine-response points over Local 50k on 40 faint recaptures with +0.030 DN16
+exact-flat RMS. At equal response it lowers paired increment error by 0.131
+DN16 versus the earlier whole-photo gate on those crops. The locked arm
+exceeds its calibration increment limit on transfer. Native GFX sky pixels
+are identical to Local 50k and the fine cab mesh still has incomplete
+crossings. The trained blend is experimental.
+[Direct weak-detail response training](direct-detail-response.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

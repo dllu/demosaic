@@ -13,6 +13,11 @@ The local encoder can be shared across the three conditioning
 forwards. On the checked crop batches this cuts their median
 time from **524 to 495 ms** with bit-identical RGB.
 
+The [direct response study](direct-detail-response.md) uses the same
+proposals and differentiates through final gain interpolation. Its
+signed-response head recovers 0.526 points on 40 faint recaptures with
+0.124 DN16 more paired increment error and 0.030 DN16 more flat error.
+
 ## What the head can change
 
 The [earlier whole-photo gate](context-conditioned-detail.md) used

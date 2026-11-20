@@ -1272,6 +1272,15 @@ flat RMS. A different photo gives similar results. Supplied exact
 targets select 2.418 more points while lowering both fine-increment
 and flat error, indicating room to improve gain estimation.
 
+[Direct weak-detail response training](direct-detail-response.md)
+supervises the exact interpolated fine band and tests signed two-green
+features. On 40 faint recaptures, the response head adds 0.526 points
+with 0.030 DN16 more flat RMS. At equal response, paired increment
+error falls 0.131 DN16 versus the earlier whole-photo gate. Rolling
+the signed features raises flat error with little change in response.
+The locked increment error exceeds the calibration limit and the
+fine cab crossings remain incomplete.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

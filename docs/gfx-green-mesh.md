@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Direct weak-detail response](direct-detail-response.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The locked response head changes the left/right crops by 0.031/0.188 DN16 nominal and 2.446/4.223 transferred. Some transferred segments gain contrast and fine crossings remain incomplete |
 | [Trained exterior scene gate](scene-detail-selector.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The aligned head changes the right crop by 0.273 DN16 nominal and 0.810 transferred, with fine crossings incomplete |
 | [Color evidence for connected gaps](cfa-gap-support.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The affine green and color outputs are equal on the right and fine crossings remain incomplete |
 | [Connected gap support](junction-occlusion.md#standing-gfx100s-comparisons) | Both ROIs, both profiles and both camera JPEGs viewed at ×4 and ×16. The connected affine correction uses the same support as whole-region affine on the right. Fine crossings remain incomplete above Local 50k and Corpus 100k |
