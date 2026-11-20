@@ -122,6 +122,38 @@ endpoint rises.
 
 [Source-bound numeric curve](results/local-redraw-average-v1/dose-evidence.json).
 
+## Fixed photo comparison with Corpus 100k
+
+On the same 427 source photos, mean-redraw EMA scores 37.25003 dB
+versus 37.24747 dB for Corpus 100k. The paired mean change is
++0.00255 dB with a 95% source bootstrap interval of
+[−0.00919, +0.01354]. Scores rise on 239 photos and fall on 188.
+The 5th to 95th percentile of per-source changes spans −0.14890
+to +0.15716 dB. Both policies use IEEE FP32 and identical scored
+inputs. The mean-redraw collection uses CUDA and the Corpus 100k
+collection uses CPU. V120's source means agree within 0.000004 dB
+between the two collections.
+
+| Condition | Mean redraw − Corpus 100k sRGB PSNR |
+| --- | ---: |
+| ISO100 prior | +0.02548 dB |
+| ISO1600 prior | +0.02231 dB |
+| ISO12800 prior | +0.01779 dB |
+| Legacy noise | +0.01853 dB |
+| Shadows | +0.02355 dB |
+| ADC only | −0.00932 dB |
+| Highlights | −0.08045 dB |
+
+The gains at the ISO priors, legacy noise and shadows accompany
+a larger highlight regression.
+The overall interval spans zero, and the two checkpoints have
+different known-camera results and wire behavior. Compared with
+Corpus 100k, mean redraw loses 0.18693 dB on known CFA and gains
+0.01081 dB on unseen CFA. The scoped wire and native comparisons
+provide the separate evidence for detail and artifacts.
+[Per-source comparison](results/local-redraw-average-v1/fixed-photo-mean-vs-corpus.json) ·
+[Frozen comparison driver](results/local-redraw-average-v1/fixed-photo-mean-vs-corpus-replay.tar.xz).
+
 ## Fixed camera panels
 
 The replays cover the same 72 known-camera and 90 unseen-camera

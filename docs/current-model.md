@@ -1,10 +1,13 @@
 # Current model choices
 
 Reviewed November 19, 2026. **V120 Small is the general inference recommendation.**
-The [Corpus 100k EMA](full-corpus-long100k.md#broader-evaluation) is the strongest
-measured option for the fixed photo benchmark at 37.24747 dB, +0.20739 dB over
-V120. It loses 0.03046 dB on the unseen measured-CFA panel and has a visible
-clipped-petal failure. The [completed64-source scene review](whole-scene-context-development64.md)
+The [Corpus 100k EMA](full-corpus-long100k.md#broader-evaluation) scores
+37.24747 dB on the fixed photo benchmark, +0.20739 dB over V120.
+It loses 0.03046 dB on unseen measured CFA and has a visible
+clipped-petal failure. The [mean-redraw EMA](local-redraw-average.md#fixed-photo-comparison-with-corpus-100k)
+is within 0.003 dB overall. It gains 0.01779 dB at ISO12800 and loses
+0.08045 dB in highlights compared with Corpus 100k.
+The [completed64-source scene review](whole-scene-context-development64.md)
 finds small quiet-region gains and mixed detail/color costs; fine crossings
 remain missing. The [completed camera panels](whole-scene-context-camera-review.md)
 find a partial unseen-camera repair over local-only, still below V120.
@@ -72,6 +75,7 @@ compiled batch four. [Full-frame batch replay](corpus100k-fp16-batch.md).
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
 | [Long schedule at 50k](full-corpus-long50k-native.md) | Retained ordinary and shadow sRGB are +0.020/+0.044 dB over V120 | Faint fine-band RMS rises on all four materials versus V120. Bright orange ADC mean error reaches 1,490 DN16 in a BGGR spot check, with visible unevenness. Fine cab crossings still incomplete |
 | [Full-corpus 100k](full-corpus-long100k.md) | 37.24747 dB on the fixed 427-photo panel, +0.20739 dB versus V120 and +0.15668 versus Corpus 20k. Known CFA +0.02436 dB versus V120. [Weakest fine-band response](full-corpus-long100k-weak-band.md) improves from 78.57% to 79.47% at ISO100 | Photo quality option. Unseen CFA −0.03046 dB versus V120. ISO12800 weakest response stays near 36.5%. Clipped highlights, orange bias, fine grass and incomplete fine cab crossings remain weaknesses |
+| [Mean-redraw +512](local-redraw-average.md#fixed-photo-comparison-with-corpus-100k) | 37.25003 dB on the fixed photos, with a paired overall difference of +0.00255 dB versus Corpus 100k. Gains 0.01779–0.02548 dB on the three ISO priors, legacy noise and shadows | Highlights −0.08045 dB and known CFA −0.18693 dB versus Corpus 100k. Higher draw variance and missing fine cab crossings in the scoped comparisons |
 | [Expanded scene local-only 12k](expanded-scene-local12k.md) | +0.093/+0.088 dB over its 100k parent on the two development conditions. Both standing GFX reviews complete | Known/unseen CFA −0.02934/+0.00040 dB versus parent. Thin suspension lines and fine cab crossings remain incomplete. Full427 photos collecting. [Fixed camera comparison](expanded-scene-12000-cameras.md) |
 | [Expanded scene spatial 12k](expanded-scene-spatial12k.md) | +0.0165/+0.0044 dB over local-only at the two development conditions. The aligned guide raises ISO400 weak response by 0.081 percentage points versus the neutral scene | Known/unseen CFA −0.04909/−0.00341 dB versus parent. ISO6400 quiet error rises with the aligned guide. Fine GFX crossings remain incomplete. Full427 photos collecting. [Fixed camera comparison](expanded-scene-12000-cameras.md) |
 | [Localized contrast 2,400](scene-local-contrast-2400.md#completed-64-photo-comparison) | Four EMAs reviewed on 64 photos and both GFX families. Plain local reduces ISO6400 coupled fine-increment RMS from 102.99 to 102.66 DN16 versus Corpus 100k | Adding aligned scene features raises flat-core variation slightly in both recipes. Corpus 100k retains the lowest flat RMS and higher fine response. Fine cab crossings remain incomplete and fixed broad panels are collecting |

@@ -19,8 +19,8 @@ V132's matched attention trial does not improve faint-detail quality.
 Version numbers identify experiments, not releases: V198/V200 are separate
 small detail-head studies, not successors to the full V131/V132 models.
 
-Corpus 100k used 90,778 ordinary photos and leads the fixed photo panel at
-37.24747 dB. Its unseen-camera score is slightly lower, clipped-color
+Corpus 100k used 90,778 ordinary photos and scores 37.24747 dB on the
+fixed 427-photo panel. Its unseen-camera score is slightly lower, clipped-color
 failures remain, and the fine cab crossings stay incomplete.
 For Corpus 100k on CUDA, use `--precision float16 --tile 512 --overlap 64
 --batch-size 4` without the FP32-only cuDNN benchmark flag. The paired GB10
