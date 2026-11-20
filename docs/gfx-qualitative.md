@@ -3,6 +3,7 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Local support for the weak correction](local-weak-support.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The donor color check changes the coarse fence by 4.22 DN16 RGB RMS versus the combined check and retains connected crossings.
 - [Separate fit for the weaker direction](local-conditional-posterior.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The coarse fence changes 4.74 DN16 RGB RMS versus the combined check and retains connected crossings.
 - [Ring phase prior](local-bayer-presence.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The coarse fence changes 6.82 DN16 RGB RMS versus the combined check and retains connected crossings.
 - [Noise-weighted Bayer validation](cfa-predictive-covariance.md#standing-gfx100s-comparisons) reproduces the local conditional output on all four main crops, with smooth sky and the same coarse crossings.

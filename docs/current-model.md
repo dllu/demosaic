@@ -188,6 +188,12 @@ Continuing-strand error differs by 0.001 DN16. The 160-pixel crop
 option takes 28.58 ms after the parent forward and gives a subtly
 clearer weak diagonal on the right cab.
 
+[Local support tests](local-weak-support.md) reproduce the weak posterior's
+gain on another 24 photos (+2.135 ISO6400 points, −1.576 DN16 intact weak RMS).
+Held green and held red/blue tapers add at least as much gap texture as a
+uniform reduction at equal response. Supplying exact support lowers added
+gap luma RMS from 0.289 to 0.008 DN16 at equal recovery in a diagnostic.
+
 [Regional Bayer color pooling](cfa-regional-phase.md) adds 0.504
 weak-response points over green-only on 24 fresh warped backgrounds with
 equal flat RMS. Nearby checks reduce errors from local color reversals.

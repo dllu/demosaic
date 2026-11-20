@@ -2,6 +2,8 @@
 
 Holding the stronger correction fixed and estimating only the faint direction improves weak-wire recovery on three ISO6400 photo panels. The new `weak-posterior` crop option gains **1.807 percentage points** on 24 new source-disjoint photos and lowers intact weak error **1.323 DN16**. False weak projection into true gaps rises **0.084 DN16**. Error on the continuing strong strand changes by **0.001 DN16**. The nominal right GFX100S cab shows a slightly clearer second diagonal in places, with incomplete crossings.
 
+The [local support follow-up](local-weak-support.md) reproduces the recovery gain on another 24 photos. Held green and color tapers show no added-gap advantage over uniform scaling at equal recovery, while known support nearly eliminates the added gap texture in a diagnostic.
+
 ## Separate frequency, rank and local evidence
 
 The [joint ring posterior](local-bayer-presence.md) can change either carrier. This version starts from the [combined broad and central check](local-nested-support.md), retains its stronger correction, and offers a new fit only in the weaker direction. The four frequency-donor patches and the 64-pixel fit and 32-pixel delivery windows stay fixed. A separate attempt to infer rank from those exterior donors left all 32 calibration crops ambiguous. The calibration fixtures give both directions similar exterior amplitudes even where one is faint in the query.

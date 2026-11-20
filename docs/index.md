@@ -1,6 +1,6 @@
 # Documentation guide
 
-Reviewed November 19, 2026. **V120 Small is the general recommendation.**
+Reviewed November 20, 2026. **V120 Small is the general recommendation.**
 Start with the [README](../README.md) for installation and inference.
 
 ## Current guidance
@@ -41,6 +41,7 @@ Start with the [README](../README.md) for installation and inference.
 [Combined broad and central RAW checks](local-nested-support.md) ·
 [Ring phase prior for weak Bayer detail](local-bayer-presence.md) ·
 [Separate fit for the weaker Bayer direction](local-conditional-posterior.md) ·
+[Local support for the weak Bayer correction](local-weak-support.md) ·
 [Learned Bayer gains](local-bayer-gain.md) ·
 [Spatially varying Bayer carrier phase](local-carrier-envelope.md) ·
 [Pooled Bayer phase](local-pooled-carrier.md) ·

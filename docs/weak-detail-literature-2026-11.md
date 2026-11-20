@@ -988,6 +988,14 @@ and adds 0.084 DN16 false weak projection into gaps, with a 0.001 DN16
 continuing-strand difference. Exterior rank alone fails on the calibration
 panel, and the local rank is ambiguous on the standing left cab.
 
+The [local support follow-up](local-weak-support.md) tests a separate held green
+lattice and independent center red/blue measurements on another 24 photos.
+Neither taper lowers added gap texture versus uniform scaling at equal
+recovery. Supplying the exact support to the same four-station blend
+reduces added gap RMS from 0.289 to 0.008 DN16. This separates the question
+of where to apply the weak correction from whether the recovered carrier
+matches the measurements.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can
