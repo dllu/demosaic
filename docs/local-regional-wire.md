@@ -4,8 +4,10 @@
 test whether a local weak-direction loss recovers contrast that is
 averaged away by a whole-crop loss. Both arms also get explicit
 supervision where that direction is absent. The eight-update
-qualification finished, and the first 32 matched training updates
-were verified. Endpoint quality is pending.
+qualification finished, and the two EMA checkpoints at 128 updates
+have a [scoped numerical and native review](local-regional-wire-128.md).
+Both have lower fixed-panel fine error and less fine response than
+Local 50k. The 1,024-update run and its endpoint review are pending.
 [Launch receipt](results/local-regional-wire-v1/launch.json) ·
 [Frozen protocol and qualification](results/local-regional-wire-v1/launch-evidence.tar.xz).
 
@@ -78,5 +80,5 @@ review plan. Training completion, numerical evaluation and native
 viewing will be recorded as separate states.
 
 The canonical 427-photo and known/unseen camera inputs are frozen.
-The new arms have no endpoint entries in the
-[PSNR history](performance-history.md) as of this training launch.
+The full trained pair is needed for an entry in the
+[PSNR history](performance-history.md).

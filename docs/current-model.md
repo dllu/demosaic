@@ -123,6 +123,12 @@ in each linked report. [Package interfaces](architecture.md).
 
 ## Experimental detail components
 
+[Regional weak-wire supervision at 128 updates](local-regional-wire-128.md)
+slightly reduces fixed natural fine-increment and wire gap error
+relative to the matched whole-core arm. It also lowers weak response
+and increases error on the stronger strand through a true gap.
+Both models use the existing Local 50k inference path.
+
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the
 64-photo panel above Corpus 100k. Fine-increment RMS drops 1.09 DN16

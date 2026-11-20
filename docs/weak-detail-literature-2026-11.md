@@ -1168,7 +1168,11 @@ background activity much more strongly than continuation in this trial.
 full-trunk arms from Local 50k with 1,024 distinct sources each.
 The local weak-response term compares nine subregions against the
 whole-core term. Both arms explicitly penalize the absent direction.
-Training is underway and the endpoint comparison is pending.
+At [128 updates](local-regional-wire-128.md) the regional term slightly
+lowers fixed natural fine error and false weak-direction projection.
+The continuing stronger direction through a weak gap has higher RMS
+error, and the weak direction loses signed response. The endpoint
+comparison is pending.
 
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 

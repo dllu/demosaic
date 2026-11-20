@@ -77,6 +77,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [Signed wire supervision](local-wire-response.md) ·
 [Continuing-wire supervision](local-continuing-wire.md) ·
 [regional weak-wire training from Local 50k](local-regional-wire.md) ·
+[matched 128-update review](local-regional-wire-128.md) ·
 [factored luminance correction](local-factored-wire.md) ·
 [separate phase and support](local-wire-gate-support.md) ·
 [exterior RAW wire verification](wire-exterior-verification.md) ·

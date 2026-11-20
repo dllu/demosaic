@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Regional weak-wire training at 128 updates](local-regional-wire-128.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The regional arm changes the crops by 0.74–1.50 DN16 RGB RMS versus Local 50k. The transferred right has the clearest diagonals and fine crossings stay incomplete |
 | [Exterior wire verification](wire-exterior-verification.md#standing-gfx100s-comparisons) | Both ROIs, noise profiles and JPEGs viewed at both displays. The right aperture shows a clearer but overly regular local grid. The two left banks are empty and crossings remain incomplete outside the tested aperture |
 | [Held-out frequency refinement](wire-frequency-refinement.md#standing-gfx100s-comparisons) | Both ROIs and profiles reviewed at ×4 and ×16 with both JPEGs. The local right grid stays regular. Supplying the older left donor pair adds one local diagonal per profile with affine refinement and changes neither profile with innovation. Connected left crossings remain missing |
 | [Directional support windows](wire-segment-support.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs reviewed at ×4 and ×16. The left donor path changes the two crops by 0.68 and 0.72 DN16 RGB RMS. The right patch stays regular and fine crossings remain incomplete |

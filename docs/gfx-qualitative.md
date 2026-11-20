@@ -3,6 +3,11 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Regional weak-wire training at 128 updates](local-regional-wire-128.md#standing-gfx100s-comparisons)
+  keeps the sky smooth and the coarse chain-link crossings coherent in
+  both arms. The regional crop changes by 0.55 DN16 RGB RMS in the sky
+  and 2.44 DN16 on the fence versus Local 50k. Fine cables and leaves
+  remain soft.
 - [Exterior wire verification](wire-exterior-verification.md#standing-gfx100s-comparisons)
   reproduces the parent sky and foliage with empty proposal banks. The
   coarse fence keeps coherent crossings. The tested building aperture
