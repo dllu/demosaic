@@ -13,6 +13,10 @@ The fit also changes three stationary-interaction draws. Real
 right-cab changes remain subtle, with incomplete fine crossings.
 The fit remains experimental.
 
+The [color support follow-up](cfa-gap-support.md) checks red and
+blue, including cases where the same carrier has different spatial
+support in each color.
+
 ## Infer gap support from a stronger wire
 
 The [independent phase selection study](adaptive-junction-phase.md)

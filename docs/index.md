@@ -53,6 +53,7 @@ Start with the [README](../README.md) for installation and inference.
 [Red and blue evidence for junctions](cfa-junction-phase.md) ·
 [Context-conditioned detail retention](context-conditioned-detail.md) ·
 [Regional junction refit](junction-regional-refit.md) ·
+[Color evidence for connected gaps](cfa-gap-support.md) ·
 [Connected gap support](junction-occlusion.md) ·
 [Independent phase selection](adaptive-junction-phase.md) ·
 [Spatial junction phase](spatial-junction-phase.md) ·

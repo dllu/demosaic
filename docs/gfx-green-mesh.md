@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Color evidence for connected gaps](cfa-gap-support.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The affine green and color outputs are equal on the right and fine crossings remain incomplete |
 | [Connected gap support](junction-occlusion.md#standing-gfx100s-comparisons) | Both ROIs, both profiles and both camera JPEGs viewed at ×4 and ×16. The connected affine correction uses the same support as whole-region affine on the right. Fine crossings remain incomplete above Local 50k and Corpus 100k |
 | [Independent phase selection](adaptive-junction-phase.md#standing-gfx100s-comparisons) | Both ROIs, noise profiles and JPEGs viewed at ×4 and ×16. The 0.5-SD margin nominates affine on the right. Its local support variant changes the right ROI by 0.274 and 0.321 DN16 RGB RMS, with fine crossings still incomplete |
 | [Spatial junction phase](spatial-junction-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The fitted curve returns the regional RAW refit. The affine phase changes the right ROI by 0.13 and 0.17 DN16 RGB RMS, with fine crossings still incomplete |

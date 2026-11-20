@@ -1092,6 +1092,13 @@ Corpus 100k on the same mosaics. Its locked dose exceeds the gap
 budget, and the supplied optical mask preserves much more contrast
 with lower gap error.
 
+[Color evidence for connected gaps](cfa-gap-support.md) finds useful
+red/blue proposals in shared support and poorer recovery at equal
+gap luma on mixed-color fixtures. Holding green and the restoration
+fixed, giving red the same gap restores a missed green taper.
+Matching phase across colors leaves room for their spatial support
+to differ.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

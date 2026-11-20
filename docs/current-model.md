@@ -273,6 +273,12 @@ Local 50k and Corpus 100k. The locked strength exceeds the gap
 limit, some stationary controls change and fine cab crossings
 remain incomplete.
 
+[Color evidence for connected gaps](cfa-gap-support.md) helps some
+shared gaps. On the 24-photo conflict panel it loses 0.315 points
+at equal gap luma relative to green. Replacing a continuing red
+strand with a matching break restores a missed taper. Both real
+right-cab profiles give the same affine output with green or color.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over
