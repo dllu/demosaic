@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Shared-target and continuing-wire gains](detail-shared-oracle.md#standing-gfx100s-comparisons) changes sky by 0.038 DN16 and coarse fence by 0.139 DN16 RGB RMS at the shared lock. Sky stays smooth, coarse crossings stay connected and building and foliage look nearly identical to Local 50k.
+
 - [Weak-wire gain training](detail-wire-gate.md#standing-gfx100s-comparisons) returns Local 50k at the calibration locks. At full diagnostic strength the higher-weight head changes sky by 0.379 DN16 and the coarse fence by 2.828 DN16 RGB RMS. Sky stays smooth and coarse crossings stay connected.
 
 - [Weak-wire proposal headroom](detail-directional-proposal.md#standing-gfx100s-comparisons) changes sky by 0.014 DN16 and coarse fence by 0.483 DN16 RGB RMS above the earlier Bayer blend. Sky remains smooth and coarse crossings stay connected.

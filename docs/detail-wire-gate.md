@@ -15,6 +15,10 @@ directional proposal makes a two-point contrast gain feasible
 on **40 of 40 photos**, up from **25 of 40** with the conditioning
 proposals alone.
 
+The [shared-target and continuing-wire follow-up](detail-shared-oracle.md)
+adds explicit protection for the continuing strand. Small nonzero strengths
+transfer to 32 new wire fixtures, with different intact and gap tradeoffs.
+
 ## Setup and objective
 
 The frozen Local 50k EMA supplies the nominal result and the

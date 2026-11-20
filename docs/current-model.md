@@ -111,6 +111,14 @@ continuing-strand error. On these new optical wires the same proposal
 makes a two-point gain feasible on 40/40 targets in the exact fit.
 [Weak-wire gain training](detail-wire-gate.md).
 
+A continuing-strand loss makes both retrained weak-wire heads select
+nonzero strengths on calibration. On new optical wires the shared-target
+head gains 0.145 contrast points with +0.008 DN16 intact paired error and
+−0.018 DN16 weak-gap error. At equal recovery the direct head better
+preserves the stronger strand. Both lose some natural faint contrast and
+the native fine cab crossings remain incomplete.
+[Shared-target and continuing-wire gains](detail-shared-oracle.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

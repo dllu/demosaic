@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Shared-target and continuing-wire gains](detail-shared-oracle.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. Shared lock changes the transferred left/right crops by 0.739/0.888 DN16 RGB RMS. Full strength changes their existing diagonals and mottling, with crossings still incomplete |
 | [Weak-wire gain training](detail-wire-gate.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The calibration locks reproduce Local 50k. At full diagnostic strength the higher-weight head changes the transferred crops by 6.571/6.021 DN16 with no clear continuity gain |
 | [Weak-wire proposal headroom](detail-directional-proposal.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The parent-phase proposal changes left/right by 0.119/0.137 DN16 nominal and 0.153/0.181 transferred above the earlier Bayer blend. Fine crossings remain incomplete |
 | [Bayer routing across contrast levels](detail-regime-router.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The branchwise mixture changes left/right by 0.210/1.069 DN16 nominal and 0.579/0.542 transferred. Fine crossings remain incomplete |

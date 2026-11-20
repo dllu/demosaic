@@ -1340,6 +1340,16 @@ Both calibrations choose zero. At two additional points the
 directional basis is feasible on all 40 new optical fixtures
 when gains may see exact targets. [Weak-wire gain training](detail-wire-gate.md).
 
+A shared exact-target fit reaches those two added points on all 40 fixtures
+with one gain map across related views, lowering continuing-strand error by
+7.293 DN16 while raising total gap error by 1.432 DN16. On 32 newly captured
+wires the calibrated student realizes 0.145 points. At equal recovery,
+distillation improves intact paired error and direct training better
+preserves the continuing strand. Rolling the station descriptors changes
+where corrections occur with nearly equal aggregate weak response. Stronger
+evidence of location-specific support is still needed.
+[Shared-target and continuing-wire gains](detail-shared-oracle.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,
