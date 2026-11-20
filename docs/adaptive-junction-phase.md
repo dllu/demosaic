@@ -12,6 +12,10 @@ has an interval spanning zero. Both variants remain experimental.
 On the real right cab, a slight preference for the affine fit gives
 small local contrast changes. Fine crossings remain incomplete.
 
+[The connected-gap follow-up](junction-occlusion.md) measures
+whether a stronger wire fades across a region and uses the
+predicted footprint to refit the weak interaction.
+
 ## Phase selection and local support
 
 The [spatial junction phase test](spatial-junction-phase.md) fits separate

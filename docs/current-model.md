@@ -265,6 +265,14 @@ has little evidence changes the right cab subtly, with incomplete
 crossings. The station gate gives less response than scaling the
 whole-region pool at equal measured gap luma.
 
+[Connected gap support](junction-occlusion.md) checks whether a wire
+weakens across an oval or strip before refitting pooled contrast.
+It gains 0.100 points and lowers junction error 0.053 DN16 at equal
+gap luma on displaced-gap fixtures, with similar results over
+Local 50k and Corpus 100k. The locked strength exceeds the gap
+limit, some stationary controls change and fine cab crossings
+remain incomplete.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

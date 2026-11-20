@@ -1084,6 +1084,14 @@ preference changes the right cab subtly. Local signed support on
 the difference band gives less contrast recovery than scaling the
 whole-region pool to the same mean gap luma.
 
+[Connected gap support](junction-occlusion.md) estimates where a
+stronger fundamental wire fades, with a held Bayer check on the
+proposed shape. The refit gains 0.100 interaction points at equal
+gap texture on 24 new variable-phase photos. The result holds over
+Corpus 100k on the same mosaics. Its locked dose exceeds the gap
+budget, and the supplied optical mask preserves much more contrast
+with lower gap error.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can
