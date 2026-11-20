@@ -9,6 +9,10 @@ is **0.47 DN16**. The photo gain comes from suppressing a contradicted
 correction. Fine cab crossings remain incomplete and this fit stays
 experimental.
 
+The [directional pooling follow-up](cfa-directional-chroma.md) finds
+that larger pools with the green waveform still fail on those windows.
+An independent red phase recovers two windows on a fresh ISO1600 panel.
+
 ## Channel fit and conditional delivery
 
 The same four exterior patches nominate the carrier pair, and the

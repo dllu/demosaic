@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Directional signed Bayer color](cfa-directional-chroma.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed at ×4 and ×16 with AHD and JPEGs. Wider color pooling and independent phase reproduce the local conditional pixels. Fine crossings near the post remain incomplete |
 | [Held red/blue channel checks](cfa-signed-color-delivery.md#standing-gfx100s-comparisons) | Both ROIs and priors reviewed at ×4 and ×16 with AHD/JPEG references. The conditional fit changes one red window on the transferred left crop. The unconditional fit gives weak strands a greener tint. Fine crossings remain incomplete |
 | [Regional Bayer color phase](cfa-regional-phase.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed at ×4 and ×16 with the ISO100 AHD and JPEG references. Regional weighting changes each ROI by at most 0.334 DN16 RGB RMS versus the crop-wide color fit. Fine crossings remain incomplete |
 | [Bayer phase across colors](cfa-phase-sharing.md#standing-gfx100s-comparisons) | Both ROIs and noise profiles viewed at ×4 and ×16. Opening the direction rank adds subtle diagonal structure on the left. Sharing red and blue phase changes each ROI by less than 1 DN16 RGB RMS versus green weak-only. Fine crossings remain incomplete |

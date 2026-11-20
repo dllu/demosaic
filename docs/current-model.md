@@ -184,6 +184,9 @@ crop fit takes 39 ms on the right cab and leaves fine crossings incomplete.
 local signed-photo RGB RMS by 0.471 DN16 over regional color pooling.
 The photos show gains from suppressing unsupported neutral color.
 Weak-increment error and fine real cab crossings remain unresolved.
+[Directional pooling](cfa-directional-chroma.md) leaves this fit's
+outputs equal. Fitting red and blue phase independently recovers two
+red windows at ISO1600, with incomplete real cab crossings.
 
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
