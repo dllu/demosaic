@@ -157,6 +157,13 @@ RMS by 6.252 DN16. The learned arms give nearly equal wire
 scores and add regularity on the fine cab without completing
 crossings.
 
+The [spatially varying carrier replay](local-carrier-envelope.md)
+gains 0.183 weak-response points over the fixed combined check
+on warped exact targets. At comparable recovery continuing-strand
+RMS rises by 1.509 DN16. Supplying the synthetic phase shift
+adds 0.920 points in a separate weak-only diagnostic. The real
+fine cab shows small changes with incomplete crossings.
+
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
 weak response it lowers continuing-strand RMS by 2.361 DN16 versus

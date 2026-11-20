@@ -1038,6 +1038,14 @@ wider amplitude cap improves the paired response and also brightens
 the overly regular cab lattice. The two directions still lack connected
 crossings in the left ROI.
 
+A [held-green complex envelope](local-carrier-envelope.md) tests
+locally varying phase and amplitude with a fixed broad and central
+Bayer gate. It gains 0.183 weak-response points on 20 new warped
+photo fixtures. At comparable response, continuing-strand RMS
+rises 1.509 DN16. A known-phase diagnostic gains 0.920 points
+and increases weak-window admission from 129 to 209 without
+activating its controls. The real cab shows small changes.
+
 [Whole-photo patch covariance](scene-patch-covariance.md) tests a
 second use of exterior measurements. It learns correlations between
 native cosine modes from nearby or visually similar exterior patches
