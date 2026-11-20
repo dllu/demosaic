@@ -51,6 +51,7 @@ Start with the [README](../README.md) for installation and inference.
 [Cab Bayer evidence and masked internal phase](local-internal-phase.md) ·
 [Local wire checks for a junction sideband](local-junction-support.md) ·
 [Red and blue evidence for junctions](cfa-junction-phase.md) ·
+[Bayer routing across contrast levels](detail-regime-router.md) ·
 [Weak-detail training across redraws](detail-redraw-gate.md) ·
 [Direct weak-detail response training](direct-detail-response.md) ·
 [Trained exterior scene gates](scene-detail-selector.md) ·

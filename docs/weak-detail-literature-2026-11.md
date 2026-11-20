@@ -1313,6 +1313,15 @@ off-target components rise versus Local 50k, and the direct
 control preserves more contrast on the weakest half and the
 planted wires. [Independent-redraw gate training](detail-redraw-gate.md).
 
+A branchwise mixture of the frozen redraw and direct heads uses
+one Bayer-dependent gate for sharpening and another for smoothing.
+With buffered calibration across two contrast levels, it gains
+0.379 faint response points on 48 confirmation photos and lowers
+exact-flat RMS by 0.116 DN16. At equal response the paired error
+is lower than the best fixed mixture. Moving the local descriptors
+lowers response. The faintest half and planted wires still lose
+contrast. [Bayer routing across contrast levels](detail-regime-router.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,

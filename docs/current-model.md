@@ -87,6 +87,13 @@ The direct control recovers more contrast on the faintest half and
 on planted wires. Fine cab crossings remain incomplete.
 [Independent-redraw gate training](detail-redraw-gate.md).
 
+Separate Bayer routing for sharpening and smoothing gains 0.379 faint
+response points and removes 0.116 DN16 exact-flat RMS on a new confirmation
+panel. A buffered strength passes the mean error budgets in both contrast
+regimes. The faintest half and planted wires lose some response, and real
+cab crossing changes are subtle. The mixture remains experimental.
+[Bayer routing across contrast levels](detail-regime-router.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

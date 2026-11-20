@@ -14,6 +14,12 @@ head than with the direct-loss control. The stability head
 reduces weak-direction residue in planted gaps and also loses
 intact wire contrast. Fine real cab crossings remain incomplete.
 
+The follow-up mixes the two frozen heads with nominal Local 50k,
+using a single buffered calibration for both contrast regimes.
+It stays within the paired-error limits on 48 confirmation photos.
+The faintest half and planted wires still lose some response.
+[Bayer routing across contrast levels](detail-regime-router.md).
+
 ## Separate reproducible error from draw-sensitive error
 
 The previous signed-response head improved faint contrast and
