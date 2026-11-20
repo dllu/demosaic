@@ -465,6 +465,11 @@ wire tradeoff. At matched flat error, donor and query checking adds
 0.109 weak-response points and lowers continuing-wire gap error by
 0.162 DN16 versus the earlier confirmed diagonal. Fine and flat errors
 rise on new natural photos. The fine cab crossings remain incomplete.
+[Wider Bayer windows](scene-patch-width.md) lower continuing short-wire
+error in planted true gaps by 3.85 DN16 versus the 16-pixel window
+at nearly equal flat error. The separate low band gains 0.51 long
+response points over Corpus 100k. Natural-photo error rises and
+the real fine cab crossings remain incomplete.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

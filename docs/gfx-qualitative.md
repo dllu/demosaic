@@ -27,6 +27,10 @@ historical boards. Use these reports for the current completed comparisons:
   changes the sky by 0.027 DN16 RGB RMS at the natural matched-flat
   strength. The sky stays smooth and the existing coarse crossings
   stay coherent. Thin wires, bracing and leaf subdivisions stay soft.
+- [Wider Bayer windows](scene-patch-width.md#standing-gfx100s-comparisons)
+  change sky by 0.009 DN16 RGB RMS and coarse fence by 1.477.
+  Sky stays smooth and the coarse crossing pattern stays coherent.
+  Fine building and foliage details remain soft.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.

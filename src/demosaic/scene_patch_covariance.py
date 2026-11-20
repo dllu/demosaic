@@ -7,7 +7,6 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 SIZE = 16
-STRIDE = 8
 NEIGHBORS = 32
 MODES = ("matched", "diagonal", "transposed", "nearby", "confirmed", "confirmed_diagonal")
 VALIDATED_MODES = (
@@ -20,6 +19,22 @@ VALIDATED_MODES = (
 
 
 @dataclass(frozen=True)
+class PatchBand:
+    """Native window size and the radial band delivered by its filter."""
+
+    size: int = 16
+    low: float = 0.08
+    high: float = 0.224
+
+    def __post_init__(self):
+        if self.size not in (16, 32) or not 0 < self.low <= self.high <= 0.224:
+            raise ValueError("Expected a supported patch size and detail band below the CFA limit")
+
+
+DEFAULT_BAND = PatchBand()
+
+
+@dataclass(frozen=True)
 class PatchBasis:
     green: np.ndarray
     projection: np.ndarray
@@ -27,44 +42,50 @@ class PatchBasis:
     transpose: np.ndarray
 
 
-@lru_cache(maxsize=4)
-def patch_basis(colors):
+@lru_cache(maxsize=16)
+def patch_basis(colors, band=DEFAULT_BAND):
     """Fit smooth nuisance terms and the same continuous modes on both greens."""
     green = np.flatnonzero(np.asarray(colors) == 1)
     if (len(colors), len(green)) != (4, 2):
         raise ValueError("Expected a Bayer layout with two green planes")
     # Coefficients are orthonormal on the delivered native grid. Exclude the
     # per-plane Nyquist limits and the low modes used for patch matching.
-    frequency = np.arange(8) / (2 * SIZE)
+    size = band.size
+    harmonics = np.arange(int(2 * size * 0.224) + 1)
+    frequency = harmonics / (2 * size)
     radius = np.hypot(frequency[:, None], frequency[None, :])
-    smooth = np.argwhere(radius < 0.08)
-    active = np.argwhere((radius >= 0.08) & (radius <= 0.224))
-    pairs = np.concatenate((smooth, active))
-    locations = (np.arange(SIZE) + 0.5) / SIZE
-    basis = np.sqrt(2 / SIZE) * np.cos(np.pi * np.arange(8)[:, None] * locations)
-    basis[0] = 1 / np.sqrt(SIZE)
+    delivered = (radius >= band.low) & (radius <= band.high)
+    nuisance = np.argwhere((radius <= 0.224) & ~delivered)
+    active = np.argwhere(delivered)
+    if not len(active):
+        raise ValueError("Detail band contains no modes at this window size")
+    pairs = np.concatenate((nuisance, active))
+    locations = (np.arange(size) + 0.5) / size
+    basis = np.sqrt(2 / size) * np.cos(np.pi * harmonics[:, None] * locations)
+    basis[0] = 1 / np.sqrt(size)
     image = basis[pairs[:, 0], :, None] * basis[pairs[:, 1], None, :]
     sampled = np.stack([image[:, g // 2 :: 2, g % 2 :: 2] for g in green])
     design = sampled.reshape(2, len(pairs), -1).transpose(0, 2, 1)
     if not np.all(np.linalg.cond(design) < 8):
         raise ValueError("The selected detail modes are ill-conditioned on Bayer")
-    projection = np.linalg.pinv(design)[:, len(smooth) :]
+    projection = np.linalg.pinv(design)[:, len(nuisance) :]
     lookup = {tuple(pair): i for i, pair in enumerate(active)}
     transpose = np.array([lookup[(x, y)] for y, x in active])
-    return PatchBasis(green, projection, image[len(smooth) :], transpose)
+    return PatchBasis(green, projection, image[len(nuisance) :], transpose)
 
 
-def sample_windows(raw, coords):
+def sample_windows(raw, coords, size=SIZE):
     """Extract even-origin windows directly from physical CFA planes."""
     y, x = (coords.T // 2)[..., None, None]
-    offsets = np.arange(SIZE // 2)
+    offsets = np.arange(size // 2)
     return raw[:, y + offsets[:, None], x + offsets].transpose(1, 0, 2, 3)
 
 
 def encode(windows, basis, shot, read):
     means = windows.mean(axis=(-1, -2), dtype=np.float64)
     green = windows[:, basis.green]
-    quadrants = green.reshape(len(windows), 2, 2, SIZE // 4, 2, SIZE // 4)
+    quarter = basis.image.shape[-1] // 4
+    quadrants = green.reshape(len(windows), 2, 2, quarter, 2, quarter)
     quadrants = quadrants.mean(axis=(1, 3, 5), dtype=np.float64).reshape(len(windows), 4)
     signal = means[:, basis.green].mean(axis=1)
     noise = np.sqrt(np.maximum(shot * signal + read, 1e-12))
@@ -81,29 +102,35 @@ class ExteriorPatches:
     coords: np.ndarray
     features: np.ndarray
     normalized: np.ndarray
+    band: PatchBand = DEFAULT_BAND
 
 
-def build_exterior(raw, colors, box, shot, read, *, max_windows=4800, halo=16):
+def build_exterior(raw, colors, box, shot, read, *, max_windows=4800, halo=16, band=DEFAULT_BAND):
     """Read only exterior CFA sites. Coordinates and thinning precede image reads."""
     x, y, w, h = box
     height, width = (2 * n for n in raw.shape[-2:])
-    stride = max(SIZE, 2 * int(np.ceil(np.sqrt(height * width / max_windows) / 2)))
+    size = band.size
+    stride = max(size, 2 * int(np.ceil(np.sqrt(height * width / max_windows) / 2)))
     yy, xx = np.meshgrid(
-        np.arange(0, height - SIZE + 1, stride),
-        np.arange(0, width - SIZE + 1, stride),
+        np.arange(0, height - size + 1, stride),
+        np.arange(0, width - size + 1, stride),
         indexing="ij",
     )
-    safe = (yy + SIZE <= y - halo) | (yy >= y + h + halo)
-    safe |= (xx + SIZE <= x - halo) | (xx >= x + w + halo)
+    safe = (yy + size <= y - halo) | (yy >= y + h + halo)
+    safe |= (xx + size <= x - halo) | (xx >= x + w + halo)
     coords = np.column_stack((yy[safe], xx[safe]))
     if not len(coords):
         return None
-    basis = patch_basis(tuple(colors))
-    features, coefficients, noise, valid = encode(sample_windows(raw, coords), basis, shot, read)
+    basis = patch_basis(tuple(colors), band)
+    features, coefficients, noise, valid = encode(
+        sample_windows(raw, coords, size), basis, shot, read
+    )
     # Divide by the typical standard deviation of the average green fit.
     # Limit the leverage of a single high-contrast donor.
     normalized = coefficients / (np.sqrt(2) * noise[:, None, None])
-    return ExteriorPatches(coords[valid], features[valid], np.clip(normalized[valid], -10, 10))
+    return ExteriorPatches(
+        coords[valid], features[valid], np.clip(normalized[valid], -10, 10), band
+    )
 
 
 def choose_exterior(features, coords, exterior, *, nearby=False, ranked=False):
@@ -252,19 +279,22 @@ def corrections(raw, parent_green, colors, shot, read, box, exterior, *, validat
     height, width = parent_green.shape
     modes = VALIDATED_MODES if validate_donors else MODES
     results = {key: np.zeros_like(parent_green) for key in modes}
-    if exterior is None or not len(exterior.coords) or min(height, width) < SIZE:
+    if exterior is None or not len(exterior.coords):
+        return results
+    size = exterior.band.size
+    if min(height, width) < size:
         return results
 
-    basis = patch_basis(tuple(colors))
+    basis = patch_basis(tuple(colors), exterior.band)
     yy, xx = np.meshgrid(
-        np.arange(0, height - SIZE + 1, STRIDE),
-        np.arange(0, width - SIZE + 1, STRIDE),
+        np.arange(0, height - size + 1, size // 2),
+        np.arange(0, width - size + 1, size // 2),
         indexing="ij",
     )
     coords = np.column_stack((yy.ravel(), xx.ravel()))
-    windows = sample_windows(raw, coords)
+    windows = sample_windows(raw, coords, size)
     features, coefficients, noise, valid = encode(windows, basis, shot, read)
-    offsets = np.arange(SIZE)
+    offsets = np.arange(size)
     grid_y = coords[:, 0, None, None] + offsets[:, None]
     grid_x = coords[:, 1, None, None] + offsets
     parent_windows = parent_green[grid_y, grid_x]
@@ -285,7 +315,7 @@ def corrections(raw, parent_green, colors, shot, read, box, exterior, *, validat
         values = single_donor_fit(
             donors, weights, innovation, coefficients, noise, basis, neighbors, nearby_weights
         )
-    taper = np.sin((offsets + 0.5) * np.pi / SIZE) ** 2
+    taper = np.sin((offsets + 0.5) * np.pi / size) ** 2
     window = taper[:, None] * taper[None, :]
     normal = np.zeros_like(parent_green)
     np.add.at(normal, (grid_y, grid_x), np.broadcast_to(window, parent_windows.shape))

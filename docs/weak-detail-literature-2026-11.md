@@ -1023,9 +1023,16 @@ response. Both standing GFX families were viewed.
 repeat-pattern flat error from 27.01 to 15.44 DN16 at similar
 response. At matched wire-flat error, adding the query check
 gains 0.109 points over the earlier confirmed diagonal. Natural
-fine error rises. The tested 16-pixel basis starts above the
-measured fine green fence fundamental. The real ROI still has
-incomplete crossings.
+fine error rises. The tested 16-pixel basis covers the measured
+real cab peaks and starts above the longer planted-mesh
+fundamental. The real ROI still has incomplete crossings.
+
+[Wider Bayer windows](scene-patch-width.md) preserve the frequency
+band while increasing native support from 16 to 32 pixels. They
+reduce continuing short-wire error in true gaps by 3.85 DN16 at
+nearly equal flat error. A separate band recovers more of a planted
+24–35-pixel fundamental. The wire-calibrated strengths increase
+natural-photo errors, and the native cab crossings stay incomplete.
 
 ### 5. Give coarse mottle and fine response distinct training routes
 

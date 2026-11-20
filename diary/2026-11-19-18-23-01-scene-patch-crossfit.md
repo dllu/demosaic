@@ -20,3 +20,9 @@ fence stays coherent. The fine cab crossings remain incomplete.
 Completed numerical and native review for this frozen-weight
 component. Fixed-panel PSNR coverage is recorded separately.
 [Performance history](../docs/performance-history.md).
+
+Frequency provenance correction. The 27.69-pixel period belongs
+to the planted V196 mesh. The real DSCF3842 peaks range from
+about 7.2 to 8.8 pixels and fall inside the evaluated band.
+[Planted measurement](../docs/innovation-frequency-selection.md) ·
+[Measured DSCF3842 peaks](../docs/green-phase-spectrum.md#measured-result).

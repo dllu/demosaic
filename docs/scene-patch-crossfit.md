@@ -13,6 +13,12 @@ retain incomplete fine crossings.
 [Frozen drivers and receipts](results/scene-patch-crossfit-v1/evidence.tar.xz) ·
 [Crop provenance](images/scene-patch-crossfit-v1/manifest.json).
 
+[Wider Bayer windows](scene-patch-width.md) lower short-wire error
+in known gaps by 3.85 DN16 versus the narrower same-band window.
+A separate low band raises long-wave response at similar quiet
+error on a second set of planted wires. The real cab still has
+incomplete crossings.
+
 ## Separate discovery from measurement
 
 The [previous patch-covariance experiment](scene-patch-covariance.md)
@@ -187,11 +193,13 @@ leaf subdivisions remain soft.
 Both DSCF3842/3835 left crops stay mostly unresolved. The
 transferred right still shows clearer diagonal traces with
 incomplete crossings. The donor-validated change is 0.024–0.067
-DN16 over the four fine-cab crops. The fitted detail starts near
-0.08 cycles/pixel, above the measured ≈0.036 cycles/pixel fine-fence
-fundamental. The ISO100 AHD and camera JPEGs are independent
+DN16 over the four fine-cab crops. The measured real peaks span
+0.114–0.139 cycles/pixel, inside the fitted band. The approximately
+0.036 cycles/pixel peak reported in V196 belongs to a planted mesh.
+The ISO100 AHD and camera JPEGs are independent
 qualitative references with different aperture, exposure and
-motion. [Earlier measured fine-fence frequency](innovation-frequency-selection.md).
+motion. [Measured cab peaks](green-phase-spectrum.md#measured-result) ·
+[Planted mesh frequency audit](innovation-frequency-selection.md).
 
 [Sky](images/scene-patch-crossfit-v1/standing/main-overcast-sky-main-overcast-sky-x4.png) ·
 [Building](images/scene-patch-crossfit-v1/standing/main-building-detail-main-building-detail-x4.png) ·

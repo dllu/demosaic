@@ -5,6 +5,7 @@ from demosaic.scene_patch_covariance import (
     MODES,
     SIZE,
     ExteriorPatches,
+    PatchBand,
     build_exterior,
     confirmed_power,
     corrections,
@@ -117,3 +118,18 @@ def test_donor_halves_validate_each_others_modes_and_preserve_the_query_sign():
         different, weights, tone, observation, np.ones(1), basis
     ).values():
         np.testing.assert_array_equal(result, 0)
+
+
+@pytest.mark.parametrize("colors", [(0, 1, 1, 2), (1, 0, 2, 1), (1, 2, 0, 1), (2, 1, 1, 0)])
+def test_wide_band_tracks_long_detail_on_both_greens(colors):
+    low = patch_basis(colors, PatchBand(32, 0.022, 0.08))
+    mid = patch_basis(colors, PatchBand(32, 0.08, 0.16))
+    phase = (np.arange(32) + 0.5) * np.pi / 16
+    rgb = np.broadcast_to(0.35 + 0.04 * np.cos(phase), (3, 32, 32))
+    raw = pack(rgb, colors)
+    view = sample_windows(raw, np.array([[0, 0]]), 32)
+    _, long, _, _ = encode(view, low, 0.001, 0.00001)
+    _, short, _, _ = encode(view, mid, 0.001, 0.00001)
+    np.testing.assert_allclose(long[:, 0], long[:, 1], atol=1e-13)
+    assert np.linalg.norm(long) > 0.1
+    np.testing.assert_allclose(short, 0, atol=1e-13)

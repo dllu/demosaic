@@ -46,8 +46,13 @@ has repeatedly come with extra flat-region error or false color. The
    [Separate donor validation](scene-patch-crossfit.md) lowers flat
    error on coherent repeats and improves planted-wire response at
    matched flat error. The new natural-photo panel has higher
-   increment and flat error. The fitted band starts above the
-   measured fine-cab fundamental.
+   increment and flat error. The fitted band covers the measured
+   fine-cab peaks and starts above the longer planted-mesh fundamental.
+   [Wider measurement windows](scene-patch-width.md) improve both real
+   peak projections in a clean-signal basis check. The same-band
+   32-pixel window lowers short-wire error inside planted gaps at
+   nearly equal flat error. Real fine crossings stay incomplete and
+   the wire-calibrated strengths raise natural-photo error.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side
