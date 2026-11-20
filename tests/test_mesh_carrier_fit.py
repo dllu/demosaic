@@ -91,7 +91,7 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
 
 
 @pytest.mark.parametrize("pattern", tuple(PATTERNS))
-@pytest.mark.parametrize("method", ("pooled", "pooled-color", "ring-posterior"))
+@pytest.mark.parametrize("method", ("pooled", "pooled-color", "ring-posterior", "weak-posterior"))
 def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
     y, x = np.indices((480, 480), dtype=np.float32)
     x, y = x - 230, y - 228
@@ -122,7 +122,7 @@ def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
     assert result.dtype == parent.dtype
 
 
-@pytest.mark.parametrize("method", ("pooled", "pooled-color"))
+@pytest.mark.parametrize("method", ("pooled", "pooled-color", "weak-posterior"))
 def test_pooled_fit_requires_context_and_independent_donors(method):
     raw = scene_fixture()
     raw[133:325, 135:327] = 0.08

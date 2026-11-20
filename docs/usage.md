@@ -127,9 +127,12 @@ channels have different phase. The original 64-pixel fit is the default
 Use `method="ring-posterior"` with `parent_context=None` for
 the ring phase prior. It estimates weak support in the center
 from both green lattices and the surrounding RAW ring.
+Use `method="weak-posterior"` with the 192×192 `parent_context`
+shown above to apply that prior only to the weaker direction.
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·
+[Weak-only results and timing](local-conditional-posterior.md#use-the-crop-option) ·
 [Original 64-pixel fit](bayer-carrier-scale.md).
 
 ## Environment and storage

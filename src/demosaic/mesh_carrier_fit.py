@@ -180,8 +180,12 @@ def refine_raw_mesh_carriers(
     The experimental `"ring-posterior"` method uses an exterior Bayer
     prior and averages the no-wire, one-wire and two-wire models in each
     delivery window. It estimates the inherited correction on the parent
-    crop itself. Donor clearance defaults to zero for `"local64"` and
-    16 pixels for the other methods.
+    crop itself. The experimental `"weak-posterior"` method requires a
+    192×192 parent context and uses the ring prior only in the weaker
+    direction when both green lattices agree on the ranking. It preserves
+    the stronger correction from the combined broad and central check.
+    Donor clearance defaults to zero for `"local64"` and 16 pixels for
+    the other methods.
 
     Requires the eval extra. Calibrated for a repeating two-family mesh.
     """
@@ -216,9 +220,11 @@ def refine_raw_mesh_carriers(
     x, y, w, h = map(int, (x, y, w, h))
     if min(x, y) < 0 or x + w > 2 * scene.shape[2] or y + h > 2 * scene.shape[1]:
         raise ValueError("roi must be contained in the Bayer scene")
-    if method not in ("local64", "pooled", "pooled-color", "ring-posterior"):
-        raise ValueError("method must be 'local64', 'pooled', 'pooled-color', or 'ring-posterior'")
+    methods = ("local64", "pooled", "pooled-color", "ring-posterior", "weak-posterior")
+    if method not in methods:
+        raise ValueError(f"method must be one of {methods}")
     pooled = method in ("pooled", "pooled-color")
+    needs_context = pooled or method == "weak-posterior"
     minimum_clearance = 0 if method == "local64" else _POOLED_HALO
     clearance = minimum_clearance if donor_clearance is None else donor_clearance
     if (
@@ -227,9 +233,9 @@ def refine_raw_mesh_carriers(
         or clearance < minimum_clearance
     ):
         raise ValueError(f"donor_clearance must be an integer of at least {minimum_clearance}")
-    if pooled:
+    if needs_context:
         if parent_context is None:
-            raise ValueError("pooled method requires a 192×192 parent_context")
+            raise ValueError(f"{method} method requires a 192×192 parent_context")
         parent_context = np.asarray(parent_context)
         interior = np.s_[:, _POOLED_HALO:-_POOLED_HALO, _POOLED_HALO:-_POOLED_HALO]
         if (
@@ -242,7 +248,7 @@ def refine_raw_mesh_carriers(
                 "parent_context must contain the exact RGB parent and its 16-pixel halo"
             )
     elif parent_context is not None:
-        raise ValueError("parent_context is only used by the pooled method")
+        raise ValueError("parent_context is used by the pooled and weak-posterior methods")
     frequencies = _spacing(scene, colors, x, y, clearance=int(clearance))
     if frequencies is None:
         return parent
@@ -255,6 +261,20 @@ def refine_raw_mesh_carriers(
 
             return _refine(
                 parent, scene, colors, (x, y), frequencies, shot, read, neutral / neutral[1]
+            )
+        if method == "weak-posterior":
+            from ._mesh_weak_posterior import _refine
+
+            return _refine(
+                parent,
+                parent_context,
+                scene,
+                colors,
+                (x, y),
+                frequencies,
+                shot,
+                read,
+                neutral / neutral[1],
             )
         if pooled:
             from ._mesh_pooled import _refine

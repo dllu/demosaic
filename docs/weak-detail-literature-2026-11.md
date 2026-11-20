@@ -982,6 +982,12 @@ and +0.026 DN16 false projection into gaps. At matched response the
 combined check has lower continuing-strand error. Substituting exact
 frequencies changes weak recovery by just 0.021 points for the ring fit.
 
+The [weak-only follow-up](local-conditional-posterior.md) keeps the combined
+check's stronger correction. It gains 1.807 points on 24 new ISO6400 photos
+and adds 0.084 DN16 false weak projection into gaps, with a 0.001 DN16
+continuing-strand difference. Exterior rank alone fails on the calibration
+panel, and the local rank is ambiguous on the standing left cab.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

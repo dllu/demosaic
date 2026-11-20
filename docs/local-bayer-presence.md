@@ -2,6 +2,11 @@
 
 Estimating local support for zero, one or two wire directions gives a new opt-in crop restoration. Against the [combined broad and central check](local-nested-support.md), it gains **0.573 weak-response points** on the retained ISO6400 panel and **0.506 points** on 24 source-disjoint photos. The fresh interval spans zero, and faint projection into true gaps rises **0.026 DN16**. On the real right cab, one family becomes more visible in places while the second remains uneven. The sky and coarse fence retain their appearance.
 
+[Fitting the weaker direction separately](local-conditional-posterior.md)
+retains the combined check's stronger coefficients. It gains 1.807
+weak-response points and lowers intact weak error 1.323 DN16 on 24
+new ISO6400 photos, with 0.084 DN16 more false projection in gaps.
+
 ## Separate discovery, context and delivery
 
 All methods use the existing four 128-pixel Bayer frequency donors. On the photographic panel those start outside the 256-pixel query. For each 64-pixel fit window, the ring excludes its central 32×32 pixels. It estimates two signed quadratures per direction from the two native green lattices, each with its own smooth nuisance fit. The squared coefficient norm is reduced by its estimated noise energy. The result supplies a prior mean. The prior deviation is 0.00065 plus 0.60 times that estimated amplitude, in normalized sensor units.

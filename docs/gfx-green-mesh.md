@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Separate fit for the weaker direction](local-conditional-posterior.md#standing-gfx100s-comparisons) | Both ROIs, priors and JPEGs viewed at ×4 and ×16. Left uses the combined fit. The weaker right diagonal becomes clearer in places, with incomplete crossings and background mottle |
 | [Ring phase prior](local-bayer-presence.md#standing-gfx100s-comparisons) | Both ROIs, priors and camera JPEGs viewed at ×4 and ×16. A diagonal becomes more pronounced on nominal right. The second family and left crossings remain incomplete |
 | [Noise-weighted Bayer validation](cfa-predictive-covariance.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed at ×4 and ×16 with AHD and JPEGs. The weighted and covariance checks reproduce the local conditional result. Fine crossings and background mottle remain |
 | [Whole-frame graph routes](scene-geodesic-donors.md#native-gfx100s-review) | Both ROIs, priors and JPEGs viewed at native ×16. Nominal right changes 0.89 DN16 RGB RMS versus V120. Other crops reproduce V120 and fine crossings remain incomplete |

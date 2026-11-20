@@ -181,6 +181,13 @@ projection in true gaps. At similar weak response, continuing-strand
 error rises 4.353 DN16 versus the combined check. The real right cab
 has a more pronounced diagonal and incomplete crossings.
 
+The [weak-only posterior](local-conditional-posterior.md) keeps the
+combined check's stronger correction and gains 1.807 ISO6400 points
+on 24 new photos, with 0.084 DN16 more false weak projection in gaps.
+Continuing-strand error differs by 0.001 DN16. The 160-pixel crop
+option takes 28.58 ms after the parent forward and gives a subtly
+clearer weak diagonal on the right cab.
+
 [Regional Bayer color pooling](cfa-regional-phase.md) adds 0.504
 weak-response points over green-only on 24 fresh warped backgrounds with
 equal flat RMS. Nearby checks reduce errors from local color reversals.

@@ -3,6 +3,7 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Separate fit for the weaker direction](local-conditional-posterior.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The coarse fence changes 4.74 DN16 RGB RMS versus the combined check and retains connected crossings.
 - [Ring phase prior](local-bayer-presence.md#standing-gfx100s-comparisons) returns Local 50k in sky, building and foliage. The coarse fence changes 6.82 DN16 RGB RMS versus the combined check and retains connected crossings.
 - [Noise-weighted Bayer validation](cfa-predictive-covariance.md#standing-gfx100s-comparisons) reproduces the local conditional output on all four main crops, with smooth sky and the same coarse crossings.
 - [Whole-frame graph routes](scene-geodesic-donors.md#native-gfx100s-review) reproduce V120 in the sky, building and foliage, and reproduce endpoint ranking on the coarse fence. The cost-matched straight route introduces visible building bands.
