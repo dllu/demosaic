@@ -10,6 +10,13 @@ SIZE = 16
 STRIDE = 8
 NEIGHBORS = 32
 MODES = ("matched", "diagonal", "transposed", "nearby", "confirmed", "confirmed_diagonal")
+VALIDATED_MODES = (
+    "donor_validated",
+    "validated_diagonal",
+    "validated_transposed",
+    "donor_and_query",
+    "diagonal_and_query",
+)
 
 
 @dataclass(frozen=True)
@@ -99,13 +106,16 @@ def build_exterior(raw, colors, box, shot, read, *, max_windows=4800, halo=16):
     return ExteriorPatches(coords[valid], features[valid], np.clip(normalized[valid], -10, 10))
 
 
-def choose_exterior(features, coords, exterior, *, nearby=False):
+def choose_exterior(features, coords, exterior, *, nearby=False, ranked=False):
     feature_cost = cdist(features, exterior.features, metric="sqeuclidean")
     spatial = cdist(coords, exterior.coords, metric="sqeuclidean")
     spatial /= (4 * SIZE) ** 2
     distance = feature_cost + (spatial if nearby else 0.25 * np.log1p(spatial))
     count = min(NEIGHBORS, len(exterior.coords))
     index = np.argpartition(distance, count - 1, axis=1)[:, :count]
+    if ranked:
+        order = np.argsort(np.take_along_axis(distance, index, axis=1), axis=1, kind="stable")
+        index = np.take_along_axis(index, order, axis=1)
     selected = np.take_along_axis(feature_cost, index, axis=1)
     weights = np.exp(-0.5 * selected)
     # A poor match shrinks the second moments toward zero.
@@ -140,10 +150,108 @@ def signed_support(observations, projected, sigma):
     return np.clip((scores.min(axis=1) - 0.5) / 2, 0, 1)
 
 
-def corrections(raw, parent_green, colors, shot, read, box, exterior):
+def folded_weights(weights):
+    """Normalize disjoint halves while retaining the reliability of the donor match."""
+    totals = weights.sum(axis=-1, keepdims=True)
+    proba = weights / np.maximum(totals, 1e-30)
+    square_sum = np.sum(proba**2, axis=-1, keepdims=True)
+    supported = (square_sum <= 0.25) & (totals > 0)
+    return proba, square_sum, supported
+
+
+def confirmed_power(products, weights, noise_power):
+    """Lower signed cross-power estimate from held-out pairs of physical greens."""
+    p, square_sum, supported = folded_weights(weights)
+    mean = np.einsum("bn,bnk->bk", p, products)
+    squared_error = (products - mean[:, None]) ** 2
+    variance = np.einsum("bn,bnk->bk", p**2, squared_error) / np.maximum(1 - square_sum, 1e-6)
+    standard_error = np.sqrt(np.maximum(variance, noise_power * square_sum))
+    return np.maximum(mean - 2 * standard_error, 0) * supported
+
+
+def donor_validated_fields(donors, weights, innovation, coefficients, noise, basis):
+    """Fit directions in one donor half and estimate their power in the other."""
+    result = {key: np.zeros_like(innovation) for key in VALIDATED_MODES}
+    if donors.shape[1] < 8:
+        return result
+    gram = basis.projection @ basis.projection.swapaxes(-1, -2)
+    coefficient_var = gram.diagonal(axis1=-1, axis2=-2)
+    match_strength = np.minimum(weights.sum(axis=1, keepdims=True), 1)
+    diagonal_support = signed_support(
+        coefficients, innovation, noise[:, None, None] * np.sqrt(coefficient_var)
+    )
+    for start in (0, 1):
+        discover, validate = donors[:, start::2], donors[:, 1 - start :: 2]
+        p, _, eligible = folded_weights(weights[:, start::2])
+        held = weights[:, 1 - start :: 2]
+        moment = covariance(discover, p)
+        diagonal_only = np.maximum(moment.diagonal(axis1=-1, axis2=-2), 0)
+        checked = confirmed_power(
+            validate[:, :, 0] * validate[:, :, 1], held, np.prod(coefficient_var, axis=0) / 4
+        )
+        signal = np.minimum(checked, diagonal_only) * match_strength * eligible
+        update = innovation * signal / (1 + signal) * 0.5
+        result["validated_diagonal"] += update
+        result["diagonal_and_query"] += update * diagonal_support
+
+        eig, vectors = np.linalg.eigh(moment)
+        observations = np.einsum("bik,bngi->bngk", vectors, validate)
+        variances = np.einsum("bik,gij,bjk->bgk", vectors, gram, vectors, optimize=True)
+        checking_noise = np.prod(variances, axis=1) / 4
+        powers = confirmed_power(
+            observations[:, :, 0] * observations[:, :, 1], held, checking_noise
+        )
+        signal = np.minimum(powers, np.maximum(eig, 0)) * match_strength * eligible
+        gain = 0.5 * signal / (1 + signal)
+        projected = np.einsum("bik,bi->bk", vectors, innovation)
+        result["donor_validated"] += np.einsum("bik,bk->bi", vectors, gain * projected)
+        observed = np.einsum("bik,bgi->bgk", vectors, coefficients)
+        support = signed_support(observed, projected, noise[:, None, None] * np.sqrt(variances))
+        result["donor_and_query"] += np.einsum("bik,bk->bi", vectors, gain * projected * support)
+
+        wrong = vectors[:, basis.transpose]
+        wrong_projection = np.einsum("bik,bi->bk", wrong, innovation)
+        result["validated_transposed"] += np.einsum("bik,bk->bi", wrong, gain * wrong_projection)
+    return result
+
+
+def single_donor_fit(
+    donors, weights, innovation, coefficients, noise, basis, neighbors, nearby_weights
+):
+    """Previous single estimate of covariance and its original controls."""
+    matched = covariance(donors, weights)
+    # Finite sample noise alone yields positive eigenvalues after PSD
+    # projection. Use the same dimension-dependent empirical allowance
+    # for the full moment and its diagonal control.
+    floor = np.sqrt(len(basis.image) * np.sum(weights**2, axis=1))
+    rotated = matched[:, basis.transpose][:, :, basis.transpose]
+    diagonal = np.maximum(matched.diagonal(axis1=-1, axis2=-2) - floor[:, None], 0)
+    local = covariance(neighbors, nearby_weights)
+    local_floor = np.sqrt(len(basis.image) * np.sum(nearby_weights**2, axis=1))
+    gain, vectors = eigenfilter(matched, floor)
+    projected = np.einsum("bik,bi->bk", vectors, innovation)
+    observed = np.einsum("bik,bgi->bgk", vectors, coefficients)
+    exact_projection = np.einsum("bik,gip->bgkp", vectors, basis.projection)
+    sigma = noise[:, None, None] * np.linalg.norm(exact_projection, axis=-1)
+    support = signed_support(observed, projected, sigma)
+    diagonal_sigma = noise[:, None, None] * np.linalg.norm(basis.projection, axis=-1)
+    diagonal_gain = innovation * (diagonal / (1 + diagonal))
+    return {
+        "matched": np.einsum("bik,bk->bi", vectors, gain * projected),
+        "diagonal": diagonal_gain,
+        "transposed": filter_innovation(rotated, innovation, floor),
+        "nearby": filter_innovation(local, innovation, local_floor),
+        "confirmed": np.einsum("bik,bk->bi", vectors, gain * projected * support),
+        "confirmed_diagonal": diagonal_gain
+        * signed_support(coefficients, innovation, diagonal_sigma),
+    }
+
+
+def corrections(raw, parent_green, colors, shot, read, box, exterior, *, validate_donors=False):
     """Return fixed-basis luminance corrections from the query measurements."""
     height, width = parent_green.shape
-    results = {key: np.zeros_like(parent_green) for key in MODES}
+    modes = VALIDATED_MODES if validate_donors else MODES
+    results = {key: np.zeros_like(parent_green) for key in modes}
     if exterior is None or not len(exterior.coords) or min(height, width) < SIZE:
         return results
 
@@ -169,34 +277,14 @@ def corrections(raw, parent_green, colors, shot, read, box, exterior):
     )
     innovation = (coefficients - parent_fits).mean(axis=1) * valid[:, None]
     global_coords = coords + np.asarray(box)[[1, 0]]
-    donors, weights = choose_exterior(features, global_coords, exterior)
-    matched = covariance(donors, weights)
-    # Finite sample noise alone yields positive eigenvalues after PSD
-    # projection. Use the same dimension-dependent empirical allowance
-    # for the full moment and its diagonal control.
-    floor = np.sqrt(len(basis.image) * np.sum(weights**2, axis=1))
-    rotated = matched[:, basis.transpose][:, :, basis.transpose]
-    diagonal = np.maximum(matched.diagonal(axis1=-1, axis2=-2) - floor[:, None], 0)
-    neighbors, weights = choose_exterior(features, global_coords, exterior, nearby=True)
-    local = covariance(neighbors, weights)
-    local_floor = np.sqrt(len(basis.image) * np.sum(weights**2, axis=1))
-    gain, vectors = eigenfilter(matched, floor)
-    projected = np.einsum("bik,bi->bk", vectors, innovation)
-    observed = np.einsum("bik,bgi->bgk", vectors, coefficients)
-    exact_projection = np.einsum("bik,gip->bgkp", vectors, basis.projection)
-    sigma = noise[:, None, None] * np.linalg.norm(exact_projection, axis=-1)
-    support = signed_support(observed, projected, sigma)
-    diagonal_sigma = noise[:, None, None] * np.linalg.norm(basis.projection, axis=-1)
-    diagonal_gain = innovation * (diagonal / (1 + diagonal))
-    values = {
-        "matched": np.einsum("bik,bk->bi", vectors, gain * projected),
-        "diagonal": diagonal_gain,
-        "transposed": filter_innovation(rotated, innovation, floor),
-        "nearby": filter_innovation(local, innovation, local_floor),
-        "confirmed": np.einsum("bik,bk->bi", vectors, gain * projected * support),
-        "confirmed_diagonal": diagonal_gain
-        * signed_support(coefficients, innovation, diagonal_sigma),
-    }
+    donors, weights = choose_exterior(features, global_coords, exterior, ranked=validate_donors)
+    if validate_donors:
+        values = donor_validated_fields(donors, weights, innovation, coefficients, noise, basis)
+    else:
+        neighbors, nearby_weights = choose_exterior(features, global_coords, exterior, nearby=True)
+        values = single_donor_fit(
+            donors, weights, innovation, coefficients, noise, basis, neighbors, nearby_weights
+        )
     taper = np.sin((offsets + 0.5) * np.pi / SIZE) ** 2
     window = taper[:, None] * taper[None, :]
     normal = np.zeros_like(parent_green)

@@ -460,6 +460,11 @@ response points over Corpus 100k with two-green confirmation on 24
 independent ISO6400 photos. It raises fine-increment and flat error.
 The simpler diagonal reaches higher response. Fine cab crossings
 remain incomplete.
+[Separate Bayer donors](scene-patch-crossfit.md) improve the retained
+wire tradeoff. At matched flat error, donor and query checking adds
+0.109 weak-response points and lowers continuing-wire gap error by
+0.162 DN16 versus the earlier confirmed diagonal. Fine and flat errors
+rise on new natural photos. The fine cab crossings remain incomplete.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

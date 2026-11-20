@@ -1,0 +1,3761 @@
+{
+  "weights": {
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+      "type": "base",
+      "step": 100000
+    },
+    "v120": {
+      "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "type": "base",
+      "step": 20000
+    }
+  },
+  "naturals": [
+    {
+      "id": "fresh-19-present",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "record": {
+        "id": "fresh-19",
+        "source": {
+          "attribution": null,
+          "author": "Berthold Werner",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/d3/d3ef147a91562530284ba937369db2d5fd8af50b.npy",
+          "cache_sha256": "52be80521bda00ba857b55aaac46c1e5def2976ad5829850aad7d61285c10a00",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/d3/ef/d3ef147a91562530284ba937369db2d5fd8af50b.jpg",
+          "dtype": "uint16",
+          "height": 2542,
+          "id": "d3ef147a91562530284ba937369db2d5fd8af50b",
+          "license": "Public domain",
+          "license_url": null,
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Marktbreit_BW_9.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Marktbreit_BW_9.jpg",
+          "sha1": "d3ef147a91562530284ba937369db2d5fd8af50b",
+          "sha1_hex": "d3ef147a91562530284ba937369db2d5fd8af50b",
+          "shape": [
+            635,
+            904,
+            3
+          ],
+          "split": "val",
+          "title": "File:Marktbreit BW 9.jpg",
+          "width": 3619
+        },
+        "box": [
+          486,
+          104,
+          256,
+          256
+        ],
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "input": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-19-input.npz",
+          "sha256": "a98be81f1065ba6afc01941c4c9ae626b137c4954a3d4324b8d3504d0f333c72"
+        },
+        "rgb": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-19-predictions.npz",
+          "sha256": "e7f7857eba994ff3a1e857d5131eded498c4a06a197a71d7e87cd558d2c3ad52"
+        },
+        "rgb_key": "parent",
+        "draw": "independent",
+        "partition": "fresh",
+        "layout": "GBRG",
+        "seeds": {
+          "exterior": 1813008377224255817,
+          "present": 3977349890293957797,
+          "masked-fine": 4492942972964272424,
+          "flat": 1804458804054323327
+        },
+        "packed": {
+          "shape": [
+            3,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "59095d232ec3fc332ee8945d032b5135a28443dc712a38fbf3497a34dfcb187b"
+        }
+      },
+      "role": "present",
+      "weights": {
+        "matched": 0.007342805550428903,
+        "diagonal": 0.0073567328752139486,
+        "confirmed": 0.03719333057890639,
+        "confirmed_diagonal": 0.03814986394292117,
+        "donor_validated": 0.05104027977636037,
+        "validated_diagonal": 0.0438072551108101,
+        "validated_transposed": 0.051208317418085535,
+        "donor_and_query": 0.2528834922666963,
+        "diagonal_and_query": 0.21280782623296943
+      },
+      "increment_RMS_change_vs_confirmed_diagonal": -0.11892707412937398,
+      "board": {
+        "image": {
+          "path": "exact/fresh-19-present-comparison.png",
+          "sha256": "c0adf5102061c109a055f743592dac20a23f9a0d505cb28f596be1e28d85539f"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Single covariance",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Confirmed diagonal",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated diagonal",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Transposed prior",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/fresh-19-present-triplet.png",
+          "sha256": "33890c72eb4b51c345a4b00884c0631b936c5e4338995858398c58b3e10bd730"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-19-flat",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "record": {
+        "id": "fresh-19",
+        "source": {
+          "attribution": null,
+          "author": "Berthold Werner",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/d3/d3ef147a91562530284ba937369db2d5fd8af50b.npy",
+          "cache_sha256": "52be80521bda00ba857b55aaac46c1e5def2976ad5829850aad7d61285c10a00",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/d3/ef/d3ef147a91562530284ba937369db2d5fd8af50b.jpg",
+          "dtype": "uint16",
+          "height": 2542,
+          "id": "d3ef147a91562530284ba937369db2d5fd8af50b",
+          "license": "Public domain",
+          "license_url": null,
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Marktbreit_BW_9.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Marktbreit_BW_9.jpg",
+          "sha1": "d3ef147a91562530284ba937369db2d5fd8af50b",
+          "sha1_hex": "d3ef147a91562530284ba937369db2d5fd8af50b",
+          "shape": [
+            635,
+            904,
+            3
+          ],
+          "split": "val",
+          "title": "File:Marktbreit BW 9.jpg",
+          "width": 3619
+        },
+        "box": [
+          486,
+          104,
+          256,
+          256
+        ],
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "input": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-19-input.npz",
+          "sha256": "a98be81f1065ba6afc01941c4c9ae626b137c4954a3d4324b8d3504d0f333c72"
+        },
+        "rgb": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-19-predictions.npz",
+          "sha256": "e7f7857eba994ff3a1e857d5131eded498c4a06a197a71d7e87cd558d2c3ad52"
+        },
+        "rgb_key": "parent",
+        "draw": "independent",
+        "partition": "fresh",
+        "layout": "GBRG",
+        "seeds": {
+          "exterior": 1813008377224255817,
+          "present": 3977349890293957797,
+          "masked-fine": 4492942972964272424,
+          "flat": 1804458804054323327
+        },
+        "packed": {
+          "shape": [
+            3,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "59095d232ec3fc332ee8945d032b5135a28443dc712a38fbf3497a34dfcb187b"
+        }
+      },
+      "role": "flat",
+      "weights": {
+        "matched": 0.007342805550428903,
+        "diagonal": 0.0073567328752139486,
+        "confirmed": 0.03719333057890639,
+        "confirmed_diagonal": 0.03814986394292117,
+        "donor_validated": 0.05104027977636037,
+        "validated_diagonal": 0.0438072551108101,
+        "validated_transposed": 0.051208317418085535,
+        "donor_and_query": 0.2528834922666963,
+        "diagonal_and_query": 0.21280782623296943
+      },
+      "increment_RMS_change_vs_confirmed_diagonal": -0.11892707412937398,
+      "board": {
+        "image": {
+          "path": "exact/fresh-19-flat-comparison.png",
+          "sha256": "d7a604c7f6af1ffcf6832b1fcf34b7844bfa423cba3c42b4e1cc8988e5401bbe"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Single covariance",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Confirmed diagonal",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated diagonal",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Transposed prior",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/fresh-19-flat-triplet.png",
+          "sha256": "a63f90162559232e0922c51ee8d19fe65ea6e3c40322ee43d86b41e8876e7854"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-15-present",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "record": {
+        "id": "fresh-15",
+        "source": {
+          "attribution": "Julian Herzog",
+          "author": "Julian Herzog (Website)",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/45/4533eebca45225ee6798e40ce54e4b5ab5ad6d38.npy",
+          "cache_sha256": "969b972a63053a821f553e0e9b83e9c277962496c1fa6372bcbabf302f6f09d2",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/45/33/4533eebca45225ee6798e40ce54e4b5ab5ad6d38.jpg",
+          "dtype": "uint16",
+          "height": 2304,
+          "id": "4533eebca45225ee6798e40ce54e4b5ab5ad6d38",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Patrouille_Suisse_Northrop_F-5E_Tiger_II_ILA_Berlin_2016_15.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Patrouille_Suisse_Northrop_F-5E_Tiger_II_ILA_Berlin_2016_15.jpg",
+          "sha1": "4533eebca45225ee6798e40ce54e4b5ab5ad6d38",
+          "sha1_hex": "4533eebca45225ee6798e40ce54e4b5ab5ad6d38",
+          "shape": [
+            576,
+            1024,
+            3
+          ],
+          "split": "val",
+          "title": "File:Patrouille Suisse Northrop F-5E Tiger II ILA Berlin 2016 15.jpg",
+          "width": 4096
+        },
+        "box": [
+          336,
+          80,
+          256,
+          256
+        ],
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "input": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-15-input.npz",
+          "sha256": "23aee4102a33a23ddcb319dbeafcbdbb9934d2e2a993bd67ce79c670437cb1d4"
+        },
+        "rgb": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-15-predictions.npz",
+          "sha256": "a27c8fc727a9d98f8c917012eaff7bab734455e0949510c7ee11f1151301ce6a"
+        },
+        "rgb_key": "parent",
+        "draw": "independent",
+        "partition": "fresh",
+        "layout": "GBRG",
+        "seeds": {
+          "exterior": 891412518134637109,
+          "present": 2449901516619823095,
+          "masked-fine": 2966996497666410396,
+          "flat": 3817266918347853460
+        },
+        "packed": {
+          "shape": [
+            3,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "8200c19c24a122f3bbccf5a978c5228db1dfad6aaa4408e1430803916e81b1e6"
+        }
+      },
+      "role": "present",
+      "weights": {
+        "matched": 0.007342805550428903,
+        "diagonal": 0.0073567328752139486,
+        "confirmed": 0.03719333057890639,
+        "confirmed_diagonal": 0.03814986394292117,
+        "donor_validated": 0.05104027977636037,
+        "validated_diagonal": 0.0438072551108101,
+        "validated_transposed": 0.051208317418085535,
+        "donor_and_query": 0.2528834922666963,
+        "diagonal_and_query": 0.21280782623296943
+      },
+      "increment_RMS_change_vs_confirmed_diagonal": 0.2365812454446683,
+      "board": {
+        "image": {
+          "path": "exact/fresh-15-present-comparison.png",
+          "sha256": "64948e60cce03968f807ceff5795c31905caa1f9ff06857ff85be7bc86870477"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Single covariance",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Confirmed diagonal",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated diagonal",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Transposed prior",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/fresh-15-present-triplet.png",
+          "sha256": "aaf03e2fc4668229de968bce7c068711b6a92cf06730096d34f80f4fc5e83567"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-15-flat",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "record": {
+        "id": "fresh-15",
+        "source": {
+          "attribution": "Julian Herzog",
+          "author": "Julian Herzog (Website)",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/45/4533eebca45225ee6798e40ce54e4b5ab5ad6d38.npy",
+          "cache_sha256": "969b972a63053a821f553e0e9b83e9c277962496c1fa6372bcbabf302f6f09d2",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/45/33/4533eebca45225ee6798e40ce54e4b5ab5ad6d38.jpg",
+          "dtype": "uint16",
+          "height": 2304,
+          "id": "4533eebca45225ee6798e40ce54e4b5ab5ad6d38",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Patrouille_Suisse_Northrop_F-5E_Tiger_II_ILA_Berlin_2016_15.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Patrouille_Suisse_Northrop_F-5E_Tiger_II_ILA_Berlin_2016_15.jpg",
+          "sha1": "4533eebca45225ee6798e40ce54e4b5ab5ad6d38",
+          "sha1_hex": "4533eebca45225ee6798e40ce54e4b5ab5ad6d38",
+          "shape": [
+            576,
+            1024,
+            3
+          ],
+          "split": "val",
+          "title": "File:Patrouille Suisse Northrop F-5E Tiger II ILA Berlin 2016 15.jpg",
+          "width": 4096
+        },
+        "box": [
+          336,
+          80,
+          256,
+          256
+        ],
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "input": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-15-input.npz",
+          "sha256": "23aee4102a33a23ddcb319dbeafcbdbb9934d2e2a993bd67ce79c670437cb1d4"
+        },
+        "rgb": {
+          "path": "/mnt/external/demosaic/scene-patch-crossfit-v1/observations/fresh-15-predictions.npz",
+          "sha256": "a27c8fc727a9d98f8c917012eaff7bab734455e0949510c7ee11f1151301ce6a"
+        },
+        "rgb_key": "parent",
+        "draw": "independent",
+        "partition": "fresh",
+        "layout": "GBRG",
+        "seeds": {
+          "exterior": 891412518134637109,
+          "present": 2449901516619823095,
+          "masked-fine": 2966996497666410396,
+          "flat": 3817266918347853460
+        },
+        "packed": {
+          "shape": [
+            3,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "8200c19c24a122f3bbccf5a978c5228db1dfad6aaa4408e1430803916e81b1e6"
+        }
+      },
+      "role": "flat",
+      "weights": {
+        "matched": 0.007342805550428903,
+        "diagonal": 0.0073567328752139486,
+        "confirmed": 0.03719333057890639,
+        "confirmed_diagonal": 0.03814986394292117,
+        "donor_validated": 0.05104027977636037,
+        "validated_diagonal": 0.0438072551108101,
+        "validated_transposed": 0.051208317418085535,
+        "donor_and_query": 0.2528834922666963,
+        "diagonal_and_query": 0.21280782623296943
+      },
+      "increment_RMS_change_vs_confirmed_diagonal": 0.2365812454446683,
+      "board": {
+        "image": {
+          "path": "exact/fresh-15-flat-comparison.png",
+          "sha256": "7336c953c26ccdbe81d642085758de97a58aaed4fa192d110f76f6a5ead0cbf6"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Single covariance",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Confirmed diagonal",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated diagonal",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Transposed prior",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/fresh-15-flat-triplet.png",
+          "sha256": "7b32a7d68d49435c978478c4940f236cd37508d23bea19e0939013765410925e"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor-validated covariance",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "wire": [
+    {
+      "id": "wire-35f2f4c550",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "record": {
+        "source": {
+          "attribution": null,
+          "author": "Roger Culos",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/35/35f2f4c55096c863672a5df45eb3a377fc9374ea.npy",
+          "cache_sha256": "52c6a1c690572fe377086aac43a8985ec27246a1575e018d1cf9123ee624d3f2",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/35/f2/35f2f4c55096c863672a5df45eb3a377fc9374ea.jpg",
+          "dtype": "uint16",
+          "height": 2835,
+          "id": "35f2f4c55096c863672a5df45eb3a377fc9374ea",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Hippolais_polyglotta_MHNT.ZOO.2010.11.201.1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Hippolais_polyglotta_MHNT.ZOO.2010.11.201.1.jpg",
+          "sha1": "35f2f4c55096c863672a5df45eb3a377fc9374ea",
+          "sha1_hex": "35f2f4c55096c863672a5df45eb3a377fc9374ea",
+          "shape": [
+            708,
+            708,
+            3
+          ],
+          "split": "val",
+          "title": "File:Hippolais polyglotta MHNT.ZOO.2010.11.201.1.jpg",
+          "width": 2835
+        },
+        "box": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/green-covariance-refit-v1/fresh/21-input.npz",
+          "sha256": "0ff7125d9dd905967fced2222e77cba6f75b4046a4c7128402a9ac8d34e64f46"
+        },
+        "rgb": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/green-covariance-refit-v1/fresh/21-prediction.npz",
+          "sha256": "d39bbc1a1747ac8fb55f81aabdd6cb593e4768c6dd2362e950491b265bfcf1e6"
+        },
+        "rgb_key": "parent",
+        "geometry": {
+          "family": "strip",
+          "frequency": [
+            [
+              0.07675379626282333,
+              0.045196183180570636
+            ],
+            [
+              0.08876380444018461,
+              -0.08390277358128492
+            ]
+          ],
+          "phase": [
+            -2.5020748640860284,
+            0.7437509513979643
+          ],
+          "strength": [
+            0.01431927533146059,
+            0.008033723757856747
+          ],
+          "width": [
+            0.09296951816968592,
+            0.1314653886502093
+          ],
+          "edge": -4.944025561679606,
+          "gap_center": [
+            6.610658940571067,
+            -2.220502729975447
+          ],
+          "gap_width": 34.0022927465951,
+          "gap_length": 39.737182405690554,
+          "gap_orientation": 0.7435512659029629,
+          "angle": 0.2789446806140936,
+          "tint": [
+            0.09927775425393283,
+            0.15416156930217284,
+            0.07700223130878732
+          ]
+        },
+        "atlas": 700,
+        "true_gap_pixels": 9969,
+        "results": {
+          "quiet": {
+            "donor_validated": {
+              "weak_response_pp": 9.47631346461501,
+              "intact_increment_RMS_DN16": 156.58654992802212,
+              "exact_flat_RMS_DN16": 31.24673314647995,
+              "gap_RMS_DN16": 139.6125174882318,
+              "gap_continuing_strong_RMS_DN16": 70.64574971386992,
+              "gap_weak_RMS_DN16": 1.9930166399726201,
+              "exterior_only_weak_RMS_DN16": 4.321466764882921
+            },
+            "validated_diagonal": {
+              "weak_response_pp": 8.810394881525273,
+              "intact_increment_RMS_DN16": 156.96227087237332,
+              "exact_flat_RMS_DN16": 31.28509019170479,
+              "gap_RMS_DN16": 139.71932266792962,
+              "gap_continuing_strong_RMS_DN16": 70.56910608058607,
+              "gap_weak_RMS_DN16": 1.9405945546547234,
+              "exterior_only_weak_RMS_DN16": 4.374266370083958
+            },
+            "validated_transposed": {
+              "weak_response_pp": 9.241552666903674,
+              "intact_increment_RMS_DN16": 156.8254304449745,
+              "exact_flat_RMS_DN16": 31.192971225309908,
+              "gap_RMS_DN16": 139.63843464180107,
+              "gap_continuing_strong_RMS_DN16": 70.64410112071329,
+              "gap_weak_RMS_DN16": 1.9971364181732247,
+              "exterior_only_weak_RMS_DN16": 4.420160961652037
+            },
+            "donor_and_query": {
+              "weak_response_pp": 10.310194012982658,
+              "intact_increment_RMS_DN16": 156.70492012357423,
+              "exact_flat_RMS_DN16": 31.042360564117473,
+              "gap_RMS_DN16": 139.59995023359372,
+              "gap_continuing_strong_RMS_DN16": 70.52235797484254,
+              "gap_weak_RMS_DN16": 2.0647160913937683,
+              "exterior_only_weak_RMS_DN16": 4.303539757980858
+            },
+            "diagonal_and_query": {
+              "weak_response_pp": 9.189830239471922,
+              "intact_increment_RMS_DN16": 157.00935266256127,
+              "exact_flat_RMS_DN16": 31.313595878591258,
+              "gap_RMS_DN16": 139.8080392632595,
+              "gap_continuing_strong_RMS_DN16": 70.3456005198994,
+              "gap_weak_RMS_DN16": 2.1161278616603267,
+              "exterior_only_weak_RMS_DN16": 3.979458888453851
+            },
+            "matched": {
+              "weak_response_pp": 7.9217412899569055,
+              "intact_increment_RMS_DN16": 157.27769646958077,
+              "exact_flat_RMS_DN16": 31.00710125628856,
+              "gap_RMS_DN16": 139.4809606132178,
+              "gap_continuing_strong_RMS_DN16": 70.63678734746982,
+              "gap_weak_RMS_DN16": 1.8660150816799361,
+              "exterior_only_weak_RMS_DN16": 4.310027049859971
+            },
+            "diagonal": {
+              "weak_response_pp": 7.831142572352684,
+              "intact_increment_RMS_DN16": 157.33249750160118,
+              "exact_flat_RMS_DN16": 31.011624141915377,
+              "gap_RMS_DN16": 139.47341641974498,
+              "gap_continuing_strong_RMS_DN16": 70.62716239380023,
+              "gap_weak_RMS_DN16": 1.849926719572958,
+              "exterior_only_weak_RMS_DN16": 4.324475808009963
+            },
+            "confirmed": {
+              "weak_response_pp": 8.327420208160753,
+              "intact_increment_RMS_DN16": 157.18131436339027,
+              "exact_flat_RMS_DN16": 30.98437128481995,
+              "gap_RMS_DN16": 139.48837275997136,
+              "gap_continuing_strong_RMS_DN16": 70.592906632884,
+              "gap_weak_RMS_DN16": 1.864480977932716,
+              "exterior_only_weak_RMS_DN16": 4.311076292473957
+            },
+            "confirmed_diagonal": {
+              "weak_response_pp": 7.929259900841514,
+              "intact_increment_RMS_DN16": 157.3448517874786,
+              "exact_flat_RMS_DN16": 31.007847482074965,
+              "gap_RMS_DN16": 139.50011487369318,
+              "gap_continuing_strong_RMS_DN16": 70.5696680628714,
+              "gap_weak_RMS_DN16": 1.8872163906134534,
+              "exterior_only_weak_RMS_DN16": 4.235526840643934
+            },
+            "parent": {
+              "weak_response_pp": 7.557558112842815,
+              "intact_increment_RMS_DN16": 157.44697774468648,
+              "exact_flat_RMS_DN16": 30.973645518367437,
+              "gap_RMS_DN16": 139.4070669546849,
+              "gap_continuing_strong_RMS_DN16": 70.65815610139475,
+              "gap_weak_RMS_DN16": 1.8373972433589292,
+              "exterior_only_weak_RMS_DN16": 4.296862952082165
+            },
+            "v120": {
+              "weak_response_pp": 8.012517450202871,
+              "intact_increment_RMS_DN16": 160.1007210156618,
+              "exact_flat_RMS_DN16": 29.551798116789097,
+              "gap_RMS_DN16": 143.48819632720392,
+              "gap_continuing_strong_RMS_DN16": 75.8539414424797,
+              "gap_weak_RMS_DN16": 2.1049550585499,
+              "exterior_only_weak_RMS_DN16": 4.596018298609249
+            }
+          },
+          "response": {
+            "donor_validated": {
+              "weak_response_pp": 9.976424715410912,
+              "intact_increment_RMS_DN16": 156.38535301468215,
+              "exact_flat_RMS_DN16": 31.389630125372168,
+              "gap_RMS_DN16": 139.67890211475483,
+              "gap_continuing_strong_RMS_DN16": 70.64252830125467,
+              "gap_weak_RMS_DN16": 2.0348960614067546,
+              "exterior_only_weak_RMS_DN16": 4.330780637309604
+            },
+            "validated_diagonal": {
+              "weak_response_pp": 9.527530907585229,
+              "intact_increment_RMS_DN16": 156.74136218839976,
+              "exact_flat_RMS_DN16": 31.655886405295302,
+              "gap_RMS_DN16": 139.93377530596464,
+              "gap_continuing_strong_RMS_DN16": 70.51823909314325,
+              "gap_weak_RMS_DN16": 2.0014146919834355,
+              "exterior_only_weak_RMS_DN16": 4.4243063389984
+            },
+            "validated_transposed": {
+              "weak_response_pp": 10.472358829910942,
+              "intact_increment_RMS_DN16": 156.4636055578338,
+              "exact_flat_RMS_DN16": 31.618820774872248,
+              "gap_RMS_DN16": 139.8552205992441,
+              "gap_continuing_strong_RMS_DN16": 70.63386967874312,
+              "gap_weak_RMS_DN16": 2.1203132040975836,
+              "exterior_only_weak_RMS_DN16": 4.527241884214785
+            },
+            "donor_and_query": {
+              "weak_response_pp": 8.781539344246738,
+              "intact_increment_RMS_DN16": 157.06357061806239,
+              "exact_flat_RMS_DN16": 30.951421609689966,
+              "gap_RMS_DN16": 139.47092783173485,
+              "gap_continuing_strong_RMS_DN16": 70.5934470750867,
+              "gap_weak_RMS_DN16": 1.936222733805029,
+              "exterior_only_weak_RMS_DN16": 4.295746932156898
+            },
+            "diagonal_and_query": {
+              "weak_response_pp": 8.186504589106606,
+              "intact_increment_RMS_DN16": 157.2396448816,
+              "exact_flat_RMS_DN16": 31.034541554310895,
+              "gap_RMS_DN16": 139.5331502632395,
+              "gap_continuing_strong_RMS_DN16": 70.53172994212584,
+              "gap_weak_RMS_DN16": 1.940084044709809,
+              "exterior_only_weak_RMS_DN16": 4.174279405528244
+            },
+            "matched": {
+              "weak_response_pp": 8.178676520002805,
+              "intact_increment_RMS_DN16": 157.16261922598937,
+              "exact_flat_RMS_DN16": 31.044445702771068,
+              "gap_RMS_DN16": 139.53595127070705,
+              "gap_continuing_strong_RMS_DN16": 70.62171737824715,
+              "gap_weak_RMS_DN16": 1.8864094212114122,
+              "exterior_only_weak_RMS_DN16": 4.319657667911773
+            },
+            "diagonal": {
+              "weak_response_pp": 7.949010680877816,
+              "intact_increment_RMS_DN16": 157.28508375529586,
+              "exact_flat_RMS_DN16": 31.034494102493756,
+              "gap_RMS_DN16": 139.50326930638064,
+              "gap_continuing_strong_RMS_DN16": 70.61382101996911,
+              "gap_weak_RMS_DN16": 1.8553729221284931,
+              "exterior_only_weak_RMS_DN16": 4.336567736893004
+            },
+            "confirmed": {
+              "weak_response_pp": 8.070090223187329,
+              "intact_increment_RMS_DN16": 157.26711468953573,
+              "exact_flat_RMS_DN16": 30.977179289585088,
+              "gap_RMS_DN16": 139.45982890790702,
+              "gap_continuing_strong_RMS_DN16": 70.6144545933345,
+              "gap_weak_RMS_DN16": 1.8553542735905346,
+              "exterior_only_weak_RMS_DN16": 4.306084892257065
+            },
+            "confirmed_diagonal": {
+              "weak_response_pp": 7.769687902461131,
+              "intact_increment_RMS_DN16": 157.3865674672679,
+              "exact_flat_RMS_DN16": 30.98908373225502,
+              "gap_RMS_DN16": 139.45848310016808,
+              "gap_continuing_strong_RMS_DN16": 70.60734800016392,
+              "gap_weak_RMS_DN16": 1.8656078494701953,
+              "exterior_only_weak_RMS_DN16": 4.261820309959861
+            },
+            "parent": {
+              "weak_response_pp": 7.557558112842815,
+              "intact_increment_RMS_DN16": 157.44697774468648,
+              "exact_flat_RMS_DN16": 30.973645518367437,
+              "gap_RMS_DN16": 139.4070669546849,
+              "gap_continuing_strong_RMS_DN16": 70.65815610139475,
+              "gap_weak_RMS_DN16": 1.8373972433589292,
+              "exterior_only_weak_RMS_DN16": 4.296862952082165
+            },
+            "v120": {
+              "weak_response_pp": 8.012517450202871,
+              "intact_increment_RMS_DN16": 160.1007210156618,
+              "exact_flat_RMS_DN16": 29.551798116789097,
+              "gap_RMS_DN16": 143.48819632720392,
+              "gap_continuing_strong_RMS_DN16": 75.8539414424797,
+              "gap_weak_RMS_DN16": 2.1049550585499,
+              "exterior_only_weak_RMS_DN16": 4.596018298609249
+            }
+          }
+        }
+      },
+      "role": "present",
+      "display_choice": "largest extra weak response among exact gaps",
+      "strengths": {
+        "matched": {
+          "gain": 0.010284335936287175,
+          "fit_flat_increase": 0.09999999999626041
+        },
+        "diagonal": {
+          "gain": 0.01152223857806896,
+          "fit_flat_increase": 0.10000000000000142
+        },
+        "confirmed": {
+          "gain": 0.05618856665061385,
+          "fit_flat_increase": 0.09999999999888942
+        },
+        "confirmed_diagonal": {
+          "gain": 0.06458707741647397,
+          "fit_flat_increase": 0.10000000000000142
+        },
+        "donor_validated": {
+          "gain": 0.017925023829445053,
+          "fit_flat_increase": 0.09999999999999787
+        },
+        "validated_diagonal": {
+          "gain": 0.015725086656028925,
+          "fit_flat_increase": 0.10000000000285425
+        },
+        "validated_transposed": {
+          "gain": 0.018615208639030618,
+          "fit_flat_increase": 0.10000000000000142
+        },
+        "donor_and_query": {
+          "gain": 0.10656575735921388,
+          "fit_flat_increase": 0.10000000000000142
+        },
+        "diagonal_and_query": {
+          "gain": 0.08645421501840331,
+          "fit_flat_increase": 0.10000000000000142
+        }
+      },
+      "matched_wire_result": {
+        "matched-flat": {
+          "matched": {
+            "weak_response_pp": 8.067632026322304,
+            "intact_increment_RMS_DN16": 157.21191033800292,
+            "exact_flat_RMS_DN16": 31.026912374571825,
+            "gap_RMS_DN16": 139.51189681448196,
+            "gap_continuing_strong_RMS_DN16": 70.62823062106109,
+            "gap_weak_RMS_DN16": 1.8775727665705653,
+            "exterior_only_weak_RMS_DN16": 4.315461127147533
+          },
+          "diagonal": {
+            "weak_response_pp": 7.98605258875872,
+            "intact_increment_RMS_DN16": 157.27042182808609,
+            "exact_flat_RMS_DN16": 31.04249032435002,
+            "gap_RMS_DN16": 139.51280696081108,
+            "gap_continuing_strong_RMS_DN16": 70.6096252382979,
+            "gap_weak_RMS_DN16": 1.8570912493544554,
+            "exterior_only_weak_RMS_DN16": 4.3403990111407875
+          },
+          "confirmed": {
+            "weak_response_pp": 8.720607559565831,
+            "intact_increment_RMS_DN16": 157.05602385353438,
+            "exact_flat_RMS_DN16": 31.002345554883476,
+            "gap_RMS_DN16": 139.53462864859043,
+            "gap_continuing_strong_RMS_DN16": 70.5604926569478,
+            "gap_weak_RMS_DN16": 1.8785657674249674,
+            "exterior_only_weak_RMS_DN16": 4.3191785958265525
+          },
+          "confirmed_diagonal": {
+            "weak_response_pp": 8.18684311313296,
+            "intact_increment_RMS_DN16": 157.28428217487343,
+            "exact_flat_RMS_DN16": 31.05107082503689,
+            "gap_RMS_DN16": 139.5726679457615,
+            "gap_continuing_strong_RMS_DN16": 70.50983077091328,
+            "gap_weak_RMS_DN16": 1.9227689193900126,
+            "exterior_only_weak_RMS_DN16": 4.193185962850394
+          },
+          "donor_validated": {
+            "weak_response_pp": 8.231411840533925,
+            "intact_increment_RMS_DN16": 157.12888578085517,
+            "exact_flat_RMS_DN16": 31.01932276740921,
+            "gap_RMS_DN16": 139.47030335695717,
+            "gap_continuing_strong_RMS_DN16": 70.65379018659401,
+            "gap_weak_RMS_DN16": 1.8910673425324662,
+            "exterior_only_weak_RMS_DN16": 4.303483554930055
+          },
+          "validated_diagonal": {
+            "weak_response_pp": 8.007276604747549,
+            "intact_increment_RMS_DN16": 157.25858217164588,
+            "exact_flat_RMS_DN16": 31.03543127216774,
+            "gap_RMS_DN16": 139.50999980545788,
+            "gap_continuing_strong_RMS_DN16": 70.62616487384163,
+            "gap_weak_RMS_DN16": 1.873964724160066,
+            "exterior_only_weak_RMS_DN16": 4.323150370955548
+          },
+          "validated_transposed": {
+            "weak_response_pp": 8.169722118428748,
+            "intact_increment_RMS_DN16": 157.2042103758783,
+            "exact_flat_RMS_DN16": 31.00409140910497,
+            "gap_RMS_DN16": 139.4824320925815,
+            "gap_continuing_strong_RMS_DN16": 70.65304009461818,
+            "gap_weak_RMS_DN16": 1.8941517956157212,
+            "exterior_only_weak_RMS_DN16": 4.3384544436554675
+          },
+          "donor_and_query": {
+            "weak_response_pp": 8.717525965698476,
+            "intact_increment_RMS_DN16": 157.08150598211657,
+            "exact_flat_RMS_DN16": 30.950486042223105,
+            "gap_RMS_DN16": 139.46671612159372,
+            "gap_continuing_strong_RMS_DN16": 70.59665975909041,
+            "gap_weak_RMS_DN16": 1.930957905875198,
+            "exterior_only_weak_RMS_DN16": 4.295646361143841
+          },
+          "diagonal_and_query": {
+            "weak_response_pp": 8.220674593027901,
+            "intact_increment_RMS_DN16": 157.22977081295267,
+            "exact_flat_RMS_DN16": 31.040381632159004,
+            "gap_RMS_DN16": 139.54102254129188,
+            "gap_continuing_strong_RMS_DN16": 70.52507553240243,
+            "gap_weak_RMS_DN16": 1.9458467722107193,
+            "exterior_only_weak_RMS_DN16": 4.167629075006321
+          },
+          "parent": {
+            "weak_response_pp": 7.557558112842815,
+            "intact_increment_RMS_DN16": 157.44697774468648,
+            "exact_flat_RMS_DN16": 30.973645518367437,
+            "gap_RMS_DN16": 139.4070669546849,
+            "gap_continuing_strong_RMS_DN16": 70.65815610139475,
+            "gap_weak_RMS_DN16": 1.8373972433589292,
+            "exterior_only_weak_RMS_DN16": 4.296862952082165
+          },
+          "v120": {
+            "weak_response_pp": 8.012517450202871,
+            "intact_increment_RMS_DN16": 160.1007210156618,
+            "exact_flat_RMS_DN16": 29.551798116789097,
+            "gap_RMS_DN16": 143.48819632720392,
+            "gap_continuing_strong_RMS_DN16": 75.8539414424797,
+            "gap_weak_RMS_DN16": 2.1049550585499,
+            "exterior_only_weak_RMS_DN16": 4.596018298609249
+          }
+        }
+      },
+      "board": {
+        "image": {
+          "path": "wire/wire-35f2f4c550-comparison.png",
+          "sha256": "631d0b2c3f1abac726b236b6253a240946b13c2de58edd31a8cb11c853789bba"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Confirmed diagonal",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "wire/wire-35f2f4c550-triplet.png",
+          "sha256": "efbc9e37a596e163951896ee05073333e49bf70ab3b4ef90c601db9c121c1648"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "wire-807607835c",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "record": {
+        "source": {
+          "attribution": null,
+          "author": "Carlos Figueroa Rojas",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/80/807607835ce058bbbb6946d7a37102da96626fbb.npy",
+          "cache_sha256": "43b85b0c0da8d30b98f83ff4154348700901dc047ef37d9a73015247c4cafa49",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/80/76/807607835ce058bbbb6946d7a37102da96626fbb.jpg",
+          "dtype": "uint16",
+          "height": 5223,
+          "id": "807607835ce058bbbb6946d7a37102da96626fbb",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Carill%C3%B3n_Estaci%C3%B3n_Limache_20191223_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Carill%C3%B3n_Estaci%C3%B3n_Limache_20191223_01.jpg",
+          "sha1": "807607835ce058bbbb6946d7a37102da96626fbb",
+          "sha1_hex": "807607835ce058bbbb6946d7a37102da96626fbb",
+          "shape": [
+            1305,
+            868,
+            3
+          ],
+          "split": "val",
+          "title": "File:Carill\u00f3n Estaci\u00f3n Limache 20191223 01.jpg",
+          "width": 3472
+        },
+        "box": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/green-covariance-refit-v1/fresh/08-input.npz",
+          "sha256": "4f65570127f3ff1f7068845fe60db20d99bff4329e7f6e842114d3dc7aa8bd08"
+        },
+        "rgb": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/green-covariance-refit-v1/fresh/08-prediction.npz",
+          "sha256": "ed5d42b15daffa729e93c986e26f319ebf17b53ac5568b33b20c4048519316cf"
+        },
+        "rgb_key": "parent",
+        "geometry": {
+          "family": "ellipse",
+          "frequency": [
+            [
+              0.0895546768800831,
+              0.05848581162859289
+            ],
+            [
+              0.08872601404507428,
+              -0.0542742239054813
+            ]
+          ],
+          "phase": [
+            2.7976108464750524,
+            -2.0180252865832218
+          ],
+          "strength": [
+            0.014405124418870915,
+            0.007603174255324072
+          ],
+          "width": [
+            0.1169577412730697,
+            0.10536733194623926
+          ],
+          "edge": 8.559542837876009,
+          "gap_center": [
+            -5.781349493858649,
+            5.080335614994713
+          ],
+          "gap_width": 27.49880546430769,
+          "gap_length": 46.6777513584601,
+          "gap_orientation": 1.8206356921584421,
+          "angle": 0.7071851447970685,
+          "tint": [
+            0.09696885451628572,
+            0.07763908794249166,
+            0.1332529666053479
+          ]
+        },
+        "atlas": 700,
+        "true_gap_pixels": 4034,
+        "results": {
+          "quiet": {
+            "donor_validated": {
+              "weak_response_pp": 23.003286297052387,
+              "intact_increment_RMS_DN16": 148.9860951924281,
+              "exact_flat_RMS_DN16": 15.94744668764729,
+              "gap_RMS_DN16": 121.87866175108701,
+              "gap_continuing_strong_RMS_DN16": 75.04855080952994,
+              "gap_weak_RMS_DN16": 7.193966975916984,
+              "exterior_only_weak_RMS_DN16": 5.201237892961197
+            },
+            "validated_diagonal": {
+              "weak_response_pp": 22.830152670958825,
+              "intact_increment_RMS_DN16": 148.95414559435207,
+              "exact_flat_RMS_DN16": 15.812768656267531,
+              "gap_RMS_DN16": 121.96043243013847,
+              "gap_continuing_strong_RMS_DN16": 75.21150965152965,
+              "gap_weak_RMS_DN16": 6.9433494596151695,
+              "exterior_only_weak_RMS_DN16": 5.246144745624421
+            },
+            "validated_transposed": {
+              "weak_response_pp": 22.313829924103562,
+              "intact_increment_RMS_DN16": 149.16949797969474,
+              "exact_flat_RMS_DN16": 15.980456140766774,
+              "gap_RMS_DN16": 122.12309487842491,
+              "gap_continuing_strong_RMS_DN16": 75.24875095688489,
+              "gap_weak_RMS_DN16": 6.670361344351945,
+              "exterior_only_weak_RMS_DN16": 5.041944049290454
+            },
+            "donor_and_query": {
+              "weak_response_pp": 23.80873968063515,
+              "intact_increment_RMS_DN16": 149.54246852686944,
+              "exact_flat_RMS_DN16": 16.01541573142211,
+              "gap_RMS_DN16": 121.68533755317765,
+              "gap_continuing_strong_RMS_DN16": 74.04939529408455,
+              "gap_weak_RMS_DN16": 7.603870288532391,
+              "exterior_only_weak_RMS_DN16": 5.383905193244266
+            },
+            "diagonal_and_query": {
+              "weak_response_pp": 23.8049005252098,
+              "intact_increment_RMS_DN16": 149.0890503685489,
+              "exact_flat_RMS_DN16": 15.915953241435275,
+              "gap_RMS_DN16": 121.92900710956725,
+              "gap_continuing_strong_RMS_DN16": 74.49574501206185,
+              "gap_weak_RMS_DN16": 7.233914325318683,
+              "exterior_only_weak_RMS_DN16": 5.418627683277687
+            },
+            "matched": {
+              "weak_response_pp": 21.91344871478644,
+              "intact_increment_RMS_DN16": 149.19470900047523,
+              "exact_flat_RMS_DN16": 15.342392494961468,
+              "gap_RMS_DN16": 121.86705280535209,
+              "gap_continuing_strong_RMS_DN16": 75.336025751262,
+              "gap_weak_RMS_DN16": 6.755749289410954,
+              "exterior_only_weak_RMS_DN16": 5.186807284139321
+            },
+            "diagonal": {
+              "weak_response_pp": 21.88315395728915,
+              "intact_increment_RMS_DN16": 149.21502416698192,
+              "exact_flat_RMS_DN16": 15.342599831402548,
+              "gap_RMS_DN16": 121.87150225795385,
+              "gap_continuing_strong_RMS_DN16": 75.35797864267539,
+              "gap_weak_RMS_DN16": 6.715221316089478,
+              "exterior_only_weak_RMS_DN16": 5.1773482842426395
+            },
+            "confirmed": {
+              "weak_response_pp": 22.060241560707833,
+              "intact_increment_RMS_DN16": 149.38797482213505,
+              "exact_flat_RMS_DN16": 15.328212791857398,
+              "gap_RMS_DN16": 121.84261259707377,
+              "gap_continuing_strong_RMS_DN16": 75.13063541067116,
+              "gap_weak_RMS_DN16": 6.867783320298316,
+              "exterior_only_weak_RMS_DN16": 5.28912151830756
+            },
+            "confirmed_diagonal": {
+              "weak_response_pp": 22.120504446247413,
+              "intact_increment_RMS_DN16": 149.22193785869223,
+              "exact_flat_RMS_DN16": 15.345432004685746,
+              "gap_RMS_DN16": 121.84463398376869,
+              "gap_continuing_strong_RMS_DN16": 75.18768924743267,
+              "gap_weak_RMS_DN16": 6.786849103264817,
+              "exterior_only_weak_RMS_DN16": 5.2246610542956855
+            },
+            "parent": {
+              "weak_response_pp": 21.63647348501701,
+              "intact_increment_RMS_DN16": 149.2513616430759,
+              "exact_flat_RMS_DN16": 15.28564256293409,
+              "gap_RMS_DN16": 121.8543080615857,
+              "gap_continuing_strong_RMS_DN16": 75.40068266383892,
+              "gap_weak_RMS_DN16": 6.653430113175727,
+              "exterior_only_weak_RMS_DN16": 5.158722340742064
+            },
+            "v120": {
+              "weak_response_pp": 20.970557424496402,
+              "intact_increment_RMS_DN16": 153.24738188241753,
+              "exact_flat_RMS_DN16": 16.37765251567829,
+              "gap_RMS_DN16": 120.65074663352327,
+              "gap_continuing_strong_RMS_DN16": 71.06100311438642,
+              "gap_weak_RMS_DN16": 7.223375164734318,
+              "exterior_only_weak_RMS_DN16": 5.395443786368304
+            }
+          },
+          "response": {
+            "donor_validated": {
+              "weak_response_pp": 23.35953359416959,
+              "intact_increment_RMS_DN16": 148.94278855867614,
+              "exact_flat_RMS_DN16": 16.27119701739952,
+              "gap_RMS_DN16": 121.89961133121228,
+              "gap_continuing_strong_RMS_DN16": 74.95836659049266,
+              "gap_weak_RMS_DN16": 7.335958591052275,
+              "exterior_only_weak_RMS_DN16": 5.219790026260592
+            },
+            "validated_diagonal": {
+              "weak_response_pp": 23.513435306380032,
+              "intact_increment_RMS_DN16": 148.8427294288955,
+              "exact_flat_RMS_DN16": 16.414022953010868,
+              "gap_RMS_DN16": 122.04881424627992,
+              "gap_continuing_strong_RMS_DN16": 75.10512172484243,
+              "gap_weak_RMS_DN16": 7.110428987734505,
+              "exterior_only_weak_RMS_DN16": 5.31367136082683
+            },
+            "validated_transposed": {
+              "weak_response_pp": 22.80890598062472,
+              "intact_increment_RMS_DN16": 149.22360648958468,
+              "exact_flat_RMS_DN16": 17.08796821137988,
+              "gap_RMS_DN16": 122.37576387745025,
+              "gap_continuing_strong_RMS_DN16": 75.13837075571885,
+              "gap_weak_RMS_DN16": 6.6866601887686,
+              "exterior_only_weak_RMS_DN16": 4.9590162280692205
+            },
+            "donor_and_query": {
+              "weak_response_pp": 22.602390788028455,
+              "intact_increment_RMS_DN16": 149.29830145432283,
+              "exact_flat_RMS_DN16": 15.466375205338215,
+              "gap_RMS_DN16": 121.71133454032915,
+              "gap_continuing_strong_RMS_DN16": 74.76740988297533,
+              "gap_weak_RMS_DN16": 7.074249131553915,
+              "exterior_only_weak_RMS_DN16": 5.239452084826883
+            },
+            "diagonal_and_query": {
+              "weak_response_pp": 22.472018721924304,
+              "intact_increment_RMS_DN16": 149.12588223722426,
+              "exact_flat_RMS_DN16": 15.419954506958046,
+              "gap_RMS_DN16": 121.83436394799956,
+              "gap_continuing_strong_RMS_DN16": 75.03651946634444,
+              "gap_weak_RMS_DN16": 6.872799411187731,
+              "exterior_only_weak_RMS_DN16": 5.246830919804455
+            },
+            "matched": {
+              "weak_response_pp": 22.10885755939591,
+              "intact_increment_RMS_DN16": 149.15895735709606,
+              "exact_flat_RMS_DN16": 15.40510244233428,
+              "gap_RMS_DN16": 121.87841931079105,
+              "gap_continuing_strong_RMS_DN16": 75.29053764855736,
+              "gap_weak_RMS_DN16": 6.828284246193474,
+              "exterior_only_weak_RMS_DN16": 5.2072759831455
+            },
+            "diagonal": {
+              "weak_response_pp": 21.98943367233721,
+              "intact_increment_RMS_DN16": 149.2012558426418,
+              "exact_flat_RMS_DN16": 15.377748408155176,
+              "gap_RMS_DN16": 121.87981486506307,
+              "gap_continuing_strong_RMS_DN16": 75.33964109593941,
+              "gap_weak_RMS_DN16": 6.741871363001004,
+              "exterior_only_weak_RMS_DN16": 5.185815392406586
+            },
+            "confirmed": {
+              "weak_response_pp": 21.9185943987698,
+              "intact_increment_RMS_DN16": 149.338916848798,
+              "exact_flat_RMS_DN16": 15.30836148367678,
+              "gap_RMS_DN16": 121.84442135346806,
+              "gap_continuing_strong_RMS_DN16": 75.22010658242431,
+              "gap_weak_RMS_DN16": 6.795821916570282,
+              "exterior_only_weak_RMS_DN16": 5.244747412395346
+            },
+            "confirmed_diagonal": {
+              "weak_response_pp": 21.91271028389786,
+              "intact_increment_RMS_DN16": 149.23139085818016,
+              "exact_flat_RMS_DN16": 15.313864434470466,
+              "gap_RMS_DN16": 121.84659910871405,
+              "gap_continuing_strong_RMS_DN16": 75.278340953905,
+              "gap_weak_RMS_DN16": 6.729286073012244,
+              "exterior_only_weak_RMS_DN16": 5.195767133493865
+            },
+            "parent": {
+              "weak_response_pp": 21.63647348501701,
+              "intact_increment_RMS_DN16": 149.2513616430759,
+              "exact_flat_RMS_DN16": 15.28564256293409,
+              "gap_RMS_DN16": 121.8543080615857,
+              "gap_continuing_strong_RMS_DN16": 75.40068266383892,
+              "gap_weak_RMS_DN16": 6.653430113175727,
+              "exterior_only_weak_RMS_DN16": 5.158722340742064
+            },
+            "v120": {
+              "weak_response_pp": 20.970557424496402,
+              "intact_increment_RMS_DN16": 153.24738188241753,
+              "exact_flat_RMS_DN16": 16.37765251567829,
+              "gap_RMS_DN16": 120.65074663352327,
+              "gap_continuing_strong_RMS_DN16": 71.06100311438642,
+              "gap_weak_RMS_DN16": 7.223375164734318,
+              "exterior_only_weak_RMS_DN16": 5.395443786368304
+            }
+          }
+        }
+      },
+      "role": "present",
+      "display_choice": "largest extra false-gap error among the other exact gaps",
+      "strengths": {
+        "matched": {
+          "gain": 0.010430812359062234,
+          "fit_flat_increase": 0.09999999999923403
+        },
+        "diagonal": {
+          "gain": 0.011800012924050527,
+          "fit_flat_increase": 0.09999999999705267
+        },
+        "confirmed": {
+          "gain": 0.056268454433264906,
+          "fit_flat_increase": 0.0999999999999801
+        },
+        "confirmed_diagonal": {
+          "gain": 0.06563685300288234,
+          "fit_flat_increase": 0.09999999999975984
+        },
+        "donor_validated": {
+          "gain": 0.018262916805169314,
+          "fit_flat_increase": 0.10000000000202292
+        },
+        "validated_diagonal": {
+          "gain": 0.016045950217102384,
+          "fit_flat_increase": 0.10000000000000142
+        },
+        "validated_transposed": {
+          "gain": 0.019074238303600652,
+          "fit_flat_increase": 0.09999999999999787
+        },
+        "donor_and_query": {
+          "gain": 0.10980871609389131,
+          "fit_flat_increase": 0.09999999999999787
+        },
+        "diagonal_and_query": {
+          "gain": 0.08872457442305913,
+          "fit_flat_increase": 0.09999999999942588
+        }
+      },
+      "matched_wire_result": {
+        "matched-flat": {
+          "matched": {
+            "weak_response_pp": 22.029927076056946,
+            "intact_increment_RMS_DN16": 149.17297765083387,
+            "exact_flat_RMS_DN16": 15.377530327045728,
+            "gap_RMS_DN16": 121.87359168951183,
+            "gap_continuing_strong_RMS_DN16": 75.30889693558244,
+            "gap_weak_RMS_DN16": 6.798951738369565,
+            "exterior_only_weak_RMS_DN16": 5.198943337594232
+          },
+          "diagonal": {
+            "weak_response_pp": 22.032144552825766,
+            "intact_increment_RMS_DN16": 149.19604204107958,
+            "exact_flat_RMS_DN16": 15.393661247262076,
+            "gap_RMS_DN16": 121.8833098098074,
+            "gap_continuing_strong_RMS_DN16": 75.3322810880699,
+            "gap_weak_RMS_DN16": 6.752586719546984,
+            "exterior_only_weak_RMS_DN16": 5.189299904389169
+          },
+          "confirmed": {
+            "weak_response_pp": 22.277577720458325,
+            "intact_increment_RMS_DN16": 149.46986773366922,
+            "exact_flat_RMS_DN16": 15.36958764659012,
+            "gap_RMS_DN16": 121.84394411011782,
+            "gap_continuing_strong_RMS_DN16": 74.99491529775442,
+            "gap_weak_RMS_DN16": 6.978781086027406,
+            "exterior_only_weak_RMS_DN16": 5.3586763285319865
+          },
+          "confirmed_diagonal": {
+            "weak_response_pp": 22.469253890896095,
+            "intact_increment_RMS_DN16": 149.21682594832023,
+            "exact_flat_RMS_DN16": 15.418191889304566,
+            "gap_RMS_DN16": 121.84873976856026,
+            "gap_continuing_strong_RMS_DN16": 75.03822363129318,
+            "gap_weak_RMS_DN16": 6.884373565668573,
+            "exterior_only_weak_RMS_DN16": 5.275095822422264
+          },
+          "donor_validated": {
+            "weak_response_pp": 22.125537700891574,
+            "intact_increment_RMS_DN16": 149.1384091152809,
+            "exact_flat_RMS_DN16": 15.41168614405101,
+            "gap_RMS_DN16": 121.85280977716221,
+            "gap_continuing_strong_RMS_DN16": 75.27357482267725,
+            "gap_weak_RMS_DN16": 6.846016198559521,
+            "exterior_only_weak_RMS_DN16": 5.168669829914656
+          },
+          "validated_diagonal": {
+            "weak_response_pp": 22.073701499067305,
+            "intact_increment_RMS_DN16": 149.12738529217896,
+            "exact_flat_RMS_DN16": 15.397344160669032,
+            "gap_RMS_DN16": 121.88604160750843,
+            "gap_continuing_strong_RMS_DN16": 75.33090168455165,
+            "gap_weak_RMS_DN16": 6.759318776927793,
+            "exterior_only_weak_RMS_DN16": 5.186136340265627
+          },
+          "validated_transposed": {
+            "weak_response_pp": 21.888778339781776,
+            "intact_increment_RMS_DN16": 149.19982129111048,
+            "exact_flat_RMS_DN16": 15.424320640173017,
+            "gap_RMS_DN16": 121.94400650052648,
+            "gap_continuing_strong_RMS_DN16": 75.34396787640736,
+            "gap_weak_RMS_DN16": 6.659008922763489,
+            "exterior_only_weak_RMS_DN16": 5.1147896290079835
+          },
+          "donor_and_query": {
+            "weak_response_pp": 22.579730380662333,
+            "intact_increment_RMS_DN16": 149.29568648137558,
+            "exact_flat_RMS_DN16": 15.45943152684605,
+            "gap_RMS_DN16": 121.71344737016149,
+            "gap_continuing_strong_RMS_DN16": 74.78168030589686,
+            "gap_weak_RMS_DN16": 7.064341479210015,
+            "exterior_only_weak_RMS_DN16": 5.237191660365106
+          },
+          "diagonal_and_query": {
+            "weak_response_pp": 22.540541984622653,
+            "intact_increment_RMS_DN16": 149.11909050696977,
+            "exact_flat_RMS_DN16": 15.437141600454082,
+            "gap_RMS_DN16": 121.83544368888433,
+            "gap_continuing_strong_RMS_DN16": 75.00751111767003,
+            "gap_weak_RMS_DN16": 6.891041005669016,
+            "exterior_only_weak_RMS_DN16": 5.254742720722235
+          },
+          "parent": {
+            "weak_response_pp": 21.63647348501701,
+            "intact_increment_RMS_DN16": 149.2513616430759,
+            "exact_flat_RMS_DN16": 15.28564256293409,
+            "gap_RMS_DN16": 121.8543080615857,
+            "gap_continuing_strong_RMS_DN16": 75.40068266383892,
+            "gap_weak_RMS_DN16": 6.653430113175727,
+            "exterior_only_weak_RMS_DN16": 5.158722340742064
+          },
+          "v120": {
+            "weak_response_pp": 20.970557424496402,
+            "intact_increment_RMS_DN16": 153.24738188241753,
+            "exact_flat_RMS_DN16": 16.37765251567829,
+            "gap_RMS_DN16": 120.65074663352327,
+            "gap_continuing_strong_RMS_DN16": 71.06100311438642,
+            "gap_weak_RMS_DN16": 7.223375164734318,
+            "exterior_only_weak_RMS_DN16": 5.395443786368304
+          }
+        }
+      },
+      "board": {
+        "image": {
+          "path": "wire/wire-807607835c-comparison.png",
+          "sha256": "f24b43ffed4280bb3128e14ffd2e0f1ab8dd209aa9c9f630110e9a8b494bcf33"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Confirmed diagonal",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "wire/wire-807607835c-triplet.png",
+          "sha256": "ce2bb072b69f93d3722a93d0c21a3a55233205f086a5055baee59303bb800a2e"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Donor and query check",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "standing": [
+    {
+      "id": "main-overcast-sky-main-overcast-sky",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "query": [
+        5752,
+        1352,
+        256,
+        256
+      ],
+      "native_ROI": [
+        5800,
+        1400,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+        "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-overcast-sky-RGB-f32.npy",
+        "sha256": "81ea6f37bbf950cf0b4c351f83b337b981e2c4f8242b6f8bdc69cc43fe9f0a9a"
+      },
+      "donor_windows": 4771,
+      "camera_RGB_change_DN16": {
+        "matched": 0.14872182071989473,
+        "confirmed_diagonal": 0.0,
+        "donor_validated": 0.026871941317910226,
+        "validated_diagonal": 0.0330329499748184,
+        "validated_transposed": 0.03167148100333627,
+        "donor_and_query": 0.020555738289453947
+      },
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-overcast-sky-main-overcast-sky-x4.png",
+              "sha256": "876ce9811ecf7d4b700b08573671b38e5acbc537acd3fce852357226899f0001"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "main-building-detail-main-building-detail",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "query": [
+        5742,
+        2642,
+        256,
+        256
+      ],
+      "native_ROI": [
+        5790,
+        2690,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+        "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-building-detail-RGB-f32.npy",
+        "sha256": "3d33e65ad3e27d114f4a9557a1623179d23231b07e748c6a8632ff70fe977694"
+      },
+      "donor_windows": 4771,
+      "camera_RGB_change_DN16": {
+        "matched": 0.29864302721241653,
+        "confirmed_diagonal": 0.4690967127924725,
+        "donor_validated": 0.43801340944072453,
+        "validated_diagonal": 0.3866064331447965,
+        "validated_transposed": 0.33635966086712565,
+        "donor_and_query": 1.1897538786332476
+      },
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-building-detail-main-building-detail-x4.png",
+              "sha256": "ddaf62768ecd600b9683a249b9061203c7122159673cff4825fa13d5817e1374"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "main-foliage-main-foliage",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "query": [
+        8842,
+        5522,
+        256,
+        256
+      ],
+      "native_ROI": [
+        8890,
+        5570,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+        "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-foliage-RGB-f32.npy",
+        "sha256": "107933ad4412b5456ddfb75652f85ab6b8162a180287833700b327c5bfbb7d80"
+      },
+      "donor_windows": 4771,
+      "camera_RGB_change_DN16": {
+        "matched": 0.32688866654955806,
+        "confirmed_diagonal": 0.9188762478994261,
+        "donor_validated": 0.6783504291982314,
+        "validated_diagonal": 0.6485546265455112,
+        "validated_transposed": 0.665219850581072,
+        "donor_and_query": 1.9567190751411145
+      },
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-foliage-main-foliage-x4.png",
+              "sha256": "be6a1f5efbface415f46a4c293ddec396b258c586224fc30c3e5b4dd6f0483c5"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "main-chain-link-fence-main-chain-link-fence",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "query": [
+        2192,
+        5952,
+        256,
+        256
+      ],
+      "native_ROI": [
+        2240,
+        6000,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+        "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-chain-link-fence-RGB-f32.npy",
+        "sha256": "3215efefed0599b23f9070b17e10429cd5b672aaa7afe8b6a309fa8feb45896b"
+      },
+      "donor_windows": 4771,
+      "camera_RGB_change_DN16": {
+        "matched": 0.3105667935670613,
+        "confirmed_diagonal": 0.7358653188889173,
+        "donor_validated": 0.4513500753425221,
+        "validated_diagonal": 0.620670911819443,
+        "validated_transposed": 0.4396392769395477,
+        "donor_and_query": 1.07120567696498
+      },
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-chain-link-fence-main-chain-link-fence-x4.png",
+              "sha256": "8d866f74e1a8810ae764ab7cb6726b271039556a04eb53fe477c4f49fc8e39e8"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-left",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "query": [
+        758,
+        6440,
+        256,
+        256
+      ],
+      "native_ROI": [
+        806,
+        6489,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+        "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+      },
+      "donor_windows": 4770,
+      "camera_RGB_change_DN16": {
+        "matched": 0.12136475572272201,
+        "confirmed_diagonal": 0.05344351156071651,
+        "donor_validated": 0.03852157471252316,
+        "validated_diagonal": 0.023939384371701088,
+        "validated_transposed": 0.04334992819541688,
+        "donor_and_query": 0.03689862036992537
+      },
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-left-x16.png",
+              "sha256": "c724d43b4c76179bf56ec7ee6f9167929170fc57fd435447d6eda88412a09177"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-left-x4.png",
+              "sha256": "f570421ed26aaf3e02c26c0391215dd0dfcbdfc4b6a4cabd9f8837382d62ffdb"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-right",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "query": [
+        978,
+        6400,
+        256,
+        256
+      ],
+      "native_ROI": [
+        1026,
+        6449,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+        "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+      },
+      "donor_windows": 4772,
+      "camera_RGB_change_DN16": {
+        "matched": 0.10071063207501048,
+        "confirmed_diagonal": 0.01451683668511219,
+        "donor_validated": 0.024159786982679572,
+        "validated_diagonal": 0.03166171268933789,
+        "validated_transposed": 0.029283170998775084,
+        "donor_and_query": 0.016807611422241256
+      },
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-right-x16.png",
+              "sha256": "9f7aa5ffebd940f6ef2be957a8bd355eac7aa688ba53c25c8f82a35756b9d3e4"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-right-x4.png",
+              "sha256": "5919fbc8427041b86ba95734764748a83a901c55cfea19a07bccf6080fcf84cb"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-left",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "query": [
+        758,
+        6440,
+        256,
+        256
+      ],
+      "native_ROI": [
+        806,
+        6489,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+        "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+      },
+      "donor_windows": 4770,
+      "camera_RGB_change_DN16": {
+        "matched": 0.1433713586918542,
+        "confirmed_diagonal": 0.11416138525555507,
+        "donor_validated": 0.06661814979848957,
+        "validated_diagonal": 0.06534002618516117,
+        "validated_transposed": 0.0742768295323288,
+        "donor_and_query": 0.09079383683691837
+      },
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-left-x16.png",
+              "sha256": "c1bc4ff650c9a0007a64db8c10d2080bef7b58da90731432cb3a2732ffe2c350"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-left-x4.png",
+              "sha256": "d41f5a477447a806dd641baa468d9ab1dd368aeced86859eb72d776a10c8f3b1"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-right",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "query": [
+        978,
+        6400,
+        256,
+        256
+      ],
+      "native_ROI": [
+        1026,
+        6449,
+        160,
+        160
+      ],
+      "parent_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "parent_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+        "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+      },
+      "donor_windows": 4772,
+      "camera_RGB_change_DN16": {
+        "matched": 0.12985370973358198,
+        "confirmed_diagonal": 0.06277627093855942,
+        "donor_validated": 0.046263512966786866,
+        "validated_diagonal": 0.05511549299783079,
+        "validated_transposed": 0.055063514399258856,
+        "donor_and_query": 0.06911903879322034
+      },
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-right-x16.png",
+              "sha256": "e3a7aa0dec6318dad7949842036c036e3d7cc2b383f6f5de6950ed443a0067ef"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-right-x4.png",
+              "sha256": "5d7365e5e06a9250fabeac93eb3a26247b5b56fd5e99fe21f612e8c8540bb3e7"
+            },
+            "panels": [
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Single covariance",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Confirmed diagonal",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated covariance",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor-validated diagonal",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Transposed prior",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Donor and query check",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1688,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1856,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "chart": {
+    "path": "fresh-frontier.png",
+    "sha256": "9f72d686bea2024d93774bda6da954d4587fbd3396e84cbe7e107db7a52ec1f3"
+  },
+  "operating_point": "quiet",
+  "native_settings": {
+    "matched": 0.007342805550428903,
+    "diagonal": 0.0073567328752139486,
+    "confirmed": 0.03719333057890639,
+    "confirmed_diagonal": 0.03814986394292117,
+    "donor_validated": 0.05104027977636037,
+    "validated_diagonal": 0.0438072551108101,
+    "validated_transposed": 0.051208317418085535,
+    "donor_and_query": 0.2528834922666963,
+    "diagonal_and_query": 0.21280782623296943
+  },
+  "inspection": {
+    "local_time": "2026-11-19T18:21:32.571661-08:00",
+    "assets": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-patch-crossfit-v1/sheets.json",
+      "sha256": "30bea8f14a91daf057d57718a2148a47c0351d88a3e5819f4d753257c0783ae1"
+    },
+    "notes": {
+      "natural": "Marktbreit preserves the beams while the smallest window and trim detail stays soft. The jet scene has clean sky color and rounded dark transitions. Both exact-flat centers appear smooth.",
+      "wire": "The strip example keeps its strong parallel set, with weak crossing contrast below the exact target. The ellipse example has incomplete weak lines and looks close to the matched control.",
+      "main": "The sky stays visually smooth. Coarse crossings are coherent, with soft fine bracing and leaf tips.",
+      "fine_cab": "Both left crops remain largely unresolved. Transferred right diagonals remain clearest, with incomplete fine crossings in both displays and noise profiles."
+    }
+  }
+}

@@ -8,6 +8,11 @@ error and **0.176 DN16** more flat-core error. Fitting the correction strength
 on independent noise draws selects zero at both ISO levels. The native
 GFX100S review shows no new fine crossings.
 
+[A follow-up using separate donors](scene-patch-crossfit.md) reduces
+flat error at similar response on coherent repeats. The combined
+donor and query checks improve the held-out wire tradeoff. The new
+natural-photo replay still has higher error.
+
 [Machine results](results/scene-patch-covariance-v1/publication.json) ·
 [Frozen receipts and source](results/scene-patch-covariance-v1/evidence.tar.xz) ·
 [Native crop provenance](images/scene-patch-covariance-v1/manifest.json).

@@ -23,6 +23,10 @@ historical boards. Use these reports for the current completed comparisons:
   changes the sky by 0.190 DN16 RGB RMS with two-green confirmation.
   The diagonal control has zero sky correction. The coarse fence
   retains its crossings, with soft building wires and leaf details.
+- [Covariance checked on separate donors](scene-patch-crossfit.md#standing-gfx100s-comparisons)
+  changes the sky by 0.027 DN16 RGB RMS at the natural matched-flat
+  strength. The sky stays smooth and the existing coarse crossings
+  stay coherent. Thin wires, bracing and leaf subdivisions stay soft.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.

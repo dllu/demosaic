@@ -6,8 +6,10 @@ from demosaic.scene_patch_covariance import (
     SIZE,
     ExteriorPatches,
     build_exterior,
+    confirmed_power,
     corrections,
     covariance,
+    donor_validated_fields,
     encode,
     filter_innovation,
     patch_basis,
@@ -86,3 +88,32 @@ def test_signed_support_uses_the_less_supportive_green():
     observations = np.array([[[3.0, 2.0, -4.0, 9.0], [1.5, -1.0, -3.0, 9.0]]])
     proposal = np.array([[2.0, 1.0, -1.0, 0.0]])
     np.testing.assert_array_equal(signed_support(observations, proposal, 1.0), [[0.5, 0, 1, 0]])
+
+
+def test_validation_rejects_unsupported_power_and_small_effective_groups():
+    products = np.tile([9.0, -9.0, 0.0], (2, 4, 1))
+    weights = np.array([[0.25] * 4, [1, 0, 0, 0]])
+    power = confirmed_power(products, weights, np.ones(3))
+    np.testing.assert_array_equal(power, [[8, 0, 0], [0, 0, 0]])
+
+
+def test_donor_halves_validate_each_others_modes_and_preserve_the_query_sign():
+    basis = patch_basis((0, 1, 1, 2))
+    count = len(basis.image)
+    coherent = np.zeros((1, 16, 2, count))
+    tone = np.zeros((1, count))
+    tone[0, 0] = 1
+    weights = np.full((1, 16), 1 / 16)
+    coherent[:, :, :, 0] = 8
+    observation = np.broadcast_to(tone[:, None], (1, 2, count))
+    signal = donor_validated_fields(coherent, weights, tone, observation, np.ones(1) * 0.1, basis)
+    assert np.vdot(signal["donor_validated"], tone) > 0.8
+    assert np.vdot(signal["donor_and_query"], tone) > 0.5
+    np.testing.assert_allclose(signal["donor_validated"], signal["validated_diagonal"], atol=1e-15)
+    different = coherent.copy()
+    different[:, 1::2, :, 0] = 0
+    different[:, 1::2, :, 1] = 8
+    for result in donor_validated_fields(
+        different, weights, tone, observation, np.ones(1), basis
+    ).values():
+        np.testing.assert_array_equal(result, 0)

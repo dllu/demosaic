@@ -1019,6 +1019,14 @@ independent increment and flat error. The simpler diagonal control
 also gives lower error in a repeat-pattern simulation at matched
 response. Both standing GFX families were viewed.
 
+[Separate donor validation](scene-patch-crossfit.md) lowers
+repeat-pattern flat error from 27.01 to 15.44 DN16 at similar
+response. At matched wire-flat error, adding the query check
+gains 0.109 points over the earlier confirmed diagonal. Natural
+fine error rises. The tested 16-pixel basis starts above the
+measured fine green fence fundamental. The real ROI still has
+incomplete crossings.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

@@ -43,6 +43,11 @@ has repeatedly come with extra flat-region error or false color. The
    on independent natural targets, and calibration under independent
    noise selects zero correction. Two-green confirmation improves response
    at a fixed correction dose, with higher quiet and increment error.
+   [Separate donor validation](scene-patch-crossfit.md) lowers flat
+   error on coherent repeats and improves planted-wire response at
+   matched flat error. The new natural-photo panel has higher
+   increment and flat error. The fitted band starts above the
+   measured fine-cab fundamental.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

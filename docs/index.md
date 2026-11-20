@@ -92,6 +92,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [weak edges and independent-exposure supervision](weak-edge-distill.md) ·
 [whole-image RAW spectral priors](scene-spectrum-detail.md) ·
 [whole-photo patch covariance](scene-patch-covariance.md) ·
+[patch covariance on separate Bayer donors](scene-patch-crossfit.md) ·
 [learned spectral corrections](learned-spectral-detail.md) ·
 [exact gap supervision and Bayer witnesses](learned-spectral-gaps.md) ·
 [between-bin Bayer phase refinement](subbin-spectral-witness.md) ·
