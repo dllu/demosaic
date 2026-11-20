@@ -1003,6 +1003,14 @@ primarily on one background. Wider pooling with coarse-color affinity
 provides little gain there. Coherence across the four donors fails in both
 right cab profiles, so the real crop uses uniform attenuation.
 
+The [curved phase transport test](local-curved-phase-transport.md) finds
+that the exterior can predict curvature when nearby patches share the
+same weak surface. On 15 comparable curved photos, the phase cosine rises
+from 0.799 to 0.999. At equal recovery added gap RMS falls 0.003 DN16
+relative to the fixed guard on 24 new photos. Both right cab profiles
+still fail because only one side shows repeatable evidence and its two
+extrapolations disagree at the query.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

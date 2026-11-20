@@ -200,6 +200,12 @@ added gap luma RMS by 0.122 DN16 on 32 new ISO6400 photos, with most of the
 gain from one source. Both right cab profiles fall back to a uniform blend
 because exterior phase is inconsistent.
 
+[Curved phase transport](local-curved-phase-transport.md) predicts the
+known weak phase much more accurately on 24 new curved fixtures when both
+phase estimates are available. Its taper adds 0.102 response points over
+the fixed guard, with an interval spanning zero. Both real right-cab profiles
+still lack repeatable support across the donor patches.
+
 [Regional Bayer color pooling](cfa-regional-phase.md) adds 0.504
 weak-response points over green-only on 24 fresh warped backgrounds with
 equal flat RMS. Nearby checks reduce errors from local color reversals.

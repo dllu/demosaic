@@ -2,6 +2,8 @@
 
 The new `weak-phase-guard` crop option uses nearby RAW patches to predict the phase of faint detail, then uses 16-pixel local measurements to decide where to apply the [weak-only correction](local-conditional-posterior.md). At equal recovered contrast on 32 new ISO6400 photo-based fixtures, it lowers added gap luma RMS from **0.311 to 0.189 DN16**. One photo accounts for 97% of the mean difference. The wider and coarse-color-guided checks offer little improvement on that panel, and both right GFX cab crops fall back because the exterior phase is inconsistent.
 
+The [curved phase follow-up](local-curved-phase-transport.md) improves agreement with the known phase on new curved fields. The gain in recovered contrast is small, and the phase fit remains ineligible on both right cab profiles.
+
 ## Separate the phase from the local support check
 
 The [previous support replay](local-weak-support.md) used a weak waveform already fitted at the center or tested red/blue ratios against a green fitted there. This check estimates the entire complex phase for each Bayer site from four separate 128-pixel RAW patches. The frequency, weak/strong rank and applied weak correction come from the existing pipeline. An inverse-noise weighted phase consensus must have a magnitude of at least 65% of the weighted mean magnitude and squared signal-to-noise of at least 16 on both green lattices. Red and blue join the check individually when they satisfy the same criteria.

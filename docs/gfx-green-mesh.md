@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Curved phase transport](local-curved-phase-transport.md#standing-gfx100s-comparisons) | Both ROIs and noise profiles viewed at ×4 and ×16 with the ISO100 AHD and both JPEGs. Only the left donor of each right crop repeats the weak phase. Extrapolating it to the right crop still gives incompatible predictions and fine crossings remain incomplete |
 | [Exterior phase guard](local-phase-extent.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed at ×4 and ×16 with AHD and both JPEGs. The right crops use the uniform fallback because phase is inconsistent across donors. Fine crossings and mottle remain |
 | [Local support for the weak correction](local-weak-support.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed at ×4 and ×16 with AHD and both JPEGs. The left stays at the combined fit. On the right the tests change diagonal contrast subtly, with the same incomplete crossings and background mottle |
 | [Separate fit for the weaker direction](local-conditional-posterior.md#standing-gfx100s-comparisons) | Both ROIs, priors and JPEGs viewed at ×4 and ×16. Left uses the combined fit. The weaker right diagonal becomes clearer in places, with incomplete crossings and background mottle |
