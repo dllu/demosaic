@@ -194,6 +194,12 @@ stronger ISO1600 panel. The ISO6400 gain depends on one photo.
 The larger candidate comparison changes the coarse fence slightly
 and leaves both fine cab ROIs as before.
 
+[Noise-weighted Bayer validation](cfa-predictive-covariance.md) helps a
+controlled fit with a large dark-to-bright variance difference. On fresh
+ISO1600 photos it gains 0.073 signed-response points over the matched affine
+fit, with an interval spanning zero. The fresh ISO6400 colors and both GFX
+families reproduce the earlier output.
+
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
 weak response it lowers continuing-strand RMS by 2.361 DN16 versus

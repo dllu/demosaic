@@ -1328,6 +1328,13 @@ full-frame feasibility.
 
 ## What would make the next result convincing
 
+The [noise-weighted color follow-up](cfa-predictive-covariance.md) finds
+lower error on a known-waveform control with a large noise gradient.
+On 16 fresh mixed-illumination scenes, the ISO1600 gain over an equal-cutoff
+affine fit is small and uncertain. Propagating fitted-background covariance
+adds little over per-pixel noise weighting. At ISO6400 the fresh and real
+results retain their earlier limitations.
+
 The first small study should be the prepared shared-edge comparison. The next
 diagnostic should test A/B-held-out evidence with and without an edge nuisance
 model. Only then choose between localized waves, constrained aggregation or a

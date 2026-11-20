@@ -8,6 +8,11 @@ equal measured gap error. The high-noise improvement comes from
 one photo. On the earlier, weaker panels the benefit remains
 small and the real fine cab crops remain incomplete.
 
+[Noise-weighted validation](cfa-predictive-covariance.md) tests per-pixel
+shot/read variance and propagated background uncertainty. The added
+covariance changes little on the fresh mixed-illumination cases, and the
+new checks leave both standing GFX outputs equal to local conditional.
+
 ## Estimate the color waveform before checking it
 
 The [preceding experiment](cfa-directional-chroma.md) found windows
