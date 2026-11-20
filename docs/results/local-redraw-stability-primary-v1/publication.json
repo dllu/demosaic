@@ -1,0 +1,216 @@
+{
+  "collector": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/primary/full/result.json",
+    "sha256": "02110237f2c76f6e127ca60602b3f4e62e6d1d24fe91dc1055d9f5aa799c1d71"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/primary/plan.json",
+    "sha256": "769abb53a9bc07726855d94dcd99d905c1ce93603c3e259c4badce2a0ce43bfc"
+  },
+  "qualification": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/primary/preflight/result.json",
+    "sha256": "434b99888d5aacb368dfea3bd94f3f582c89b458f391b901486c6e9e5fe57d5a"
+  },
+  "archive": {
+    "path": "docs/results/local-redraw-stability-primary-v1/evidence.tar.xz",
+    "sha256": "813e05255a662bf6eec891fe60be0af04e06f067660231d7fcfd6fdb9c5ef8b4"
+  },
+  "canonical_inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/result.json",
+    "sha256": "64cacba459e09a90eb2727bf85b876f295ab21e13135585cbc501cc7738e3b09"
+  },
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "prior-mean": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-average-v1/training/mean.pt",
+        "sha256": "c9083e7be3ec87e2f9bd2c2d4372cf0bce005d9d46d43b89c50e7af9e9bc272c"
+      },
+      "step": 512
+    },
+    "mean": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/mean.pt",
+        "sha256": "d771a3256db49e7d2fdbc98f76e0bc2d6e3a95f103d711a20749f15a1bd4764a"
+      },
+      "step": 320
+    },
+    "repeat": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/repeat.pt",
+        "sha256": "cc5a3cd5d33096f9696d250627d380ecc2f0ed53971da8c2d3f9772550cf9a7a"
+      },
+      "step": 320
+    },
+    "repeat-gap": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/repeat-gap.pt",
+        "sha256": "d9b68e30fea57cfe0e84509688c1326c5f5ce6f5286fe2b6a16e4775a2cba533"
+      },
+      "step": 320
+    }
+  },
+  "complete": true,
+  "counts": {
+    "known": 24,
+    "unseen": 30,
+    "photo": 3108
+  },
+  "policy": "CUDA channels-last IEEE FP32. Retain per-case PSNR, input fingerprints and CPU checks.",
+  "weights": "EMA",
+  "photo_sources": 427,
+  "observations_per_model": 11956,
+  "photo_summary": [
+    {
+      "model": "V120",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 39.95386147395389,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.04008459031841,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "V120",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.261069608586176,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.95752184305872,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "mean",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.126074947932764,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.24140666248248,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "mean",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.024784094520975,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.76249940480505,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "prior-mean",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.13643954301925,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.25002806973959,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "prior-mean",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.0428783425263,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.79762962886265,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "repeat",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.11840901984224,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.23465419206463,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "repeat",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.016419953533585,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.74640242542539,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "repeat-gap",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.118430789077756,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.2327280181752,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "repeat-gap",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.019055700727876,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.75115561911038,
+          "count": 16
+        }
+      }
+    }
+  ]
+}

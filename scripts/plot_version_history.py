@@ -8,6 +8,7 @@ import json
 import math
 import re
 import tarfile
+from collections import defaultdict
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -25,13 +26,15 @@ COVERAGE_NOTE = (
     "[completed fixed camera panels](scene-50000-cameras.md). "
     "The two independent-redraw endpoints also have "
     "[completed fixed camera panels](local-redraw-average.md#fixed-camera-panels). "
-    "The three repeat and gap continuations have "
-    "[completed fixed camera panels](local-redraw-stability.md#fixed-camera-panels). "
-    "The three signed wire continuations have "
-    "[completed fixed camera panels](local-wire-response.md#fixed-camera-panels). "
+    "The mean-redraw parent and three repeat and gap continuations have completed "
+    "[the fixed photo panel](local-redraw-stability.md#fixed-photo-panel) and "
+    "[both camera panels](local-redraw-stability.md#fixed-camera-panels). "
+    "The three signed wire continuations have completed "
+    "[the fixed photo panel](local-wire-response.md#fixed-photo-panel) and "
+    "[both camera panels](local-wire-response.md#fixed-camera-panels). "
     "The continuing-wire trial has "
     "[completed fixed camera panels](local-continuing-wire.md#fixed-camera-panels). "
-    "These eighteen full427 scores are pending. "
+    "Eleven other full427 scores are pending. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -678,6 +681,101 @@ def collect_compact_scene_endpoints():
     )
 
 
+def attach_compact_photo_endpoints(points, source, camera_source, names, report):
+    """Attach a compact CUDA photo panel after auditing all source observations."""
+    photo = json.loads(source.read_text())
+    camera = json.loads(camera_source.read_text())
+    assert photo["complete"] and photo["weights"] == camera["weights"] == "EMA"
+    matches = ("plan", "canonical_inputs", "models")
+    assert all(photo[k] == camera[k] for k in matches)
+    archive = REPO / photo["archive"]["path"]
+    assert digest(archive) == photo["archive"]["sha256"]
+    means = {}
+    with tarfile.open(archive) as bundle:
+        def load(name, ref):
+            raw = bundle.extractfile(name).read()
+            assert hashlib.sha256(raw).hexdigest() == ref["sha256"]
+            return json.loads(raw)
+
+        result = load("collector-result.json", photo["collector"])
+        plan = load("plan.json", photo["plan"])
+        canonical = load("canonical-inputs.json", photo["canonical_inputs"])
+        preflight = load("preflight.json", photo["qualification"])
+        assert result["complete"] and result["scope"] == "full"
+        assert result["counts"] == photo["counts"] == {"known": 24, "unseen": 30, "photo": 3108}
+        assert all(result[k] == photo[k] for k in (*matches, "policy"))
+        assert result["models"] == plan["models"] == preflight["models"]
+        assert result["policy"] == plan["policy"] and result["policy"].startswith("CUDA")
+        assert plan["canonical_inputs"] == result["canonical_inputs"]
+        assert result["qualification"] == photo["qualification"]
+        assert preflight["scope"] == "preflight" and preflight["plan"] == result["plan"]
+        checks = preflight["V120_CPU_comparisons"]
+        assert any(r["stage"] == "photo" for r in checks)
+        assert max(abs(delta) for item in checks for delta in item["delta_dB"]) < 1e-4
+        assert canonical["all_input_witnesses_exact"]
+        witnesses = {r["batch"]: r for r in canonical["records"] if r["stage"] == "photo"}
+        case_refs = {Path(r["path"]).stem: r for r in result["cases"]}
+        assert len(case_refs) == len(result["cases"]) == 3162
+        assert len(witnesses) == 3108
+        samples = {arm: defaultdict(dict) for arm in result["models"]}
+        axes = set()
+        for index in range(3108):
+            native = witnesses[index]
+            case = load(f"photo/{index:05d}.json", case_refs[f"photo-{index:05d}"])
+            assert case["plan"] == result["plan"] and case["arrays"] == native["arrays"]
+            assert (case["stage"], case["batch"]) == ("photo", index)
+            assert set(case["variants"]) == set(samples)
+            context = native["context"]
+            axis = (context["condition"]["name"], context["pattern"])
+            axes.add(axis)
+            for arm, variant in case["variants"].items():
+                for row, source_id in zip(variant["rows"], context["ids"], strict=True):
+                    assert (row["model"], row["id"]) == (arm, source_id)
+                    assert (row["condition"], row["pattern"]) == axis
+                    if source_id.startswith("synthetic-"):
+                        assert row["kind"] == "synthetic"
+                        continue
+                    assert row["kind"] == "photo"
+                    entries = samples[arm][source_id]
+                    value = row["metrics"]["srgb_psnr"]
+                    assert axis not in entries and math.isfinite(value)
+                    entries[axis] = value
+        assert len({a for a, _ in axes}) == 7 and len({b for _, b in axes}) == 4
+        overall = result["summaries"]["photo"]["overall"]
+        assert photo["photo_summary"] == overall
+        for arm, photos in samples.items():
+            assert len(photos) == photo["photo_sources"] == 427
+            assert all(set(v) == axes for v in photos.values())
+            assert sum(map(len, photos.values())) == photo["observations_per_model"] == 11956
+            means[arm] = math.fsum(math.fsum(v.values()) / len(v) for v in photos.values()) / len(photos)
+            saved = next(r for r in overall if (r["model"], r["kind"]) == (arm, "photo"))
+            measure = saved["metrics"]["srgb_psnr"]
+            assert measure["count"] == len(photos)
+            assert math.isclose(means[arm], measure["mean"], rel_tol=0, abs_tol=1e-10)
+    for point, arm in zip(points, names, strict=True):
+        assert point["checkpoint_sha256"] == photo["models"][arm]["checkpoint"]["sha256"]
+        for stage in ("known", "unseen"):
+            panel = camera["panels"][stage]["overall"][arm]
+            assert math.isclose(
+                point[f"{stage}_CFA_PSNR"], panel["sensor_psnr"], rel_tol=0, abs_tol=1e-10
+            )
+        point["photo_srgb_PSNR"] = means[arm]
+        point["evaluation_metadata"]["photo"] = {
+            "photo_sources": 427,
+            "observations_per_model": 11956,
+            "conditions": 7,
+            "CFAs": 4,
+            "canonical_inputs_sha256": photo["canonical_inputs"]["sha256"],
+            "precision": "CUDA IEEE FP32",
+        }
+    return [{
+        "path": str(p.relative_to(REPO)),
+        "sha256": digest(p),
+        "endpoints": [r["endpoint"] for r in points],
+        "report": report,
+    } for p in (source, archive)]
+
+
 def collect_redraw_endpoints():
     path = REPO / "docs/results/local-redraw-average-camera-v1/publication.json"
     names = {"individual": ("Draw-wise +512", 512), "mean": ("Mean draw +512", 512)}
@@ -686,16 +784,20 @@ def collect_redraw_endpoints():
     )
 
 
-def collect_stability_endpoints():
+def collect_stability_endpoints(mean_parent):
     path = REPO / "docs/results/local-redraw-stability-camera-v1/publication.json"
     names = {
         "mean": ("Mean +320", 320),
         "repeat": ("Repeat +320", 320),
         "repeat-gap": ("Gap +320", 320),
     }
-    return collect_compact_camera_endpoints(
-        path, "local-redraw-stability.md", "local-redraw-stability", names
-    )
+    report = "local-redraw-stability.md"
+    points, evidence = collect_compact_camera_endpoints(path, report, "local-redraw-stability", names)
+    photo = REPO / "docs/results/local-redraw-stability-primary-v1/publication.json"
+    evidence.extend(attach_compact_photo_endpoints(
+        [*points, mean_parent], photo, path, (*names, "prior-mean"), report
+    ))
+    return points, evidence
 
 
 def collect_wire_response_endpoints():
@@ -705,9 +807,11 @@ def collect_wire_response_endpoints():
         "wire-mean": ("Full wire band", 320),
         "wire-aligned": ("Aligned wire", 320),
     }
-    return collect_compact_camera_endpoints(
-        path, "local-wire-response.md", "local-wire-response", names
-    )
+    report = "local-wire-response.md"
+    points, evidence = collect_compact_camera_endpoints(path, report, "local-wire-response", names)
+    photo = REPO / "docs/results/local-wire-response-primary-v1/publication.json"
+    evidence.extend(attach_compact_photo_endpoints(points, photo, path, names, report))
+    return points, evidence
 
 
 def collect_continuing_wire_endpoints():
@@ -744,11 +848,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v10.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v11.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v9.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v10.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v9.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v8.json"
         if not destination.exists():
@@ -792,7 +898,8 @@ def main():
         redraw_points, redraw_evidence = collect_redraw_endpoints()
         points.extend(redraw_points)
         evidence.extend(redraw_evidence)
-        stability_points, stability_evidence = collect_stability_endpoints()
+        mean_parent = next(p for p in redraw_points if p["endpoint"] == "local-redraw-average-mean")
+        stability_points, stability_evidence = collect_stability_endpoints(mean_parent)
         points.extend(stability_points)
         evidence.extend(stability_evidence)
         wire_points, wire_evidence = collect_wire_response_endpoints()

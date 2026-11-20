@@ -48,9 +48,10 @@ byte for byte when the second draw is omitted.
 Both artifacts store separate raw and EMA states. Interleaved BF16
 training took **579.49 s** including data and hashing. Evaluation uses
 EMA with CUDA IEEE FP32 and processes each restored RAW on its own.
-Both fixed measured-camera panels are complete. The fixed 427-photo
-replay is running on both new endpoints with V120. The eight-batch
-admission reproduces the archived V120 scores within 0.000008 dB.
+Both fixed measured-camera panels are complete. The identical
+mean-redraw EMA scores 37.25003 dB on the fixed 427 photos as the
+starting model of the [repeat and gap study](local-redraw-stability.md#fixed-photo-panel).
+The individual-redraw EMA's fixed photo result is pending.
 [Prior single-pair continuation](local-paired-continuation.md) ·
 [Comparable PSNR history](performance-history.md).
 
@@ -139,7 +140,8 @@ archived panel means within 0.000002 dB.
 
 The mean arm loses 0.03235 dB known and 0.04143 dB unseen
 relative to its individual-loss control. The paired camera results
-are included in the chart. The fixed 427-photo scores remain pending.
+are included in the chart, along with the mean-redraw EMA's completed
+fixed photo panel.
 [Camera evidence](results/local-redraw-average-camera-v1/publication.json) ·
 [Per-batch archive](results/local-redraw-average-camera-v1/evidence.tar.xz) ·
 [Earlier matched camera panels](scene-50000-cameras.md) ·

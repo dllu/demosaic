@@ -200,9 +200,38 @@ The added gap loss shifts repeat's scores by +0.00391 dB known and
 −0.00231 dB unseen. The known camera gap and the faint-wire response
 loss hold back a general recommendation.
 
-The canonical 427-photo run is in progress with the same three EMA
-hashes listed above. Its measured averages remain pending. The full427
-V120 and Corpus 100k references are independently complete. [Camera summary](results/local-redraw-stability-camera-v1/publication.json) ·
+[Camera summary](results/local-redraw-stability-camera-v1/publication.json) ·
 [Camera archive](results/local-redraw-stability-camera-v1/evidence.tar.xz) ·
 [Comparable PSNR history](performance-history.md) ·
 [Corpus references](scene-50000-cameras.md).
+
+## Fixed photo panel
+
+The fixed replay covers the original 427 photographs, seven noise and
+exposure conditions and four Bayer layouts in CUDA IEEE FP32. The
+same mean-redraw EMA used as the starting model matches the checkpoint
+hash and camera scores in its original review. The photo qualification
+reproduces the archived V120 CPU scores within 0.000004 dB.
+
+| EMA | Source-balanced sRGB PSNR |
+| --- | ---: |
+| V120 | 37.04008 dB |
+| Corpus 100k, completed fixed panel | 37.24747 dB |
+| Starting mean-redraw EMA | 37.25003 dB |
+| Matched mean control | 37.24141 dB |
+| Repeat loss | 37.23465 dB |
+| Repeat + gap loss | 37.23273 dB |
+
+Repeat gains 0.19457 dB over V120 and falls 0.01537 dB below the
+starting EMA. It gives up 0.00675 dB to the matched mean control.
+The gap term costs another 0.00193 dB versus repeat. The natural
+weak-detail, wire and measured-camera results above describe the
+different behavior of the same checkpoints.
+
+The archive binds 3,108 photo-stage batches to the frozen inputs and
+11,956 observations per model on the 427 photos. The sixteen
+constructed sources have separate aggregates. Collection took
+35,425.15 seconds wall with concurrent GPU work across all stages.
+[Photo summary](results/local-redraw-stability-primary-v1/publication.json) ·
+[Per-batch photo evidence](results/local-redraw-stability-primary-v1/evidence.tar.xz) ·
+[PSNR history](performance-history.md).

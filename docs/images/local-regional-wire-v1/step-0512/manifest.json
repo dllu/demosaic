@@ -1,0 +1,2529 @@
+{
+  "step": 512,
+  "weights": "EMA",
+  "precision": "CUDA IEEE FP32",
+  "checkpoints": {
+    "global-aligned": {
+      "path": "/mnt/external/demosaic/local-regional-wire-v1/train/step-0512/global-aligned.pt",
+      "sha256": "54bdb1d0ac91182af672edcf5772a5e3773493eb9decba5add208df3db75b055"
+    },
+    "regional-aligned": {
+      "path": "/mnt/external/demosaic/local-regional-wire-v1/train/step-0512/regional-aligned.pt",
+      "sha256": "b7612259677b61a62edc461bc3a144568e372c6671130a052839dc7a1bee954e"
+    },
+    "local50k": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+      "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+    }
+  },
+  "exact": [
+    {
+      "id": "wire-12",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "case": {
+        "source": {
+          "source": {
+            "attribution": null,
+            "author": "Tobias \"ToMar\" Maier",
+            "bin_factor": 4,
+            "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ad/ad0b3ba2652514f25bd0da0daf373dca0ba09c8b.npy",
+            "cache_sha256": "78f6cd8498940a30743e9e90c803d92726c78ae23ded5c0043d3ddad4a12eb4f",
+            "color_space": "linear-sRGB",
+            "credit": "Own work",
+            "download_path": "images/ad/0b/ad0b3ba2652514f25bd0da0daf373dca0ba09c8b.jpg",
+            "dtype": "uint16",
+            "height": 2102,
+            "id": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Concord_Eye-Q_1M_Camera_rear_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Concord_Eye-Q_1M_Camera_rear_view.jpg",
+            "sha1": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+            "sha1_hex": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+            "shape": [
+              525,
+              700,
+              3
+            ],
+            "split": "val",
+            "title": "File:Concord Eye-Q 1M Camera rear view.jpg",
+            "width": 2802
+          },
+          "index": 12,
+          "box": [
+            180,
+            4,
+            512,
+            512
+          ],
+          "camera": {
+            "pattern": "GBRG",
+            "wb": [
+              1.6067786325577211,
+              1.0,
+              1.3708790471593986
+            ],
+            "camera_inverse": [
+              [
+                0.8625788132550156,
+                0.10724719743786934,
+                0.030173989307115002
+              ],
+              [
+                0.03583862582658379,
+                0.9357174364551699,
+                0.02844393771824635
+              ],
+              [
+                0.013085025968556869,
+                0.09460856145315415,
+                0.892306412578289
+              ]
+            ],
+            "exposure": 0.7905762168799332,
+            "shot": 0.00014897918438741805,
+            "read": 8.337760943062196e-08,
+            "black": 0.03,
+            "noise_seed": 1253738468077806002
+          },
+          "kind": "wire",
+          "geometry": {
+            "family": "ellipse",
+            "frequency": [
+              [
+                0.0912391388192916,
+                0.06608114039034557
+              ],
+              [
+                0.08887352308170532,
+                -0.07330690797987081
+              ]
+            ],
+            "phase": [
+              2.5826001338113196,
+              -2.1769649825830366
+            ],
+            "strength": [
+              0.01456746427942367,
+              0.007234215161915719
+            ],
+            "width": [
+              0.12765798452235602,
+              0.1265432393864863
+            ],
+            "edge": -10.16894669337608,
+            "gap_center": [
+              19.307771216009456,
+              17.845015079692708
+            ],
+            "gap_width": 21.763983768800912,
+            "gap_length": 43.45677592914153,
+            "gap_orientation": 1.5110439988666589,
+            "angle": 0.43172087201439835,
+            "tint": [
+              0.12094686297959371,
+              0.11458922972514139,
+              0.11546867214939108
+            ]
+          }
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/12-capture.npz",
+          "sha256": "32e4b238f778a8d66ff07668c82e2df0a3a5d7a545197a8a4daeac76871d23c0"
+        },
+        "model_outputs": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/12-estimate.npz",
+          "sha256": "236f2b2e3b1f67f525cf2cea67c7b31d449be461820c60d3c674964b44833edf"
+        },
+        "endpoint_output": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local50000-scoped-v1/predictions/12.npy",
+          "sha256": "7a53c51d714087c032156a06ed32776c33f5f2e086068538adf3a2a1db400cb0"
+        },
+        "box": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "gap_pixels": 2976
+      },
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/wire-12-global-aligned.npy",
+          "sha256": "cff85ac9acd4949636e185da1cf8f6afaf830080cbd3badf101ea98c59ca4758"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/wire-12-regional-aligned.npy",
+          "sha256": "90bb26f296bc3ec161cc7c799430d14e2d00f954f27c1461aca694e54377f057"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/wire-12-local50k.npy",
+          "sha256": "7a53c51d714087c032156a06ed32776c33f5f2e086068538adf3a2a1db400cb0"
+        }
+      },
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "selection_metric": "gap_weak_RMS_DN16",
+      "difference": -0.3812865188398109,
+      "board": {
+        "image": {
+          "path": "exact/wire-12-comparison.png",
+          "sha256": "47944e04e7eae13f7fb3cf2842b60f4ef89c88a3e6c89af72bfb019933a2657e"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Whole-core supervision",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/wire-12-triplet.png",
+          "sha256": "d567aef15513e24528d523fd7fd1b46dacca07be0f5ad8afc3facda4ba3ecec4"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "wire-04",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "case": {
+        "source": {
+          "source": {
+            "attribution": null,
+            "author": "Daniel Kraft",
+            "bin_factor": 4,
+            "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/38/38f28b27d574ae6f22d932d866d0c18cf974db10.npy",
+            "cache_sha256": "451e6a4e1850f45b3033e2aad350d268a49de2883b25acf3f2ea8694d771b96f",
+            "color_space": "linear-sRGB",
+            "credit": "Own work",
+            "download_path": "images/38/f2/38f28b27d574ae6f22d932d866d0c18cf974db10.jpg",
+            "dtype": "uint16",
+            "height": 3456,
+            "id": "38f28b27d574ae6f22d932d866d0c18cf974db10",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Dune_Namib_Naukluft_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Dune_Namib_Naukluft_2.jpg",
+            "sha1": "38f28b27d574ae6f22d932d866d0c18cf974db10",
+            "sha1_hex": "38f28b27d574ae6f22d932d866d0c18cf974db10",
+            "shape": [
+              864,
+              1150,
+              3
+            ],
+            "split": "val",
+            "title": "File:Dune Namib Naukluft 2.jpg",
+            "width": 4600
+          },
+          "index": 4,
+          "box": [
+            338,
+            100,
+            512,
+            512
+          ],
+          "camera": {
+            "pattern": "BGGR",
+            "wb": [
+              1.5865163727302605,
+              1.0,
+              2.8096686484324755
+            ],
+            "camera_inverse": [
+              [
+                0.3500000000000001,
+                0.49347633267053903,
+                0.15652366732946094
+              ],
+              [
+                0.09889916576673387,
+                0.8665707841516663,
+                0.03453005008159978
+              ],
+              [
+                0.053758939479998165,
+                0.3805839155462354,
+                0.5656571449737664
+              ]
+            ],
+            "exposure": 1.2902787904013122,
+            "shot": 0.002463620728499003,
+            "read": 4.521429592120972e-05,
+            "black": 0.03,
+            "noise_seed": 2635731310269923894
+          },
+          "kind": "wire",
+          "geometry": {
+            "family": "ellipse",
+            "frequency": [
+              [
+                0.06326701986705933,
+                0.06602975071649698
+              ],
+              [
+                0.07155849212865675,
+                -0.04026028120716115
+              ]
+            ],
+            "phase": [
+              -0.2731243518157678,
+              1.1357324662465258
+            ],
+            "strength": [
+              0.011386341058604123,
+              0.008599760968986356
+            ],
+            "width": [
+              0.12184152848934049,
+              0.12804494882110282
+            ],
+            "edge": -2.4054436076591514,
+            "gap_center": [
+              1.0357170268611,
+              6.0382963349734275
+            ],
+            "gap_width": 35.27415725047683,
+            "gap_length": 55.0613041498271,
+            "gap_orientation": 1.1439727265813813,
+            "angle": -1.54717340214638,
+            "tint": [
+              0.10790607144986808,
+              0.13278728906538526,
+              0.12268384702519479
+            ]
+          }
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/04-capture.npz",
+          "sha256": "96da56497d38431db92d9781a49a7013a49c4addb0b9c77a821944832be32567"
+        },
+        "model_outputs": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/04-estimate.npz",
+          "sha256": "c485bcff5e8faff39b806d48f83c08e7b4b5cccbedd1deeac8ae6a60a98473cd"
+        },
+        "endpoint_output": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local50000-scoped-v1/predictions/04.npy",
+          "sha256": "35b0736c151dafa598afcd84cf08a7290cd17ed409d7e91ea346ac9e993d1d8a"
+        },
+        "box": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "gap_pixels": 6096
+      },
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/wire-04-global-aligned.npy",
+          "sha256": "05e15ad6011b921bdd33e11f2f8424c9b1b161ef70ffc630b386d0bc712434c3"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/wire-04-regional-aligned.npy",
+          "sha256": "a29f0449ffffa0226984287f53e2bef6d637fdba1124c3a5da1ca1aa9a608ccf"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/wire-04-local50k.npy",
+          "sha256": "35b0736c151dafa598afcd84cf08a7290cd17ed409d7e91ea346ac9e993d1d8a"
+        }
+      },
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "selection_metric": "gap_weak_RMS_DN16",
+      "difference": 0.09960081189341174,
+      "board": {
+        "image": {
+          "path": "exact/wire-04-comparison.png",
+          "sha256": "5dbe45e2b7ac1fd130da8977511d40b534c7e5f3c63c58a0df2a05acb21efe23"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Whole-core supervision",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/wire-04-triplet.png",
+          "sha256": "086ece8f65cc27b615296798de61be6a09f21ce1274575e3ba7a8f67174f9953"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "photo-45",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "case": {
+        "source": {
+          "source": {
+            "attribution": null,
+            "author": "Dominicus Johannes Bergsma",
+            "bin_factor": 4,
+            "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/cf/cfb7eae6f6a59e344fdf0c3c9e46cbbc6b5cf84d.npy",
+            "cache_sha256": "54058c6ea05b58d7cdb82f8351c3b952ec99226bb7768018e45a06ce06e23667",
+            "color_space": "linear-sRGB",
+            "credit": "Own work",
+            "download_path": "images/cf/b7/cfb7eae6f6a59e344fdf0c3c9e46cbbc6b5cf84d.jpg",
+            "dtype": "uint16",
+            "height": 2769,
+            "id": "cfb7eae6f6a59e344fdf0c3c9e46cbbc6b5cf84d",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/25/Informatiebord._Locatie%2C_Oostvaardersplassen_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Informatiebord._Locatie,_Oostvaardersplassen_01.jpg",
+            "sha1": "cfb7eae6f6a59e344fdf0c3c9e46cbbc6b5cf84d",
+            "sha1_hex": "cfb7eae6f6a59e344fdf0c3c9e46cbbc6b5cf84d",
+            "shape": [
+              692,
+              940,
+              3
+            ],
+            "split": "val",
+            "title": "File:Informatiebord. Locatie, Oostvaardersplassen 01.jpg",
+            "width": 3761
+          },
+          "index": 45,
+          "box": [
+            134,
+            200,
+            256,
+            256
+          ],
+          "camera": {
+            "pattern": "RGGB",
+            "wb": [
+              0.6650913404141888,
+              1.0,
+              0.7262799819063317
+            ],
+            "camera_inverse": [
+              [
+                0.3763495816017255,
+                0.44299195689326626,
+                0.1806584615050082
+              ],
+              [
+                0.022797248241649824,
+                0.9324162022137527,
+                0.044786549544597515
+              ],
+              [
+                0.11681739108461095,
+                0.03430553332438131,
+                0.8488770755910078
+              ]
+            ],
+            "exposure": 3.3975681661150032,
+            "shot": 0.0002715273234376584,
+            "read": 2.8677866701964964e-07,
+            "black": 0.03,
+            "noise_seed": 7134855703846780
+          },
+          "kind": "natural"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/45-capture.npz",
+          "sha256": "0642c2afed58df77de2546e64ae93bcb18911e54259cff9f93874fff1bfea059"
+        },
+        "model_outputs": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/45-estimate.npz",
+          "sha256": "1e2d642d30697fce7ae2be776c51a30f21d0f8337cd867101ae8c3d56049a9a9"
+        },
+        "endpoint_output": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local50000-scoped-v1/predictions/45.npy",
+          "sha256": "6775ac9948e26a47e856cc4ca7fbdcfc37e280bf7ce0c61a0186459a3d23dc4e"
+        },
+        "box": [
+          134,
+          200,
+          256,
+          256
+        ],
+        "gap_pixels": 0
+      },
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/photo-45-global-aligned.npy",
+          "sha256": "8368c5224c0d1cc1d231a6ecd55babbf5e13965a6db97e133b1b51cb99a9f893"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/photo-45-regional-aligned.npy",
+          "sha256": "157b2d9166585a37684508e4030a3449faabb3d880864de3390015189f20edc6"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/photo-45-local50k.npy",
+          "sha256": "6775ac9948e26a47e856cc4ca7fbdcfc37e280bf7ce0c61a0186459a3d23dc4e"
+        }
+      },
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "selection_metric": "fine_increment_RMS_DN16",
+      "difference": -0.5013928473456986,
+      "board": {
+        "image": {
+          "path": "exact/photo-45-comparison.png",
+          "sha256": "b5587c0fe5061f5a3c95f4b534d398f1d7bb31494401be061be774df22a5f34e"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Whole-core supervision",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/photo-45-triplet.png",
+          "sha256": "bcffe7089e3b9e6e83e8e08cbc02dc9b381f7a0757a7ddd89de26470ac09549e"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "photo-34",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "case": {
+        "source": {
+          "source": {
+            "attribution": null,
+            "author": "Sumitsurai",
+            "bin_factor": 4,
+            "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/87/87efb21d9afaff090501dcdd6d4424516cea0e59.npy",
+            "cache_sha256": "7b5ae6367ae35b1b7a56bceefc87cb9023f21a83f117619c34015773794d7b1d",
+            "color_space": "linear-sRGB",
+            "credit": "Own work",
+            "download_path": "images/87/ef/87efb21d9afaff090501dcdd6d4424516cea0e59.jpg",
+            "dtype": "uint16",
+            "height": 3100,
+            "id": "87efb21d9afaff090501dcdd6d4424516cea0e59",
+            "license": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Para_Stone_Deul_Remaining_Works_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Para_Stone_Deul_Remaining_Works_(2).jpg",
+            "sha1": "87efb21d9afaff090501dcdd6d4424516cea0e59",
+            "sha1_hex": "87efb21d9afaff090501dcdd6d4424516cea0e59",
+            "shape": [
+              775,
+              516,
+              3
+            ],
+            "split": "val",
+            "title": "File:Para Stone Deul Remaining Works (2).jpg",
+            "width": 2067
+          },
+          "index": 34,
+          "box": [
+            16,
+            468,
+            256,
+            256
+          ],
+          "camera": {
+            "pattern": "GRBG",
+            "wb": [
+              1.9000278768980752,
+              1.0,
+              2.3209786720726675
+            ],
+            "camera_inverse": [
+              [
+                0.6198298758422384,
+                0.27050827881328376,
+                0.10966184534447787
+              ],
+              [
+                0.16098830518043392,
+                0.5241529315169255,
+                0.31485876330264057
+              ],
+              [
+                0.04491783132121475,
+                0.30700457440074136,
+                0.6480775942780439
+              ]
+            ],
+            "exposure": 1.711548508386239,
+            "shot": 0.0038118052741395497,
+            "read": 0.00021520820880162716,
+            "black": 0.03,
+            "noise_seed": 4589104400106515514
+          },
+          "kind": "natural"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/34-capture.npz",
+          "sha256": "0778da66894afddaa5606bfcace0636ad8aa462a545b0b42686fd9c9abe21e72"
+        },
+        "model_outputs": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/34-estimate.npz",
+          "sha256": "1a3166a02c2c69559b27f59da1af7b853e644f276c7c5a057caa9abfac1f9696"
+        },
+        "endpoint_output": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local50000-scoped-v1/predictions/34.npy",
+          "sha256": "886c634ada8bbb2a1cde437e1118837e25947e6c9db2bfd6e57a6145264922bb"
+        },
+        "box": [
+          16,
+          468,
+          256,
+          256
+        ],
+        "gap_pixels": 0
+      },
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/photo-34-global-aligned.npy",
+          "sha256": "3ebeb3afb38ff5dcbf72eb534e69f75bdc641ad666a9de5d5aaf7b6bc1a78d9e"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/photo-34-regional-aligned.npy",
+          "sha256": "e2117491f33bf11d57758bb175019d75fd90d983b3ddbcc0eba3bbe33e49618e"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/photo-34-local50k.npy",
+          "sha256": "886c634ada8bbb2a1cde437e1118837e25947e6c9db2bfd6e57a6145264922bb"
+        }
+      },
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "selection_metric": "fine_increment_RMS_DN16",
+      "difference": 0.3000502865915564,
+      "board": {
+        "image": {
+          "path": "exact/photo-34-comparison.png",
+          "sha256": "2b54f5816c5e3524629062278a97c0d8f40c7cca50ebbed9fb7f9d678aa583e7"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Whole-core supervision",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/photo-34-triplet.png",
+          "sha256": "3f25bf2940a3c243e7d57a5d3d40fff22163c780a40ea48b7339a16708f47281"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Regional supervision",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "standing": [
+    {
+      "id": "main-overcast-sky-main-overcast-sky",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+        "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+      },
+      "local_ROI": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "sensor_box": [
+        5624,
+        1224,
+        512,
+        512
+      ],
+      "global_ROI": [
+        5800,
+        1400,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-overcast-sky-main-overcast-sky-x4.png",
+              "sha256": "fc28e28a8ec29ee6a6e90c48c156d01075eb9a768cce1e6430e104bb129740bd"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-overcast-sky-main-overcast-sky-global-aligned.npy",
+          "sha256": "3effcdb75f5ba6480edf5858d7eeb14cd5875fd1f4db2de542185b0e9db82817"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-overcast-sky-main-overcast-sky-regional-aligned.npy",
+          "sha256": "b5dbce393b9c45d1edfa708aca1eedaf0509f31fa80b5c62f17a875de634d0d1"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-overcast-sky-main-overcast-sky-local50k.npy",
+          "sha256": "1e8979f375dba3b33addeabb5e6d50c94afc0012d3c0775ac8d835adb6197d99"
+        }
+      },
+      "forward": {
+        "global-aligned": 1.3458018370438367,
+        "regional-aligned": 1.257363214972429,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 2.7583993139168284,
+        "Regional supervision": 2.697568918694723
+      }
+    },
+    {
+      "id": "main-building-detail-main-building-detail",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+        "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+      },
+      "local_ROI": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "sensor_box": [
+        5614,
+        2514,
+        512,
+        512
+      ],
+      "global_ROI": [
+        5790,
+        2690,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-building-detail-main-building-detail-x4.png",
+              "sha256": "972d34c5d6255c59feb9d6a2c73c05594d35062ef0acb43a0728d426d4a843ea"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-building-detail-main-building-detail-global-aligned.npy",
+          "sha256": "3589dfea53ed23bc4832e2f32d59f8d4dc454e0d1948debac788b2851c70882d"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-building-detail-main-building-detail-regional-aligned.npy",
+          "sha256": "7d0f97729d557486c68a84dbce448d9a745abf8223d0a03b283c280380a473f1"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-building-detail-main-building-detail-local50k.npy",
+          "sha256": "3c079aded47e90c162307a4da794c712a3c8ed3a3ac3416c9cb56a27fd0d1a75"
+        }
+      },
+      "forward": {
+        "global-aligned": 1.3576185080455616,
+        "regional-aligned": 1.303261999040842,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 6.376966372102863,
+        "Regional supervision": 6.478341561882143
+      }
+    },
+    {
+      "id": "main-foliage-main-foliage",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+        "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+      },
+      "local_ROI": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "sensor_box": [
+        8714,
+        5394,
+        512,
+        512
+      ],
+      "global_ROI": [
+        8890,
+        5570,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-foliage-main-foliage-x4.png",
+              "sha256": "d6b7501805e4859fbf11cd043681be9de1d4001ba8433a0b2534a527dd2d8502"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-foliage-main-foliage-global-aligned.npy",
+          "sha256": "a395468241a4474f1ca46f9f43f0d73035dd4a87db7a39eb491b2eaf76022baf"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-foliage-main-foliage-regional-aligned.npy",
+          "sha256": "8ec54a1882727bc0898f572d960ed1199a63e0b0b26ccea66e5ee0d3bc04bdb9"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-foliage-main-foliage-local50k.npy",
+          "sha256": "c515da957938cab94dbe8c31fddcc911131d5acd270e41c2da37cd744c919e6d"
+        }
+      },
+      "forward": {
+        "global-aligned": 1.372419313993305,
+        "regional-aligned": 1.4132080370327458,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 9.903591155572183,
+        "Regional supervision": 9.940488743434432
+      }
+    },
+    {
+      "id": "main-chain-link-fence-main-chain-link-fence",
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+        "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+      },
+      "local_ROI": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "sensor_box": [
+        2064,
+        5824,
+        512,
+        512
+      ],
+      "global_ROI": [
+        2240,
+        6000,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/main-chain-link-fence-main-chain-link-fence-x4.png",
+              "sha256": "e1ffe98a76452263480144dce877fe92ab27ad5cb1a306bc667adaf971448562"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-chain-link-fence-main-chain-link-fence-global-aligned.npy",
+          "sha256": "b3967a940c9e9e7ebbdc34816695acba3e5173a435cd87c2e392b6fe43963bfa"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/main-chain-link-fence-main-chain-link-fence-regional-aligned.npy",
+          "sha256": "c86c145eb74519c2163230c4f375afe668abe544c1a88684b6b518300e2e7144"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-chain-link-fence-main-chain-link-fence-local50k.npy",
+          "sha256": "e84f6a02e9b36d209cc62d22aa2cef34d2c31e9ede70de868b956647cc919243"
+        }
+      },
+      "forward": {
+        "global-aligned": 1.1479215529980138,
+        "regional-aligned": 1.317399297025986,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 11.508822564766929,
+        "Regional supervision": 12.569086052766618
+      }
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-left",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "local_ROI": [
+        206,
+        229,
+        160,
+        160
+      ],
+      "sensor_box": [
+        600,
+        6260,
+        768,
+        768
+      ],
+      "global_ROI": [
+        806,
+        6489,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-left-x16.png",
+              "sha256": "0bc68572168d7127308582272624159df86dd3498e9d74f896dc5d9fe37c0db2"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-left-x4.png",
+              "sha256": "73bc65247186189479527a1417738b9bb40e50ddeb75d11525322eaee807d1b4"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-nominal-fine-green-mesh-left-global-aligned.npy",
+          "sha256": "ce3d0b3aba3b4591ddc5a0bd049baddeb2b75ef0529381bcc0900d30e2485419"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-nominal-fine-green-mesh-left-regional-aligned.npy",
+          "sha256": "b34a7293df2d960d6c8ebf44d226788a01c71b5f35bbcfc138a8d57b9804befa"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-nominal-fine-green-mesh-left-local50k.npy",
+          "sha256": "d1b05f947f9fe5cad721d12fbf3e855a53e623a6896b478b828a9905464b8943"
+        }
+      },
+      "forward": {
+        "global-aligned": 2.8736493800533935,
+        "regional-aligned": 2.5387344220653176,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 3.684371159597836,
+        "Regional supervision": 3.8050645680313226
+      }
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-right",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "local_ROI": [
+        426,
+        189,
+        160,
+        160
+      ],
+      "sensor_box": [
+        600,
+        6260,
+        768,
+        768
+      ],
+      "global_ROI": [
+        1026,
+        6449,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-right-x16.png",
+              "sha256": "cd35580a5b4773f2c151aa8f4e80a60db3715cfa08d761b711d5ebb8667bef97"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-nominal-fine-green-mesh-right-x4.png",
+              "sha256": "7018a30da090fbe9d4494a97eed4dd9887c88ff57383d585f6711f7d281c9b20"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-nominal-fine-green-mesh-left-global-aligned.npy",
+          "sha256": "ce3d0b3aba3b4591ddc5a0bd049baddeb2b75ef0529381bcc0900d30e2485419"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-nominal-fine-green-mesh-left-regional-aligned.npy",
+          "sha256": "b34a7293df2d960d6c8ebf44d226788a01c71b5f35bbcfc138a8d57b9804befa"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-nominal-fine-green-mesh-left-local50k.npy",
+          "sha256": "d1b05f947f9fe5cad721d12fbf3e855a53e623a6896b478b828a9905464b8943"
+        }
+      },
+      "forward": {
+        "global-aligned": 2.8736493800533935,
+        "regional-aligned": 2.5387344220653176,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 4.779164916638676,
+        "Regional supervision": 5.20673932108614
+      }
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-left",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "local_ROI": [
+        206,
+        229,
+        160,
+        160
+      ],
+      "sensor_box": [
+        600,
+        6260,
+        768,
+        768
+      ],
+      "global_ROI": [
+        806,
+        6489,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-left-x16.png",
+              "sha256": "3bd6c766416244b6342542835f96e47cdff8f080af531c5d01e77dc1784ba83e"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-left-x4.png",
+              "sha256": "c82323dc7f299ae63a127563a10361b82ab93fc05f29462ec1fea6fd16258701"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-profile3879-fine-green-mesh-left-global-aligned.npy",
+          "sha256": "e05d4234c1da0ab89984868cadae9f265d591342484c452829de74694b70a4ca"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-profile3879-fine-green-mesh-left-regional-aligned.npy",
+          "sha256": "8d53d9405ba7bbabee56b31c5d0f87cacceadf954616a41a4cad10f77bf8b8ea"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-profile3879-fine-green-mesh-left-local50k.npy",
+          "sha256": "f6bf12a8540ada73a1c450b5e5df7d538baaabb58996d9170b9ee058ead90d1a"
+        }
+      },
+      "forward": {
+        "global-aligned": 2.9657414510147646,
+        "regional-aligned": 2.850890542031266,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 6.554721301415852,
+        "Regional supervision": 7.598682478065856
+      }
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-right",
+      "raw": {
+        "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "local_ROI": [
+        426,
+        189,
+        160,
+        160
+      ],
+      "sensor_box": [
+        600,
+        6260,
+        768,
+        768
+      ],
+      "global_ROI": [
+        1026,
+        6449,
+        160,
+        160
+      ],
+      "displays": [
+        {
+          "exposure": 16.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-right-x16.png",
+              "sha256": "c8c24bfea9c734c8c91425bf1a15c2290162b1c245eef4308d04a5dc04adf6bd"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "exposure": 4.0,
+          "board": {
+            "image": {
+              "path": "standing/mesh-profile3879-fine-green-mesh-right-x4.png",
+              "sha256": "e1db18b9df5c9a91d0e1da1764c7c61773de3ef200c82f54f374b9a19ec139b0"
+            },
+            "panels": [
+              {
+                "name": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Corpus 100k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Local 50k",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Whole-core supervision",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "Regional supervision",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 AHD reference",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "name": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "predictions": {
+        "global-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-profile3879-fine-green-mesh-left-global-aligned.npy",
+          "sha256": "e05d4234c1da0ab89984868cadae9f265d591342484c452829de74694b70a4ca"
+        },
+        "regional-aligned": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/predictions/mesh-profile3879-fine-green-mesh-left-regional-aligned.npy",
+          "sha256": "8d53d9405ba7bbabee56b31c5d0f87cacceadf954616a41a4cad10f77bf8b8ea"
+        },
+        "local50k": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-profile3879-fine-green-mesh-left-local50k.npy",
+          "sha256": "f6bf12a8540ada73a1c450b5e5df7d538baaabb58996d9170b9ee058ead90d1a"
+        }
+      },
+      "forward": {
+        "global-aligned": 2.9657414510147646,
+        "regional-aligned": 2.850890542031266,
+        "local50k": 0.0
+      },
+      "RGB_RMS_vs_parent_DN16": {
+        "Whole-core supervision": 10.679705876356994,
+        "Regional supervision": 13.535184271637236
+      }
+    }
+  ],
+  "figure": {
+    "path": "wire-paired-effects.png",
+    "sha256": "315161ffa078eb92eaf9e6704db770dd0b702c9e9f8f813e5f2a80b096a8ea1d"
+  },
+  "reviewed": "2026-11-19T22:54:27.041889-08:00",
+  "viewing": {
+    "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0512/views.json",
+    "sha256": "82455af52706f1f7f8dc92ec6d86c02b8d58f7876d020641977e66074d2fff2e"
+  },
+  "review_scope": "Intermediate matched checkpoints."
+}

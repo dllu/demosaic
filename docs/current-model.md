@@ -123,11 +123,12 @@ in each linked report. [Package interfaces](architecture.md).
 
 ## Experimental detail components
 
-[Regional weak-wire supervision at 128 updates](local-regional-wire-128.md)
-slightly reduces fixed natural fine-increment and wire gap error
-relative to the matched whole-core arm. It also lowers weak response
-and increases error on the stronger strand through a true gap.
-Both models use the existing Local 50k inference path.
+[Regional weak-wire supervision at 512 updates](local-regional-wire-512.md)
+lowers continuing-strand RMS by 2.614 DN16 on off-grid gaps versus
+whole-core supervision and recovers 0.588 points less of the weak strand.
+Wire exact-flat RMS is 1.902 DN16 higher than Local 50k. The transferred
+right cab crop shows a stronger first diagonal and incomplete crossings.
+Both arms use the Local 50k inference path.
 
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the
@@ -364,14 +365,16 @@ The gap arm recovers 0.66 wire points versus repeat and raises exact-flat
 wire RMS by 0.79 DN16. The fine cab crossings remain incomplete in both
 profiles. Repeat gains 0.02439 dB unseen over its parent and finishes
 0.00473 dB above V120 unseen. Its known mean trails V120 by 0.11404 dB.
+On the fixed photos it scores 37.23465 dB, 0.00675 dB below matched mean.
 [Signed wire supervision](local-wire-response.md) restores 1.26 weak-wire
 response points over its matched repeat control on separate redraws with
 nearly unchanged flat and weak-direction gap error. Variance rises 2.9%
 over the control. Against the starting checkpoint, the aligned arm has
 16.9% less draw variance and 1.88 points less weak-wire response. It gains
 0.04456 dB known CFA and loses 0.00865 dB unseen. Error in the continuing
-strong wire accounts for most of the total gap regression. Fine real cab
-crossings remain incomplete.
+strong wire accounts for most of the total gap regression. Its fixed
+photo score of 37.22113 dB is 0.00122 dB above matched repeat and
+0.01353 dB below the starting EMA. Fine real cab crossings remain incomplete.
 [Continuing-wire supervision](local-continuing-wire.md) restores 16.86
 points of strong response inside exact weak gaps and raises weak response
 3.16 points over its aligned control. The separate double-gap test gains

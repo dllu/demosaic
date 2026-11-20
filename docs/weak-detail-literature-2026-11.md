@@ -1171,8 +1171,12 @@ whole-core term. Both arms explicitly penalize the absent direction.
 At [128 updates](local-regional-wire-128.md) the regional term slightly
 lowers fixed natural fine error and false weak-direction projection.
 The continuing stronger direction through a weak gap has higher RMS
-error, and the weak direction loses signed response. The endpoint
-comparison is pending.
+error, and the weak direction loses signed response. At [512 updates](local-regional-wire-512.md),
+continuing-strand error is lower on both wire panels, with still weaker
+second-direction response. On the off-grid panel the regional arm also
+raises wire-flat RMS by 1.902 DN16 versus Local 50k and recovers
+slightly more target-aligned detail on the separate natural panel.
+The endpoint comparison is pending.
 
 On 32 groups from that recipe, the weak terms are orthogonal to the
 exact-flat and strong-gap controls at the restored pixels. Through the

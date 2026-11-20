@@ -269,8 +269,39 @@ trails by 0.06948 dB known and 0.00392 dB unseen. The full-band arm leads
 V120 by 0.02881 dB unseen, with weaker fine-detail recovery on both
 exact wire cohorts. The unseen comparison covers five scenes.
 
-The canonical 427-photo worker is running on the three listed EMAs.
-V120 and Corpus 100k have completed fixed photo results. The three
-new full427 scores remain pending. [Camera summary](results/local-wire-response-camera-v1/publication.json) ·
+[Camera summary](results/local-wire-response-camera-v1/publication.json) ·
 [Per-case camera evidence](results/local-wire-response-camera-v1/evidence.tar.xz) ·
 [Comparable PSNR history](performance-history.md).
+
+## Fixed photo panel
+
+The 427-photo panel is complete for all three 320-update EMAs, V120
+and the starting repeat EMA. It uses the original seven noise and
+exposure conditions, four Bayer layouts and equal weight per photo.
+The archived CUDA IEEE FP32 qualification agrees with the historical
+V120 CPU photo scores within 0.000004 dB on its check cases.
+
+| EMA | Source-balanced sRGB PSNR |
+| --- | ---: |
+| V120 | 37.04008 dB |
+| Corpus 100k, completed fixed panel | 37.24747 dB |
+| Starting repeat EMA | 37.23465 dB |
+| Matched repeat control | 37.21991 dB |
+| Full wire band | 37.19897 dB |
+| Aligned wire | 37.22113 dB |
+
+Aligned wire gains 0.00122 dB over matched repeat and 0.18104 dB
+over V120. It trails the starting model by 0.01353 dB and Corpus 100k
+by 0.02635 dB. The full-band arm scores 0.02094 dB below matched
+repeat on the same photos. Its unseen CFA gain remains useful on the
+separate measured-camera panel. The exact redraw and standing GFX
+results above describe how the learned detail changes.
+
+The archive binds all 3,108 photo-stage batch receipts to the frozen
+input manifest, with 11,956 scored observations per model from the
+427 photos. The sixteen constructed sources use a separate summary.
+The 32,021.80-second collection wall time includes all stages,
+models, metric computation and the shared GPU workload.
+[Photo summary](results/local-wire-response-primary-v1/publication.json) ·
+[Per-batch photo evidence](results/local-wire-response-primary-v1/evidence.tar.xz) ·
+[PSNR history](performance-history.md).

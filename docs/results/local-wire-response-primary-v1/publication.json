@@ -1,0 +1,216 @@
+{
+  "collector": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-wire-response-v1/primary/full/result.json",
+    "sha256": "6e7e8d0e842346bdb9dee604c38c4feec8adbc909eb19831824c8781e9a992c6"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-wire-response-v1/primary/plan.json",
+    "sha256": "71068931f46dafeffe2ccb9fc8b01c291f7ed5335fe84b2fb5141df255dc361b"
+  },
+  "qualification": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-wire-response-v1/primary/preflight/result.json",
+    "sha256": "0fc4bbe76692f4a6e818fab90e439429856878d6ab57637286776e8e12a74e0f"
+  },
+  "archive": {
+    "path": "docs/results/local-wire-response-primary-v1/evidence.tar.xz",
+    "sha256": "a6285322b584cbafdd0d25c968b3e86ce000e049f37c3ec3a44d299e8a2f2ee2"
+  },
+  "canonical_inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/result.json",
+    "sha256": "64cacba459e09a90eb2727bf85b876f295ab21e13135585cbc501cc7738e3b09"
+  },
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "prior-repeat": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/repeat.pt",
+        "sha256": "cc5a3cd5d33096f9696d250627d380ecc2f0ed53971da8c2d3f9772550cf9a7a"
+      },
+      "step": 320
+    },
+    "repeat": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-wire-response-v1/training/repeat.pt",
+        "sha256": "2bad84bdb90e98811fa34e2a6991edf9e661961db9139d3396e09ff17bca7e9a"
+      },
+      "step": 320
+    },
+    "wire-mean": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-wire-response-v1/training/wire-mean.pt",
+        "sha256": "6af82eaed3b9b9f5a1b07bef09db8b4c0b2caea96b09bc246e5114cc91cc4d2e"
+      },
+      "step": 320
+    },
+    "wire-aligned": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-wire-response-v1/training/wire-aligned.pt",
+        "sha256": "964c9dd75d2cd75d12a57391a978e1505dd7ece47e3df4565b441356cafadd6e"
+      },
+      "step": 320
+    }
+  },
+  "complete": true,
+  "counts": {
+    "known": 24,
+    "unseen": 30,
+    "photo": 3108
+  },
+  "policy": "CUDA channels-last IEEE FP32. Retain per-case PSNR, input fingerprints and CPU checks.",
+  "weights": "EMA",
+  "photo_sources": 427,
+  "observations_per_model": 11956,
+  "photo_summary": [
+    {
+      "model": "V120",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 39.95386147395389,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.04008459031841,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "V120",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.261069608586176,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.95752184305872,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "prior-repeat",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.11840901984224,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.23465419206463,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "prior-repeat",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.016419953533585,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.74640242542539,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "repeat",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.110517020686565,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.21990844644245,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "repeat",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.99039737454483,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.71157462682042,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "wire-aligned",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.1128528326321,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.22112657155189,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "wire-aligned",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.98850350507668,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.70731524910246,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "wire-mean",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.077052363427285,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 37.19896955464587,
+          "count": 427
+        }
+      }
+    },
+    {
+      "model": "wire-mean",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.9533613132579,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 36.67691114970616,
+          "count": 16
+        }
+      }
+    }
+  ]
+}
