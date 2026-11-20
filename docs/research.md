@@ -72,6 +72,12 @@ has repeatedly come with extra flat-region error or false color. The
    pruned integer control, and only 0.06 against the earlier radial
    filter. Right-cab peak agreement improves with many crossings
    still missing.
+   [Joint Fourier support](scene-coherent-fourier.md) uses the same
+   shifted bins and validates a group over disjoint donors. It
+   improves continuing-wire error by 2.98 DN16 and weak response by
+   1.00 point on 32 unused backgrounds. Relative to averaging the
+   shifted grids, its natural-photo flat and increment errors rise
+   and both real cab directions lose projection at equal RGB RMS.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

@@ -8,6 +8,10 @@ and is close to the earlier filter on the fresh panel. The right cab
 fence shows higher projection along both measured RAW peaks, with
 fine crossings still incomplete.
 
+[Follow-up on joint Fourier support](scene-coherent-fourier.md)
+validates groups of neighboring bins and transfers to 32 unused
+photo backgrounds.
+
 [Machine results](results/scene-staggered-phase-v1/publication.json) ·
 [Frozen drivers and receipts](results/scene-staggered-phase-v1/evidence.tar.xz) ·
 [Native provenance](images/scene-staggered-phase-v1/manifest.json).

@@ -98,6 +98,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [phase-paired donor power](scene-phase-power.md) ·
 [query phase consensus and off-grid transfer](scene-query-consensus.md) ·
 [shifted Fourier grids and independent off-grid confirmation](scene-staggered-phase.md) ·
+[joint support across neighboring Fourier bins](scene-coherent-fourier.md) ·
 [learned spectral corrections](learned-spectral-detail.md) ·
 [exact gap supervision and Bayer witnesses](learned-spectral-gaps.md) ·
 [between-bin Bayer phase refinement](subbin-spectral-witness.md) ·

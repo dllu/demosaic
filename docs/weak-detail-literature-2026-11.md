@@ -1064,6 +1064,14 @@ one donor split and validating on the other gives a lower mean
 fresh response. At equal correction energy both measured
 right-cab peaks gain, with no clear visual recovery of fine crossings.
 
+[Joint Fourier support](scene-coherent-fourier.md) validates pooled
+power across neighboring shifted bins while the delivered correction
+keeps each bin's query phase. On 32 unused photo backgrounds it gains
+1.004 points of weak response and reduces continuing-wire error by
+2.979 DN16 against four-grid averaging with similar false gap
+projection. Dense cosine restores more of the intact weak direction.
+Natural fine error rises, and both cab ROIs retain incomplete crossings.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

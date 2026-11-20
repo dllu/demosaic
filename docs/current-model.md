@@ -493,6 +493,13 @@ off-grid spectral coverage and reduce the earlier radial filter's
 flat cost on two 24-photo panels. Fresh intact response stays close
 to earlier radial. Both measured right cab peaks gain at equal
 correction energy, with many fine crossings still missing.
+[Joint Fourier support](scene-coherent-fourier.md) uses donor
+cross-power across nearby frequencies to gate each query pair.
+The gate gives similar continuing-wire error to dense cosine
+with lower false gap projection on 32 new backgrounds. Dense
+cosine restores more intact weak detail. Joint gating raises the
+natural-photo fine error, and its cab projections fall versus
+four-grid averaging at equal RGB correction energy.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

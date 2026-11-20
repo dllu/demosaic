@@ -44,6 +44,10 @@ historical boards. Use these reports for the current completed comparisons:
   change sky by 0.006 DN16 RGB RMS and coarse fence by 1.238 with
   four-grid averaging. The sky stays smooth, the coarse crossings stay
   connected, and fine building and leaf detail stay soft.
+- [Joint Fourier support](scene-coherent-fourier.md#standing-gfx100s-comparisons)
+  changes sky by 0.012 DN16 RGB RMS and coarse fence by 2.404 with
+  joint gating. Sky stays smooth and coarse links remain connected.
+  Thin cables and leaf subdivisions remain soft.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.
