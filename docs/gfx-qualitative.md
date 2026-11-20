@@ -48,6 +48,10 @@ historical boards. Use these reports for the current completed comparisons:
   changes sky by 0.012 DN16 RGB RMS and coarse fence by 2.404 with
   joint gating. Sky stays smooth and coarse links remain connected.
   Thin cables and leaf subdivisions remain soft.
+- [Neighboring RAW phase](scene-phase-neighbors.md#standing-gfx100s-comparisons)
+  changes sky by 0.010 DN16 RGB RMS and coarse fence by 2.312 with
+  the across-wire check. The sky stays smooth, coarse crossings
+  stay connected, and fine cables and leaf subdivisions remain soft.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.

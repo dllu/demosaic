@@ -8,6 +8,10 @@ points** of weak response and lowers continuing-wire error by
 similar. Natural-photo fine error rises, and the real cab crops
 still have incomplete crossings.
 
+[Follow-up on neighboring RAW phase](scene-phase-neighbors.md)
+compares the joint gate against directional support checks after
+calibrating on disjoint natural photos.
+
 [Machine results](results/scene-coherent-fourier-v1/publication.json) ·
 [Frozen drivers and receipts](results/scene-coherent-fourier-v1/evidence.tar.xz) ·
 [Native crop provenance](images/scene-coherent-fourier-v1/manifest.json).

@@ -1072,6 +1072,14 @@ keeps each bin's query phase. On 32 unused photo backgrounds it gains
 projection. Dense cosine restores more of the intact weak direction.
 Natural fine error rises, and both cab ROIs retain incomplete crossings.
 
+[Neighboring RAW phase](scene-phase-neighbors.md) confirms each
+center pair on two disjoint nearby windows. Across-wire checks
+lower continuing-wire error by 0.45–0.81 DN16 across three earlier
+off-grid panels after matching natural fine-increment error on
+separate photos. False weak projection changes little. The gains
+are larger at the wire-flat calibration, where natural flat error
+also rises. No clear real cab crossing gain is visible.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

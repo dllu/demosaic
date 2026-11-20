@@ -500,6 +500,12 @@ with lower false gap projection on 32 new backgrounds. Dense
 cosine restores more intact weak detail. Joint gating raises the
 natural-photo fine error, and its cab projections fall versus
 four-grid averaging at equal RGB correction energy.
+[Neighboring RAW phase](scene-phase-neighbors.md) checks the
+center phase on disjoint nearby windows. At a natural-increment
+calibration the across-wire check lowers continuing-wire error in
+three off-grid replays with little change in weak response.
+Natural error still favors the frozen parent, and the cab
+crossings remain incomplete.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

@@ -78,6 +78,11 @@ has repeatedly come with extra flat-region error or false color. The
    1.00 point on 32 unused backgrounds. Relative to averaging the
    shifted grids, its natural-photo flat and increment errors rise
    and both real cab directions lose projection at equal RGB RMS.
+   [Neighboring RAW phase](scene-phase-neighbors.md) improves the
+   continuing direction when compared at a natural fine-increment
+   calibration. A quarter-cycle phase control fails to repeat this
+   gain. Natural flat error rises slightly and the fine real
+   crossings remain incomplete.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side
