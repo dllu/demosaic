@@ -188,6 +188,12 @@ Weak-increment error and fine real cab crossings remain unresolved.
 outputs equal. Fitting red and blue phase independently recovers two
 red windows at ISO1600, with incomplete real cab crossings.
 
+[Spatially varying color phase](cfa-relative-phase.md) improves
+signed response by 1.117 points with equal gap error on a fresh
+stronger ISO1600 panel. The ISO6400 gain depends on one photo.
+The larger candidate comparison changes the coarse fence slightly
+and leaves both fine cab ROIs as before.
+
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
 weak response it lowers continuing-strand RMS by 2.361 DN16 versus

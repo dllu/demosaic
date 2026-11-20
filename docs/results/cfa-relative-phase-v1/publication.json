@@ -1,0 +1,642 @@
+{
+  "id": "cfa-relative-phase-v1",
+  "scope": "Experimental crop-level color field estimates on fresh stronger-chroma and frozen optical replays.",
+  "receipts": {
+    "plan": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/master.json",
+      "sha256": "479aa1e0eac3ca04ddadd1ae45225b1a4b9f1111afd505f9895e5d04dde8fe34"
+    },
+    "observations": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/inputs.json",
+      "sha256": "854c2eb5aa8cbf54e88680da7cfa86a9073b6fbe3cf7551de29cef5ffc391974"
+    },
+    "review": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/result.json",
+      "sha256": "c7fbcd708b802d690f2b0d5b8c482ff5ccbf3248c3115e3406a1b1291b7cbfaa"
+    },
+    "basis": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/basis-audit.json",
+      "sha256": "84b61f30d214d94c257ffcbc27c59a8eda1dfeec1cefdbc60a0a0a261a16fae8"
+    },
+    "positive_views": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/recovered.json",
+      "sha256": "6a6a41cedac8119d2ca43b9514cbd11f709c891e6462b72c5d75c9212333c352"
+    },
+    "competition": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/competition/result.json",
+      "sha256": "5434759a677daa5411e234cdbf3fd136370cf414f1b3fedbb1dab0d18239cb58"
+    },
+    "competition_view": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/competition-board.json",
+      "sha256": "05af46d56657402bda565740b7f2312f71b827367002a4ea44b164b7fc9ea693"
+    },
+    "1600_plan": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/iso1600/plan.json",
+      "sha256": "b36dc7da6deb7fd73e7ab72c173aeaa82a1c810c1055e6d531797008966aef6a"
+    },
+    "6400_plan": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/iso6400/plan.json",
+      "sha256": "6264c5f0906570d89d5034e00695a06770bf9aa089e74204e962785f7f9e88e8"
+    },
+    "1600_inputs": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/iso1600/inputs.json",
+      "sha256": "ca8d40f68a0a2a006221d87032da77966265bbe5d92f567cd5e5a0ffd7684e10"
+    },
+    "6400_inputs": {
+      "path": "/mnt/external/demosaic/cfa-relative-phase-v1/iso6400/inputs.json",
+      "sha256": "e3c5681e7f132667e0256f406dff934cefaa4eb1160eaed26c0c91898ac65a2c"
+    }
+  },
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/cfa-relative-phase-v1/capture_relative.py",
+      "sha256": "fe9e6e312f85333430d1dfb10896c5a7557a015f87e9dab90f1f5ac45e5128e8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/cfa-relative-phase-v1/replay_relative.py",
+      "sha256": "886085c7364769e7ce10d9edce442fe7482fd2d73c6ec8f5ed5165083f4716da"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/cfa-relative-phase-v1/audit_basis.py",
+      "sha256": "ea3282594f16a485b65a0e262afc48e5f31b190d9123b78c3a5d236b44f058d2"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/cfa-relative-phase-v1/render_relative.py",
+      "sha256": "aeb6afe0dd35e0e0ff254e1934c6f3d2ffafb6602699e5b966d7373b6d2543ca"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/cfa-relative-phase-v1/relative_competition.py",
+      "sha256": "6f55639365a29201ffd7a54c31ccf5d2250005b81da37bf8f84b2456b98f6b74"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/cfa-relative-phase-v1/render_competition.py",
+      "sha256": "aa7c5f058c0a6fcda1901af2e76af9d09e7e173014d9715f174fafd377bfa3fc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/cfa-relative-phase-v1/relative_phase.py",
+      "sha256": "d0809b13787640e90501090b371985f11c3acc5277e484f55161a8b2b0a76a67"
+    }
+  ],
+  "parent_checkpoints": {
+    "local50k": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+      "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+    },
+    "v120": {
+      "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "type": "base",
+      "step": 20000
+    }
+  },
+  "baseline_source": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/mesh_carrier_fit.py",
+      "sha256": "55aeafd90bad31857a614807d09aa94fd3feaa559ecdb0fa8a26c5828ac3953c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/_mesh_pooled.py",
+      "sha256": "19825eb2a4ca3c219d0aabd916da91fc2503669d340252048114d4cc5c8e88f3"
+    }
+  ],
+  "previous": [
+    {
+      "path": "docs/results/cfa-directional-chroma-v1/publication.json",
+      "sha256": "149f8208b43d6a8b0cf40f9648b47b7bed637adbfea2b985eb96cf37508df532"
+    },
+    {
+      "path": "docs/results/cfa-color-delivery-v1/publication.json",
+      "sha256": "a7696acfad73045441555e10d51cf75b1986216b5afad306686485cf29951918"
+    }
+  ],
+  "archive": {
+    "path": "docs/results/cfa-relative-phase-v1/evidence.tar.xz",
+    "sha256": "9c77f5cf251fda67efa228b3312620fe5df827e9457e4f13ea6875a195f6a595"
+  },
+  "figures": [
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/iso1600-relative-color-18-comparison.png",
+      "sha256": "103d2f2c7c85c563b8ddde0a98fe3f219992080e73ef306888c325bb9f4c75b5"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/iso1600-relative-color-18-triplet.png",
+      "sha256": "cc8fd37c008a07af21879831985b6f4067b0b5aaefdd3575ba1d765922a2a071"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/iso6400-relative-color-15-comparison.png",
+      "sha256": "dfc60a8c8ca780bf9f0b273dfccd9d07db39067cd9c51b1c564caf28b27452b1"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/iso6400-relative-color-15-triplet.png",
+      "sha256": "3178f0aa1294912079314944573dbffefb5e0f6bf35b7cb45634598601a579c4"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/main-building-detail-main-building-detail-x4.png",
+      "sha256": "0f43c2ca37db4dbe593cbc1983f77491d20fa022173a09b5a528cae80b8f7b51"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/main-chain-link-fence-main-chain-link-fence-x4-changed.png",
+      "sha256": "f63d9f8c0f1982810d2206b9c808de973884ae790f91863866a2d92ead7d300c"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/main-chain-link-fence-main-chain-link-fence-x4.png",
+      "sha256": "c7b12dfc80f3c430765d5bd3d60cb1644a6c3bdceaf44a9f9cdd8947fb0e4fb4"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/main-foliage-main-foliage-x4.png",
+      "sha256": "9d00046770e16bb4af888513c732b12db3c0d4fe9750df5ccccc5a03cd9170a6"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/main-overcast-sky-main-overcast-sky-x4.png",
+      "sha256": "f5831fdd1785f7b702e0830796117b21a810c2f759085e8d19e21757500991dc"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-nominal-fine-green-mesh-left-x16.png",
+      "sha256": "fed8f6bea40c77c8c290608891409bed14068e95579a83fda4eca48da14c86ad"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-nominal-fine-green-mesh-left-x4.png",
+      "sha256": "966faed2f42df62f2916fa2294438f2c3886e657e3db7663b661bdafe8c25455"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-nominal-fine-green-mesh-right-x16.png",
+      "sha256": "bfea80871fe6b1cb03c8390605a5d451d47cff078db1f56cb39f395b86f9fb67"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-nominal-fine-green-mesh-right-x4.png",
+      "sha256": "5f1634015478feec94f19fdf6498feedbc7db81f873c4702821e2072a169a5f6"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-profile3879-fine-green-mesh-left-x16.png",
+      "sha256": "2387db10925a2eace0496bbfab95dc647776a0bf4380754dbf7f4a8c91526284"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-profile3879-fine-green-mesh-left-x4.png",
+      "sha256": "a79253269dea0fd170b99e307367d23e05920e38e330a72878994eab8480f69f"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-profile3879-fine-green-mesh-right-x16.png",
+      "sha256": "ba2f67b9e2cdb6714acd022a7fc4a5b06ffd0ec8851fc84ada6f773a926987fe"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/mesh-profile3879-fine-green-mesh-right-x4.png",
+      "sha256": "22f81110f965e4ca73831e540a8368f8633a8a437ec403725b574886ffb17860"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/relative-color-00-comparison.png",
+      "sha256": "126af0895a8c39a6adb058b3651e6b19f413ddf6b62cabfe3b50000e81878cca"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/relative-color-00-triplet.png",
+      "sha256": "906986346f464dfe30c689c3b9c84d85ca8d32090c592591a2220646e9450461"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/relative-color-05-comparison.png",
+      "sha256": "761a90f0f3ceae4d16d25ef92b90ac7d77aa568e7b4ffee760d1bdd6ec7a3dda"
+    },
+    {
+      "path": "docs/assets/cfa-relative-phase-v1/relative-color-05-triplet.png",
+      "sha256": "488168c756b81ae6e67ee2352abe981b411af8ebc3fc41f3f63d407bdf7085ee"
+    }
+  ],
+  "native_review": "All 21 published native views inspected, including both changed exact crops and the wider coarse-fence result.",
+  "by_panel_response": {
+    "prior_retained": {
+      "conditional": {
+        "n": 24,
+        "mean": -7.442358688124689,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "own_phase": {
+        "n": 24,
+        "mean": -7.416934177150758,
+        "delta": [
+          0.025424510973930763,
+          0.0,
+          0.07627353292179229
+        ]
+      },
+      "own_phase_sign": {
+        "n": 24,
+        "mean": -7.416934177150758,
+        "delta": [
+          0.025424510973930763,
+          0.0,
+          0.07627353292179229
+        ]
+      },
+      "transport": {
+        "n": 24,
+        "mean": -7.398847945137459,
+        "delta": [
+          0.043510742987230344,
+          0.0,
+          0.11471877742092396
+        ]
+      },
+      "affine": {
+        "n": 24,
+        "mean": -7.398403874800341,
+        "delta": [
+          0.04395481332434925,
+          0.0,
+          0.1054631376177632
+        ]
+      },
+      "field": {
+        "n": 24,
+        "mean": -7.442358688124689,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "field_sign": {
+        "n": 24,
+        "mean": -7.428505588714036,
+        "delta": [
+          0.013853099410652714,
+          0.0,
+          0.04155929823195814
+        ]
+      },
+      "parent": {
+        "n": 24,
+        "mean": -5.151021541327833,
+        "delta": [
+          2.2913371467968555,
+          0.8652193463766984,
+          3.9966326291058487
+        ]
+      },
+      "v120": {
+        "n": 24,
+        "mean": -5.015997119732219,
+        "delta": [
+          2.4263615683924704,
+          0.64504773059419,
+          4.395986541051062
+        ]
+      }
+    },
+    "prior_iso1600": {
+      "conditional": {
+        "n": 12,
+        "mean": -11.344728830596472,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "own_phase": {
+        "n": 12,
+        "mean": -11.323390289747971,
+        "delta": [
+          0.02133854084849836,
+          0.0,
+          0.06401562254549509
+        ]
+      },
+      "own_phase_sign": {
+        "n": 12,
+        "mean": -11.261358138786719,
+        "delta": [
+          0.0833706918097515,
+          0.0,
+          0.2074349937322578
+        ]
+      },
+      "transport": {
+        "n": 12,
+        "mean": -11.344728830596472,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "affine": {
+        "n": 12,
+        "mean": -11.344728830596472,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "field": {
+        "n": 12,
+        "mean": -11.344728830596472,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "field_sign": {
+        "n": 12,
+        "mean": -11.344728830596472,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "parent": {
+        "n": 12,
+        "mean": -7.824703201067798,
+        "delta": [
+          3.5200256295286714,
+          2.4580266285064485,
+          4.673110453931303
+        ]
+      },
+      "v120": {
+        "n": 12,
+        "mean": -8.84109634698553,
+        "delta": [
+          2.5036324836109376,
+          0.799260972095376,
+          4.239700634556129
+        ]
+      }
+    },
+    "prior_iso6400": {
+      "conditional": {
+        "n": 12,
+        "mean": -1.8857935694640993,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "own_phase": {
+        "n": 12,
+        "mean": -1.8857935694640993,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "own_phase_sign": {
+        "n": 12,
+        "mean": -1.8857935694640993,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "transport": {
+        "n": 12,
+        "mean": -1.8857935694640993,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "affine": {
+        "n": 12,
+        "mean": -1.8857935694640993,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "field": {
+        "n": 12,
+        "mean": -1.8857935694640993,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "field_sign": {
+        "n": 12,
+        "mean": -1.8857935694640993,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "parent": {
+        "n": 12,
+        "mean": -1.1998759672509134,
+        "delta": [
+          0.6859176022131862,
+          0.17741613507044907,
+          1.2808225740796764
+        ]
+      },
+      "v120": {
+        "n": 12,
+        "mean": -1.858337441886791,
+        "delta": [
+          0.027456127577308198,
+          -1.5157660032890803,
+          1.5974221717413122
+        ]
+      }
+    },
+    "iso1600": {
+      "conditional": {
+        "n": 17,
+        "mean": 3.410791486649626,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "own_phase": {
+        "n": 17,
+        "mean": 3.5149877742737026,
+        "delta": [
+          0.10419628762407639,
+          0.020984577337486075,
+          0.23487590019186189
+        ]
+      },
+      "own_phase_sign": {
+        "n": 17,
+        "mean": 3.51910643166614,
+        "delta": [
+          0.10831494501651392,
+          0.022043803625391416,
+          0.23519906803486662
+        ]
+      },
+      "transport": {
+        "n": 17,
+        "mean": 3.477822780669959,
+        "delta": [
+          0.06703129402033325,
+          0.004671600400148775,
+          0.15179688030108043
+        ]
+      },
+      "affine": {
+        "n": 17,
+        "mean": 4.225467803627655,
+        "delta": [
+          0.8146763169780293,
+          0.4256542911148517,
+          1.2073429397452777
+        ]
+      },
+      "field": {
+        "n": 17,
+        "mean": 4.419516131540504,
+        "delta": [
+          1.0087246448908778,
+          0.46959049645163503,
+          1.5176441141936206
+        ]
+      },
+      "field_sign": {
+        "n": 17,
+        "mean": 4.5280838284162215,
+        "delta": [
+          1.117292341766596,
+          0.5217071510012826,
+          1.7013750058280723
+        ]
+      },
+      "parent": {
+        "n": 17,
+        "mean": 1.0390518933769288,
+        "delta": [
+          -2.3717395932726966,
+          -5.981150385944381,
+          0.5561334349740619
+        ]
+      },
+      "v120": {
+        "n": 17,
+        "mean": 0.16153440700576685,
+        "delta": [
+          -3.2492570796438587,
+          -6.899909854157176,
+          -0.34943657884383095
+        ]
+      }
+    },
+    "iso6400": {
+      "conditional": {
+        "n": 17,
+        "mean": 1.1274427155479503,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "own_phase": {
+        "n": 17,
+        "mean": 1.213788548603116,
+        "delta": [
+          0.08634583305516574,
+          0.0,
+          0.25903749916549723
+        ]
+      },
+      "own_phase_sign": {
+        "n": 17,
+        "mean": 1.213788548603116,
+        "delta": [
+          0.08634583305516574,
+          0.0,
+          0.25903749916549723
+        ]
+      },
+      "transport": {
+        "n": 17,
+        "mean": 1.1538945652119061,
+        "delta": [
+          0.026451849663955914,
+          0.0,
+          0.07935554899186774
+        ]
+      },
+      "affine": {
+        "n": 17,
+        "mean": 1.3506446619204429,
+        "delta": [
+          0.22320194637249238,
+          0.0,
+          0.6696058391174772
+        ]
+      },
+      "field": {
+        "n": 17,
+        "mean": 1.4227739671857742,
+        "delta": [
+          0.29533125163782387,
+          0.0,
+          0.8859937549134715
+        ]
+      },
+      "field_sign": {
+        "n": 17,
+        "mean": 1.4229599327537314,
+        "delta": [
+          0.29551721720578106,
+          0.0,
+          0.8865516516173431
+        ]
+      },
+      "parent": {
+        "n": 17,
+        "mean": 1.0112523412935577,
+        "delta": [
+          -0.11619037425439244,
+          -1.5625635124564348,
+          1.1249332865224007
+        ]
+      },
+      "v120": {
+        "n": 17,
+        "mean": 0.2902153978156291,
+        "delta": [
+          -0.8372273177323208,
+          -2.4387667130101502,
+          0.7353749454085742
+        ]
+      }
+    }
+  },
+  "stronger_scene_held_comparison_extra_windows": {
+    "iso1600": {
+      "0": {
+        "0": 68,
+        "2": 66
+      },
+      "1": {},
+      "2": {},
+      "3": {},
+      "4": {}
+    },
+    "iso6400": {
+      "0": {
+        "0": 2,
+        "2": 2
+      },
+      "1": {},
+      "2": {},
+      "3": {},
+      "4": {}
+    }
+  }
+}

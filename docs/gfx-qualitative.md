@@ -3,6 +3,7 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Spatial color phase from Bayer samples](cfa-relative-phase.md#standing-gfx100s-comparisons) preserves sky, building and foliage. The wider held color comparison changes the coarse fence by 2.28 DN16 RGB RMS and retains visible intersections.
 - [Directional signed Bayer color](cfa-directional-chroma.md#standing-gfx100s-comparisons) reproduces the local conditional fit across sky, building, foliage and coarse fence.
 - [Held red/blue channel checks](cfa-signed-color-delivery.md#standing-gfx100s-comparisons) reproduce the regional color fit in all four main regions, retaining coarse fence intersections and smooth sky.
 - [Regional Bayer color phase](cfa-regional-phase.md#standing-gfx100s-comparisons) preserves the coarse fence intersections. Sky, foliage and building are pixel-identical to the green-only pooled fit.

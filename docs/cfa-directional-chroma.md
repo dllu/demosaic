@@ -10,6 +10,9 @@ part of the panel. Fitting independent red/blue phase recovers two
 red windows on the fresh ISO1600 panel, for a mean gain of 0.083
 signed-response points. Fine crossings remain incomplete on the real cab.
 
+The [spatial color field follow-up](cfa-relative-phase.md) recovers more
+when chroma is stronger, with limited transfer to the earlier weaker panels.
+
 ## Fit and tests
 
 The [local conditional fit](cfa-signed-color-delivery.md) comes first.
