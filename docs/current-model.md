@@ -149,6 +149,14 @@ unseen camera panel versus sharp regional. Both cab ROIs still have
 incomplete fine crossings. Mixed optics loses 0.00982 dB against
 sharp regional and 0.04669 dB versus Local 50k on 427 photos.
 
+Two [learned Bayer gain heads](local-bayer-gain.md) retain the fixed
+proposal and vary its strength. Learned broad gains 2.787
+weak-response points over the combined check at nominal
+strength. At comparable recovery it increases continuing-strand
+RMS by 6.252 DN16. The learned arms give nearly equal wire
+scores and add regularity on the fine cab without completing
+crossings.
+
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
 weak response it lowers continuing-strand RMS by 2.361 DN16 versus

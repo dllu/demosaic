@@ -38,7 +38,8 @@ Start with the [README](../README.md) for installation and inference.
 [Local Bayer evidence with exterior phase](optical-raw-evidence.md) ·
 [Exterior phase transfer and ring-guided restoration](local-exterior-phase-transfer.md).
 [Wide RAW fits with local support checks](local-center-guard.md) ·
-[Combined broad and central RAW checks](local-nested-support.md).
+[Combined broad and central RAW checks](local-nested-support.md) ·
+[Learned Bayer gains](local-bayer-gain.md).
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·

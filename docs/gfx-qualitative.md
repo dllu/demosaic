@@ -3,6 +3,7 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Learned gains on Bayer-supported carriers](local-bayer-gain.md#standing-gfx100s-comparisons) retain the coarse intersections. Sky, foliage and building match Local 50k.
 - [Combined broad and central support](local-nested-support.md#standing-gfx100s-comparisons)
   retains the coarse intersections and keeps the Local 50k sky, building and foliage pixels.
 - [Broad fit with a central support check](local-center-guard.md#standing-gfx100s-comparisons)

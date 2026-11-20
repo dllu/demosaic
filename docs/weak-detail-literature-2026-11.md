@@ -1192,6 +1192,18 @@ response at matched natural flat error. Gate confidence distinguishes
 background activity much more strongly than continuation in this trial.
 [Separate phase and support](local-wire-gate-support.md).
 
+A [bounded Bayer gain pilot](local-bayer-gain.md) learns from
+delivered luma reconstruction error with the parent and the
+verified RAW waveforms frozen. Its nominal weak-response gain
+over the fixed combined gate is 2.787 points, with lower
+continuing-strand error. At matched response that error rises
+6.252 DN16. Broad held scores and surrounding statistics have
+little effect on the held-out wire scores at this budget.
+The broad arm reaches the amplitude cap in 87.1% of accepted
+intact-wire directions. An exact-target gain fit with the same
+objective also gives up some weak response to reduce false
+weak projection.
+
 [Regional weak-wire training](local-regional-wire.md) starts both
 full-trunk arms from Local 50k with 1,024 distinct sources each.
 The local weak-response term compares nine subregions against the
