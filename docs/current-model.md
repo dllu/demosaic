@@ -470,6 +470,11 @@ error in planted true gaps by 3.85 DN16 versus the 16-pixel window
 at nearly equal flat error. The separate low band gains 0.51 long
 response points over Corpus 100k. Natural-photo error rises and
 the real fine cab crossings remain incomplete.
+[Dense nearby Bayer donors](scene-dense-atlas.md) add signed
+support at both nominal left cab peaks with only 0.287 DN16 RGB
+RMS correction. Stronger proximity on a tight uniform atlas gains
+0.242 response points on retained short wires. Natural fine and
+flat RMS still exceed Corpus 100k at the wire-calibrated strength.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

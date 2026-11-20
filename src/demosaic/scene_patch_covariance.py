@@ -105,12 +105,8 @@ class ExteriorPatches:
     band: PatchBand = DEFAULT_BAND
 
 
-def build_exterior(raw, colors, box, shot, read, *, max_windows=4800, halo=16, band=DEFAULT_BAND):
-    """Read only exterior CFA sites. Coordinates and thinning precede image reads."""
+def exterior_grid(height, width, size, stride, box, halo):
     x, y, w, h = box
-    height, width = (2 * n for n in raw.shape[-2:])
-    size = band.size
-    stride = max(size, 2 * int(np.ceil(np.sqrt(height * width / max_windows) / 2)))
     yy, xx = np.meshgrid(
         np.arange(0, height - size + 1, stride),
         np.arange(0, width - size + 1, stride),
@@ -118,7 +114,45 @@ def build_exterior(raw, colors, box, shot, read, *, max_windows=4800, halo=16, b
     )
     safe = (yy + size <= y - halo) | (yy >= y + h + halo)
     safe |= (xx + size <= x - halo) | (xx >= x + w + halo)
-    coords = np.column_stack((yy[safe], xx[safe]))
+    return np.column_stack((yy[safe], xx[safe]))
+
+
+def dense_exterior_grid(height, width, band, box, halo, radius, nominal_budget):
+    """Reserve disjoint full-density patches near the query and thin the far field."""
+    size = band.size
+    x, y, w, h = box
+    first_x = max(0, (x - radius) // size * size)
+    first_y = max(0, (y - radius) // size * size)
+    last_x = min(width, -(-(x + w + radius) // size) * size)
+    last_y = min(height, -(-(y + h + radius) // size) * size)
+    local_box = (x - first_x, y - first_y, w, h)
+    near = exterior_grid(last_y - first_y, last_x - first_x, size, size, local_box, halo)
+    near += (first_y, first_x)
+    if len(near) >= nominal_budget:
+        # The ordering depends only on geometry, never on RAW measurements.
+        center = np.array([y + h / 2, x + w / 2])
+        order = np.argsort(np.sum((near + size / 2 - center) ** 2, axis=1), kind="stable")
+        return near[order[:nominal_budget]]
+    stride = max(size, 2 * int(np.ceil(np.sqrt(height * width / (nominal_budget - len(near))) / 2)))
+    far = exterior_grid(height, width, size, stride, box, halo)
+    fy, fx = far.T
+    beyond = (fx + size <= first_x) | (fx >= last_x) | (fy + size <= first_y) | (fy >= last_y)
+    return np.concatenate((near, far[beyond]))
+
+
+def build_exterior(
+    raw, colors, box, shot, read, *, max_windows=4800, halo=16, band=DEFAULT_BAND, dense_radius=0
+):
+    """Read only exterior CFA sites. Coordinates and thinning precede image reads."""
+    if max_windows < 1 or dense_radius < 0:
+        raise ValueError("Expected a positive sampling budget and nonnegative dense radius")
+    height, width = (2 * n for n in raw.shape[-2:])
+    size = band.size
+    if dense_radius:
+        coords = dense_exterior_grid(height, width, band, box, halo, dense_radius, max_windows)
+    else:
+        stride = max(size, 2 * int(np.ceil(np.sqrt(height * width / max_windows) / 2)))
+        coords = exterior_grid(height, width, size, stride, box, halo)
     if not len(coords):
         return None
     basis = patch_basis(tuple(colors), band)
@@ -274,7 +308,18 @@ def single_donor_fit(
     }
 
 
-def corrections(raw, parent_green, colors, shot, read, box, exterior, *, validate_donors=False):
+def corrections(
+    raw,
+    parent_green,
+    colors,
+    shot,
+    read,
+    box,
+    exterior,
+    *,
+    validate_donors=False,
+    prefer_nearby=False,
+):
     """Return fixed-basis luminance corrections from the query measurements."""
     height, width = parent_green.shape
     modes = VALIDATED_MODES if validate_donors else MODES
@@ -307,7 +352,9 @@ def corrections(raw, parent_green, colors, shot, read, box, exterior, *, validat
     )
     innovation = (coefficients - parent_fits).mean(axis=1) * valid[:, None]
     global_coords = coords + np.asarray(box)[[1, 0]]
-    donors, weights = choose_exterior(features, global_coords, exterior, ranked=validate_donors)
+    donors, weights = choose_exterior(
+        features, global_coords, exterior, nearby=prefer_nearby, ranked=validate_donors
+    )
     if validate_donors:
         values = donor_validated_fields(donors, weights, innovation, coefficients, noise, basis)
     else:

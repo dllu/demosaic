@@ -94,6 +94,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [whole-photo patch covariance](scene-patch-covariance.md) ·
 [patch covariance on separate Bayer donors](scene-patch-crossfit.md) ·
 [wider Bayer windows and a separate low band](scene-patch-width.md) ·
+[dense nearby Bayer donors](scene-dense-atlas.md) ·
 [learned spectral corrections](learned-spectral-detail.md) ·
 [exact gap supervision and Bayer witnesses](learned-spectral-gaps.md) ·
 [between-bin Bayer phase refinement](subbin-spectral-witness.md) ·

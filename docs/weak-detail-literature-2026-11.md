@@ -1034,6 +1034,13 @@ nearly equal flat error. A separate band recovers more of a planted
 24–35-pixel fundamental. The wire-calibrated strengths increase
 natural-photo errors, and the native cab crossings stay incomplete.
 
+[Dense nearby donors](scene-dense-atlas.md) raise the nominal left
+cab correction from 0.057 to 0.287 DN16 RGB RMS with the same
+gain. Proximity weighting on the sparse atlas raises short-wire
+response by 0.242 percentage points at a matched flat budget.
+The wider natural-photo test still favors the frozen parent on
+fine-increment and flat error.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

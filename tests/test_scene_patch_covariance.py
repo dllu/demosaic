@@ -10,6 +10,7 @@ from demosaic.scene_patch_covariance import (
     confirmed_power,
     corrections,
     covariance,
+    dense_exterior_grid,
     donor_validated_fields,
     encode,
     filter_innovation,
@@ -133,3 +134,18 @@ def test_wide_band_tracks_long_detail_on_both_greens(colors):
     np.testing.assert_allclose(long[:, 0], long[:, 1], atol=1e-13)
     assert np.linalg.norm(long) > 0.1
     np.testing.assert_allclose(short, 0, atol=1e-13)
+
+
+def test_near_and_far_atlas_patches_never_reuse_sites_or_touch_the_query_halo():
+    band = PatchBand(32, 0.08, 0.16)
+    box = (146, 138, 96, 96)
+    height, width = 416, 608
+    coords = dense_exterior_grid(height, width, band, box, 16, 66, 72)
+    covered = np.zeros((height, width), dtype=np.int8)
+    for y, x in coords:
+        assert y % 2 == x % 2 == 0
+        assert 0 <= y <= height - 32 and 0 <= x <= width - 32
+        covered[y : y + 32, x : x + 32] += 1
+    x, y, w, h = box
+    assert len(coords) > 32 and covered.max() == 1
+    assert not covered[y - 16 : y + h + 16, x - 16 : x + w + 16].any()

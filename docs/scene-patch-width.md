@@ -13,6 +13,11 @@ the fine GFX100S cab crossings remain incomplete.
 [Frozen drivers and receipts](results/scene-patch-width-v1/evidence.tar.xz) ·
 [Native crop provenance](images/scene-patch-width-v1/manifest.json).
 
+A [denser nearby atlas](scene-dense-atlas.md) strengthens the
+nominal left cab projection at the same gain and leaves fine
+crossings incomplete. At a tight donor budget, it reduces the
+continuing short-wire error inside true gaps.
+
 ## Separating window width from frequency coverage
 
 The [previous separate-donor filter](scene-patch-crossfit.md)

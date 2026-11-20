@@ -53,6 +53,10 @@ has repeatedly come with extra flat-region error or false color. The
    32-pixel window lowers short-wire error inside planted gaps at
    nearly equal flat error. Real fine crossings stay incomplete and
    the wire-calibrated strengths raise natural-photo error.
+   [Dense nearby sampling](scene-dense-atlas.md) improves measured
+   support on the nominal left cab and short-wire gap error at a tight
+   donor budget. Proximity helps short-wire response at that budget.
+   Real crossings stay incomplete and natural-photo errors still rise.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side
