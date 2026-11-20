@@ -86,18 +86,21 @@ automatic input estimation and its nominal-prior fallback.
 
 ### Repeating mesh crops
 
-The experimental 64-pixel carrier fit is available through
+The experimental carrier fits are available through
 `demosaic.mesh_carrier_fit.refine_raw_mesh_carriers` with the `eval` extra.
-It refines a 160×160 linear camera RGB crop using the same exposure's
-native Bayer measurements. Keep the coordinate system and camera metadata
-from the input mosaic. The crop must have four nearby 128-pixel donor
-patches. Weak or incomplete donor support returns the input crop.
+The callable refines a 160×160 linear camera RGB crop using the same
+exposure's native Bayer measurements. The pooled option uses a 16-pixel
+halo of restored RGB to estimate what the parent already recovered. It
+uses the surrounding 192×192 RAW region to estimate the weaker carrier's
+phase and checks each proposed correction on held green samples. Both
+methods use four nearby 128-pixel RAW donor patches. Weak or incomplete
+donor support returns the input crop.
 
 ```python
 from demosaic.cfa import PATTERNS
 from demosaic.mesh_carrier_fit import refine_raw_mesh_carriers
 
-x, y, size = 1026, 6449, 160
+x, y, size, halo = 1026, 6449, 160, 16
 refined = refine_raw_mesh_carriers(
     camera_rgb[:, y:y + size, x:x + size],
     packed_bayer,
@@ -107,17 +110,21 @@ refined = refine_raw_mesh_carriers(
     read=read,
     white_balance=metadata.white_balance,
     camera_to_srgb=metadata.camera_to_srgb,
+    method="pooled",
+    parent_context=camera_rgb[:, y - halo:y + size + halo, x - halo:x + size + halo],
 )
 ```
 
 `camera_rgb` is the restored RGB in unrotated sensor coordinates and
 `packed_bayer` has shape `[4, H/2, W/2]` in top-left, top-right,
 bottom-left, bottom-right order. The example coordinates identify the
-standing right cab crop. The published gains use the frozen composed
-parent specified in the report. The method can add weak lines across
-true gaps and can make mesh contrast look overly regular.
-[Native results](bayer-carrier-scale.md) ·
-[Package replay and amplitude tests](bayer-amplitude-envelope.md).
+standing right cab crop. For the original 64-pixel fit, use the default
+`method="local64"` and omit `parent_context`. The pooled method showed small
+gains on exact weak-wire targets with the frozen Local 50k parent. Fine
+crossings on the real cab still remain incomplete. Both fits can add weak
+response across true gaps.
+[Pooled results and crop timing](local-pooled-carrier.md#packaged-crop-fit) ·
+[Original 64-pixel fit](bayer-carrier-scale.md).
 
 ## Environment and storage
 

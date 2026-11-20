@@ -6,6 +6,8 @@ from .cfa import PATTERNS
 
 _ROI_SIZE = 160
 _WINDOW = 64
+_POOLED_HALO = 16
+_POOLED_FOOTPRINT = _ROI_SIZE + 2 * _POOLED_HALO
 _DONOR = 128
 _FFT_SIZE = 256
 _FREQUENCIES = np.fft.fftfreq(_FFT_SIZE, d=2)
@@ -18,16 +20,23 @@ _DONOR_TAPER = np.outer(_DONOR_TAPER, _DONOR_TAPER).astype(np.float32)
 _OVERLAP = np.sin(np.pi * (np.arange(_WINDOW) + 0.5) / _WINDOW) ** 2
 _OVERLAP = np.outer(_OVERLAP, _OVERLAP)
 _X, _Y = np.meshgrid(np.arange(_WINDOW, dtype=np.float64), np.arange(_WINDOW, dtype=np.float64))
-_DCT_ORDER = int(np.ceil(0.066 * _WINDOW))
-_SMOOTH = np.stack(
-    [
-        np.cos(np.pi * i * ((_X + 0.5) / _WINDOW)) * np.cos(np.pi * j * ((_Y + 0.5) / _WINDOW))
-        for i in range(_DCT_ORDER + 1)
-        for j in range(_DCT_ORDER + 1)
-        if np.hypot(i, j) <= _DCT_ORDER
-    ],
-    axis=-1,
-)
+
+
+def _cosine_background(size):
+    y, x = (np.indices((size, size), dtype=np.float64) + 0.5) / size
+    order = int(np.ceil(0.066 * size))
+    return np.stack(
+        [
+            np.cos(np.pi * i * x) * np.cos(np.pi * j * y)
+            for i in range(order + 1)
+            for j in range(order + 1)
+            if np.hypot(i, j) <= order
+        ],
+        axis=-1,
+    )
+
+
+_SMOOTH = _cosine_background(_WINDOW)
 _EDGE = np.minimum(
     1.0, np.minimum(np.arange(_ROI_SIZE) + 0.5, np.arange(_ROI_SIZE)[::-1] + 0.5) / 12
 )
@@ -138,7 +147,18 @@ def _patch(scene, parent, xy, colors, design, carriers, shot, read):
 
 
 def refine_raw_mesh_carriers(
-    parent, scene, colors, roi, *, shot, read, white_balance, camera_to_srgb
+    parent,
+    scene,
+    colors,
+    roi,
+    *,
+    shot,
+    read,
+    white_balance,
+    camera_to_srgb,
+    method="local64",
+    parent_context=None,
+    donor_clearance=None,
 ):
     """Refine a co-registered 160×160 linear camera RGB crop using noisy RAW.
 
@@ -148,6 +168,15 @@ def refine_raw_mesh_carriers(
     for each phase. Supply the input shot/read prior, camera gains and
     camera-to-sRGB matrix. The fit uses four nearby 128-pixel RAW patches
     and may return the parent when support is weak.
+
+    The default method is `"local64"`. The experimental `"pooled"` method
+    accepts a 192×192 RGB `parent_context` with the exact parent crop centered
+    inside it. It pools the weaker carrier's phase across this footprint
+    and validates it on held Bayer samples inside each delivery window.
+    It retains the planar fit where the direction ranking or evidence is
+    ambiguous. Donor clearance defaults to 16 pixels for this method and
+    zero otherwise. Supply a larger integer clearance to move donors farther
+    from the ROI.
 
     Requires the eval extra. Calibrated for a repeating two-family mesh.
     """
@@ -174,17 +203,61 @@ def refine_raw_mesh_carriers(
     ):
         raise ValueError("white_balance and camera_to_srgb must describe valid camera color")
     x, y, w, h = roi
-    if not all(isinstance(v, (int, np.integer)) for v in roi) or (w, h) != (_ROI_SIZE, _ROI_SIZE):
+    if not all(isinstance(v, (int, np.integer)) for v in (x, y, w, h)) or (w, h) != (
+        _ROI_SIZE,
+        _ROI_SIZE,
+    ):
         raise ValueError("roi must be a 160×160 native integer rectangle")
+    x, y, w, h = map(int, (x, y, w, h))
     if min(x, y) < 0 or x + w > 2 * scene.shape[2] or y + h > 2 * scene.shape[1]:
         raise ValueError("roi must be contained in the Bayer scene")
-    frequencies = _spacing(scene, colors, x, y)
+    if method not in ("local64", "pooled"):
+        raise ValueError("method must be 'local64' or 'pooled'")
+    minimum_clearance = _POOLED_HALO if method == "pooled" else 0
+    clearance = minimum_clearance if donor_clearance is None else donor_clearance
+    if (
+        isinstance(clearance, (bool, np.bool_))
+        or not isinstance(clearance, (int, np.integer))
+        or clearance < minimum_clearance
+    ):
+        raise ValueError(f"donor_clearance must be an integer of at least {minimum_clearance}")
+    if method == "pooled":
+        if parent_context is None:
+            raise ValueError("pooled method requires a 192×192 parent_context")
+        parent_context = np.asarray(parent_context)
+        interior = np.s_[:, _POOLED_HALO:-_POOLED_HALO, _POOLED_HALO:-_POOLED_HALO]
+        if (
+            parent_context.shape != (3, _POOLED_FOOTPRINT, _POOLED_FOOTPRINT)
+            or parent_context.dtype != parent.dtype
+            or not np.isfinite(parent_context).all()
+            or not np.array_equal(parent_context[interior], parent)
+        ):
+            raise ValueError(
+                "parent_context must contain the exact RGB parent and its 16-pixel halo"
+            )
+    elif parent_context is not None:
+        raise ValueError("parent_context is only used by the pooled method")
+    frequencies = _spacing(scene, colors, x, y, clearance=int(clearance))
     if frequencies is None:
         return parent
     try:
         neutral = np.linalg.solve(matrix, np.ones(3)) / wb
         if neutral[1] == 0:
             return parent
+        if method == "pooled":
+            from ._mesh_pooled import _refine
+
+            return _refine(
+                parent,
+                parent_context[1],
+                scene,
+                colors,
+                (x, y),
+                frequencies,
+                shot,
+                read,
+                neutral / neutral[1],
+            )
         angle = (
             2
             * np.pi

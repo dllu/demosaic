@@ -76,3 +76,65 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
     held[:] = np.random.default_rng(812).uniform(0.03, 0.15, held.shape)
     replay = _spacing(pack(changed), PATTERNS[pattern], x, y, clearance=halo)
     np.testing.assert_array_equal(replay, original)
+
+
+@pytest.mark.parametrize("pattern", tuple(PATTERNS))
+def test_pooled_weak_phase_on_an_odd_native_origin(pattern):
+    y, x = np.indices((480, 480), dtype=np.float32)
+    x, y = x - 230, y - 228
+    envelope = np.clip((122 - np.maximum(abs(x), abs(y))) / 33, 0, 1)
+    warp = envelope * (2.5 * (x + y) / 110 + (x - y) ** 2 / 30000)
+    strong = 0.008 * np.cos(2 * np.pi * (0.1171875 * x + 0.07421875 * y) + 0.8)
+    weak = 0.004 * np.cos(2 * np.pi * (0.08984375 * x - 0.072265625 * y) - 0.9 + warp)
+    context = np.full((3, 192, 192), 0.08, dtype=np.float32)
+    parent = context[:, 16:-16, 16:-16]
+    result = refine_raw_mesh_carriers(
+        parent,
+        pack(0.08 + strong + weak),
+        PATTERNS[pattern],
+        (151, 149, 160, 160),
+        shot=0.00128,
+        read=6.5536e-6,
+        white_balance=np.ones(3),
+        camera_to_srgb=np.eye(3),
+        method="pooled",
+        parent_context=context,
+    )
+
+    core = np.s_[165:293, 167:295]
+    restored = result[1, 16:-16, 16:-16] - 0.08
+    for carrier in (strong[core], weak[core]):
+        assert np.sum(restored * carrier) > 0.45 * np.sum(carrier**2)
+    np.testing.assert_array_equal(result[0], result[1])
+    assert result.dtype == parent.dtype
+
+
+def test_pooled_fit_requires_context_and_independent_donors():
+    raw = scene_fixture()
+    raw[133:325, 135:327] = 0.08
+    context = np.full((3, 192, 192), 0.08, dtype=np.float32)
+    parent = context[:, 16:-16, 16:-16]
+
+    def refine(roi, **kwargs):
+        return refine_raw_mesh_carriers(
+            parent,
+            pack(raw),
+            PATTERNS["RGGB"],
+            roi,
+            shot=0.00128,
+            read=6.5536e-6,
+            white_balance=np.ones(3),
+            camera_to_srgb=np.eye(3),
+            method="pooled",
+            **kwargs,
+        )
+
+    center = (151, 149, 160, 160)
+    with pytest.raises(ValueError, match="requires a 192×192 parent_context"):
+        refine(center)
+    with pytest.raises(ValueError, match="exact RGB parent"):
+        refine(center, parent_context=context + 0.01)
+    with pytest.raises(ValueError, match="at least 16"):
+        refine(center, parent_context=context, donor_clearance=15)
+    assert refine(center, parent_context=context) is parent
+    assert refine((16, 16, 160, 160), parent_context=context) is parent

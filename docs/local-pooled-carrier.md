@@ -229,3 +229,42 @@ This inference-only crop replay has no new fixed-photo or camera
 scores.
 [Paired results and figures](results/local-pooled-carrier-v1/publication.json) ·
 [Original receipts and source](results/local-pooled-carrier-v1/evidence.tar.xz).
+
+## Packaged crop fit
+
+`refine_raw_mesh_carriers(method="pooled", parent_context=...)` applies
+the weak-only correction to a native 160 × 160 crop. It reads just the
+two green RAW lattices in the verification footprint after donor
+nomination, builds the weaker phase field once per lattice, and batches
+the overlapping window fits. The default `local64` remains available.
+[Usage and input shapes](usage.md#repeating-mesh-crops).
+
+All 40,550,400 RGB values matched the archived weak-only implementation
+bit for bit. The check replayed 20 warped and 32 straight photo backgrounds,
+two RAW draws and five roles per background, plus the eight standing GFX
+crops. The composed parent used the Local 50k EMA checkpoint
+`62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959`.
+The existing native comparisons above therefore show the packaged result.
+
+Median warm CPU time in milliseconds per crop on the GB10 host, with
+one BLAS thread and 21 interleaved measurements per method and case.
+The measurements include donor search and fit construction with both
+input and parent already in memory. They cover crop refinement only.
+
+| GFX crop | Archived weak-only | Packaged pooled | Default `local64` |
+| --- | ---: | ---: | ---: |
+| Overcast sky | 9.03 | 9.14 | 9.05 |
+| Building | 9.10 | 9.13 | 9.10 |
+| Foliage | 9.13 | 9.15 | 9.05 |
+| Coarse fence | 71.05 | 38.14 | 15.86 |
+| Left cab, nominal | 68.80 | 26.75 | 14.33 |
+| Right cab, nominal | 69.98 | 37.13 | 14.78 |
+| Left cab, transferred | 68.86 | 26.65 | 14.44 |
+| Right cab, transferred | 69.86 | 37.20 | 14.79 |
+
+Pooling is about 1.9× faster than the archived weak-only replay on
+the coarse fence and right cab and still takes about 2.5× as long
+as the original 64-pixel fit on those crops. Both left cab profiles
+use the planar fallback because the direction ranking is ambiguous.
+[Replay and timing manifest](results/local-pooled-carrier-api-v1/publication.json) ·
+[Receipts and benchmark source](results/local-pooled-carrier-api-v1/evidence.tar.xz).

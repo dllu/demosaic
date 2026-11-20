@@ -169,7 +169,10 @@ gains 0.307 and 0.108 weak-response points versus fixed combined
 on separate warped and straight panels. Holding the stronger
 correction fixed preserves continuing-strand, false-gap and flat
 accuracy at those gains. The left cab ranking is ambiguous and
-the right changes slightly, with incomplete crossings.
+the right changes slightly, with incomplete crossings. The experimental
+crop API reproduces the replay and accepts a 16-pixel halo of restored RGB.
+[Usage](usage.md#repeating-mesh-crops) ·
+[Parity and CPU timing](local-pooled-carrier.md#packaged-crop-fit).
 
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
