@@ -198,6 +198,10 @@ has repeatedly come with extra flat-region error or false color. The
    Full-frame appearance protects the building. The fixed-bracket
    lead and the cab donor crops point to the remaining selection
    problem. A straight-path appearance score does little to solve it.
+   [Graph routes around obstructions](scene-geodesic-donors.md) respond
+   to the connecting scene in a paired layout with fixed local RAW.
+   On the original replay, endpoint appearance recovers more faint
+   signal. The fine cab remains unresolved after local validation.
    [Query background and score controls](query-rail-background.md)
    find that a two-boundary fit suppresses rail and building artifacts
    with similar weak response. Dropping the amplitude penalty in a

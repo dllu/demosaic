@@ -3,6 +3,7 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Whole-frame graph routes](scene-geodesic-donors.md#native-gfx100s-review) reproduce V120 in the sky, building and foliage, and reproduce endpoint ranking on the coarse fence. The cost-matched straight route introduces visible building bands.
 - [Spatial color phase from Bayer samples](cfa-relative-phase.md#standing-gfx100s-comparisons) preserves sky, building and foliage. The wider held color comparison changes the coarse fence by 2.28 DN16 RGB RMS and retains visible intersections.
 - [Directional signed Bayer color](cfa-directional-chroma.md#standing-gfx100s-comparisons) reproduces the local conditional fit across sky, building, foliage and coarse fence.
 - [Held red/blue channel checks](cfa-signed-color-delivery.md#standing-gfx100s-comparisons) reproduce the regional color fit in all four main regions, retaining coarse fence intersections and smooth sky.

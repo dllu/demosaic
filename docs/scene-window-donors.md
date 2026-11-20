@@ -11,6 +11,11 @@ The [query-fit follow-up](query-rail-background.md) holds these
 guides fixed and isolates the effect of the local background
 and validation score on false texture.
 
+[Whole-frame graph routes](scene-geodesic-donors.md) test alternate
+paths around occlusion on the same replay. The graph responds to
+intervening scene pixels in a controlled layout and loses faint-wire
+response on the original exact-target panel.
+
 ## A shared catalog and independent checks
 
 The synthetic replay reuses the 16 source 88–95 observations and exact

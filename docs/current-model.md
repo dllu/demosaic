@@ -960,6 +960,13 @@ both recover less than 1%. Full-frame ranking avoids visible building
 bands introduced by the wider spectral search. The cab crossings
 remain soft.
 
+[Whole-frame graph routes](scene-geodesic-donors.md) change donor
+selection when an intervening obstruction moves. The graph recovers
+0.89% of the faint ISO400 increment against 4.80% for whole-frame
+endpoint appearance within the same quiet allowance. Both graph
+variants retain the smooth sky and coarse crossings. Fine cab
+crossings remain incomplete.
+
 [Two-boundary query validation](query-rail-background.md) lowers
 rail-only correction RMS from 7.29 to 0.79 DN16 with forced guides
 and retains about 4.80% ISO400 weak response with full-frame guides

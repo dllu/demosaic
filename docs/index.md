@@ -213,6 +213,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [appearance-first donor ranking and curved-wire recovery](affinity-first-donors.md) ·
 [localized donor validation beside rails](localized-donor-validation.md) ·
 [whole-frame ranking of localized RAW windows](scene-window-donors.md) ·
+[whole-frame graph routes for RAW donor ranking](scene-geodesic-donors.md) ·
 [query validation and two-boundary rail fits](query-rail-background.md) ·
 [phase averages inside fitted surfaces](surface-phase-aggregation.md) ·
 [signed local bounds for phase averaging](local-phase-bounds.md) ·
