@@ -103,6 +103,14 @@ parent-phase proposal adds 0.081 faint natural points with 0.005 DN16
 more exact-flat RMS over the Bayer blend.
 [Weak-wire proposal headroom](detail-directional-proposal.md).
 
+Learning wire gains with exact gap and flat controls chooses zero
+correction on calibration at both signed-response weights. The larger
+weight substantially increases use of the directional proposal. It
+offsets most of the contrast lost to smoothing and still raises
+continuing-strand error. On these new optical wires the same proposal
+makes a two-point gain feasible on 40/40 targets in the exact fit.
+[Weak-wire gain training](detail-wire-gate.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

@@ -1331,6 +1331,15 @@ the parent-phase deficit gains 0.102 wire points with 0.305 DN16
 more intact error. The best-case fit has access to exact targets
 and measures intact error. [Weak-wire proposal headroom](detail-directional-proposal.md).
 
+The learned gate follow-up trains on 384 wire and 96 natural
+photos with explicit weak-gap and flat losses. A stronger signed
+reward makes the directional proposal regain 1.107 points
+lost to the other branches. Full strength still loses 0.060
+points versus Local 50k and raises continuing-wire error.
+Both calibrations choose zero. At two additional points the
+directional basis is feasible on all 40 new optical fixtures
+when gains may see exact targets. [Weak-wire gain training](detail-wire-gate.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,

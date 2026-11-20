@@ -15,6 +15,13 @@ paired error**. It adds **0.081 points** on faint natural
 texture and **0.005 DN16** of exact-flat fine RMS. The real
 fine cab crossings remain incomplete.
 
+The learned follow-up fits the same proposals on 480 additional
+photos with exact gaps and paired weak-response supervision.
+Both calibrations choose zero strength. On the new optical
+wires the directional basis extends exact-target feasibility
+from 25 to 40 photos at a required two-point gain.
+[Weak-wire gain training](detail-wire-gate.md).
+
 ## Measure the proposal space with exact targets
 
 The [Bayer blend](detail-regime-router.md) only routes the
