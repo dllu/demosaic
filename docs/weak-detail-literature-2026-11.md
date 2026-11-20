@@ -1359,6 +1359,14 @@ frequencies raises the full-strength held response from 0.141 to 0.636
 points and leaves the same check limited by local signal.
 [Reserved Bayer phase for weak-wire routing](detail-phase-routing.md).
 
+Widening the frequency search to other quadrants raises intact weak
+nominations from 15 to 159 out of 323 stations with harmonic removal.
+On new fixtures it recovers 0.362 contrast points, versus 0.032 with
+wrong-photo nominations. A plain wide search recovers 0.456 points
+and better protects the continuing strand. Both admit more exact-flat
+stations, and the fine cab crossings remain incomplete.
+[Wider Bayer frequency nomination](detail-wide-phase.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,

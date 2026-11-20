@@ -126,6 +126,13 @@ finds the weak frequency in only 7 of 324 intact stations, and the native
 cab crossings remain incomplete.
 [Reserved Bayer phase for weak-wire routing](detail-phase-routing.md).
 
+A wider exterior Bayer search on 256-pixel queries recovers 0.456 weak
+contrast points and reduces continuing-strand error by 1.027 DN16 on fresh
+wire fixtures. The harmonic-aware search gains 0.362 points with a smaller
+flat penalty and loses most of that gain with wrong-photo nominations.
+Both locks add some weak-gap residue, and the real cab crossings remain
+incomplete. [Wider Bayer frequency nomination](detail-wide-phase.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

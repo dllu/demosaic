@@ -51,6 +51,7 @@ Start with the [README](../README.md) for installation and inference.
 [Cab Bayer evidence and masked internal phase](local-internal-phase.md) ·
 [Local wire checks for a junction sideband](local-junction-support.md) ·
 [Red and blue evidence for junctions](cfa-junction-phase.md) ·
+[Wider Bayer frequency nomination](detail-wide-phase.md) ·
 [Reserved Bayer phase for weak-wire routing](detail-phase-routing.md) ·
 [Shared-target and continuing-wire gains](detail-shared-oracle.md) ·
 [Weak-wire gain training](detail-wire-gate.md) ·

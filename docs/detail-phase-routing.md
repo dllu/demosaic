@@ -9,6 +9,11 @@ the same operation recovered **0.636 points at full strength**, up from
 0.141 with discovered frequencies. Nomination and local sensitivity both
 limited recovery.
 
+A [wider nomination follow-up](detail-wide-phase.md) raises weak-carrier
+coverage and improves locked recovery on another 32 wire fixtures.
+The same local check admits more exact-flat stations when the search
+covers the wider context.
+
 ## Exterior proposal and local check
 
 Each station uses a 64×64 native window at 32-pixel spacing. The outside of its

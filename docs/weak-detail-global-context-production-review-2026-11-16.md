@@ -64,6 +64,12 @@ more flat-core variation in the spatial model. Within that model,
 the matching preview slightly reduces flat variation compared with
 masking the preview. Both GFX families retain incomplete fine detail.
 
+Within a 256-pixel RAW query, wider exterior frequency nominations
+gain 0.362 weak contrast points on 32 new optical-wire fixtures with
+a separate Bayer center check. Wrong-photo nominations give 0.032
+points. Wider search also admits more exact-flat stations, and the standing
+real cab still has incomplete crossings. [Wider Bayer frequency nomination](detail-wide-phase.md).
+
 **Start production optimization of V120 now. For the next quality architecture,
 test whole-image context once per photograph, coupled to a smaller native-detail
 path that still requires RAW evidence.** The strongest recent result is improved
