@@ -37,8 +37,9 @@ COVERAGE_NOTE = (
     "Both regional weak-wire endpoints have completed "
     "[the fixed photo panel](local-regional-wire-1024.md#fixed-photo-panel) and "
     "[both camera panels](local-regional-wire-1024.md#fixed-camera-panels). "
-    "The mixed-optics arm also has "
-    "[completed fixed camera panels](local-optical-mixture-1024.md#fixed-camera-panels). "
+    "The mixed-optics arm has completed "
+    "[the fixed photo panel](local-optical-mixture-1024.md#fixed-photo-panel) and "
+    "[both camera panels](local-optical-mixture-1024.md#fixed-camera-panels). "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -847,9 +848,11 @@ def collect_regional_wire_endpoints():
 def collect_mixed_optics_endpoints():
     path = REPO / "docs/results/local-optical-mixture-camera-v1/publication.json"
     names = {"regional-optical-mix": ("Mixed optics +1024", 1024)}
-    return collect_compact_camera_endpoints(
-        path, "local-optical-mixture-1024.md", "local-optical-mixture", names
-    )
+    report = "local-optical-mixture-1024.md"
+    points, evidence = collect_compact_camera_endpoints(path, report, "local-optical-mixture", names)
+    photo = REPO / "docs/results/local-optical-mixture-primary-v1/publication.json"
+    evidence.extend(attach_compact_photo_endpoints(points, photo, path, names, report))
+    return points, evidence
 
 
 def main():
@@ -875,11 +878,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v14.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v15.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v13.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v14.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v13.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v12.json"
         if not destination.exists():

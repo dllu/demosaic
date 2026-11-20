@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 
 from demosaic.cfa import PATTERNS
-from demosaic.mesh_carrier_fit import refine_raw_mesh_carriers
+from demosaic.mesh_carrier_fit import _spacing, refine_raw_mesh_carriers
 
 pytest.importorskip("scipy")
 
@@ -62,3 +62,17 @@ def test_ring_of_donors_does_not_fill_measured_flat_center():
         previous, pack(image), PATTERNS["RGGB"], (16, 16, 160, 160), **args
     )
     np.testing.assert_array_equal(edge, previous)
+
+
+@pytest.mark.parametrize("pattern", tuple(PATTERNS))
+def test_frequency_donors_exclude_the_verification_halo(pattern):
+    raw = scene_fixture()
+    x, y, halo = 151, 149, 16
+    original = _spacing(pack(raw), PATTERNS[pattern], x, y, clearance=halo)
+    assert original is not None
+
+    changed = raw.copy()
+    held = changed[y - halo : y + 160 + halo, x - halo : x + 160 + halo]
+    held[:] = np.random.default_rng(812).uniform(0.03, 0.15, held.shape)
+    replay = _spacing(pack(changed), PATTERNS[pattern], x, y, clearance=halo)
+    np.testing.assert_array_equal(replay, original)

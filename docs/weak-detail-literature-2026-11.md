@@ -950,6 +950,14 @@ An exploratory lower cutoff retains 1.927 points over Local 50k
 with no activation in 56 reused exact-flat crops. Lowering it
 further gains more response and admits 37 flats. This frames the
 tradeoff at the level of the complete selection procedure.
+A [fresh two-draw study](local-nested-support.md) combines the broad
+and center checks with frequency donors outside the full synthetic
+query. At comparable weak response the combined check reduces
+continuing-strand RMS 4.203 DN16 versus broad verification. It has
+zero edge-only and uniform activations in 64 crops per role and
+two flat-core activations. Center 3 has nine flat-core activations
+on the same new panel. The real fine cab requires closer disjoint
+donors and still contains incomplete crossings.
 
 Calibrate the complete selection-and-validation procedure on fresh exact flats
 and edge-only scenes, including the search over all candidates. Measure false

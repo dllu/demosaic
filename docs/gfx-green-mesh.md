@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Combined broad and central support](local-nested-support.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed with AHD and both JPEGs at ×4 and ×16. Donors just outside the verification halo preserve more nominal right-cab diagonal continuity with the combined check than with Center 3. Fine crossings remain incomplete |
 | [Broad fit with a central support check](local-center-guard.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed with both JPEGs and ISO100 AHD. Broad verification strengthens the right diagonal grid. Central verification makes smaller changes and fine crossings remain incomplete |
 | [Exterior phase transfer and ring-guided correction](local-exterior-phase-transfer.md#standing-gfx100s-comparisons) | Both ROIs, profiles and references viewed at ×4 and ×16. The nearby exterior guide differs from the first local phase by 87.8° on the left at 64 pixels. The ring correction adds less diagonal contrast than the wider local fit, with only small changes to the fine cab mesh |
 | [Mixed-optics endpoint](local-optical-mixture-1024.md#standing-gfx100s-comparisons) | Both ROIs, profiles, AHD and both JPEGs viewed at ×4 and ×16. Mixed changes the four crops by 3.09–4.52 DN16 RGB RMS versus sharp regional. The transferred profile shows stronger fragmented diagonals, with broad green-gray patches and incomplete fine crossings |

@@ -232,8 +232,40 @@ The largest unseen differences are −0.07010 dB on *Coulicoco* and
 [Camera audit](results/local-optical-mixture-camera-v1/publication.json) ·
 [Camera cases](results/local-optical-mixture-camera-v1/evidence.tar.xz).
 
-The fixed 427-photo panel is running. The training, fixed exact, both
-optical panels, both standing GFX reviews and both camera panels are complete.
+## Fixed photo panel
+
+The final CUDA IEEE FP32 EMA has complete fixed 427-photo
+coverage. The summary balances 11,956 exact-input observations
+per model over 427 photos, seven conditions and four Bayer
+layouts. The controls use the matching canonical receipts.
+The sharp regional summary matches its previous publication
+exactly. The photo session took 2,523.42 s wall after the
+camera collection, including concurrent GPU work.
+
+| EMA | Source-balanced sRGB PSNR |
+| --- | ---: |
+| V120 | 37.04008 dB |
+| Corpus 100k | 37.24747 dB |
+| Local 50k | 37.27953 dB |
+| Sharp regional | 37.24266 dB |
+| Mixed optics | 37.23284 dB |
+
+Mixed optics loses 0.00982 dB versus sharp regional
+[−0.01184, −0.00800], 0.04669 dB versus Local 50k
+[−0.05329, −0.04086] and 0.01463 dB versus Corpus 100k
+[−0.02780, −0.00238]. It gains 0.19276 dB versus V120
+[+0.17936, +0.20531]. Mixed optics has lower means than
+sharp regional in all seven conditions. The largest difference is
+−0.02540 dB on the ADC-only condition, and the smallest is
+−0.00279 dB on highlights. The highlight interval spans zero.
+Intervals use 10,000 paired source resamples.
+[Primary publication](results/local-optical-mixture-primary-v1/publication.json) ·
+[Paired results by condition](results/local-optical-mixture-primary-v1/paired.json) ·
+[Analysis source and paired receipt](results/local-optical-mixture-primary-v1/paired-evidence.tar.xz) ·
+[Canonical cases](results/local-optical-mixture-primary-v1/evidence.tar.xz).
+
+Training, fixed exact scoring, both optical panels, both standing
+GFX reviews and all three fixed panels are complete.
 [Training trace archive](results/local-optical-mixture-v1/training-1024-evidence.tar.xz) ·
 [Fixed-panel and native evidence](results/local-optical-mixture-v1/fixed-1024-evidence.tar.xz) ·
 [Fresh optical evidence](results/local-optical-mixture-v1/confirmation-1024-evidence.tar.xz).

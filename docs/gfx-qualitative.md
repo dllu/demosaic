@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Combined broad and central support](local-nested-support.md#standing-gfx100s-comparisons)
+  retains the coarse intersections and keeps the Local 50k sky, building and foliage pixels.
 - [Broad fit with a central support check](local-center-guard.md#standing-gfx100s-comparisons)
   keeps the coarse crossings and the Local 50k sky, building and foliage pixels.
 - [Exterior phase transfer and ring-guided correction](local-exterior-phase-transfer.md#standing-gfx100s-comparisons)

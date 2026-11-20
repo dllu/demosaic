@@ -10,7 +10,7 @@ Start with the [README](../README.md) for installation and inference.
 | Choose a model or understand version numbers | [Model choices](current-model.md) |
 | Run inference, set noise priors or export | [Usage](usage.md), [DNG/JPEG](dng-export.md), [hot pixels](hot-pixel-clusters.md) |
 | Run faster 102 MP inference on GB10 | [FP16 batch size and memory](corpus100k-fp16-batch.md), [FP16 tile settings and TensorRT quality](corpus100k-fp16-throughput.md), [Compiled DINO and paired restore timing](corpus100k-trt-dino.md), [Tile overlap at fixed context size](corpus100k-overlap.md), [Local 50k saturation guard](local50000-guarded-precision.md), [Fast checkpoint loading](corpus100k-faster-inference.md), [FP16 versus IEEE FP32](corpus100k-mixed-precision.md), [Full-frame CUDA transport](corpus100k-device-tiles.md), [FP16 cuDNN search](corpus100k-cudnn-fp16.md), [Paired TensorRT kernel timing](corpus100k-trt-tactics.md) |
-| Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [Corpus 100k](full-corpus-long100k.md#broader-evaluation), [Regional weak-wire photos and cameras](local-regional-wire-1024.md#fixed-photo-panel), [Continuing-wire cameras](local-continuing-wire.md#fixed-camera-panels), [Signed wire photos and cameras](local-wire-response.md#fixed-photo-panel), [Repeat and gap continuation cameras](local-redraw-stability.md#fixed-camera-panels), [Scene 50k and paired continuation photos and cameras](scene-50000-cameras.md), [Matched scene 12k cameras](expanded-scene-12000-cameras.md), [Near-ADC cameras](near-adc-bridge-cameras.md) |
+| Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [Corpus 100k](full-corpus-long100k.md#broader-evaluation), [Mixed-optics photos and cameras](local-optical-mixture-1024.md#fixed-photo-panel), [Regional weak-wire photos and cameras](local-regional-wire-1024.md#fixed-photo-panel), [Continuing-wire cameras](local-continuing-wire.md#fixed-camera-panels), [Signed wire photos and cameras](local-wire-response.md#fixed-photo-panel), [Repeat and gap continuation cameras](local-redraw-stability.md#fixed-camera-panels), [Scene 50k and paired continuation photos and cameras](scene-50000-cameras.md), [Matched scene 12k cameras](expanded-scene-12000-cameras.md), [Near-ADC cameras](near-adc-bridge-cameras.md) |
 | Understand camera evidence and its gaps | [Real-camera overview](real-camera-quality.md) |
 | Find active work and completed research outcomes | [Experiment index](experiments.md), [research priorities](research.md) |
 | Understand the code and training data | [Architecture](architecture.md), [training pipeline](training-pipeline.md), [source review](current-source-loss-review.md) |
@@ -37,7 +37,8 @@ Start with the [README](../README.md) for installation and inference.
 [Weak-wire sensitivity to optical blur](sensor-optical-transfer.md) ·
 [Local Bayer evidence with exterior phase](optical-raw-evidence.md) ·
 [Exterior phase transfer and ring-guided restoration](local-exterior-phase-transfer.md).
-[Wide RAW fits with local support checks](local-center-guard.md).
+[Wide RAW fits with local support checks](local-center-guard.md) ·
+[Combined broad and central RAW checks](local-nested-support.md).
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·

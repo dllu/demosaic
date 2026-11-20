@@ -63,7 +63,8 @@ frozen optical schedule. The [1,024-update endpoint](local-optical-mixture-1024.
 now has a verified training receipt, both fixed exact panels, the 24
 fresh optical sources and native reviews of both GFX scenes. The earlier
 optical replay, matched-response diagnostic and both measured-camera
-panels are complete. The fixed 427-photo panel is running.
+panels are complete. The [fixed 427-photo panel](local-optical-mixture-1024.md#fixed-photo-panel)
+places mixed optics 0.00982 dB below the sharp regional control.
 
 At σ 0.85, the mixed EMA changes from a 0.247-point weak-response gain
 over the sharp regional control at [128 updates](local-optical-mixture-128.md)

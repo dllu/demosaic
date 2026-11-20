@@ -55,14 +55,16 @@ def _peaks(power):
     return np.asarray([(_FX[c], _FY[c]) for c in coords])
 
 
-def _spacing(scene, colors, x, y):
+def _spacing(scene, colors, x, y, *, clearance=0):
     from scipy.fft import fft2
 
+    # A verifier may sample beyond the delivery ROI. Keep its entire footprint
+    # clear of the frequency donors when running a held-sample experiment.
     boxes = (
-        (x - _DONOR, y + 16),
-        (x + _ROI_SIZE, y + 16),
-        (x + 16, y - _DONOR),
-        (x + 16, y + _ROI_SIZE),
+        (x - _DONOR - clearance, y + 16),
+        (x + _ROI_SIZE + clearance, y + 16),
+        (x + 16, y - _DONOR - clearance),
+        (x + 16, y + _ROI_SIZE + clearance),
     )
     if any(
         a < 0 or b < 0 or a + _DONOR > 2 * scene.shape[2] or b + _DONOR > 2 * scene.shape[1]

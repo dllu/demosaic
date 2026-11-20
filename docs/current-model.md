@@ -146,7 +146,8 @@ accurate than with Local 50k, with weaker crossing response and more
 flat error. At matched weak response the mixed blend adds 0.296 DN16
 of exact-flat RMS on 24 fresh sources. It loses 0.02032 dB on the
 unseen camera panel versus sharp regional. Both cab ROIs still have
-incomplete fine crossings. The fixed photo panel is running.
+incomplete fine crossings. Mixed optics loses 0.00982 dB against
+sharp regional and 0.04669 dB versus Local 50k on 427 photos.
 
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
@@ -162,6 +163,15 @@ A cutoff of three gives 1.927 points over the parent and no
 activations on 56 reused exact-flat crops. At comparable response
 it reduces continuing-strand RMS by 2.650 DN16 versus scaled broad
 validation. The fine real cab crossings remain incomplete.
+
+The [fresh combined support study](local-nested-support.md)
+uses two independent noise draws per source and stricter
+separation from the donors. At comparable response it lowers
+continuing-strand RMS by 4.203 DN16 versus broad verification
+and 1.931 DN16 versus Center 3. It admits no edge-only or wholly
+uniform recipient in the 64 crops per role and two flat-core
+recipients. The combined check retains more nominal right-cab
+continuity than Center 3, with persistent incomplete crossings.
 
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the
