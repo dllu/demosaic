@@ -1041,6 +1041,13 @@ response by 0.242 percentage points at a matched flat budget.
 The wider natural-photo test still favors the frozen parent on
 fine-increment and flat error.
 
+[Phase-paired donor power](scene-phase-power.md) retains the same
+dense donor geometry and assigns one validated power to each
+sine/cosine pair. Real left-cab peak projections improve at equal
+added RGB energy. The short-wire gain curve shows lower false
+projection and higher exact-flat error at the same recovered
+response. The real cab intersections remain incomplete.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

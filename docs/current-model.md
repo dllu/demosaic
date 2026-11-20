@@ -479,6 +479,11 @@ support at both nominal left cab peaks with only 0.287 DN16 RGB
 RMS correction. Stronger proximity on a tight uniform atlas gains
 0.242 response points on retained short wires. Natural fine and
 flat RMS still exceed Corpus 100k at the wire-calibrated strength.
+[Phase-paired donor power](scene-phase-power.md) raises the
+nominal left cab correction to 0.463 DN16 RGB RMS and gains on both
+measured peaks even at equal added correction energy. It lowers
+planted short-wire false projection at matched response while raising
+flat error. Fine cab crossings remain incomplete.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

@@ -57,6 +57,10 @@ has repeatedly come with extra flat-region error or false color. The
    support on the nominal left cab and short-wire gap error at a tight
    donor budget. Proximity helps short-wire response at that budget.
    Real crossings stay incomplete and natural-photo errors still rise.
+   [Phase-paired donor power](scene-phase-power.md) increases the
+   two left peak projections at equal correction energy. At matched
+   planted short-wire response, false projection falls and exact-flat
+   RMS rises. The real crossings remain incomplete.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

@@ -11,6 +11,10 @@ crossings remain incomplete. The right-hand result is mixed.
 [Frozen drivers and receipts](results/scene-dense-atlas-v1/evidence.tar.xz) ·
 [Native provenance](images/scene-dense-atlas-v1/manifest.json).
 
+[Phase-paired power with the same dense atlas](scene-phase-power.md)
+strengthens the left-cab peaks at equal added RGB energy and reduces
+short-wire false projection at matched response, with higher flat error.
+
 ## Sampling separately from matching and delivery
 
 The [wider-window test](scene-patch-width.md) improves short-wire

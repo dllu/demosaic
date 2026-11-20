@@ -34,6 +34,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Dense nearby Bayer donors](scene-dense-atlas.md#standing-gfx100s-comparisons)
   change sky by 0.016 DN16 RGB RMS and coarse fence by 2.108.
   Coarse crossings stay connected, with soft building and leaves.
+- [Phase-paired donor power](scene-phase-power.md#standing-gfx100s-comparisons)
+  changes sky by 0.012 DN16 RGB RMS and coarse fence by 1.798.
+  The sky stays smooth and existing fence crossings stay connected.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.
