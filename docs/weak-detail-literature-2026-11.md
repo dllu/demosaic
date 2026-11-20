@@ -1041,6 +1041,13 @@ reduces added missing-direction luma from 0.090 to 0.034 DN16 at matched
 recovery on 24 new photos. The crop option still recovers 1.084 additional
 contrast points over nearby phase. The fine cab changes are barely visible.
 
+The [cab phase study](local-internal-phase.md) checks the fixed frequencies
+directly on held ISO6400 Bayer cells. Both fundamentals predict held data,
+while reciprocal recentering fails on the fine cab. A signed difference
+frequency is measurable on the right. Masking each delivery neighborhood
+from an inner phase pool gains 0.413 points on 24 new photos and changes
+the left cab diagonals subtly. Fine crossings remain incomplete.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

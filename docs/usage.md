@@ -143,6 +143,11 @@ inside the existing weak windows. [Results and timing](local-near-phase.md#packa
 ambiguous it checks both directions with two-green and along-wire support.
 The local station limits the strength delivered to its pixels. [Results and timing](local-replicated-phase.md#packaged-crop-fit).
 
+`method="weak-internal-phase"` uses the same inputs. It pools phase inside
+the crop, excluding the test station and its neighbors from the phase
+estimate. The additional check applies when rank is ambiguous or distant
+phase is unreliable. [Results and timing](local-internal-phase.md#packaged-crop-fit).
+
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·

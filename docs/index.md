@@ -48,6 +48,7 @@ Start with the [README](../README.md) for installation and inference.
 [Nearby RAW phase when the distant check fails](local-near-phase.md) ·
 [Independent Bayer phase when wire rank is ambiguous](local-unranked-phase.md) ·
 [Replicated Bayer phase within each station](local-replicated-phase.md) ·
+[Cab Bayer evidence and masked internal phase](local-internal-phase.md) ·
 [Learned Bayer gains](local-bayer-gain.md) ·
 [Spatially varying Bayer carrier phase](local-carrier-envelope.md) ·
 [Pooled Bayer phase](local-pooled-carrier.md) ·

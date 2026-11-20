@@ -19,6 +19,7 @@ from ._mesh_pooled import (
     _windows,
 )
 from ._mesh_presence import _CENTER, _CENTER_PIXELS, _PACKED_CORE, _RING, _evidence, _ring_prior
+from ._mesh_weak_phase import _GAIN as _PHASE_GAIN
 from .mesh_carrier_fit import _POOLED_FOOTPRINT, _WINDOW, _positions
 
 _LOG_PRIOR_ODDS = -5.0
@@ -67,11 +68,28 @@ def _weak_correction(
 
 
 def _replicated_directions(
-    parent, scene, origin, frequencies, wave, positions, observed, corrections, shot, read, neutral
+    parent,
+    scene,
+    origin,
+    frequencies,
+    wave,
+    positions,
+    observed,
+    corrections,
+    shot,
+    read,
+    neutral,
+    *,
+    internal_phase=False,
 ):
     from ._mesh_near_phase import _replicated_taper
 
     delta = np.zeros_like(parent, dtype=np.float64)
+    if internal_phase:
+        from ._mesh_internal_phase import _estimate_phases, _internal_taper
+
+        estimates = _estimate_phases(scene, origin, frequencies, shot, read)
+        added = np.zeros_like(delta)
     for direction, previous in enumerate(corrections):
         revised = _weak_correction(
             parent, wave, direction, positions, observed, shot, read, previous, full_strength=True
@@ -79,16 +97,26 @@ def _replicated_directions(
         change = revised - previous
         if not change.any():
             continue
+        correction = _rgb(change, neutral, np.float64)
         weight = _replicated_taper(scene, origin, positions, frequencies, direction, shot, read)
         if weight is not None:
-            delta += weight * _rgb(change, neutral, np.float64)
+            delta += weight * correction
+        if internal_phase:
+            held = _internal_taper(
+                scene, origin, positions, frequencies, direction, shot, read, estimates
+            )
+            if held is not None:
+                remaining = 1 if weight is None else 1 - 0.95 * weight
+                added += held * (remaining * _PHASE_GAIN * correction)
 
     combined = sum(corrections)
     baseline = parent + _rgb(combined, neutral, parent.dtype) if combined.any() else parent
-    if not delta.any():
-        return baseline
-    full = (baseline.astype(np.float64) + delta).astype(parent.dtype)
-    return (baseline + 0.95 * (full.astype(np.float64) - baseline)).astype(parent.dtype)
+    if delta.any():
+        full = (baseline.astype(np.float64) + delta).astype(parent.dtype)
+        baseline = (baseline + 0.95 * (full.astype(np.float64) - baseline)).astype(parent.dtype)
+    if internal_phase and added.any():
+        baseline = (baseline.astype(np.float64) + added).astype(parent.dtype)
+    return baseline
 
 
 def _refine(
@@ -106,6 +134,7 @@ def _refine(
     full_weak_strength=False,
     near_phase=False,
     replicated_phase=False,
+    internal_phase=False,
 ):
     positions = _positions(colors, *origin)
     greens = tuple(_footprint(scene, origin, position) for position in positions)
@@ -139,10 +168,12 @@ def _refine(
             shot,
             read,
             neutral,
+            internal_phase=internal_phase,
         )
         return result if np.isfinite(result).all() else parent
     taper = None
     near_taper = None
+    internal_weight = None
     if first is not None and first == second:
         weak = 1 - first
         revised = _weak_correction(
@@ -170,7 +201,7 @@ def _refine(
                 from ._mesh_near_phase import _near_taper
 
                 near_taper = _near_taper(scene, origin, positions, frequencies, weak, shot, read)
-                if near_taper is not None:
+                if near_taper is not None or internal_phase:
                     near_patches = _weak_correction(
                         parent,
                         wave,
@@ -185,6 +216,15 @@ def _refine(
                     near_detail = parent + _rgb(
                         near_patches + corrections[1 - weak], neutral, parent.dtype
                     )
+                    if internal_phase:
+                        from ._mesh_internal_phase import _estimate_phases, _internal_taper
+
+                        inner = _estimate_phases(scene, origin, frequencies, shot, read)
+                        internal_weight = _internal_taper(
+                            scene, origin, positions, frequencies, weak, shot, read, inner
+                        )
+                        increment = _rgb(near_patches - corrections[weak], neutral, np.float64)
+                        internal_target = baseline.astype(np.float64) + _PHASE_GAIN * increment
         corrections[weak] = revised
     combined = corrections[0] + corrections[1]
     if taper is None and not combined.any():
@@ -197,4 +237,6 @@ def _refine(
         mixed = (1 - area) * result + area * baseline
         mixed += weight * (near_detail.astype(np.float64) - baseline)
         result = mixed.astype(parent.dtype)
+    if internal_weight is not None:
+        result = (result + internal_weight * (internal_target - result)).astype(parent.dtype)
     return result if np.isfinite(result).all() else parent

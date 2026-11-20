@@ -220,6 +220,12 @@ fallback takes about 52 ms when it changes the crop. The fine left cab
 barely changes and crossings remain incomplete. The [earlier independent
 check](local-unranked-phase.md) had a larger flat-core ripple.
 
+The opt-in [masked internal phase fit](local-internal-phase.md) excludes
+each tested station and nearby stations from the 32-pixel donor tiles.
+It gains 0.413 contrast points on 24 new sources with 0.081 DN16 mean
+missing-direction addition. The left real diagonals are slightly clearer
+and crossings remain incomplete. Median CPU cost is about 35 ms per crop.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Masked internal phase](local-internal-phase.md#standing-gfx100s-comparisons) retains smooth sky and reproduces station-capped phase on the building, foliage and connected coarse fence.
+
 - [Station-capped phase](local-replicated-phase.md#standing-gfx100s-comparisons) retains the smooth sky, building, foliage and connected coarse fence of nearby phase.
 
 - [Independent phase with ambiguous rank](local-unranked-phase.md#standing-gfx100s-comparisons) reproduces the smooth sky, building, foliage and connected coarse fence of nearby phase.

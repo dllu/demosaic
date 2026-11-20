@@ -102,6 +102,7 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
         "weak-phase-contrast",
         "weak-near-phase",
         "weak-replicated-phase",
+        "weak-internal-phase",
     ),
 )
 def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
@@ -144,6 +145,7 @@ def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
         "weak-phase-contrast",
         "weak-near-phase",
         "weak-replicated-phase",
+        "weak-internal-phase",
     ),
 )
 def test_pooled_fit_requires_context_and_independent_donors(method):
@@ -303,6 +305,37 @@ def test_replicated_phase_recovers_both_equally_ranked_wires(pattern):
     baseline_error = np.mean((baseline[:, 16:-16, 16:-16] - target) ** 2)
     revised_error = np.mean((revised[:, 16:-16, 16:-16] - target) ** 2)
     assert revised_error < 0.8 * baseline_error
+
+
+@pytest.mark.parametrize("pattern", tuple(PATTERNS))
+def test_internal_phase_excludes_the_held_station_and_its_neighbors(pattern):
+    from demosaic._mesh_internal_phase import _estimate_phases, _pool_phase
+    from demosaic.mesh_carrier_fit import _positions
+
+    origin = (151, 149)
+    frequencies = np.asarray(((0.1171875, 0.07421875), (0.08984375, -0.072265625)))
+    sites = _positions(PATTERNS[pattern], *origin)
+    greens = tuple(2 * row + column for row, column in sites)
+    x, y = origin
+    station_y, station_x = 3, 4
+    index = 10 * station_y + station_x
+    top, left = y + (station_y - 1) * 16, x + (station_x - 1) * 16
+    raw = scene_fixture()
+    edited = raw.copy()
+    edited[top : top + 48, left : left + 48] = np.random.default_rng(60).uniform(
+        0.01, 0.20, (48, 48)
+    )
+
+    def estimate(mosaic):
+        coefficients, precision = _estimate_phases(
+            pack(mosaic), origin, frequencies, 0.00128, 6.5536e-6
+        )
+        return _pool_phase(coefficients[..., 0, :], precision[..., 0], frequencies[0], greens)
+
+    original, valid = estimate(raw)
+    changed, revised_valid = estimate(edited)
+    assert valid[index] and revised_valid[index]
+    np.testing.assert_array_equal(original[index], changed[index])
 
 
 def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():

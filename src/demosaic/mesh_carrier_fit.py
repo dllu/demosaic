@@ -199,6 +199,10 @@ def refine_raw_mesh_carriers(
     directions when the green lattices disagree on rank. Delivery then
     requires phase support on both greens and a neighboring station along
     the wire. Each pixel's taper is capped by the station that contains it.
+    The experimental `"weak-internal-phase"` method adds a phase check from
+    disjoint patches inside the crop when distant phase is unreliable or
+    the direction ranking is ambiguous. Each tested station leaves its
+    own samples and its immediate neighbors out of the phase fit.
     Donor clearance defaults to zero for `"local64"` and 16 pixels for
     the other methods.
 
@@ -245,11 +249,13 @@ def refine_raw_mesh_carriers(
         "weak-phase-contrast",
         "weak-near-phase",
         "weak-replicated-phase",
+        "weak-internal-phase",
     )
     if method not in methods:
         raise ValueError(f"method must be one of {methods}")
     pooled = method in ("pooled", "pooled-color")
-    near_phase = method in ("weak-near-phase", "weak-replicated-phase")
+    replicated_phase = method in ("weak-replicated-phase", "weak-internal-phase")
+    near_phase = replicated_phase or method == "weak-near-phase"
     phase_guarded = near_phase or method in ("weak-phase-guard", "weak-phase-contrast")
     weak_posterior = method == "weak-posterior" or phase_guarded
     needs_context = pooled or weak_posterior
@@ -306,7 +312,8 @@ def refine_raw_mesh_carriers(
                 guard_clearance=int(clearance) if phase_guarded else None,
                 full_weak_strength=near_phase or method == "weak-phase-contrast",
                 near_phase=near_phase,
-                replicated_phase=method == "weak-replicated-phase",
+                replicated_phase=replicated_phase,
+                internal_phase=method == "weak-internal-phase",
             )
         if pooled:
             from ._mesh_pooled import _refine
