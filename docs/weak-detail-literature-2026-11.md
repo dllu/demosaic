@@ -1046,6 +1046,14 @@ rises 1.509 DN16. A known-phase diagnostic gains 0.920 points
 and increases weak-window admission from 129 to 209 without
 activating its controls. The real cab shows small changes.
 
+[Pooling a phase field on each green](local-pooled-carrier.md)
+changes the proposed carrier shape while keeping broad and local
+held checks. Isotropic pooling predicts the warped weak phase
+better than along-wire weights. Using it only on the weaker
+direction gains 0.307 points on the warped replays and 0.108 on
+a separate straight panel, with negligible continuing-strand,
+false-gap and flat changes. The visible real cab gain is small.
+
 [Whole-photo patch covariance](scene-patch-covariance.md) tests a
 second use of exterior measurements. It learns correlations between
 native cosine modes from nearby or visually similar exterior patches

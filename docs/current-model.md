@@ -164,6 +164,13 @@ RMS rises by 1.509 DN16. Supplying the synthetic phase shift
 adds 0.920 points in a separate weak-only diagnostic. The real
 fine cab shows small changes with incomplete crossings.
 
+[Pooling only the weaker carrier phase](local-pooled-carrier.md)
+gains 0.307 and 0.108 weak-response points versus fixed combined
+on separate warped and straight panels. Holding the stronger
+correction fixed preserves continuing-strand, false-gap and flat
+accuracy at those gains. The left cab ranking is ambiguous and
+the right changes slightly, with incomplete crossings.
+
 The [ring-guided Local 50k correction](local-exterior-phase-transfer.md)
 uses separate RAW pixels for phase estimation and validation. At comparable
 weak response it lowers continuing-strand RMS by 2.361 DN16 versus

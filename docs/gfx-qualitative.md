@@ -3,6 +3,7 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Pooling Bayer phase for the weaker direction](local-pooled-carrier.md#standing-gfx100s-comparisons) keeps the coarse crossings and changes that crop by 0.54 DN16 RGB RMS versus fixed combined.
 - [Spatially varying carrier phase](local-carrier-envelope.md#standing-gfx100s-comparisons) keeps the coarse intersections and the Local 50k sky, building and foliage pixels.
 - [Learned gains on Bayer-supported carriers](local-bayer-gain.md#standing-gfx100s-comparisons) retain the coarse intersections. Sky, foliage and building match Local 50k.
 - [Combined broad and central support](local-nested-support.md#standing-gfx100s-comparisons)

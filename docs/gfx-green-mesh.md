@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Pooling Bayer phase for the weaker direction](local-pooled-carrier.md#standing-gfx100s-comparisons) | Both ROIs, profiles and references viewed at ×4 and ×16. The weaker-only fit falls back to the fixed correction on the left and changes seven right windows under each prior. Fine crossings remain incomplete |
 | [Spatially varying carrier phase](local-carrier-envelope.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed at ×4 and ×16 with AHD and camera JPEGs. The adaptive fit changes four nominal left and three nominal right direction windows. Fine crossings remain incomplete |
 | [Learned gains on Bayer-supported carriers](local-bayer-gain.md#standing-gfx100s-comparisons) | Both 192-update EMAs viewed on both ROIs, both priors, AHD and both camera JPEGs. Higher nominal gain makes the right grid more regular. Left crossings remain incomplete near the post |
 | [Combined broad and central support](local-nested-support.md#standing-gfx100s-comparisons) | Both ROIs and priors viewed with AHD and both JPEGs at ×4 and ×16. Donors just outside the verification halo preserve more nominal right-cab diagonal continuity with the combined check than with Center 3. Fine crossings remain incomplete |
