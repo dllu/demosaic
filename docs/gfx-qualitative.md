@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Red and blue evidence for junctions](cfa-junction-phase.md#standing-gfx100s-comparisons) reproduces the green-only sky, building and foliage. The coarse fence retains its connected crossings.
+
 - [Local wire check for a junction sideband](local-junction-support.md#standing-gfx100s-comparisons) leaves sky, building and foliage at masked internal phase. The coarse fence keeps connected crossings and gains a small change in modulation.
 
 - [Masked internal phase](local-internal-phase.md#standing-gfx100s-comparisons) retains smooth sky and reproduces station-capped phase on the building, foliage and connected coarse fence.

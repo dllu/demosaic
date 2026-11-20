@@ -1,0 +1,3337 @@
+{
+  "camera": {
+    "source": {
+      "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/result.json",
+      "sha256": "42f6657a8c8f8c5c610edb13666590fad0c3fa55b157857500f3df6314003de2"
+    },
+    "checkpoints": {
+      "regional-aligned": {
+        "path": "/mnt/external/demosaic/local-regional-wire-v1/train/step-1024/regional-aligned.pt",
+        "sha256": "bc633b61e30ac5bc708b7249c7885ca0c45591a2155882ba51ead94c97a6f445"
+      },
+      "local50k": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+        "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+      },
+      "regional-optical-mix": {
+        "path": "/mnt/external/demosaic/local-optical-mixture-v1/train/step-1024/regional-optical-mix.pt",
+        "sha256": "469c6797616875495654f0425f2f92f762f04920079bbab990bc1cd328e0c81e"
+      }
+    },
+    "rows": [
+      {
+        "id": "main-overcast-sky-main-overcast-sky",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-overcast-sky-main-overcast-sky-local50k.npy",
+          "sha256": "1e8979f375dba3b33addeabb5e6d50c94afc0012d3c0775ac8d835adb6197d99"
+        },
+        "ROI_xywh": [
+          5800,
+          1400,
+          160,
+          160
+        ],
+        "local_ROI": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": false,
+          "state": "no frequencies"
+        },
+        "change_DN16": {
+          "locked": 0.0,
+          "bounded": 0.0,
+          "four": 0.0
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/main-overcast-sky-main-overcast-sky-x4.png",
+              "sha256": "b401bfb8666c041fedf27ba13a9565dcd9e8be38429c5ab0bf81a86a85af63ed"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/main-overcast-sky-main-overcast-sky-x4.png",
+                "sha256": "597d6d11556ba8ece282775244207a4726437c66104313beb6203448d7553ee3"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "main-building-detail-main-building-detail",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-building-detail-main-building-detail-local50k.npy",
+          "sha256": "3c079aded47e90c162307a4da794c712a3c8ed3a3ac3416c9cb56a27fd0d1a75"
+        },
+        "ROI_xywh": [
+          5790,
+          2690,
+          160,
+          160
+        ],
+        "local_ROI": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": false,
+          "state": "no frequencies"
+        },
+        "change_DN16": {
+          "locked": 0.0,
+          "bounded": 0.0,
+          "four": 0.0
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/main-building-detail-main-building-detail-x4.png",
+              "sha256": "9a3d675a92c21eacc0c43caecf18450a2e949114ab7bbf01fa5fdc42469ff707"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/main-building-detail-main-building-detail-x4.png",
+                "sha256": "de282f94450f1172619cd07508bdc61cceedb00fa2de634b9dc01eba3794fb67"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "main-foliage-main-foliage",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-foliage-main-foliage-local50k.npy",
+          "sha256": "c515da957938cab94dbe8c31fddcc911131d5acd270e41c2da37cd744c919e6d"
+        },
+        "ROI_xywh": [
+          8890,
+          5570,
+          160,
+          160
+        ],
+        "local_ROI": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": false,
+          "state": "no frequencies"
+        },
+        "change_DN16": {
+          "locked": 0.0,
+          "bounded": 0.0,
+          "four": 0.0
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/main-foliage-main-foliage-x4.png",
+              "sha256": "82d47b173d13e9606dd431c70225211449db3443e190e32a401287161d984fa7"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/main-foliage-main-foliage-x4.png",
+                "sha256": "7ecf5dd4d821544019afbc7898b2355c12b9981e38e232051cc0da2b17c8ab4a"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/main-chain-link-fence-main-chain-link-fence-local50k.npy",
+          "sha256": "e84f6a02e9b36d209cc62d22aa2cef34d2c31e9ede70de868b956647cc919243"
+        },
+        "ROI_xywh": [
+          2240,
+          6000,
+          160,
+          160
+        ],
+        "local_ROI": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": true,
+          "state": "delivered",
+          "color_support": [
+            {
+              "color": 0,
+              "site": 0,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  19.25951441415028,
+                  1.921041699886529
+                ],
+                [
+                  23.16773543990389,
+                  7.577109176994032
+                ]
+              ],
+              "sideband_q1": 6.417038791600725
+            },
+            {
+              "color": 2,
+              "site": 3,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  9.919381499529427,
+                  -1.9078651618657911
+                ],
+                [
+                  14.632901072336612,
+                  -1.9159680217476622
+                ]
+              ],
+              "sideband_q1": 2.2412500548886256
+            }
+          ],
+          "map_means": {
+            "green": 0.8961728709590407,
+            "four": 0.8764894572578039,
+            "bounded": 0.9153619825296824,
+            "four_leave_uncertain": 0.8764894572578039,
+            "bounded_leave_uncertain": 0.9153619825296824
+          }
+        },
+        "change_DN16": {
+          "locked": 0.19467927124134976,
+          "bounded": 0.07327837415190575,
+          "four": 0.2117472494810836
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/main-chain-link-fence-main-chain-link-fence-x4.png",
+              "sha256": "402432838ee69e8e203bb5080706a9b4c2a5e2c0e2054a787d3ea1d830e46b9f"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/main-chain-link-fence-main-chain-link-fence-x4.png",
+                "sha256": "307aa49aafe683ccde45e0d918d6f4d732a9eaf2b3761610a106b68290366910"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-nominal-fine-green-mesh-left-local50k.npy",
+          "sha256": "d1b05f947f9fe5cad721d12fbf3e855a53e623a6896b478b828a9905464b8943"
+        },
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "local_ROI": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": true,
+          "state": "delivered",
+          "color_support": [
+            {
+              "color": 2,
+              "site": 1,
+              "admitted": false,
+              "fundamental_q1": [
+                [
+                  1.7398948401513399,
+                  0.6238438129707421
+                ],
+                [
+                  0.8908092278677623,
+                  -0.6422455890155702
+                ]
+              ],
+              "sideband_q1": 0.2240904274977514
+            },
+            {
+              "color": 0,
+              "site": 2,
+              "admitted": false,
+              "fundamental_q1": [
+                [
+                  1.780745774274577,
+                  1.4425789920726753
+                ],
+                [
+                  1.5857448964193313,
+                  -0.5179864365230058
+                ]
+              ],
+              "sideband_q1": 0.2136788846423379
+            }
+          ],
+          "map_means": {
+            "green": 0.22284327215939206,
+            "four": 0.22284327215939206,
+            "bounded": 0.22284327215939206,
+            "four_leave_uncertain": 0.22284327215939206,
+            "bounded_leave_uncertain": 0.22284327215939206
+          }
+        },
+        "change_DN16": {
+          "locked": 0.05397115646170035,
+          "bounded": 0.0,
+          "four": 0.0
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-nominal-fine-green-mesh-left-x16.png",
+              "sha256": "49a676db9dd7813098f2701c6b13f46f25c35fbd1b6d3b156dc6202761ef3ea0"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 16.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-nominal-fine-green-mesh-left-x16.png",
+                "sha256": "982e324b1179ec3aa8ec552df624d6a75a0ebccb41b5374f5ba39c70935afa36"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-nominal-fine-green-mesh-left-x4.png",
+              "sha256": "3d22f016bda7243bcb3923d913a76eb90193555cb0e7acb0b7c9c9503ba171be"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-nominal-fine-green-mesh-left-x4.png",
+                "sha256": "8180c30642b47bea7bbe41c3972e24a687dd02184a83439a9273191125a944ea"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-nominal-fine-green-mesh-left-local50k.npy",
+          "sha256": "d1b05f947f9fe5cad721d12fbf3e855a53e623a6896b478b828a9905464b8943"
+        },
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "local_ROI": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": true,
+          "state": "delivered",
+          "color_support": [
+            {
+              "color": 2,
+              "site": 1,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  4.089862957077952,
+                  -0.8366858067085495
+                ],
+                [
+                  4.427283054418101,
+                  -0.28833473355911426
+                ]
+              ],
+              "sideband_q1": 4.107278840182745
+            },
+            {
+              "color": 0,
+              "site": 2,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  4.1955831750885455,
+                  2.296769161053151
+                ],
+                [
+                  3.657616048964393,
+                  1.2494864394387546
+                ]
+              ],
+              "sideband_q1": 1.5545715426422548
+            }
+          ],
+          "map_means": {
+            "green": 0.36911897038279196,
+            "four": 0.36975771860202655,
+            "bounded": 0.4335471906241341,
+            "four_leave_uncertain": 0.36975771860202655,
+            "bounded_leave_uncertain": 0.4335471906241341
+          }
+        },
+        "change_DN16": {
+          "locked": 0.5066829895128537,
+          "bounded": 0.6653644433987211,
+          "four": 1.3695547764465095
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-nominal-fine-green-mesh-right-x16.png",
+              "sha256": "a9a692fd852a95909cb1a027bcd24c984bbb9fed13f025e2f89c96974269da9c"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 16.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-nominal-fine-green-mesh-right-x16.png",
+                "sha256": "d95fe4766a23d90975424622e6f7cd4de73f8a99653a28b6363e2c0a4f56a64c"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-nominal-fine-green-mesh-right-x4.png",
+              "sha256": "73ae8dcbc0be1e5c5bbcc0958eed3e5064267572e3f7cd3ff652dcd7bdec8b0d"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-nominal-fine-green-mesh-right-x4.png",
+                "sha256": "ca8bb404b00696782c9e8888cb3478ccba5c6afe89aef93199f33eeaed58cbf0"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-profile3879-fine-green-mesh-left-local50k.npy",
+          "sha256": "f6bf12a8540ada73a1c450b5e5df7d538baaabb58996d9170b9ee058ead90d1a"
+        },
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "local_ROI": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": true,
+          "state": "delivered",
+          "color_support": [
+            {
+              "color": 2,
+              "site": 1,
+              "admitted": false,
+              "fundamental_q1": [
+                [
+                  2.545291224442153,
+                  1.1727840089105723
+                ],
+                [
+                  1.2281095549788716,
+                  -0.878643328518497
+                ]
+              ],
+              "sideband_q1": 0.2494268541801402
+            },
+            {
+              "color": 0,
+              "site": 2,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  2.685243201389232,
+                  2.066592092004635
+                ],
+                [
+                  2.2894706630211483,
+                  -0.6288240338496272
+                ]
+              ],
+              "sideband_q1": 0.30646616042078917
+            }
+          ],
+          "map_means": {
+            "green": 0.26381942298113537,
+            "four": 0.25635413894563874,
+            "bounded": 0.3149975608846016,
+            "four_leave_uncertain": 0.26381942298113537,
+            "bounded_leave_uncertain": 0.26381942298113537
+          }
+        },
+        "change_DN16": {
+          "locked": 0.11315186670568357,
+          "bounded": 0.15564661329406498,
+          "four": 0.3317812772459378
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-profile3879-fine-green-mesh-left-x16.png",
+              "sha256": "7ff9c882b5c159017a2974b1add6916d3beb7ece88bfae620021a89cf725b532"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 16.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-profile3879-fine-green-mesh-left-x16.png",
+                "sha256": "28dc0026b68d703319db001d50c094a2e42044805a6b3971a58a1c22313e4a8e"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-profile3879-fine-green-mesh-left-x4.png",
+              "sha256": "a0b1649445bccdfa4d6781ba57f0c979017d108f3b0113fe0d60baee5aafd274"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-profile3879-fine-green-mesh-left-x4.png",
+                "sha256": "d4b66bafbe007bf9626af293d0bc277c00847ff23400decff9777047f4e5be92"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/review-0128/predictions/mesh-profile3879-fine-green-mesh-left-local50k.npy",
+          "sha256": "f6bf12a8540ada73a1c450b5e5df7d538baaabb58996d9170b9ee058ead90d1a"
+        },
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "local_ROI": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "trace": {
+          "admitted": true,
+          "state": "delivered",
+          "color_support": [
+            {
+              "color": 2,
+              "site": 1,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  5.610484191237048,
+                  -1.2364648304401569
+                ],
+                [
+                  6.188761268327094,
+                  -0.41380890912310486
+                ]
+              ],
+              "sideband_q1": 5.72797113030626
+            },
+            {
+              "color": 0,
+              "site": 2,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  5.224194454117547,
+                  3.0410637249091677
+                ],
+                [
+                  4.846466364084212,
+                  1.6976604721089366
+                ]
+              ],
+              "sideband_q1": 2.186390987660543
+            }
+          ],
+          "map_means": {
+            "green": 0.4074713922329267,
+            "four": 0.39089880358011875,
+            "bounded": 0.47025812191064054,
+            "four_leave_uncertain": 0.39089880358011875,
+            "bounded_leave_uncertain": 0.47025812191064054
+          }
+        },
+        "change_DN16": {
+          "locked": 0.5246429348895115,
+          "bounded": 0.6702301992643099,
+          "four": 1.4907820212218763
+        },
+        "native": [
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-profile3879-fine-green-mesh-right-x16.png",
+              "sha256": "978891c5c178488038248faaf219727201afb12d345fe97ee9b88c8d50aaa77d"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 16.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-profile3879-fine-green-mesh-right-x16.png",
+                "sha256": "b6e05c169501d7232e897a76f49f3b7816431be673ca7e67ec85cd2f66e64d37"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "image": {
+              "path": "docs/assets/cfa-junction-phase-v1/mesh-profile3879-fine-green-mesh-right-x4.png",
+              "sha256": "96e1601f3f6609d97931bec49d76211d9068a4036ba9296bffe9d41af545bed1"
+            },
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "V120 EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Local 50k",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Green wire check",
+                "png_xywh": [
+                  512,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, locked",
+                "png_xywh": [
+                  680,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bounded R/B, full",
+                "png_xywh": [
+                  848,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Four-plane pool",
+                "png_xywh": [
+                  1016,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 AHD reference",
+                "png_xywh": [
+                  1184,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO6400 camera JPEG",
+                "png_xywh": [
+                  1352,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "ISO100 camera JPEG",
+                "png_xywh": [
+                  1520,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "exposure": 4.0,
+            "previous": {
+              "image": {
+                "path": "/mnt/external/demosaic/local-optical-mixture-v1/fixed-review/standing/mesh-profile3879-fine-green-mesh-right-x4.png",
+                "sha256": "40c7057540577fa976fcdaace45f8b779cb5263dfa2b384699dd7b4ae88bd4d8"
+              },
+              "panels": [
+                {
+                  "name": "Noisy (Malvar)",
+                  "png_xywh": [
+                    8,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "V120 EMA",
+                  "png_xywh": [
+                    176,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Corpus 100k",
+                  "png_xywh": [
+                    344,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Local 50k",
+                  "png_xywh": [
+                    512,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Sharp regional",
+                  "png_xywh": [
+                    680,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "Mixed optics",
+                  "png_xywh": [
+                    848,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 AHD reference",
+                  "png_xywh": [
+                    1016,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO6400 camera JPEG",
+                  "png_xywh": [
+                    1184,
+                    24,
+                    160,
+                    160
+                  ]
+                },
+                {
+                  "name": "ISO100 camera JPEG",
+                  "png_xywh": [
+                    1352,
+                    24,
+                    160,
+                    160
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "exact": {
+    "source": {
+      "path": "/mnt/external/demosaic/cfa-junction-phase-v1/replay-held.json",
+      "sha256": "38d99cc366d253667e2f405bd585d562a60c2f5fb7e9b9590ed9413663ab8791"
+    },
+    "rows": [
+      {
+        "id": "cfa-junction-16",
+        "draw": 0,
+        "input": {
+          "path": "/mnt/external/demosaic/cfa-junction-phase-v1/held/inputs/cfa-junction-16-draw0.npz",
+          "sha256": "41b2152fb1e902451305fe8d414e39d487802aa5a67c25eb9afb36db640cdbf0"
+        },
+        "fixture": {
+          "id": "cfa-junction-16",
+          "source": {
+            "attribution": "Reinhold M\u00f6ller",
+            "author": "Ermell",
+            "bin_factor": 4,
+            "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/e5/e53b696451226152b8de82dece585b38f8a0b2bf.npy",
+            "cache_sha256": "f644733669591d0eed26d500283658fecaa38dba42d5afe2e0b49e228234d1a3",
+            "color_space": "linear-sRGB",
+            "credit": "Own work",
+            "download_path": "images/e5/3b/e53b696451226152b8de82dece585b38f8a0b2bf.jpg",
+            "dtype": "uint16",
+            "height": 2160,
+            "id": "e53b696451226152b8de82dece585b38f8a0b2bf",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/W%C3%BCrgauer_Bergrennen_2022_Riley_12-4_TT_Sprite-20220911-RM-113114.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "page_url": "https://commons.wikimedia.org/wiki/File:W%C3%BCrgauer_Bergrennen_2022_Riley_12-4_TT_Sprite-20220911-RM-113114.jpg",
+            "sha1": "e53b696451226152b8de82dece585b38f8a0b2bf",
+            "sha1_hex": "e53b696451226152b8de82dece585b38f8a0b2bf",
+            "shape": [
+              540,
+              802,
+              3
+            ],
+            "split": "val",
+            "title": "File:W\u00fcrgauer Bergrennen 2022 Riley 12-4 TT Sprite-20220911-RM-113114.jpg",
+            "width": 3209
+          },
+          "box": [
+            206,
+            14,
+            512,
+            512
+          ],
+          "camera": {
+            "pattern": "RGGB",
+            "wb": [
+              0.8933060337753028,
+              1.0,
+              1.6061575744905168
+            ],
+            "camera_inverse": [
+              [
+                0.43909333025096786,
+                0.42576383238170956,
+                0.13514283736732255
+              ],
+              [
+                0.08130077560712021,
+                0.6792074549925396,
+                0.23949176940034012
+              ],
+              [
+                0.051179121928951195,
+                0.04410805425605849,
+                0.9047128238149903
+              ]
+            ],
+            "exposure": 0.33,
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "black": 0.03,
+            "noise_seed": 513397713314887677
+          },
+          "geometry": {
+            "family": "smooth-dip",
+            "frequency": [
+              [
+                0.10623953906329374,
+                0.07623347008397507
+              ],
+              [
+                0.08514775576417619,
+                -0.07470368055457312
+              ]
+            ],
+            "phase": [
+              -0.9867520433825923,
+              1.9227166218013236
+            ],
+            "strength": [
+              0.01469963233746039,
+              0.017608139716270132
+            ],
+            "width": [
+              0.13901037782342415,
+              0.15156615294135295
+            ],
+            "edge": -18.44632651763552,
+            "tint": [
+              0.11426950268454723,
+              0.07880744733392106,
+              0.14264211681392186
+            ],
+            "gap_center": [
+              -10.101737931995979,
+              -14.342897010555873
+            ],
+            "gap_width": 24.813777154918323,
+            "gap_length": 45.63184776365497,
+            "gap_orientation": 0.725562856401747,
+            "angle": 0.26733283360687987,
+            "interaction_ratio": 0.8546127050078329,
+            "relative_interaction_polarity": 1
+          },
+          "index": 16,
+          "color_case": "aligned"
+        },
+        "noise": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "sigma": 0.85,
+        "weights": {
+          "v120": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+            "type": "base",
+            "step": 20000
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+            "type": "base",
+            "step": 100000
+          },
+          "local50k": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+            "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+          },
+          "regional-aligned": {
+            "path": "/mnt/external/demosaic/local-regional-wire-v1/train/step-1024/regional-aligned.pt",
+            "sha256": "bc633b61e30ac5bc708b7249c7885ca0c45591a2155882ba51ead94c97a6f445"
+          }
+        },
+        "ROI": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "exposure": 2.0,
+        "selection": "other",
+        "criterion": 1.3728489462862612,
+        "trace": {
+          "admitted": true,
+          "state": "delivered",
+          "color_support": [
+            {
+              "color": 0,
+              "site": 0,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  14.776722779845901,
+                  2.494597361328672
+                ],
+                [
+                  10.812418177223444,
+                  -1.7230747811334621
+                ]
+              ],
+              "sideband_q1": 5.15817069830473
+            },
+            {
+              "color": 2,
+              "site": 3,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  10.04518281282959,
+                  2.0725053488631273
+                ],
+                [
+                  7.575974697154243,
+                  1.3381694537612332
+                ]
+              ],
+              "sideband_q1": 3.937722580116689
+            }
+          ],
+          "map_means": {
+            "green": 0.6540056289436089,
+            "four": 0.7347511285070751,
+            "bounded": 0.7349334900738741,
+            "four_leave_uncertain": 0.7347511285070751,
+            "bounded_leave_uncertain": 0.7349334900738741
+          }
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/assets/cfa-junction-phase-v1/cfa-junction-16-triplet.png",
+            "sha256": "39c7bbf04d7d1dc378eea8ff154ccee246642890586806d79740449c5c385a1f"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bounded R/B, locked",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "board": {
+          "image": {
+            "path": "docs/assets/cfa-junction-phase-v1/cfa-junction-16-comparison.png",
+            "sha256": "2904693de1b34067dc39421e30a785f95dc49a58297686a9ac31f1c012157ff6"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 50k",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Green wire check",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bounded R/B, locked",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bounded R/B, full",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Four-plane pool",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "cfa-junction-06",
+        "draw": 0,
+        "input": {
+          "path": "/mnt/external/demosaic/cfa-junction-phase-v1/held/inputs/cfa-junction-06-draw0.npz",
+          "sha256": "58c2975836988291f99300b7a51ee98737bd6dd3bbf5d9081f84a45382f0c3e3"
+        },
+        "fixture": {
+          "id": "cfa-junction-06",
+          "source": {
+            "attribution": null,
+            "author": "Thomas Bresson",
+            "bin_factor": 4,
+            "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/c8/c8bb39ba0d9099e1918453ab6e0c460990841bc3.npy",
+            "cache_sha256": "715590490667fb8cf135dd7fe69110b7f180f09a7bcb575916ed5820547392e7",
+            "color_space": "linear-sRGB",
+            "credit": "Own work",
+            "download_path": "images/c8/bb/c8bb39ba0d9099e1918453ab6e0c460990841bc3.jpg",
+            "dtype": "uint16",
+            "height": 2848,
+            "id": "c8bb39ba0d9099e1918453ab6e0c460990841bc3",
+            "license": "CC BY 3.0",
+            "license_url": "https://creativecommons.org/licenses/by/3.0",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/2014-01-01_00-11-24_feux-artifices-belfort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "page_url": "https://commons.wikimedia.org/wiki/File:2014-01-01_00-11-24_feux-artifices-belfort.jpg",
+            "sha1": "c8bb39ba0d9099e1918453ab6e0c460990841bc3",
+            "sha1_hex": "c8bb39ba0d9099e1918453ab6e0c460990841bc3",
+            "shape": [
+              712,
+              1072,
+              3
+            ],
+            "split": "val",
+            "title": "File:2014-01-01 00-11-24 feux-artifices-belfort.jpg",
+            "width": 4288
+          },
+          "box": [
+            542,
+            86,
+            512,
+            512
+          ],
+          "camera": {
+            "pattern": "GRBG",
+            "wb": [
+              1.5649199364896131,
+              1.0,
+              1.5241462909501462
+            ],
+            "camera_inverse": [
+              [
+                0.5699350228753134,
+                0.41607982827577494,
+                0.013985148848911645
+              ],
+              [
+                0.11584060236534875,
+                0.5566977448041575,
+                0.3274616528304937
+              ],
+              [
+                0.11716483969281805,
+                0.15617947994121134,
+                0.7266556803659706
+              ]
+            ],
+            "exposure": 0.33,
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "black": 0.03,
+            "noise_seed": 2455203063537170023
+          },
+          "geometry": {
+            "family": "ellipse",
+            "frequency": [
+              [
+                0.06608636008637411,
+                0.10236927256983294
+              ],
+              [
+                0.08076579333713388,
+                -0.10231891457957602
+              ]
+            ],
+            "phase": [
+              -1.9402492863696146,
+              1.9512114669965186
+            ],
+            "strength": [
+              0.01297040390094294,
+              0.011449229539478625
+            ],
+            "width": [
+              0.12654087075938783,
+              0.11698895722251285
+            ],
+            "edge": -12.022757420126084,
+            "tint": [
+              0.09584764375252,
+              0.08251338553962963,
+              0.1333150607903057
+            ],
+            "gap_center": [
+              7.7423573428393055,
+              14.656801132241775
+            ],
+            "gap_width": 28.964648266138813,
+            "gap_length": 37.17638922975558,
+            "gap_orientation": 0.12399448278260523,
+            "angle": 0.9379420949682307,
+            "interaction_ratio": 0.9445682081045037,
+            "relative_interaction_polarity": -1
+          },
+          "index": 6,
+          "color_case": "red continues through green break"
+        },
+        "noise": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "sigma": 0.85,
+        "weights": {
+          "v120": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+            "type": "base",
+            "step": 20000
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+            "type": "base",
+            "step": 100000
+          },
+          "local50k": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+            "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+          },
+          "regional-aligned": {
+            "path": "/mnt/external/demosaic/local-regional-wire-v1/train/step-1024/regional-aligned.pt",
+            "sha256": "bc633b61e30ac5bc708b7249c7885ca0c45591a2155882ba51ead94c97a6f445"
+          }
+        },
+        "ROI": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "exposure": 2.0,
+        "selection": "red through green break",
+        "criterion": 0.34060325203025643,
+        "trace": {
+          "admitted": true,
+          "state": "delivered",
+          "color_support": [
+            {
+              "color": 0,
+              "site": 1,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  8.234119748430082,
+                  -0.48933145774366693
+                ],
+                [
+                  6.901385909678805,
+                  2.0703615558275894
+                ]
+              ],
+              "sideband_q1": -1.1746555460917347
+            },
+            {
+              "color": 2,
+              "site": 2,
+              "admitted": true,
+              "fundamental_q1": [
+                [
+                  9.409538855748805,
+                  0.42961733366479476
+                ],
+                [
+                  5.21683234946737,
+                  1.7826125487350415
+                ]
+              ],
+              "sideband_q1": 1.689167672208668
+            }
+          ],
+          "map_means": {
+            "green": 0.44193518739377535,
+            "four": 0.5275237579569427,
+            "bounded": 0.4948389094730004,
+            "four_leave_uncertain": 0.5057808636846826,
+            "bounded_leave_uncertain": 0.4903398942110861
+          }
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/assets/cfa-junction-phase-v1/cfa-junction-06-triplet.png",
+            "sha256": "ab495a12bddaa4ccd671f31a91b315e8dd45145724b06ac4a03b71025ac699ea"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bounded R/B, locked",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "board": {
+          "image": {
+            "path": "docs/assets/cfa-junction-phase-v1/cfa-junction-06-comparison.png",
+            "sha256": "f44b9da1f96c128a2f335bc62f11f0a5c8b06a9a4f89683f43cd7c40d466d4d5"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 50k",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Green wire check",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bounded R/B, locked",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bounded R/B, full",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Four-plane pool",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "lock": {
+    "path": "/mnt/external/demosaic/cfa-junction-phase-v1/locked.json",
+    "sha256": "24ca37270a48b5024fcf546d92e5d931ce8642b7045cc5df5def3a24ceb47d44"
+  }
+}

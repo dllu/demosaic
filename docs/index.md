@@ -50,6 +50,7 @@ Start with the [README](../README.md) for installation and inference.
 [Replicated Bayer phase within each station](local-replicated-phase.md) ·
 [Cab Bayer evidence and masked internal phase](local-internal-phase.md) ·
 [Local wire checks for a junction sideband](local-junction-support.md) ·
+[Red and blue evidence for junctions](cfa-junction-phase.md) ·
 [Learned Bayer gains](local-bayer-gain.md) ·
 [Spatially varying Bayer carrier phase](local-carrier-envelope.md) ·
 [Pooled Bayer phase](local-pooled-carrier.md) ·

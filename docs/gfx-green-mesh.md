@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Red and blue evidence for junctions](cfa-junction-phase.md#standing-gfx100s-comparisons) | Both ROIs and noise profiles viewed at ×4 and ×16 alongside AHD and both JPEGs. The fixed dose changes the right crop by 0.51 and 0.52 DN16 RGB RMS. Fine crossings remain uneven |
 | [Local wire check for a junction sideband](local-junction-support.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. Right changes by 2.67 and 2.77 DN16 RGB RMS versus masked internal phase, with uneven crossings and retained mottle |
 | [Masked internal phase](local-internal-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The left diagonals change subtly by 2.16 and 2.30 DN16 RGB RMS versus station-capped phase. Both fine crossings remain incomplete |
 | [Station-capped phase](local-replicated-phase.md#standing-gfx100s-comparisons) | Both ROIs and profiles reviewed at ×4 and ×16 with AHD and camera JPEGs. Left changes by 0.072 DN16 RGB RMS nominal and 0.041 transferred versus nearby phase. Right reproduces nearby phase and fine crossings remain incomplete |

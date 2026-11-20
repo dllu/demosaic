@@ -231,7 +231,11 @@ difference-frequency term where both wires have local support. On 24 new
 exact targets it gains 2.768 points of interaction contrast and lowers
 junction error by 1.121 DN16. At equal interaction recovery its gap
 addition is 0.136 versus 0.248 DN16 for crop-wide delivery. Right cab
-changes are subtle. Changed crops take about 114 ms on one CPU thread.
+changes are subtle. A batched station projection preserves the tested outputs
+and takes about 99 ms when the crop reaches the station fit on one CPU
+thread, down from 125 ms on a paired run. The [red and blue follow-up](cfa-junction-phase.md)
+adds 0.118 interaction points at its locked dose. The real change is
+small, and a continuing red strand raises peak green-gap error at full dose.
 
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both

@@ -190,38 +190,59 @@ def _discovery(obs, bands):
     return phase, base, harmonics, index, sign, magnitude
 
 
-def _local_wire_support(obs, known):
-    waves = _quadratures(known)
-    held = (abs(obs.x) < _ROI_SIZE / 2) & (abs(obs.y) < _ROI_SIZE / 2) & (obs.fold >= 2)
-    ids = ((obs.y + _ROI_SIZE / 2) // _CELL).astype(int) * _SIDE + (
-        (obs.x + _ROI_SIZE / 2) // _CELL
-    ).astype(int)
-    support = np.zeros(_SIDE * _SIDE)
-    greens = np.unique(obs.phase)
-    for station in range(len(support)):
-        moments = np.zeros((2, 2))
-        powers = np.zeros_like(moments)
-        here = held & (ids == station)
-        for j, site in enumerate(greens):
-            mask = here & (obs.phase == site)
-            if mask.sum() < 11:
-                continue
-            x, y = obs.x[mask], obs.y[mask]
-            u, v = (x - x.mean()) / _CELL, (y - y.mean()) / _CELL
-            nuisance = np.column_stack((np.ones_like(u), u, v, u**2, u * v, v**2))
-            weight = 1 / np.sqrt(obs.variance[mask])
-            local = waves[mask]
-            for d in range(2):
-                controls = np.column_stack((nuisance, local[:, 1 - d])) * weight[:, None]
-                signal = local[:, d, 0] * weight
-                residual = signal - controls @ np.linalg.lstsq(controls, signal, rcond=1e-8)[0]
-                moments[d, j] = residual @ (obs.raw[mask] * weight)
-                powers[d, j] = residual @ residual
-        per_green = moments / np.sqrt(np.maximum(1e-10, powers))
-        pooled = moments.sum(axis=-1) / np.sqrt(np.maximum(1e-10, powers.sum(axis=-1)))
-        support[station] = np.clip(
-            np.minimum(pooled, per_green.min(axis=-1) + 1.5).min() / 1.5, 0, 1
+@cache
+def _held_stations():
+    """Indices of the 32 reserved samples per CFA phase in each 16×16 station."""
+    packed_side = _CONTEXT // 2
+    margin = _HALO // 2
+    packed_cell = _CELL // 2
+    core = np.s_[margin:-margin, margin:-margin]
+    indices = np.arange(packed_side**2).reshape(packed_side, packed_side)[core]
+    reserved = _folds()[core] >= 2
+
+    def by_station(grid):
+        return (
+            grid.reshape(_SIDE, packed_cell, _SIDE, packed_cell)
+            .transpose(0, 2, 1, 3)
+            .reshape(_SIDE**2, packed_cell**2)
         )
+
+    # Four folds partition every aligned 2×2 group of packed cells.
+    held = by_station(indices)[by_station(reserved)].reshape(_SIDE**2, packed_cell**2 // 2)
+    return held + np.arange(2)[:, None, None] * packed_side**2
+
+
+def _local_wire_support(obs, known):
+    held = _held_stations()
+    x, y = obs.x[held], obs.y[held]
+    u = (x - x.mean(axis=-1, keepdims=True)) / _CELL
+    v = (y - y.mean(axis=-1, keepdims=True)) / _CELL
+    nuisance = np.stack((np.ones_like(u), u, v, u**2, u * v, v**2), axis=-1)
+    weight = 1 / np.sqrt(obs.variance[held])
+    weighted_raw = obs.raw[held] * weight
+    waves = _quadratures(known[held])
+    moments = []
+    powers = []
+    for d in range(2):
+        controls = np.concatenate((nuisance, waves[..., 1 - d, :]), axis=-1) * weight[..., None]
+        signal = waves[..., d, 0] * weight
+        q, r = np.linalg.qr(controls)
+        scores = q.swapaxes(-1, -2) @ signal[..., None]
+        residual = signal - (q @ scores)[..., 0]
+        diagonal = abs(np.diagonal(r, axis1=-2, axis2=-1))
+        poorly_conditioned = diagonal.min(axis=-1) < 1e-6 * diagonal.max(axis=-1)
+        for phase, station in zip(*np.nonzero(poorly_conditioned), strict=True):
+            design = controls[phase, station]
+            target = signal[phase, station]
+            residual[phase, station] = (
+                target - design @ np.linalg.lstsq(design, target, rcond=1e-8)[0]
+            )
+        moments.append(np.sum(residual * weighted_raw, axis=-1))
+        powers.append(np.sum(residual**2, axis=-1))
+    moments, powers = np.asarray(moments), np.asarray(powers)
+    per_green = moments / np.sqrt(np.maximum(1e-10, powers))
+    pooled = moments.sum(axis=1) / np.sqrt(np.maximum(1e-10, powers.sum(axis=1)))
+    support = np.clip(np.minimum(pooled, per_green.min(axis=1) + 1.5).min(axis=0) / 1.5, 0, 1)
     own = support.reshape(_SIDE, _SIDE).repeat(_CELL, axis=0).repeat(_CELL, axis=1)
     return np.minimum(_pixel_map(support), own)
 

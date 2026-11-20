@@ -2,6 +2,10 @@
 
 The opt-in `weak-junction-phase` crop mode adds a signed difference-frequency term where both wire directions have local Bayer support. On 24 new exact-target photo fixtures it gains **2.768 percentage points** of interaction contrast and reduces junction increment error by **1.121 DN16** versus [masked internal phase](local-internal-phase.md). At equal recovered interaction, the local check reduces added luma in exact gaps from **0.248 to 0.136 DN16** compared with applying the same sideband crop-wide. Right-cab modulation changes subtly and fine crossings remain uneven.
 
+The [red and blue follow-up](cfa-junction-phase.md) measures a small contrast
+gain with shared green admission. Its batched green-only station projection
+speeds up the packaged fit with identical pixels on the parity panel.
+
 ## A fixed sideband and a separate check on the wires
 
 The [checked Bayer harmonic study](query-checked-junctions.md) found evidence for a difference-frequency term on the real right cab. The newer [native RAW witness](local-internal-phase.md#what-the-two-camera-exposures-support) finds that this term predicts both held folds, while the quarter-cycle control loses support. This study reuses the checked harmonic estimator with the current crop's exterior frequency pair and the masked internal phase restoration. It delivers the difference term only. The second harmonics and sum term remain available as nuisance regressors.

@@ -1056,6 +1056,12 @@ masked internal phase and adds 0.136 DN16 of gap luma versus 0.248
 for crop-wide delivery at equal recovery. Right cab crossings remain
 uneven.
 
+The [red/blue junction follow-up](cfa-junction-phase.md) measures signed
+difference-band support in every Bayer plane on the right cab. Qualifying
+red and blue votes add 0.118 contrast points at the fixed dose on 24 fresh
+photo fixtures. A continuing red wire raises peak green-gap addition at
+full dose. The fine cab differences are small.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can
