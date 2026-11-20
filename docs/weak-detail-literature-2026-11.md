@@ -1224,7 +1224,9 @@ and 0.85 native pixels. It also recovered a smaller fraction of the signal
 available after blur. Regional supervision kept lower continuing-strand
 error than whole-core supervision and recovered less of the weak strand at
 both blur widths. Keep sharp examples and a separate blur holdout in a
-matched augmentation test.
+matched augmentation test. The [mixed-optics continuation](local-optical-mixture.md)
+uses the same 1,024 ordered training sources as the sharp regional control
+and reserves 24 fresh backgrounds for the σ 0.85 comparison.
 
 ### 7. Revisit the backbone and DINO role after these discriminating tests
 
