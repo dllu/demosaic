@@ -9,6 +9,11 @@ junction error is nearly identical to the RAW-only refit. On the real
 right cab the refit slightly changes crossing modulation, with incomplete
 intersections and retained mottle.
 
+The [spatial phase follow-up](spatial-junction-phase.md) tests which
+phase changes predict held Bayer samples after accounting for the fixed
+carrier. Curvature adds a little contrast on warped exact targets. The
+right cab supports a simpler affine phase, with subtle changes.
+
 ## What the sharper prediction contributes
 
 [Lower noise conditioning](context-conditioned-detail.md) reveals more cab

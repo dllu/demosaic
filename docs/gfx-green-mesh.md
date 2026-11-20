@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Spatial junction phase](spatial-junction-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The fitted curve returns the regional RAW refit. The affine phase changes the right ROI by 0.13 and 0.17 DN16 RGB RMS, with fine crossings still incomplete |
 | [Regional junction refit](junction-regional-refit.md#standing-gfx100s-comparisons) | Both ROIs, profiles and both JPEGs viewed at ×4 and ×16. The right crop changes by 1.90 and 1.99 DN16 RGB RMS. Fine intersections remain incomplete |
 | [Context-conditioned detail retention](context-conditioned-detail.md#standing-gfx100s-comparisons) | Both ROIs, profiles and both JPEGs viewed at ×4 and ×16. Lower variance reveals more right diagonals with strong mottle and color speckles. The bounded gate leaves the fine crossings incomplete |
 | [Red and blue evidence for junctions](cfa-junction-phase.md#standing-gfx100s-comparisons) | Both ROIs and noise profiles viewed at ×4 and ×16 alongside AHD and both JPEGs. The fixed dose changes the right crop by 0.51 and 0.52 DN16 RGB RMS. Fine crossings remain uneven |

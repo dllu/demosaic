@@ -251,6 +251,12 @@ luma. The screened low-noise neural forward contributes little at equal
 contrast. The RAW refit adds about 20 ms CPU time on crops it changes,
 with subtle right-cab gains and incomplete crossings.
 
+[Spatial junction phase](spatial-junction-phase.md) gains 0.215
+interaction points on warped photos with 0.049 DN16 added gap luma.
+The simpler affine candidate has more held evidence on the right
+cab. The native change is subtle, and pooling contrast across the
+crop raises gap residue. This remains a research fit.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

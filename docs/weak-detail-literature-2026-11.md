@@ -1069,6 +1069,13 @@ amplitude after delivery on 24 new photo fixtures. Added gap luma is
 junction error at matched contrast, with an extra neural forward.
 Real fine mesh crossings remain incomplete.
 
+[Spatial junction phase](spatial-junction-phase.md) tests the phase
+difference between two locally fitted wires after accounting for a
+fixed sideband with variable amplitude. On 24 new warped photos,
+the curved field gains 0.215 points. Supplying exact geometry gains
+1.191 points. Pooled amplitude exceeds the held gap limit and
+the real fine crossings remain incomplete.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can
