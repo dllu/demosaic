@@ -375,6 +375,11 @@ continuations and double gaps. The support-only head matches the gain
 floor's weak response to within 0.024 points and reduces exact-flat
 wire RMS by 0.17 DN16. A dense signed proposal target suppresses its
 amplitude. Fine cab crossings remain incomplete across both arms.
+[Exterior wire verification](wire-exterior-verification.md) adapts an
+affine and same-color RAW contrast on exterior texture. At ISO6400 the
+bounded lift adds 13.53 signed response points, with 1.44 DN16 more false
+strong-line RMS. It requires a proposed frequency and aperture. The
+right cab shows a clearer local grid that is too regular beside the reference.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

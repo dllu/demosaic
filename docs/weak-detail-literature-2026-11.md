@@ -911,6 +911,16 @@ right cab clearer and leaves the sky unchanged. Fresh planted weak-signal
 tests show lower gap leakage and slightly lower recovery than the exterior
 full fit. The frozen neural parent still sees every sample.
 
+An exterior-adapted contrast combines a phasewise affine score and
+a nearest-same-color innovation. The latter residualizes the known
+candidate through the same stencil as the RAW. On 64 fresh backgrounds
+with supplied nominal frequencies and RAW-estimated phase and width,
+the ISO6400 false count drops from 15 to 10 and the true count from
+44 to 41. Half-bin errors largely erase the false-count benefit.
+The bounded lift recovers 13.53 signed response points, with a positive
+false-detail tail and an overly regular local right-cab grid.
+[Exterior wire verification](wire-exterior-verification.md).
+
 Calibrate the complete selection-and-validation procedure on fresh exact flats
 and edge-only scenes, including the search over all candidates. Measure false
 activation per patch/frame, not just per chosen coefficient. Formal risk control

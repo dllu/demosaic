@@ -12,6 +12,10 @@ sky and coherent coarse crossings. Fine cab crossings remain incomplete.
 [Native crop provenance](images/local-phase-support-v1/manifest.json) ·
 [Frozen drivers and receipts](results/local-phase-support-v1/evidence.tar.xz).
 
+The [exterior RAW follow-up](wire-exterior-verification.md) tests actual
+Bayer evidence for a continuation in place of a learned gate and compares
+the delivered luma changes on the frozen parent.
+
 ## Matched training
 
 Both arms freeze the aligned-control EMA

@@ -3,6 +3,10 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Exterior wire verification](wire-exterior-verification.md#standing-gfx100s-comparisons)
+  reproduces the parent sky and foliage with empty proposal banks. The
+  coarse fence keeps coherent crossings. The tested building aperture
+  has subtle added horizontal contrast and the fine cables stay soft.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.
