@@ -123,12 +123,14 @@ in each linked report. [Package interfaces](architecture.md).
 
 ## Experimental detail components
 
-[Regional weak-wire supervision at 512 updates](local-regional-wire-512.md)
-lowers continuing-strand RMS by 2.614 DN16 on off-grid gaps versus
-whole-core supervision and recovers 0.588 points less of the weak strand.
-Wire exact-flat RMS is 1.902 DN16 higher than Local 50k. The transferred
-right cab crop shows a stronger first diagonal and incomplete crossings.
-Both arms use the Local 50k inference path.
+[Completed regional weak-wire supervision](local-regional-wire-1024.md)
+lowers continuing-strand RMS by 3.100 DN16 on off-grid gaps versus
+whole-core supervision and recovers 0.733 points less of the weak strand.
+Natural fine-increment error falls 0.218 DN16 with similar response.
+Wire exact-flat RMS is 2.065 DN16 higher than Local 50k. The transferred
+right cab shows a stronger first diagonal and incomplete crossings.
+Regional gains 0.01553 dB unseen and loses 0.00689 dB known versus
+Local 50k. Both arms use the Local 50k inference path.
 
 The [paired luminance head](paired-luminance-detail.md) adds 0.47
 percentage points of target-aligned ISO6400 fine response on the

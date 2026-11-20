@@ -1,0 +1,443 @@
+{
+  "plan": {
+    "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/plan.json",
+    "sha256": "ead555101c9b6ac979f1e1d031bb9d5c6f1a31ba3e79a3023e94a6f6121844c0"
+  },
+  "preflight": {
+    "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/preflight/result.json",
+    "sha256": "d3d8d41549991081cb981e7e582bb7a747552c12a560bafa45e1d37ad4c6f86b"
+  },
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "parent100k": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "step": 100000
+    },
+    "local50k": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+        "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+      },
+      "step": 50000
+    },
+    "global-aligned": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/local-regional-wire-v1/train/step-1024/global-aligned.pt",
+        "sha256": "2e0f04c448a28c1a40beafc57bac1fc015c114180eeff75f28ccc7cbbffdd29d"
+      },
+      "step": 1024
+    },
+    "regional-aligned": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/local-regional-wire-v1/train/step-1024/regional-aligned.pt",
+        "sha256": "bc633b61e30ac5bc708b7249c7885ca0c45591a2155882ba51ead94c97a6f445"
+      },
+      "step": 1024
+    }
+  },
+  "canonical_inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/result.json",
+    "sha256": "64cacba459e09a90eb2727bf85b876f295ab21e13135585cbc501cc7738e3b09"
+  },
+  "weights": "EMA",
+  "prior_camera_study": {
+    "path": "/home/dllu/proj/demosaic/docs/results/scene-050000-camera-v1/publication.json",
+    "sha256": "a3c155c0fe2abdbffe9b69f0e5a51eeea6b7ae523535a23ebc19495e549d4238"
+  },
+  "training": {
+    "path": "/mnt/external/demosaic/local-regional-wire-v1/train/completed.json",
+    "sha256": "89d1456aeb0c73564357d92f6de98918a343df59f558d6bc8d11881a7e3c785e"
+  },
+  "parent_camera_study": {
+    "path": "/home/dllu/proj/demosaic/docs/results/scene-050000-camera-v1/publication.json",
+    "sha256": "a3c155c0fe2abdbffe9b69f0e5a51eeea6b7ae523535a23ebc19495e549d4238"
+  },
+  "parent_minus_archived_dB": {
+    "known": 0.0,
+    "unseen": 0.0
+  },
+  "replay": {
+    "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/camera-result.json",
+    "sha256": "20b6525869b71dbdaeca540c00411f6f526073285cb40d8debcaa7917383764f"
+  },
+  "precision": "CUDA IEEE FP32, channels-last, measured-CFA reference",
+  "complete_camera_panels": true,
+  "photo_panel_complete": false,
+  "V120_minus_archived_dB": {
+    "known": 1.4903261131848922e-06,
+    "unseen": 1.1678094438138942e-06
+  },
+  "panels": {
+    "known": {
+      "batches": 24,
+      "scenes": 4,
+      "crops_per_model": 72,
+      "cases": [
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00000.json",
+          "sha256": "20fb9965b3569c07d318503942da4dcc5f59d680baf3ed2d5033fe1c42c18b8f"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00001.json",
+          "sha256": "2ba1602315d524ea348bd11b4de1d86367a6ee6d60041b881696e7b947eef5b9"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00002.json",
+          "sha256": "109249a41e4a8a071e44d6ccc4627ef7d784673db4d994499fc65afc7a4988df"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00003.json",
+          "sha256": "5acecbae05e771ee8dd2dd829ca2c54ac66cdeeb13ebd1d6fb46f4396e2a9dbf"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00004.json",
+          "sha256": "3dae9c1fd286e79586e85b518758c574f4e328df969fd64a6e213aca35f8b1fb"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00005.json",
+          "sha256": "971381a915e19eff78e862ddc73b7ff3732bc524a75469e492f23c593aaadb12"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00006.json",
+          "sha256": "4ecd96cf5dc1ed9230b7c72e0083de1d1d2baebaf54b907a24f852351feea2c4"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00007.json",
+          "sha256": "fa9fc235b2a2e602d58fd63ac4d64d9cbc922c2603ec5091b233973809e9f76c"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00008.json",
+          "sha256": "5edcad71533c6b5c9bf2f928db6fe2246f9b034839bbabedc74059ec7cd2bc95"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00009.json",
+          "sha256": "a22a60a346d026351f8aecb7eda75486705be6f4f5c4a29de896ac4d91efaff0"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00010.json",
+          "sha256": "6ad55fe47c34612280968e6ee0ecee8de525d934f840147deb1e094165d7b333"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00011.json",
+          "sha256": "007bf42371852a46ec3347b9a4ccd0aaf225c4f8cb83201151ad76845c5ae616"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00012.json",
+          "sha256": "16e93e8c2d0a57f697c50c1c3c0b1a0445d074a795e03d6d2819244a97b9f249"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00013.json",
+          "sha256": "e18218aed00e0820ca1d4b437d6f434d5cb5a58ad17a2bb1cd850bbf394a4230"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00014.json",
+          "sha256": "dd7ed5dcfccf7f9d711ede47ee033ebe8e4496cffd4f0c085632dec26746ef86"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00015.json",
+          "sha256": "c091c9b41e8f9542814e7d33b9e895eb91aa4472c8e572adbabb01382c4c7ba4"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00016.json",
+          "sha256": "a9aef8acbdc00842b71792c97201c250b7ed8506b79109875a2f1bcb269c5f07"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00017.json",
+          "sha256": "34a9b70fdce0e3877cde9557805b2fe5ad4911e74a485b4e2a345d69e395932b"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00018.json",
+          "sha256": "883516ce72e489baa24a437c8cb954301e5f7bade5cd5b210248b3fbb0a2b618"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00019.json",
+          "sha256": "820a0892f104d2b27ec18bbf22fb51c0f9aceb51a0658b138351e852f9fadd8f"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00020.json",
+          "sha256": "24bb7b62a456d1b0561bf76c64242e17c67618443ddbb5cb463255f0cd1d8a15"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00021.json",
+          "sha256": "b838f371c7c65e38dcb4b83db0ec86ee4580a7807a65160ec2a437e20afddd57"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00022.json",
+          "sha256": "4ff5f8ff72ae7182df8cbabd109ae414dee28372f0154b00134e5d30d869188e"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/known-00023.json",
+          "sha256": "acec0a1fa69116070539cb83721f8028117e568a0c0628d672b7e92c4cbb790f"
+        }
+      ],
+      "overall": {
+        "V120": {
+          "sensor_psnr": 54.31271939807468,
+          "per_scene": {
+            "2pilesofplates": 62.59556092156304,
+            "7D-1": 48.92552460564507,
+            "D60-2": 51.46671464708116,
+            "MuseeL-CopteArch-C500D": 54.26307741800944
+          }
+        },
+        "parent100k": {
+          "sensor_psnr": 54.33707666397095,
+          "per_scene": {
+            "2pilesofplates": 62.60182910495334,
+            "7D-1": 48.91684786478679,
+            "D60-2": 51.57288699679904,
+            "MuseeL-CopteArch-C500D": 54.25674268934462
+          }
+        },
+        "local50k": {
+          "sensor_psnr": 54.22725545035468,
+          "per_scene": {
+            "2pilesofplates": 62.36970414055718,
+            "7D-1": 48.75577248467339,
+            "D60-2": 51.68974939982097,
+            "MuseeL-CopteArch-C500D": 54.09379577636719
+          }
+        },
+        "global-aligned": {
+          "sensor_psnr": 54.22741328345404,
+          "per_scene": {
+            "2pilesofplates": 62.25542322794596,
+            "7D-1": 48.806369357638886,
+            "D60-2": 51.69354714287652,
+            "MuseeL-CopteArch-C500D": 54.15431340535481
+          }
+        },
+        "regional-aligned": {
+          "sensor_psnr": 54.220367696550156,
+          "per_scene": {
+            "2pilesofplates": 62.25057368808322,
+            "7D-1": 48.795126385158966,
+            "D60-2": 51.69036865234375,
+            "MuseeL-CopteArch-C500D": 54.14540206061469
+          }
+        }
+      },
+      "matching_canonical_arrays": true
+    },
+    "unseen": {
+      "batches": 30,
+      "scenes": 5,
+      "crops_per_model": 90,
+      "cases": [
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00000.json",
+          "sha256": "947d42da0e51e2e587438838b34d82100660f24b1eea1a948357884c0c518b38"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00001.json",
+          "sha256": "45b3876321a31e695338a3701bcdc9a4a89b1c6f5219b163f3e4caa811379870"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00002.json",
+          "sha256": "73c1e8f90c11fca76756f0a87586615fecde51892ed4eea6682881a30c19429f"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00003.json",
+          "sha256": "9d6bc29a12ae9de9afcffadccb2ebe5c8b1c7551faf77b3cce72e41d6179a436"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00004.json",
+          "sha256": "6e9daf6f43edd78a05819682a2b9d92e1f92b2dcd20e741eb8aadbe094e45a07"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00005.json",
+          "sha256": "f28f3421301f1ed7f5fbe73efdf2eb0f7fadae303be55bdd9b0dfa83507382df"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00006.json",
+          "sha256": "49ef125e9be314ff8da725f7386cdc0b663fee976e251e9762f6b6fa00ce2ffc"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00007.json",
+          "sha256": "b7404ce20f10bd1225bfe8302f2d051534a330013c5de5ea6c3e477d1bc25462"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00008.json",
+          "sha256": "b2e2eddcf85a7b417c65fef32e2fe6a330e969699ca417751ee21f843e1d9841"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00009.json",
+          "sha256": "a1168ac33e26866178210d572ae87f3fbed94871d4654bd3fc8312d4744d43e2"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00010.json",
+          "sha256": "6df0d78f321200d17008da780732ec48beef5ca80408681cf6022752b30294d6"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00011.json",
+          "sha256": "41736429d712718032fe7db5baf043eb5591acc51c00614e1d635c68edff1fff"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00012.json",
+          "sha256": "c2480b6d7779fa38387d1242a775d664bfaf3f2aae9cc72822e55f44fa2c448a"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00013.json",
+          "sha256": "33ec256a41bbcc9fba12cd780fd716f67595d559fdbce1e6a2f64f8c6ea50f6e"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00014.json",
+          "sha256": "3724eb265b2e295b6bad41484cda513e588d0605cf288cb086ce931929591d67"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00015.json",
+          "sha256": "df534a4969c00c9c175393bacdc8831be4a3cc307a9cfd6f313ec6225b4d2ce2"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00016.json",
+          "sha256": "542b79b8c645cad9308e630872c4cfc7c8e019dbee788e88c0473a1309e4f21b"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00017.json",
+          "sha256": "c80cc549f44f8cf5f82860b87ad110d7552e32e94b581584d6d88a8dec4cb92b"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00018.json",
+          "sha256": "a21aa064776b294cd7e4e8aca8530992e98c151eb0c99da9eba2784180707f90"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00019.json",
+          "sha256": "48bbc260a0014ebeb61c030221378d5080ad318f1cf55f87c64e7cff878fd3e5"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00020.json",
+          "sha256": "63e4b55723d139df3e0ff274d00c09a8627eac99b5a3e8bccb3c869b7db37f79"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00021.json",
+          "sha256": "b7f9076763a86498a690c2a23b171b787c9a92942cccf02a79e39a75ac601983"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00022.json",
+          "sha256": "34bfb33964c7939e87bca93f1f8c62002b365726f341cb4a01a4ce2e7a5c29b4"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00023.json",
+          "sha256": "f7edf28e22351f1c887495295a65054f47c71febea38f73f7097d631f3afe0ea"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00024.json",
+          "sha256": "421b65d26d44b448b44ce636851e284f7896bcb658b405177a1b8885a514c0c6"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00025.json",
+          "sha256": "a8fdfeac5675378bcd1d14a61a52903a8fbc42f13963d77a0f2d3a124f03abf7"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00026.json",
+          "sha256": "abe33f0c950e1fd7fd49c5a427aab916342525083d6194bedf5256a845bab814"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00027.json",
+          "sha256": "45734c7266ba15d80c0dceaf4b3b73e460d792c2a3326874f6121dbdd86a9655"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00028.json",
+          "sha256": "f164adab90f50e2254a230fa59062446b41c41b4263b9df5cc74bf73edc5ab8a"
+        },
+        {
+          "path": "/mnt/external/demosaic/local-regional-wire-v1/canonical/full/unseen-00029.json",
+          "sha256": "47df9f7736ae6f96c28081e3a5e228cf9f7f5a2b2df8423eb5090086dfb8732c"
+        }
+      ],
+      "overall": {
+        "V120": {
+          "sensor_psnr": 54.00872336493599,
+          "per_scene": {
+            "LucieB_3apples": 49.35275628831651,
+            "LucieB_Coulicoco": 57.46324602762858,
+            "LucieB_bedroom_tapestry": 51.79386732313368,
+            "LucieB_stick_figurine": 56.18416192796495,
+            "LucieB_top_of_Expedit": 55.24958525763618
+          }
+        },
+        "parent100k": {
+          "sensor_psnr": 53.978262413872606,
+          "per_scene": {
+            "LucieB_3apples": 49.364066653781464,
+            "LucieB_Coulicoco": 57.327125549316406,
+            "LucieB_bedroom_tapestry": 51.78233612908257,
+            "LucieB_stick_figurine": 56.183954026963974,
+            "LucieB_top_of_Expedit": 55.23382971021864
+          }
+        },
+        "local50k": {
+          "sensor_psnr": 53.978442170884875,
+          "per_scene": {
+            "LucieB_3apples": 49.38515853881836,
+            "LucieB_Coulicoco": 57.283118142022026,
+            "LucieB_bedroom_tapestry": 51.72510422600641,
+            "LucieB_stick_figurine": 56.2934513092041,
+            "LucieB_top_of_Expedit": 55.20537863837348
+          }
+        },
+        "global-aligned": {
+          "sensor_psnr": 53.99123836093479,
+          "per_scene": {
+            "LucieB_3apples": 49.40384652879503,
+            "LucieB_Coulicoco": 57.323016272650825,
+            "LucieB_bedroom_tapestry": 51.77105840047201,
+            "LucieB_stick_figurine": 56.26472176445856,
+            "LucieB_top_of_Expedit": 55.19354883829753
+          }
+        },
+        "regional-aligned": {
+          "sensor_psnr": 53.993973922729495,
+          "per_scene": {
+            "LucieB_3apples": 49.40111033121745,
+            "LucieB_Coulicoco": 57.34035640292697,
+            "LucieB_bedroom_tapestry": 51.7743165757921,
+            "LucieB_stick_figurine": 56.254512786865234,
+            "LucieB_top_of_Expedit": 55.1995735168457
+          }
+        }
+      },
+      "matching_canonical_arrays": true
+    }
+  },
+  "archive": {
+    "path": "docs/results/local-regional-wire-camera-v1/evidence.tar.xz",
+    "sha256": "04c9dffd959d88e0b701ffdf2a91dafaf4ed835b9c14c922903d62446b9cf1b9"
+  },
+  "analysis": {
+    "known": {
+      "path": "/home/dllu/proj/demosaic/docs/results/local-regional-wire-camera-v1/known.json",
+      "sha256": "2ca06e5816929c1e3b92f7c5b19590aaf37300d893bf594942aa33393590cf5f"
+    },
+    "unseen": {
+      "path": "/home/dllu/proj/demosaic/docs/results/local-regional-wire-camera-v1/unseen.json",
+      "sha256": "0756260f88718899b6c9edd95f24fa5f9665a512b00a420529140c89b65a234f"
+    }
+  },
+  "reused_canonical_references": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-compact-050000-v1/plan.json",
+      "sha256": "e48a40398a08636e96ef1f880033ca8148877021914b6b945df3a63130efc0aa"
+    },
+    "root": "/home/dllu/proj/demosaic/.cache/experiments/scene-compact-050000-v1",
+    "models": {
+      "V120": "V120",
+      "parent100k": "parent100k",
+      "local50k": "none"
+    }
+  }
+}

@@ -1176,7 +1176,12 @@ continuing-strand error is lower on both wire panels, with still weaker
 second-direction response. On the off-grid panel the regional arm also
 raises wire-flat RMS by 1.902 DN16 versus Local 50k and recovers
 slightly more target-aligned detail on the separate natural panel.
-The endpoint comparison is pending.
+At the [completed endpoint](local-regional-wire-1024.md), the off-grid
+continuing-strand gain grows to 3.100 DN16 versus whole-core supervision
+with 0.733 points less weak response. Matching blend strengths on 16
+calibration sources leaves a response gap on the other 16. The regional
+blend has lower flat RMS, and the differences on their eight true gaps
+are unresolved. Both native cab crossings remain incomplete.
 
 On 32 groups from that recipe, the weak terms are orthogonal to the
 exact-flat and strong-gap controls at the restored pixels. Through the

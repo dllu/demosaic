@@ -1,13 +1,13 @@
 # Regional weak-wire training from Local 50k
 
-**Training launched November 19, 2026.** Two matched continuations
+**Training completed November 19, 2026.** Two matched continuations
 test whether a local weak-direction loss recovers contrast that is
 averaged away by a whole-crop loss. Both arms also get explicit
 supervision where that direction is absent. The
-[512-update review](local-regional-wire-512.md) finds lower
-continuing-strand error and weaker second-direction response.
-The [128-update review](local-regional-wire-128.md) records the earlier
-checkpoint pair. The 1,024-update run and its endpoint review are pending.
+[1,024-update endpoint review](local-regional-wire-1024.md) finds lower
+continuing-strand error and weaker second-direction response. The
+[512-update review](local-regional-wire-512.md) and
+[128-update review](local-regional-wire-128.md) retain earlier checkpoints.
 [Launch receipt](results/local-regional-wire-v1/launch.json) ·
 [Frozen protocol and qualification](results/local-regional-wire-v1/launch-evidence.tar.xz).
 
@@ -26,7 +26,7 @@ improves direction-specific recovery, with more intact or flat error.
 The new comparison starts from the quieter larger-corpus endpoint.
 [Local 50k comparisons](scene-50000-controlled.md).
 
-Each arm will receive the same **1,024 updates on 1,024 distinct
+Each arm received the same **1,024 updates on 1,024 distinct
 photos**, 512 natural and 512 with planted weak wires. The sources
 come from the approved 90,692-photo continuation corpus. They are
 disjoint from the previous paired continuation schedules and the
@@ -83,6 +83,6 @@ JPEGs and independent ISO100 AHD references are bound in the
 review plan. Training completion, numerical evaluation and native
 viewing will be recorded as separate states.
 
-The canonical 427-photo and known/unseen camera inputs are frozen.
-The full trained pair is needed for an entry in the
-[PSNR history](performance-history.md).
+The endpoint camera and photo panels use the same frozen canonical
+inputs as the other full-model comparisons. Current coverage is in
+the [PSNR history](performance-history.md).

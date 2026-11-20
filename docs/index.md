@@ -77,6 +77,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [Signed wire supervision](local-wire-response.md) ·
 [Continuing-wire supervision](local-continuing-wire.md) ·
 [regional weak-wire training from Local 50k](local-regional-wire.md) ·
+[completed regional wire review](local-regional-wire-1024.md) ·
 [matched 512-update review](local-regional-wire-512.md) ·
 [matched 128-update review](local-regional-wire-128.md) ·
 [shared-trunk gradient audit](local-regional-wire-gradient-audit.md) ·

@@ -3,6 +3,10 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Completed regional weak-wire training](local-regional-wire-1024.md#standing-gfx100s-comparisons)
+  keeps the overcast sky smooth and coarse crossings connected. The
+  regional arm changes the sky by 3.90 DN16 RGB RMS and the fence by
+  19.03 versus Local 50k. Fine building and foliage detail stay soft.
 - [Regional weak-wire training at 512 updates](local-regional-wire-512.md#standing-gfx100s-comparisons)
   keeps the sky smooth and coarse crossings connected. The regional
   arm changes the sky by 2.70 DN16 RGB RMS and the chain-link
