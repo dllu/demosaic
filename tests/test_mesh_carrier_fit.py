@@ -338,6 +338,46 @@ def test_internal_phase_excludes_the_held_station_and_its_neighbors(pattern):
     np.testing.assert_array_equal(original[index], changed[index])
 
 
+@pytest.mark.parametrize("pattern", tuple(PATTERNS))
+def test_junction_phase_recovers_signed_interaction_and_leaves_additive_mesh(pattern):
+    x, y = 151, 149
+    v, u = np.indices((480, 480), dtype=np.float64)
+    first = 2 * np.pi * (0.115234375 * u + 0.07421875 * v) + 0.4
+    second = 2 * np.pi * (0.087890625 * u - 0.072265625 * v) - 0.8
+    additive = (0.13 + 0.025 * np.cos(first) + 0.024 * np.cos(second)).astype(np.float32)
+    interaction = -0.008 * np.cos(first - second)
+    restored = np.repeat(additive[None], 3, axis=0)
+    parent = restored[:, y : y + 160, x : x + 160]
+    options = {
+        "shot": 0.00128,
+        "read": 6.5536e-6,
+        "white_balance": np.ones(3),
+        "camera_to_srgb": np.eye(3),
+    }
+
+    def refine(raw, method, halo):
+        return refine_raw_mesh_carriers(
+            parent,
+            pack(raw.astype(np.float32)),
+            PATTERNS[pattern],
+            (x, y, 160, 160),
+            method=method,
+            parent_context=restored[:, y - halo : y + 160 + halo, x - halo : x + 160 + halo],
+            **options,
+        )
+
+    with pytest.raises(ValueError, match="48-pixel halo"):
+        refine(additive, "weak-junction-phase", 16)
+    no_interaction = refine(additive, "weak-internal-phase", 16)
+    np.testing.assert_array_equal(refine(additive, "weak-junction-phase", 48), no_interaction)
+
+    old = refine(additive + interaction, "weak-internal-phase", 16)
+    new = refine(additive + interaction, "weak-junction-phase", 48)
+    truth = interaction[y + 16 : y + 144, x + 16 : x + 144]
+    change = new[1, 16:144, 16:144] - old[1, 16:144, 16:144]
+    assert (change * truth).sum() > 0.35 * (truth**2).sum()
+
+
 def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():
     raw = scene_fixture()
     packed = pack(raw)

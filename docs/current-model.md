@@ -226,6 +226,13 @@ It gains 0.413 contrast points on 24 new sources with 0.081 DN16 mean
 missing-direction addition. The left real diagonals are slightly clearer
 and crossings remain incomplete. Median CPU cost is about 35 ms per crop.
 
+The opt-in [junction phase fit](local-junction-support.md) adds a
+difference-frequency term where both wires have local support. On 24 new
+exact targets it gains 2.768 points of interaction contrast and lowers
+junction error by 1.121 DN16. At equal interaction recovery its gap
+addition is 0.136 versus 0.248 DN16 for crop-wide delivery. Right cab
+changes are subtle. Changed crops take about 114 ms on one CPU thread.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

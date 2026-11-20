@@ -1,0 +1,2302 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-junction-support-v1/summarize_junction.py",
+    "sha256": "0358e3b49d7e3eec5760cabef6d2d2a3ad8a9d5b6805724b0870ea31736fbdc5"
+  },
+  "receipts": {
+    "calibration": {
+      "path": "/mnt/external/demosaic/local-junction-support-v1/calibration.json",
+      "sha256": "2f041a4402bb368a64e0022943720905ff03e428c6518a7d8b74d751c6e865f9"
+    },
+    "independent": {
+      "path": "/mnt/external/demosaic/local-junction-support-v1/independent.json",
+      "sha256": "67a7269d14a76e38469e7bc93976b099fc828c47267a3b32b97658a2b2b60f03"
+    },
+    "api-proof": {
+      "path": "/mnt/external/demosaic/local-junction-support-v1/api-proof.json",
+      "sha256": "917be29ed40d05a77ab2314004b24354148774fee217317b70da028e179a306a"
+    },
+    "station-audit": {
+      "path": "/mnt/external/demosaic/local-junction-support-v1/station-audit.json",
+      "sha256": "afe24ccd325ee870aa46ec8d10195e1cb5346dbe1b9ecc9a009437226a11691b"
+    },
+    "natural-replay": {
+      "path": "/mnt/external/demosaic/local-junction-support-v1/natural-replay.json",
+      "sha256": "2dc35aba6ecdd9f56e422114fb8456b1ba88c8d807fd375147de7bf6324f1e0f"
+    },
+    "board-camera": {
+      "path": "/mnt/external/demosaic/local-junction-support-v1/board-camera.json",
+      "sha256": "453565823dca4c5a279e2dee83d7273eaa35436ddf347ea1dc4a505dfb0871fc"
+    },
+    "board-exact": {
+      "path": "/mnt/external/demosaic/local-junction-support-v1/board-exact.json",
+      "sha256": "9df6ce21b9cbe20a89ddd515742e1210bd220fa6d643a71a4bc4c93befb00273"
+    }
+  },
+  "calibration": {
+    "methods": {
+      "baseline": [
+        "baseline",
+        1
+      ],
+      "uniform_full": [
+        "uniform",
+        1
+      ],
+      "uniform_locked": [
+        "uniform",
+        0.30000000000000004
+      ],
+      "primary": [
+        "wire/0",
+        1.0
+      ],
+      "wire": [
+        "wire/0",
+        1.0
+      ],
+      "difference": [
+        "difference/0",
+        0.75
+      ],
+      "joint": [
+        "joint/0",
+        1.0
+      ]
+    },
+    "metrics": {
+      "baseline": {
+        "means": {
+          "interaction_response_points": 12.3156341559855,
+          "junction_increment_RMS_DN16": 31.03814847703411,
+          "interaction_increment_RMS_DN16": 28.699882960692353,
+          "present_luma_RMS_DN16": 149.55194396017282,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.0,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.0,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "uniform_full": {
+        "means": {
+          "interaction_response_points": 17.161696408832462,
+          "junction_increment_RMS_DN16": 28.994084118074163,
+          "interaction_increment_RMS_DN16": 26.84581633978571,
+          "present_luma_RMS_DN16": 149.24436140936055,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 1.1370016044451068,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 13.68026882027677,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "uniform_locked": {
+        "means": {
+          "interaction_response_points": 13.769452831839589,
+          "junction_increment_RMS_DN16": 30.38167137671113,
+          "interaction_increment_RMS_DN16": 28.104758867076757,
+          "present_luma_RMS_DN16": 149.44141623447578,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.3411004813335321,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 4.104080646083032,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "primary": {
+        "means": {
+          "interaction_response_points": 14.805126837998648,
+          "junction_increment_RMS_DN16": 30.02207126142662,
+          "interaction_increment_RMS_DN16": 27.76031143283099,
+          "present_luma_RMS_DN16": 149.38728191334133,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.2621279554543557,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 3.8123386131744024,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "wire": {
+        "means": {
+          "interaction_response_points": 14.805126837998648,
+          "junction_increment_RMS_DN16": 30.02207126142662,
+          "interaction_increment_RMS_DN16": 27.76031143283099,
+          "present_luma_RMS_DN16": 149.38728191334133,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.2621279554543557,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 3.8123386131744024,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "difference": {
+        "means": {
+          "interaction_response_points": 13.3988268889382,
+          "junction_increment_RMS_DN16": 30.58066855072335,
+          "interaction_increment_RMS_DN16": 28.27014920647378,
+          "present_luma_RMS_DN16": 149.4802681598822,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.3363048888606133,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 5.313313225459327,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "joint": {
+        "means": {
+          "interaction_response_points": 13.282494979804577,
+          "junction_increment_RMS_DN16": 30.635904364756797,
+          "interaction_increment_RMS_DN16": 28.32220758797937,
+          "present_luma_RMS_DN16": 149.49008249730284,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.1935736004909892,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 3.556854161026086,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      }
+    },
+    "within": {
+      "baseline": true,
+      "uniform_full": false,
+      "uniform_locked": true,
+      "primary": true,
+      "wire": true,
+      "difference": true,
+      "joint": true
+    },
+    "vs_baseline": {
+      "uniform_full": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            4.846062252846964,
+            1.6834208846552918,
+            8.579899948877863
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -2.044064358959947,
+            -3.837236100765642,
+            -0.5949600786826963
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.8540666209066443,
+            -3.487057870064115,
+            -0.5346502077899126
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.30758255081226543,
+            -0.6081247245657987,
+            -0.07309354117893732
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            1.1370016044451068,
+            0.0,
+            2.947799116161789
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "uniform_locked": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            1.4538186758540894,
+            0.5050262653965875,
+            2.573969984663359
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.656477100322981,
+            -1.231950841088086,
+            -0.1883829069808812
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.595124093615597,
+            -1.117557888711613,
+            -0.17047389041984853
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.11052772569706182,
+            -0.21923682329735003,
+            -0.025441065540589076
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.3411004813335321,
+            0.0,
+            0.8843397348485369
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            2.4894926820131493,
+            0.9159781037918605,
+            4.379813011394975
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.0160772156074873,
+            -1.864920740641142,
+            -0.316777401128245
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.9395715278613653,
+            -1.728330256764589,
+            -0.289679031679025
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.1646620468315175,
+            -0.3229778994590752,
+            -0.03952291081775974
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.2621279554543557,
+            0.0,
+            0.682265828886058
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "wire": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            2.4894926820131493,
+            0.9159781037918605,
+            4.379813011394975
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.0160772156074873,
+            -1.864920740641142,
+            -0.316777401128245
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.9395715278613653,
+            -1.728330256764589,
+            -0.289679031679025
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.1646620468315175,
+            -0.3229778994590752,
+            -0.03952291081775974
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.2621279554543557,
+            0.0,
+            0.682265828886058
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "difference": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            1.0831927329526998,
+            0.365118948455374,
+            1.9528299959785096
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.4574799263107594,
+            -0.8792430375816084,
+            -0.12655592755337153
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.42973375421857457,
+            -0.8226993499133535,
+            -0.11857773748455361
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.07167580029062304,
+            -0.14416462747020936,
+            -0.015528594380450955
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.3363048888606133,
+            0.0,
+            0.9276213834661914
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "joint": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            0.9668608238190776,
+            0.3315193492414968,
+            1.7226656629616097
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.40224411227731166,
+            -0.7570548879677442,
+            -0.1135575550269512
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.37767537271298507,
+            -0.7091405392288178,
+            -0.10846196792166422
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.06186146286999635,
+            -0.12310869539607322,
+            -0.01366233008550329
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.1935736004909892,
+            0.0,
+            0.5568757283484177
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "primary_vs_uniform_locked": {
+      "interaction_response_points": {
+        "sources": 24,
+        "interval": [
+          1.0356740061590597,
+          0.36942669526977684,
+          1.8325913646081138
+        ]
+      },
+      "junction_increment_RMS_DN16": {
+        "sources": 24,
+        "interval": [
+          -0.35960011528450625,
+          -0.6650789208178928,
+          -0.11650789072935508
+        ]
+      },
+      "interaction_increment_RMS_DN16": {
+        "sources": 24,
+        "interval": [
+          -0.34444743424576835,
+          -0.6306394728284661,
+          -0.10921812378983871
+        ]
+      },
+      "present_luma_RMS_DN16": {
+        "sources": 24,
+        "interval": [
+          -0.054134321134455675,
+          -0.10459506694007958,
+          -0.013739646446904766
+        ]
+      },
+      "additive_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "continuous_additive_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "gap_extra_DN16": {
+        "sources": 12,
+        "interval": [
+          -0.07897252587917644,
+          -0.2020739059624788,
+          0.0
+        ]
+      },
+      "strong_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "flat_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "edge_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "uniform_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "matched": {
+      "dose": 0.5137145484564549,
+      "scores": {
+        "means": {
+          "interaction_response_points": 14.805126837998648,
+          "junction_increment_RMS_DN16": 29.933504364528886,
+          "interaction_increment_RMS_DN16": 27.69844475328868,
+          "present_luma_RMS_DN16": 149.3721572919901,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.5840942658217828,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 7.0277531197714005,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "primary_vs_equal_response_uniform": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            4.440892098500626e-16,
+            -0.2505383685806502,
+            0.26151035216813046
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            0.08856689689773549,
+            -0.06399741697206796,
+            0.2780891953427304
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            0.06186667954230766,
+            -0.05569156136601742,
+            0.20754330157698023
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            0.01512462135120233,
+            -0.003933573060020142,
+            0.03932820773451795
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            -0.3219663103674271,
+            -0.8320614630133322,
+            0.0
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "admission": {
+      "0": 11,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    "delivery": {
+      "0": 11,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    }
+  },
+  "independent": {
+    "methods": {
+      "baseline": [
+        "baseline",
+        1
+      ],
+      "uniform_full": [
+        "uniform",
+        1
+      ],
+      "uniform_locked": [
+        "uniform",
+        0.30000000000000004
+      ],
+      "primary": [
+        "wire/0",
+        1.0
+      ],
+      "wire": [
+        "wire/0",
+        1.0
+      ],
+      "difference": [
+        "difference/0",
+        0.75
+      ],
+      "joint": [
+        "joint/0",
+        1.0
+      ]
+    },
+    "metrics": {
+      "baseline": {
+        "means": {
+          "interaction_response_points": 11.765750289656234,
+          "junction_increment_RMS_DN16": 34.70726775029899,
+          "interaction_increment_RMS_DN16": 31.289599115708267,
+          "present_luma_RMS_DN16": 150.71077850678645,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.0,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.0,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "uniform_full": {
+        "means": {
+          "interaction_response_points": 17.396892217481945,
+          "junction_increment_RMS_DN16": 32.46224584004212,
+          "interaction_increment_RMS_DN16": 29.301126187973367,
+          "present_luma_RMS_DN16": 150.29187475362232,
+          "additive_extra_DN16": 0.0014149411435080176,
+          "continuous_additive_extra_DN16": 0.014639635313749504,
+          "gap_extra_DN16": 0.504725050910396,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.05075918243090877,
+          "continuous_additive_extra_DN16": 0.7027024950599762,
+          "gap_extra_DN16": 6.018274449168422,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "uniform_locked": {
+        "means": {
+          "interaction_response_points": 13.455092868003948,
+          "junction_increment_RMS_DN16": 33.99962951671439,
+          "interaction_increment_RMS_DN16": 30.65810921911835,
+          "present_luma_RMS_DN16": 150.5686622354581,
+          "additive_extra_DN16": 0.00042448234305240534,
+          "continuous_additive_extra_DN16": 0.004391890594124852,
+          "gap_extra_DN16": 0.15141751527311884,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.015227754729272631,
+          "continuous_additive_extra_DN16": 0.2108107485179929,
+          "gap_extra_DN16": 1.805482334750527,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "primary": {
+        "means": {
+          "interaction_response_points": 14.533289076562037,
+          "junction_increment_RMS_DN16": 33.58605414095061,
+          "interaction_increment_RMS_DN16": 30.276791924666465,
+          "present_luma_RMS_DN16": 150.48109395988337,
+          "additive_extra_DN16": 0.0005451374990959154,
+          "continuous_additive_extra_DN16": 0.0065236629691554915,
+          "gap_extra_DN16": 0.1355058395668921,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.020210166940284387,
+          "continuous_additive_extra_DN16": 0.3131358225194636,
+          "gap_extra_DN16": 1.4190522966651338,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "wire": {
+        "means": {
+          "interaction_response_points": 14.533289076562037,
+          "junction_increment_RMS_DN16": 33.58605414095061,
+          "interaction_increment_RMS_DN16": 30.276791924666465,
+          "present_luma_RMS_DN16": 150.48109395988337,
+          "additive_extra_DN16": 0.0005451374990959154,
+          "continuous_additive_extra_DN16": 0.0065236629691554915,
+          "gap_extra_DN16": 0.1355058395668921,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.020210166940284387,
+          "continuous_additive_extra_DN16": 0.3131358225194636,
+          "gap_extra_DN16": 1.4190522966651338,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "difference": {
+        "means": {
+          "interaction_response_points": 13.017730563573558,
+          "junction_increment_RMS_DN16": 34.20796192861198,
+          "interaction_increment_RMS_DN16": 30.840063033190326,
+          "present_luma_RMS_DN16": 150.6147616564826,
+          "additive_extra_DN16": 0.0005324162057734694,
+          "continuous_additive_extra_DN16": 0.0025276392538541295,
+          "gap_extra_DN16": 0.13766078575239635,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.02237631558282209,
+          "continuous_additive_extra_DN16": 0.12132668418499822,
+          "gap_extra_DN16": 1.007719054929783,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "joint": {
+        "means": {
+          "interaction_response_points": 12.763009585644747,
+          "junction_increment_RMS_DN16": 34.31125266468051,
+          "interaction_increment_RMS_DN16": 30.93225502996536,
+          "present_luma_RMS_DN16": 150.62915667277204,
+          "additive_extra_DN16": 0.000414459439691251,
+          "continuous_additive_extra_DN16": 0.002311309282477209,
+          "gap_extra_DN16": 0.07290649654587542,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.016137974600861436,
+          "continuous_additive_extra_DN16": 0.11094284555890603,
+          "gap_extra_DN16": 0.523585213336434,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      }
+    },
+    "within": {
+      "baseline": true,
+      "uniform_full": false,
+      "uniform_locked": true,
+      "primary": true,
+      "wire": true,
+      "difference": true,
+      "joint": true
+    },
+    "vs_baseline": {
+      "uniform_full": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            5.63114192782571,
+            3.2579388296148455,
+            8.170073779829377
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -2.2450219102568725,
+            -3.483935356589205,
+            -1.1791692601967714
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.988472927734899,
+            -3.0608910273471928,
+            -1.049520387571023
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.41890375316411976,
+            -0.7260155308973322,
+            -0.18122024078585416
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0014149411435080176,
+            0.0,
+            0.003529907078129216
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.014639635313749504,
+            0.0,
+            0.04391890594124851
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.5047250509103961,
+            0.04859486413970588,
+            1.2079282835935607
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "uniform_locked": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            1.6893425783477134,
+            0.9773816488844538,
+            2.451022133948813
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.7076382335845994,
+            -1.0940191314559973,
+            -0.37280388636510614
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.631489896589913,
+            -0.9710419113514134,
+            -0.33398482614009567
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.14211627132832572,
+            -0.24691544008766814,
+            -0.06098651633586667
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.00042448234305240534,
+            0.0,
+            0.001058972123438765
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.004391890594124852,
+            0.0,
+            0.013175671782374556
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.15141751527311884,
+            0.014578459241911763,
+            0.3623784850780683
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            2.767538786905802,
+            1.5085248764573558,
+            4.219079452918638
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.1212136093483813,
+            -1.8253247500934155,
+            -0.5414992970281838
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.0128071910418008,
+            -1.6494698943603041,
+            -0.4887401341618422
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.22968454690306808,
+            -0.4441448735313234,
+            -0.08580547314454104
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0005451374990959154,
+            0.0,
+            0.0013872277882744314
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0065236629691554915,
+            0.0,
+            0.019570988907466474
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.1355058395668921,
+            0.014832836811260163,
+            0.30176597709384323
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "wire": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            2.767538786905802,
+            1.5085248764573558,
+            4.219079452918638
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.1212136093483813,
+            -1.8253247500934155,
+            -0.5414992970281838
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -1.0128071910418008,
+            -1.6494698943603041,
+            -0.4887401341618422
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.22968454690306808,
+            -0.4441448735313234,
+            -0.08580547314454104
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0005451374990959154,
+            0.0,
+            0.0013872277882744314
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0065236629691554915,
+            0.0,
+            0.019570988907466474
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.1355058395668921,
+            0.014832836811260163,
+            0.30176597709384323
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "difference": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            1.2519802739173234,
+            0.7129023392414036,
+            1.8465338849155166
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.4993058216870146,
+            -0.7862581404644486,
+            -0.25818454831463694
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.4495360825179409,
+            -0.7077305543687776,
+            -0.23173931315190227
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.09601685030383174,
+            -0.1785910627043582,
+            -0.037067209415216115
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0005324162057734694,
+            0.0,
+            0.0014647626883910565
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0025276392538541295,
+            0.0,
+            0.0075829177615623885
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.13766078575239635,
+            0.013568395222105525,
+            0.3141828029895405
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "joint": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            0.9972592959885133,
+            0.5519665548026607,
+            1.512470760012991
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.3960150856184849,
+            -0.6366534546050873,
+            -0.2003374810342531
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.35734408574290444,
+            -0.5766596721658509,
+            -0.17854764667763223
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.08162183401440999,
+            -0.16196411074701164,
+            -0.02902877698481319
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.000414459439691251,
+            0.0,
+            0.0010868750480604776
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.002311309282477209,
+            0.0,
+            0.006933927847431627
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            0.07290649654587542,
+            0.009547983054693473,
+            0.15444767844038856
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "primary_vs_uniform_locked": {
+      "interaction_response_points": {
+        "sources": 24,
+        "interval": [
+          1.0781962085580887,
+          0.39982620855461926,
+          1.8916314103850465
+        ]
+      },
+      "junction_increment_RMS_DN16": {
+        "sources": 24,
+        "interval": [
+          -0.41357537576378184,
+          -0.770390708147199,
+          -0.13256690178876146
+        ]
+      },
+      "interaction_increment_RMS_DN16": {
+        "sources": 24,
+        "interval": [
+          -0.3813172944518879,
+          -0.7060294334057462,
+          -0.12123481893003392
+        ]
+      },
+      "present_luma_RMS_DN16": {
+        "sources": 24,
+        "interval": [
+          -0.08756827557474238,
+          -0.1993118501749896,
+          -0.01543077951515742
+        ]
+      },
+      "additive_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.00012065515604351013,
+          0.0,
+          0.00032825566483566656
+        ]
+      },
+      "continuous_additive_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0021317723750306394,
+          0.0,
+          0.006395317125091918
+        ]
+      },
+      "gap_extra_DN16": {
+        "sources": 12,
+        "interval": [
+          -0.015911675706226733,
+          -0.07195954027044726,
+          0.029255470752513658
+        ]
+      },
+      "strong_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "flat_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "edge_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "uniform_extra_DN16": {
+        "sources": 24,
+        "interval": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "matched": {
+      "dose": 0.49147025991838234,
+      "scores": {
+        "means": {
+          "interaction_response_points": 14.533289076562037,
+          "junction_increment_RMS_DN16": 33.561799701864096,
+          "interaction_increment_RMS_DN16": 30.269191880079365,
+          "present_luma_RMS_DN16": 150.4852625154106,
+          "additive_extra_DN16": 0.0006954014915690985,
+          "continuous_additive_extra_DN16": 0.007194945372758797,
+          "gap_extra_DN16": 0.2480573519582511,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.024946628582563316,
+          "continuous_additive_extra_DN16": 0.34535737789242227,
+          "gap_extra_DN16": 2.957802907792964,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "primary_vs_equal_response_uniform": {
+        "interaction_response_points": {
+          "sources": 24,
+          "interval": [
+            -4.996003610813204e-16,
+            -0.5607379924351104,
+            0.5350441599690482
+          ]
+        },
+        "junction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            0.024254439086515662,
+            -0.1751647926170819,
+            0.2275502722282306
+          ]
+        },
+        "interaction_increment_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0076000445870995454,
+            -0.1753582897750819,
+            0.19178073894745507
+          ]
+        },
+        "present_luma_RMS_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.00416855552722654,
+            -0.06174057315280906,
+            0.046235681642567576
+          ]
+        },
+        "additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.00015026399247318302,
+            -0.0003476165609014717,
+            0.0
+          ]
+        },
+        "continuous_additive_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            -0.0006712824036033058,
+            -0.0020138472108099173,
+            0.0
+          ]
+        },
+        "gap_extra_DN16": {
+          "sources": 12,
+          "interval": [
+            -0.112551512391359,
+            -0.29958810176953204,
+            -0.0005745921688550634
+          ]
+        },
+        "strong_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "flat_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "edge_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "uniform_extra_DN16": {
+          "sources": 24,
+          "interval": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "admission": {
+      "0": 21,
+      "1": 2,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    "delivery": {
+      "0": 21,
+      "1": 2,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    }
+  },
+  "lock": {
+    "limits": {
+      "mean_additive_DN16": 0.1,
+      "mean_gap_DN16": 0.35,
+      "peak_quiet_DN16": 0.65
+    },
+    "uniform": {
+      "choice": [
+        "uniform",
+        0.30000000000000004
+      ],
+      "stats": {
+        "means": {
+          "interaction_response_points": 13.769452831839589,
+          "junction_increment_RMS_DN16": 30.38167137671113,
+          "interaction_increment_RMS_DN16": 28.104758867076757,
+          "present_luma_RMS_DN16": 149.44141623447578,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.3411004813335321,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 4.104080646083032,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "within": true
+    },
+    "primary": {
+      "choice": [
+        "wire/0",
+        1.0
+      ],
+      "stats": {
+        "means": {
+          "interaction_response_points": 14.805126837998648,
+          "junction_increment_RMS_DN16": 30.02207126142662,
+          "interaction_increment_RMS_DN16": 27.76031143283099,
+          "present_luma_RMS_DN16": 149.38728191334133,
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 0.2621279554543557,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        },
+        "peak": {
+          "additive_extra_DN16": 0.0,
+          "continuous_additive_extra_DN16": 0.0,
+          "gap_extra_DN16": 3.8123386131744024,
+          "strong_extra_DN16": 0.0,
+          "flat_extra_DN16": 0.0,
+          "edge_extra_DN16": 0.0,
+          "uniform_extra_DN16": 0.0
+        }
+      },
+      "within": true
+    },
+    "variants": {
+      "wire": {
+        "choice": [
+          "wire/0",
+          1.0
+        ],
+        "stats": {
+          "means": {
+            "interaction_response_points": 14.805126837998648,
+            "junction_increment_RMS_DN16": 30.02207126142662,
+            "interaction_increment_RMS_DN16": 27.76031143283099,
+            "present_luma_RMS_DN16": 149.38728191334133,
+            "additive_extra_DN16": 0.0,
+            "continuous_additive_extra_DN16": 0.0,
+            "gap_extra_DN16": 0.2621279554543557,
+            "strong_extra_DN16": 0.0,
+            "flat_extra_DN16": 0.0,
+            "edge_extra_DN16": 0.0,
+            "uniform_extra_DN16": 0.0
+          },
+          "peak": {
+            "additive_extra_DN16": 0.0,
+            "continuous_additive_extra_DN16": 0.0,
+            "gap_extra_DN16": 3.8123386131744024,
+            "strong_extra_DN16": 0.0,
+            "flat_extra_DN16": 0.0,
+            "edge_extra_DN16": 0.0,
+            "uniform_extra_DN16": 0.0
+          }
+        },
+        "within": true
+      },
+      "difference": {
+        "choice": [
+          "difference/0",
+          0.75
+        ],
+        "stats": {
+          "means": {
+            "interaction_response_points": 13.3988268889382,
+            "junction_increment_RMS_DN16": 30.58066855072335,
+            "interaction_increment_RMS_DN16": 28.27014920647378,
+            "present_luma_RMS_DN16": 149.4802681598822,
+            "additive_extra_DN16": 0.0,
+            "continuous_additive_extra_DN16": 0.0,
+            "gap_extra_DN16": 0.3363048888606133,
+            "strong_extra_DN16": 0.0,
+            "flat_extra_DN16": 0.0,
+            "edge_extra_DN16": 0.0,
+            "uniform_extra_DN16": 0.0
+          },
+          "peak": {
+            "additive_extra_DN16": 0.0,
+            "continuous_additive_extra_DN16": 0.0,
+            "gap_extra_DN16": 5.313313225459327,
+            "strong_extra_DN16": 0.0,
+            "flat_extra_DN16": 0.0,
+            "edge_extra_DN16": 0.0,
+            "uniform_extra_DN16": 0.0
+          }
+        },
+        "within": true
+      },
+      "joint": {
+        "choice": [
+          "joint/0",
+          1.0
+        ],
+        "stats": {
+          "means": {
+            "interaction_response_points": 13.282494979804577,
+            "junction_increment_RMS_DN16": 30.635904364756797,
+            "interaction_increment_RMS_DN16": 28.32220758797937,
+            "present_luma_RMS_DN16": 149.49008249730284,
+            "additive_extra_DN16": 0.0,
+            "continuous_additive_extra_DN16": 0.0,
+            "gap_extra_DN16": 0.1935736004909892,
+            "strong_extra_DN16": 0.0,
+            "flat_extra_DN16": 0.0,
+            "edge_extra_DN16": 0.0,
+            "uniform_extra_DN16": 0.0
+          },
+          "peak": {
+            "additive_extra_DN16": 0.0,
+            "continuous_additive_extra_DN16": 0.0,
+            "gap_extra_DN16": 3.556854161026086,
+            "strong_extra_DN16": 0.0,
+            "flat_extra_DN16": 0.0,
+            "edge_extra_DN16": 0.0,
+            "uniform_extra_DN16": 0.0
+          }
+        },
+        "within": true
+      }
+    }
+  },
+  "coupled_draws": 2,
+  "nominal_noise": {
+    "name": "iso6400",
+    "shot": 0.00128,
+    "read": 6.5536e-06,
+    "exposure": 0.33
+  },
+  "training_visits_checked": 559808,
+  "standing": {
+    "main-overcast-sky-main-overcast-sky": {
+      "baseline": 0.0,
+      "uniform": 0.0,
+      "uniform_locked": 0.0,
+      "primary": 0.0
+    },
+    "main-building-detail-main-building-detail": {
+      "baseline": 0.0,
+      "uniform": 0.0,
+      "uniform_locked": 0.0,
+      "primary": 0.0
+    },
+    "main-foliage-main-foliage": {
+      "baseline": 0.0,
+      "uniform": 0.0,
+      "uniform_locked": 0.0,
+      "primary": 0.0
+    },
+    "main-chain-link-fence-main-chain-link-fence": {
+      "baseline": 0.0,
+      "uniform": 1.4958118326049976,
+      "uniform_locked": 0.4487435843798722,
+      "primary": 1.4245181827034634
+    },
+    "mesh-nominal-fine-green-mesh-left": {
+      "baseline": 0.0,
+      "uniform": 1.1765148466910933,
+      "uniform_locked": 0.35295445727947705,
+      "primary": 0.40475344969232063
+    },
+    "mesh-nominal-fine-green-mesh-right": {
+      "baseline": 0.0,
+      "uniform": 5.855675031440501,
+      "uniform_locked": 1.7567025075647027,
+      "primary": 2.6683926756356766
+    },
+    "mesh-profile3879-fine-green-mesh-left": {
+      "baseline": 0.0,
+      "uniform": 1.4388809390905337,
+      "uniform_locked": 0.43166426716791473,
+      "primary": 0.5980902575178761
+    },
+    "mesh-profile3879-fine-green-mesh-right": {
+      "baseline": 0.0,
+      "uniform": 5.551500700836062,
+      "uniform_locked": 1.6654502073424136,
+      "primary": 2.7673367186642226
+    }
+  },
+  "exact": [
+    {
+      "id": "junction-independent-10",
+      "selection": "largest gap reduction",
+      "response_change": 7.203610813441449,
+      "draw": 0,
+      "scores": {
+        "interaction_response_points": 15.355448343516153,
+        "junction_increment_RMS_DN16": 38.2515251616636,
+        "interaction_increment_RMS_DN16": 34.2058632371824,
+        "present_luma_RMS_DN16": 173.6524184017011,
+        "additive_extra_DN16": 0.0,
+        "continuous_additive_extra_DN16": 0.0,
+        "gap_extra_DN16": 1.4190522966651338,
+        "strong_extra_DN16": 0.0,
+        "flat_extra_DN16": 0.0,
+        "edge_extra_DN16": 0.0,
+        "uniform_extra_DN16": 0.0
+      },
+      "criterion": 1.5387506111278302
+    },
+    {
+      "id": "junction-independent-20",
+      "selection": "largest junction error reduction",
+      "response_change": 19.193521618122958,
+      "draw": 1,
+      "scores": {
+        "interaction_response_points": 32.88369157784898,
+        "junction_increment_RMS_DN16": 41.115833869893024,
+        "interaction_increment_RMS_DN16": 36.89952484859684,
+        "present_luma_RMS_DN16": 126.64822953458311,
+        "additive_extra_DN16": 0.0,
+        "continuous_additive_extra_DN16": 0.0,
+        "strong_extra_DN16": 0.0,
+        "flat_extra_DN16": 0.0,
+        "edge_extra_DN16": 0.0,
+        "uniform_extra_DN16": 0.0
+      },
+      "criterion": 9.007010127833773
+    }
+  ],
+  "api": {
+    "counts": {
+      "synthetic": 336,
+      "changed": 24,
+      "real": 8
+    },
+    "peak_error_DN16": {
+      "weak-internal-phase": 0.0,
+      "weak-junction-phase": 0.0
+    },
+    "median_cpu_ms": {
+      "all": {
+        "weak-internal-phase": 35.64690850907937,
+        "weak-junction-phase": 44.02619256870821
+      },
+      "changed": {
+        "weak-internal-phase": 46.276373497676104,
+        "weak-junction-phase": 113.90519753331318
+      }
+    }
+  },
+  "natural": {
+    "authentic": {
+      "changed": {
+        "full": 0,
+        "local": 0
+      },
+      "average_DN16": {
+        "full": 0.0,
+        "local": 0.0
+      }
+    },
+    "mismatch": {
+      "changed": {
+        "full": 0,
+        "local": 0
+      },
+      "average_DN16": {
+        "full": 0.0,
+        "local": 0.0
+      }
+    }
+  },
+  "chart": {
+    "path": "/mnt/external/demosaic/local-junction-support-v1/gap-versus-interaction.png",
+    "sha256": "16ab2814d0f58a94025ad520b0493aeca96e5f6cc5263ca744b88f688a4d3953"
+  }
+}

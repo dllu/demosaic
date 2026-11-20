@@ -16,6 +16,11 @@ right-cab reconstruction with a fallback for the left. The left crop
 shows a faint lattice under both profiles. Most of the change comes
 from the exterior frequency pair.
 
+The [local junction follow-up](local-junction-support.md) evaluates the
+difference-frequency term over masked internal phase with matched additive
+controls and true wire gaps. Held evidence for both directions limits the
+spatial delivery.
+
 ## From two directions to a crossing
 
 The [exterior-phase fallback](query-exterior-witness.md) helps when only one

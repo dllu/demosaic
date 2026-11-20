@@ -7,6 +7,7 @@ from .cfa import PATTERNS
 _ROI_SIZE = 160
 _WINDOW = 64
 _POOLED_HALO = 16
+_JUNCTION_HALO = 48
 _POOLED_FOOTPRINT = _ROI_SIZE + 2 * _POOLED_HALO
 _DONOR = 128
 _FFT_SIZE = 256
@@ -203,6 +204,10 @@ def refine_raw_mesh_carriers(
     disjoint patches inside the crop when distant phase is unreliable or
     the direction ranking is ambiguous. Each tested station leaves its
     own samples and its immediate neighbors out of the phase fit.
+    The experimental `"weak-junction-phase"` method also checks a signed
+    difference frequency between the two fundamental wires. It requires a
+    256×256 `parent_context` and limits the added term to stations with
+    evidence for both wire directions.
     Donor clearance defaults to zero for `"local64"` and 16 pixels for
     the other methods.
 
@@ -250,11 +255,14 @@ def refine_raw_mesh_carriers(
         "weak-near-phase",
         "weak-replicated-phase",
         "weak-internal-phase",
+        "weak-junction-phase",
     )
     if method not in methods:
         raise ValueError(f"method must be one of {methods}")
     pooled = method in ("pooled", "pooled-color")
-    replicated_phase = method in ("weak-replicated-phase", "weak-internal-phase")
+    junction = method == "weak-junction-phase"
+    internal_phase = junction or method == "weak-internal-phase"
+    replicated_phase = internal_phase or method == "weak-replicated-phase"
     near_phase = replicated_phase or method == "weak-near-phase"
     phase_guarded = near_phase or method in ("weak-phase-guard", "weak-phase-contrast")
     weak_posterior = method == "weak-posterior" or phase_guarded
@@ -268,18 +276,20 @@ def refine_raw_mesh_carriers(
     ):
         raise ValueError(f"donor_clearance must be an integer of at least {minimum_clearance}")
     if needs_context:
+        halo = _JUNCTION_HALO if junction else _POOLED_HALO
+        side = _ROI_SIZE + 2 * halo
         if parent_context is None:
-            raise ValueError(f"{method} method requires a 192×192 parent_context")
+            raise ValueError(f"{method} method requires a {side}×{side} parent_context")
         parent_context = np.asarray(parent_context)
-        interior = np.s_[:, _POOLED_HALO:-_POOLED_HALO, _POOLED_HALO:-_POOLED_HALO]
+        interior = np.s_[:, halo:-halo, halo:-halo]
         if (
-            parent_context.shape != (3, _POOLED_FOOTPRINT, _POOLED_FOOTPRINT)
+            parent_context.shape != (3, side, side)
             or parent_context.dtype != parent.dtype
             or not np.isfinite(parent_context).all()
             or not np.array_equal(parent_context[interior], parent)
         ):
             raise ValueError(
-                "parent_context must contain the exact RGB parent and its 16-pixel halo"
+                f"parent_context must contain the exact RGB parent and its {halo}-pixel halo"
             )
     elif parent_context is not None:
         raise ValueError("parent_context is used by the pooled and weak-direction methods")
@@ -299,9 +309,13 @@ def refine_raw_mesh_carriers(
         if weak_posterior:
             from ._mesh_weak_posterior import _refine
 
-            return _refine(
+            context = parent_context
+            if junction:
+                inset = _JUNCTION_HALO - _POOLED_HALO
+                context = parent_context[:, inset:-inset, inset:-inset]
+            result = _refine(
                 parent,
-                parent_context,
+                context,
                 scene,
                 colors,
                 (x, y),
@@ -313,8 +327,26 @@ def refine_raw_mesh_carriers(
                 full_weak_strength=near_phase or method == "weak-phase-contrast",
                 near_phase=near_phase,
                 replicated_phase=replicated_phase,
-                internal_phase=method == "weak-internal-phase",
+                internal_phase=internal_phase,
             )
+            if junction:
+                from ._mesh_junction import _refine as refine_junction
+
+                try:
+                    return refine_junction(
+                        result,
+                        parent_context,
+                        scene,
+                        colors,
+                        (x, y),
+                        frequencies,
+                        shot,
+                        read,
+                        neutral / neutral[1],
+                    )
+                except np.linalg.LinAlgError:
+                    return result
+            return result
         if pooled:
             from ._mesh_pooled import _refine
 

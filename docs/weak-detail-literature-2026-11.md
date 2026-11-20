@@ -1048,6 +1048,14 @@ frequency is measurable on the right. Masking each delivery neighborhood
 from an inner phase pool gains 0.413 points on 24 new photos and changes
 the left cab diagonals subtly. Fine crossings remain incomplete.
 
+The [local junction check](local-junction-support.md) holds the measured
+difference-frequency term fixed and conditions delivery on both
+fundamentals being locally supported. On paired exact junction/additive
+captures of 24 new photos, it gains 2.768 interaction points over
+masked internal phase and adds 0.136 DN16 of gap luma versus 0.248
+for crop-wide delivery at equal recovery. Right cab crossings remain
+uneven.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

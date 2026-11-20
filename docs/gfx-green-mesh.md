@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Local wire check for a junction sideband](local-junction-support.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. Right changes by 2.67 and 2.77 DN16 RGB RMS versus masked internal phase, with uneven crossings and retained mottle |
 | [Masked internal phase](local-internal-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The left diagonals change subtly by 2.16 and 2.30 DN16 RGB RMS versus station-capped phase. Both fine crossings remain incomplete |
 | [Station-capped phase](local-replicated-phase.md#standing-gfx100s-comparisons) | Both ROIs and profiles reviewed at ×4 and ×16 with AHD and camera JPEGs. Left changes by 0.072 DN16 RGB RMS nominal and 0.041 transferred versus nearby phase. Right reproduces nearby phase and fine crossings remain incomplete |
 | [Independent phase with ambiguous rank](local-unranked-phase.md#standing-gfx100s-comparisons) | Both ROIs and profiles reviewed at ×4 and ×16. Left changes by 1.42 DN16 RGB RMS nominal and 1.37 transferred versus nearby phase, with incomplete crossings. Right reproduces nearby phase |

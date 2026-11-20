@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Local wire check for a junction sideband](local-junction-support.md#standing-gfx100s-comparisons) leaves sky, building and foliage at masked internal phase. The coarse fence keeps connected crossings and gains a small change in modulation.
+
 - [Masked internal phase](local-internal-phase.md#standing-gfx100s-comparisons) retains smooth sky and reproduces station-capped phase on the building, foliage and connected coarse fence.
 
 - [Station-capped phase](local-replicated-phase.md#standing-gfx100s-comparisons) retains the smooth sky, building, foliage and connected coarse fence of nearby phase.
