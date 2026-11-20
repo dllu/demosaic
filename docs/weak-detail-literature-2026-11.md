@@ -1010,6 +1010,15 @@ wider amplitude cap improves the paired response and also brightens
 the overly regular cab lattice. The two directions still lack connected
 crossings in the left ROI.
 
+[Whole-photo patch covariance](scene-patch-covariance.md) tests a
+second use of exterior measurements. It learns correlations between
+native cosine modes from nearby or visually similar exterior patches
+and applies them to the query's signed Bayer innovation. The two-green
+check improves response at fixed added correction energy, with higher
+independent increment and flat error. The simpler diagonal control
+also gives lower error in a repeat-pattern simulation at matched
+response. Both standing GFX families were viewed.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

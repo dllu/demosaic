@@ -37,6 +37,12 @@ has repeatedly come with extra flat-region error or false color. The
    The [fixed-proposal gain fits](scene-spectral-gain-headroom.md) find little
    extra weak-detail recovery even with exact local targets. The source-disjoint
    calibration favors higher gains and raises fine and quiet error.
+   The [whole-photo patch covariance test](scene-patch-covariance.md)
+   conditions the shape of a native green innovation with nearby or
+   similar exterior patches. Transposed covariance performs similarly
+   on independent natural targets, and calibration under independent
+   noise selects zero correction. Two-green confirmation improves response
+   at a fixed correction dose, with higher quiet and increment error.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

@@ -455,6 +455,11 @@ The real sky remains visually smooth and the fine cab crossings incomplete.
 additional weak response when both greens support the retained parent phase.
 Present error rises slightly and some texture enters attenuated controls.
 Both fine GFX meshes stay close to the preceding result.
+[Whole-photo patch covariance](scene-patch-covariance.md) adds 0.180 fine
+response points over Corpus 100k with two-green confirmation on 24
+independent ISO6400 photos. It raises fine-increment and flat error.
+The simpler diagonal reaches higher response. Fine cab crossings
+remain incomplete.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

@@ -91,6 +91,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [quiet-region smoothing with a separate detail lift](paired-flat-companion.md) ·
 [weak edges and independent-exposure supervision](weak-edge-distill.md) ·
 [whole-image RAW spectral priors](scene-spectrum-detail.md) ·
+[whole-photo patch covariance](scene-patch-covariance.md) ·
 [learned spectral corrections](learned-spectral-detail.md) ·
 [exact gap supervision and Bayer witnesses](learned-spectral-gaps.md) ·
 [between-bin Bayer phase refinement](subbin-spectral-witness.md) ·

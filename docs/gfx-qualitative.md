@@ -19,6 +19,10 @@ historical boards. Use these reports for the current completed comparisons:
   reduces the building correction from 1.61 to 0.74 DN16 camera-RGB
   RMS. The sky and foliage reproduce the parent. The coarse fence
   retains its crossings, with slightly less contrast in the aperture.
+- [Whole-photo patch covariance](scene-patch-covariance.md#standing-gfx100s-comparisons)
+  changes the sky by 0.190 DN16 RGB RMS with two-green confirmation.
+  The diagonal control has zero sky correction. The coarse fence
+  retains its crossings, with soft building wires and leaf details.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.
