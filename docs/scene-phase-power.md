@@ -12,6 +12,10 @@ filter reduces false projection in true gaps and loses intact response.
 [Frozen drivers and receipts](results/scene-phase-power-v1/evidence.tar.xz) ·
 [Native provenance](images/scene-phase-power-v1/manifest.json).
 
+[Query phase consensus](scene-query-consensus.md) lowers continuing-wire
+error by 0.198 DN16 on fresh off-grid fields. Its basis audit shows the
+weaker carrier energy spread over more Fourier pairs.
+
 ## What the donor prior measures
 
 The [dense cosine experiment](scene-dense-atlas.md) shows that nearby

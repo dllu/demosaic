@@ -61,6 +61,11 @@ has repeatedly come with extra flat-region error or false color. The
    two left peak projections at equal correction energy. At matched
    planted short-wire response, false projection falls and exact-flat
    RMS rises. The real crossings remain incomplete.
+   [Query phase consensus](scene-query-consensus.md) lowers continuing-wire
+   error in 24 fresh off-grid fields with similar false gap projection.
+   The best Fourier pair covers 44% of fresh weak-carrier energy at the
+   median, versus 63% on retained short wires. Dense cosine recovers
+   more of the fresh intact carrier.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

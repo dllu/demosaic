@@ -37,6 +37,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Phase-paired donor power](scene-phase-power.md#standing-gfx100s-comparisons)
   changes sky by 0.012 DN16 RGB RMS and coarse fence by 1.798.
   The sky stays smooth and existing fence crossings stay connected.
+- [Query phase consensus](scene-query-consensus.md#standing-gfx100s-comparisons)
+  changes sky by 0.012 DN16 RGB RMS and coarse fence by 1.781.
+  The coarse links stay connected and fine building and leaf detail stay soft.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.

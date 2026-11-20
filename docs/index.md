@@ -96,6 +96,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [wider Bayer windows and a separate low band](scene-patch-width.md) ·
 [dense nearby Bayer donors](scene-dense-atlas.md) ·
 [phase-paired donor power](scene-phase-power.md) ·
+[query phase consensus and off-grid transfer](scene-query-consensus.md) ·
 [learned spectral corrections](learned-spectral-detail.md) ·
 [exact gap supervision and Bayer witnesses](learned-spectral-gaps.md) ·
 [between-bin Bayer phase refinement](subbin-spectral-witness.md) ·

@@ -1048,6 +1048,13 @@ added RGB energy. The short-wire gain curve shows lower false
 projection and higher exact-flat error at the same recovered
 response. The real cab intersections remain incomplete.
 
+[Query phase consensus](scene-query-consensus.md) restricts amplitude
+updates to the phase supported by both query greens. Continuing-wire
+error falls 0.198 DN16 on 24 independent off-grid photo backgrounds.
+False gap projection changes by 0.004 DN16. Median weak-carrier energy
+in a single Fourier pair falls from 63% on retained wires to 44% off
+grid, where the dense cosine prior recovers more intact detail.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between
