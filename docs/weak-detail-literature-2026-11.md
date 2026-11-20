@@ -1304,6 +1304,15 @@ variance, extending the existing conditional-response work to the new heads.
 Evaluate phase/direction and off-target energy as well as template projection;
 a high projection can coexist with rounded nodes, doubled wires or false color.
 
+With frozen Local 50k proposals and two independent weak-texture
+redraws per photo, the stability loss raises held response 0.986
+points while lowering exact-flat RMS by 0.161 DN16. At the same
+response as the matched direct control, paired error falls 0.113
+DN16 and the off-target redraw difference is uncertain. Both
+off-target components rise versus Local 50k, and the direct
+control preserves more contrast on the weakest half and the
+planted wires. [Independent-redraw gate training](detail-redraw-gate.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,

@@ -79,6 +79,14 @@ are identical to Local 50k and the fine cab mesh still has incomplete
 crossings. The trained blend is experimental.
 [Direct weak-detail response training](direct-detail-response.md).
 
+Training the same gate on faint contrast and two independent redraws
+gains 0.986 fine-response points on 48 new ISO6400 photos and lowers
+exact-flat RMS by 0.161 DN16. At equal response the stability loss
+reduces paired error by 0.113 DN16 versus the matched direct control.
+The direct control recovers more contrast on the faintest half and
+on planted wires. Fine cab crossings remain incomplete.
+[Independent-redraw gate training](detail-redraw-gate.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Weak-detail training across redraws](detail-redraw-gate.md#standing-gfx100s-comparisons) changes the sky by 0.260 DN16 RGB RMS above Local 50k. The sky still looks smooth, foliage gains subtle definition and the coarse crossings remain connected.
+
 - [Direct weak-detail response](direct-detail-response.md#standing-gfx100s-comparisons) leaves the sky pixel-identical to Local 50k. Foliage and coarse fence change by 5.989 and 7.605 DN16 RGB RMS, with subtle sharpening and continuous coarse crossings.
 
 - [Trained exterior scene gate](scene-detail-selector.md#standing-gfx100s-comparisons) changes sky by 0.010 DN16 RGB RMS and coarse fence by 2.783 DN16 above Local 50k. Building and foliage change subtly and the coarse crossings stay connected.

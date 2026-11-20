@@ -11,6 +11,12 @@ increment error by **0.131 DN16**, with a **0.014 DN16** higher
 mean flat error. Native GFX crops show an unchanged overcast sky
 and incomplete fine fence crossings. The head remains experimental.
 
+The next matched run uses 512 further photos with two noise draws
+and weaker contrast. Its redraw-stability head gains 0.986 points
+while lowering exact-flat RMS on 48 new photos. It loses intact
+wire contrast and fine cab crossings remain incomplete.
+[Weak-detail training across redraws](detail-redraw-gate.md).
+
 ## Train against the delivered fine band
 
 The [previous gate study](scene-detail-selector.md) found a gap
