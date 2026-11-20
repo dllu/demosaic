@@ -1,0 +1,1046 @@
+{
+  "id": "corpus100k-overlap-v1",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "plans": {
+    "dynamic": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt-fp16-pyramid-b4-512-opt2.plan",
+      "sha256": "e4add621bf1344b1604c6a30e485445a13bf5e9e1dd1b72ee19709d61a7ad3f3"
+    },
+    "dino": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-dino-v1/dino-t512-l3.plan",
+      "sha256": "61c7e78dd9aeff5a8093937998e289c03ef25f532f4f0d35b1a3c10edc12af14"
+    }
+  },
+  "tile": 512,
+  "batch": 4,
+  "completed": {
+    "training": "Existing EMA",
+    "full_frame": true,
+    "numerical_review": true,
+    "native_review": true,
+    "fixed_photo_camera": "Prior fixed-context precision panels available. Changed full-image origins evaluated separately."
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+    "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+  },
+  "versions": {
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "torch-tensorrt": null,
+      "tensorrt": null,
+      "nvidia-modelopt": null,
+      "torchao": null,
+      "rawpy": "0.26.1"
+    },
+    "cuda": "13.0",
+    "cudnn": 92400,
+    "hardware": "NVIDIA GB10",
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "TensorRT": "11.4.0.106"
+  },
+  "startup_seconds": {
+    "decode_seconds": 6.461935229948722,
+    "checkpoint_seconds": 9.818454733002,
+    "engine_seconds": 1.7517284419154748
+  },
+  "timings": {
+    "eager64": {
+      "tiles": 520,
+      "overlap": 64,
+      "normalize_seconds": 0.32593790895771235,
+      "export_seconds": 2.0629261379363015
+    },
+    "compiled64": {
+      "tiles": 520,
+      "overlap": 64,
+      "normalize_seconds": 0.7252808129414916,
+      "export_seconds": 3.7406371869146824
+    },
+    "compiled48": {
+      "tiles": 494,
+      "overlap": 48,
+      "normalize_seconds": 0.7782004370819777,
+      "export_seconds": 4.243990542017855
+    },
+    "compiled32": {
+      "tiles": 475,
+      "overlap": 32,
+      "normalize_seconds": 0.7514074509963393,
+      "export_seconds": 2.50562459602952
+    }
+  },
+  "summary": {
+    "seconds": {
+      "forward_transfer": {
+        "eager64": 165.85499961674213,
+        "compiled64": 137.92777479276992,
+        "compiled48": 131.0497870359104,
+        "compiled32": 125.39631120522972
+      },
+      "blend": {
+        "eager64": 4.8370106420479715,
+        "compiled64": 4.547543396940455,
+        "compiled48": 4.3814396291272715,
+        "compiled32": 4.342515049036592
+      },
+      "tile_loop": {
+        "eager64": 170.6920102587901,
+        "compiled64": 142.47531818971038,
+        "compiled48": 135.43122666503768,
+        "compiled32": 129.7388262542663
+      }
+    },
+    "tile_loop_changes": {
+      "compiled64_vs_eager64": {
+        "percent": -16.530763230393585,
+        "block_bootstrap_95": [
+          -18.43269196777412,
+          -14.533502513021803
+        ]
+      },
+      "compiled48_vs_compiled64": {
+        "percent": -4.944078465080715,
+        "block_bootstrap_95": [
+          -8.567635537858518,
+          -1.203682218709406
+        ]
+      },
+      "compiled32_vs_compiled64": {
+        "percent": -8.939437438900832,
+        "block_bootstrap_95": [
+          -14.281075862479373,
+          -3.613998546432825
+        ]
+      }
+    }
+  },
+  "full": {
+    "compiled64_vs_ieee": {
+      "channels": 305987556,
+      "fraction_exact": 0.8665204280398906,
+      "fraction_within_one": 0.993696279596416,
+      "RMS_DN16": 0.5444872452318948,
+      "p95_99_999_DN16": [
+        1,
+        1,
+        5
+      ],
+      "max_DN16_and_sensor_xy_channel": [
+        163,
+        [
+          5436,
+          2582,
+          0
+        ]
+      ],
+      "seam_RMS_DN16": 0.47560805297452374,
+      "interior_RMS_DN16": 0.5494726070075021,
+      "roi": [
+        5356,
+        2502,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "near_observed_clipping": {
+        "within_6_px": {
+          "pixel_count": 290581,
+          "max_DN16": 163,
+          "RMS_DN16": 6.287413031444361
+        },
+        "elsewhere": {
+          "pixel_count": 101705271,
+          "max_DN16": 92,
+          "RMS_DN16": 0.4293811855558953
+        }
+      }
+    },
+    "compiled48_vs_compiled64": {
+      "channels": 305987556,
+      "fraction_exact": 0.12884222324387598,
+      "fraction_within_one": 0.3326437922200993,
+      "RMS_DN16": 10.188163746817311,
+      "p95_99_999_DN16": [
+        15,
+        29,
+        80
+      ],
+      "max_DN16_and_sensor_xy_channel": [
+        4479,
+        [
+          8563,
+          2559,
+          1
+        ]
+      ],
+      "seam_RMS_DN16": 12.561454960122319,
+      "interior_RMS_DN16": 9.986245364399693,
+      "roi": [
+        8483,
+        2479,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "near_observed_clipping": {
+        "within_6_px": {
+          "pixel_count": 290581,
+          "max_DN16": 4479,
+          "RMS_DN16": 114.90596453944023
+        },
+        "elsewhere": {
+          "pixel_count": 101705271,
+          "max_DN16": 3202,
+          "RMS_DN16": 8.146901883311237
+        }
+      }
+    },
+    "compiled32_vs_compiled64": {
+      "channels": 305987556,
+      "fraction_exact": 0.1404403942492354,
+      "fraction_within_one": 0.34917362129589347,
+      "RMS_DN16": 11.495569186511398,
+      "p95_99_999_DN16": [
+        15,
+        29,
+        86
+      ],
+      "max_DN16_and_sensor_xy_channel": [
+        9716,
+        [
+          8160,
+          3950,
+          2
+        ]
+      ],
+      "seam_RMS_DN16": 16.195646633716525,
+      "interior_RMS_DN16": 11.06977140557884,
+      "roi": [
+        8080,
+        3870,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "near_observed_clipping": {
+        "within_6_px": {
+          "pixel_count": 290581,
+          "max_DN16": 9716,
+          "RMS_DN16": 138.60511178340815
+        },
+        "elsewhere": {
+          "pixel_count": 101705271,
+          "max_DN16": 9033,
+          "RMS_DN16": 8.811189361559832
+        }
+      }
+    }
+  },
+  "exact": [
+    {
+      "scores": {
+        "ieee": {
+          "srgb_psnr": 33.86011555384946,
+          "linear_RGB_seam_RMSE_DN16": 1081.997555764085,
+          "linear_RGB_interior_RMSE_DN16": 987.6184626152868,
+          "delta_compiled64": {
+            "rms_DN16": 1.7495413328592517,
+            "max_DN16": 72.77037397027016,
+            "channel_mean_DN16": [
+              0.10057543171627242,
+              -0.006697615589349202,
+              -0.06311269620595981
+            ]
+          }
+        },
+        "eager64": {
+          "srgb_psnr": 33.86013914156116,
+          "linear_RGB_seam_RMSE_DN16": 1081.9840900012036,
+          "linear_RGB_interior_RMSE_DN16": 987.6086988086311,
+          "delta_compiled64": {
+            "rms_DN16": 1.8037280129810487,
+            "max_DN16": 75.84845200181007,
+            "channel_mean_DN16": [
+              -0.0028278501983316504,
+              0.0003350640251142195,
+              -0.009932129820116901
+            ]
+          }
+        },
+        "compiled64": {
+          "srgb_psnr": 33.860151210530915,
+          "linear_RGB_seam_RMSE_DN16": 1081.9775604633703,
+          "linear_RGB_interior_RMSE_DN16": 987.6144169205772,
+          "delta_compiled64": {
+            "rms_DN16": 0.0,
+            "max_DN16": 0.0,
+            "channel_mean_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "compiled48": {
+          "srgb_psnr": 33.8590108671409,
+          "linear_RGB_seam_RMSE_DN16": 1082.0289051776956,
+          "linear_RGB_interior_RMSE_DN16": 987.5907038900868,
+          "delta_compiled64": {
+            "rms_DN16": 10.570450683903946,
+            "max_DN16": 1198.5715547204018,
+            "channel_mean_DN16": [
+              0.22416690823298774,
+              -0.14347970115482256,
+              0.035721447483880335
+            ]
+          }
+        },
+        "compiled32": {
+          "srgb_psnr": 33.855458158212464,
+          "linear_RGB_seam_RMSE_DN16": 1083.5647298910576,
+          "linear_RGB_interior_RMSE_DN16": 988.0290455675814,
+          "delta_compiled64": {
+            "rms_DN16": 18.013380187240713,
+            "max_DN16": 2582.644185125828,
+            "channel_mean_DN16": [
+              0.3084580669018318,
+              -0.30409382362256027,
+              0.13817244367915926
+            ]
+          }
+        }
+      },
+      "title": "File:Alte Pinakothek lateral.jpg"
+    },
+    {
+      "scores": {
+        "ieee": {
+          "srgb_psnr": 27.743753750741792,
+          "linear_RGB_seam_RMSE_DN16": 2533.820098259442,
+          "linear_RGB_interior_RMSE_DN16": 2664.0971411033115,
+          "delta_compiled64": {
+            "rms_DN16": 176.17548008180444,
+            "max_DN16": 1831.065809726715,
+            "channel_mean_DN16": [
+              139.14801825352072,
+              29.400431002684062,
+              -0.9970736574442006
+            ]
+          }
+        },
+        "eager64": {
+          "srgb_psnr": 27.757625268218554,
+          "linear_RGB_seam_RMSE_DN16": 2532.431222265319,
+          "linear_RGB_interior_RMSE_DN16": 2662.3130407520443,
+          "delta_compiled64": {
+            "rms_DN16": 159.47125085323017,
+            "max_DN16": 1544.8358023166656,
+            "channel_mean_DN16": [
+              96.95774736700224,
+              38.38485102160365,
+              -0.0059367467047618605
+            ]
+          }
+        },
+        "compiled64": {
+          "srgb_psnr": 27.79306065587329,
+          "linear_RGB_seam_RMSE_DN16": 2530.0977994206105,
+          "linear_RGB_interior_RMSE_DN16": 2658.034842106683,
+          "delta_compiled64": {
+            "rms_DN16": 0.0,
+            "max_DN16": 0.0,
+            "channel_mean_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "compiled48": {
+          "srgb_psnr": 27.792884232477565,
+          "linear_RGB_seam_RMSE_DN16": 2537.163531473207,
+          "linear_RGB_interior_RMSE_DN16": 2658.099948049427,
+          "delta_compiled64": {
+            "rms_DN16": 782.6236796111712,
+            "max_DN16": 16753.10373902321,
+            "channel_mean_DN16": [
+              -73.93419338090595,
+              -45.35348905828579,
+              -0.3505644520849552
+            ]
+          }
+        },
+        "compiled32": {
+          "srgb_psnr": 27.795842402995895,
+          "linear_RGB_seam_RMSE_DN16": 2524.8623709840203,
+          "linear_RGB_interior_RMSE_DN16": 2653.5787603612544,
+          "delta_compiled64": {
+            "rms_DN16": 1276.900564714274,
+            "max_DN16": 35123.99529218674,
+            "channel_mean_DN16": [
+              -259.68844572419766,
+              -169.67348232281645,
+              -2.3946273011872514
+            ]
+          }
+        }
+      },
+      "title": "File:20180925 UCI Road World Championships Innsbruck Women Elite ITT Elisa Longo Borghini 850 8800.jpg"
+    },
+    {
+      "scores": {
+        "ieee": {
+          "srgb_psnr": 40.40444859664987,
+          "linear_RGB_seam_RMSE_DN16": 381.28148784017844,
+          "linear_RGB_interior_RMSE_DN16": 366.01274755530056,
+          "delta_compiled64": {
+            "rms_DN16": 1.172669676775984,
+            "max_DN16": 69.33878570795059,
+            "channel_mean_DN16": [
+              -0.004868162481572775,
+              0.018423544826900517,
+              -0.05093079631846757
+            ]
+          }
+        },
+        "eager64": {
+          "srgb_psnr": 40.40430464303233,
+          "linear_RGB_seam_RMSE_DN16": 381.2724581144081,
+          "linear_RGB_interior_RMSE_DN16": 366.0131396213097,
+          "delta_compiled64": {
+            "rms_DN16": 1.2178637267222496,
+            "max_DN16": 51.26093655824661,
+            "channel_mean_DN16": [
+              -0.0008856260467046127,
+              0.00392964688533349,
+              -0.01157615529280398
+            ]
+          }
+        },
+        "compiled64": {
+          "srgb_psnr": 40.40434381586528,
+          "linear_RGB_seam_RMSE_DN16": 381.27447916967446,
+          "linear_RGB_interior_RMSE_DN16": 366.01592227878234,
+          "delta_compiled64": {
+            "rms_DN16": 0.0,
+            "max_DN16": 0.0,
+            "channel_mean_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "compiled48": {
+          "srgb_psnr": 40.40232702321777,
+          "linear_RGB_seam_RMSE_DN16": 381.6141032971495,
+          "linear_RGB_interior_RMSE_DN16": 365.9994203846297,
+          "delta_compiled64": {
+            "rms_DN16": 8.890967165732595,
+            "max_DN16": 1343.8232445716858,
+            "channel_mean_DN16": [
+              0.04935709935924116,
+              -0.030494229096105236,
+              0.15867834470201705
+            ]
+          }
+        },
+        "compiled32": {
+          "srgb_psnr": 40.39721419348336,
+          "linear_RGB_seam_RMSE_DN16": 381.87239061694135,
+          "linear_RGB_interior_RMSE_DN16": 366.1346497596518,
+          "delta_compiled64": {
+            "rms_DN16": 13.098756530270537,
+            "max_DN16": 2748.4111869335175,
+            "channel_mean_DN16": [
+              0.035737970948901465,
+              -0.11279337965794013,
+              0.27623679851852373
+            ]
+          }
+        }
+      },
+      "title": "File:20181208 Retro Classic Bavaria Mercedes Benz 300SL R107 850 3316.jpg"
+    },
+    {
+      "scores": {
+        "ieee": {
+          "srgb_psnr": 25.220784011265515,
+          "linear_RGB_seam_RMSE_DN16": 7507.719450908508,
+          "linear_RGB_interior_RMSE_DN16": 7109.25396813067,
+          "delta_compiled64": {
+            "rms_DN16": 71.840711095012,
+            "max_DN16": 1543.906129002571,
+            "channel_mean_DN16": [
+              32.468171587296496,
+              1.9097422389514473,
+              26.740171708788694
+            ]
+          }
+        },
+        "eager64": {
+          "srgb_psnr": 25.222360308157405,
+          "linear_RGB_seam_RMSE_DN16": 7509.011389969723,
+          "linear_RGB_interior_RMSE_DN16": 7107.812435075335,
+          "delta_compiled64": {
+            "rms_DN16": 68.60407418048403,
+            "max_DN16": 1894.4945293664932,
+            "channel_mean_DN16": [
+              26.987917656949314,
+              0.7950528505200118,
+              20.12278789865692
+            ]
+          }
+        },
+        "compiled64": {
+          "srgb_psnr": 25.213025012837434,
+          "linear_RGB_seam_RMSE_DN16": 7520.955393545406,
+          "linear_RGB_interior_RMSE_DN16": 7112.782782025226,
+          "delta_compiled64": {
+            "rms_DN16": 0.0,
+            "max_DN16": 0.0,
+            "channel_mean_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "compiled48": {
+          "srgb_psnr": 25.113163502473988,
+          "linear_RGB_seam_RMSE_DN16": 7850.798969466796,
+          "linear_RGB_interior_RMSE_DN16": 7173.5366688123395,
+          "delta_compiled64": {
+            "rms_DN16": 845.6589806196582,
+            "max_DN16": 12825.944913625717,
+            "channel_mean_DN16": [
+              -156.6685406920785,
+              -1.0318578664293123,
+              286.7306251218787
+            ]
+          }
+        },
+        "compiled32": {
+          "srgb_psnr": 25.01857747076481,
+          "linear_RGB_seam_RMSE_DN16": 7841.300435556419,
+          "linear_RGB_interior_RMSE_DN16": 7239.72110104977,
+          "delta_compiled64": {
+            "rms_DN16": 971.6864166275471,
+            "max_DN16": 13051.707093715668,
+            "channel_mean_DN16": [
+              -270.32975685663047,
+              -0.08603172505842249,
+              259.4995082795352
+            ]
+          }
+        }
+      },
+      "title": "File:Statuette Karaj\u00e0 MHNT.ETH.2010.24.44-45-46.jpg"
+    },
+    {
+      "scores": {
+        "ieee": {
+          "srgb_psnr": 38.98049656563835,
+          "linear_RGB_seam_RMSE_DN16": 697.5660965446377,
+          "linear_RGB_interior_RMSE_DN16": 721.7834736947915,
+          "delta_compiled64": {
+            "rms_DN16": 2.8467815985115847,
+            "max_DN16": 140.79472661018372,
+            "channel_mean_DN16": [
+              0.17899856131106176,
+              0.05698880904975758,
+              -0.13269384341389753
+            ]
+          }
+        },
+        "eager64": {
+          "srgb_psnr": 38.980412944877365,
+          "linear_RGB_seam_RMSE_DN16": 697.5752918565889,
+          "linear_RGB_interior_RMSE_DN16": 721.7882454872891,
+          "delta_compiled64": {
+            "rms_DN16": 2.9704093241143057,
+            "max_DN16": 136.1385476589203,
+            "channel_mean_DN16": [
+              -0.010265597488419634,
+              0.03485132905309095,
+              -0.024182029412135056
+            ]
+          }
+        },
+        "compiled64": {
+          "srgb_psnr": 38.98036484139606,
+          "linear_RGB_seam_RMSE_DN16": 697.5890217387745,
+          "linear_RGB_interior_RMSE_DN16": 721.791771314289,
+          "delta_compiled64": {
+            "rms_DN16": 0.0,
+            "max_DN16": 0.0,
+            "channel_mean_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "compiled48": {
+          "srgb_psnr": 38.97846124315918,
+          "linear_RGB_seam_RMSE_DN16": 696.9046888529518,
+          "linear_RGB_interior_RMSE_DN16": 722.1547928348065,
+          "delta_compiled64": {
+            "rms_DN16": 27.033069546694005,
+            "max_DN16": 3087.8044456243515,
+            "channel_mean_DN16": [
+              0.7974160773123726,
+              0.04440994786262315,
+              0.2823900989426356
+            ]
+          }
+        },
+        "compiled32": {
+          "srgb_psnr": 38.97642666042008,
+          "linear_RGB_seam_RMSE_DN16": 697.0255154559372,
+          "linear_RGB_interior_RMSE_DN16": 722.0175878930173,
+          "delta_compiled64": {
+            "rms_DN16": 38.39858790968126,
+            "max_DN16": 3599.2146107554436,
+            "channel_mean_DN16": [
+              -1.0331102747907168,
+              -0.13559583733584596,
+              -0.03944295315712886
+            ]
+          }
+        }
+      },
+      "title": "File:20180925 UCI Road World Championships Innsbruck Women Elite ITT Kelly Murphy 850 8922.jpg"
+    },
+    {
+      "scores": {
+        "ieee": {
+          "srgb_psnr": 39.381587291854615,
+          "linear_RGB_seam_RMSE_DN16": 617.4298936716427,
+          "linear_RGB_interior_RMSE_DN16": 638.428684188683,
+          "delta_compiled64": {
+            "rms_DN16": 2.8627554788758554,
+            "max_DN16": 60.67094922065735,
+            "channel_mean_DN16": [
+              0.26785439156327373,
+              -0.08145922976343327,
+              -0.19174054424434625
+            ]
+          }
+        },
+        "eager64": {
+          "srgb_psnr": 39.38046081259448,
+          "linear_RGB_seam_RMSE_DN16": 617.4697487766724,
+          "linear_RGB_interior_RMSE_DN16": 638.4760213562038,
+          "delta_compiled64": {
+            "rms_DN16": 3.000330112742526,
+            "max_DN16": 62.178738713264465,
+            "channel_mean_DN16": [
+              0.03816105498095574,
+              -0.0012255315483049773,
+              -0.018534128124984086
+            ]
+          }
+        },
+        "compiled64": {
+          "srgb_psnr": 39.380376652298935,
+          "linear_RGB_seam_RMSE_DN16": 617.4603069764594,
+          "linear_RGB_interior_RMSE_DN16": 638.4830243631084,
+          "delta_compiled64": {
+            "rms_DN16": 0.0,
+            "max_DN16": 0.0,
+            "channel_mean_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "compiled48": {
+          "srgb_psnr": 39.386524962274564,
+          "linear_RGB_seam_RMSE_DN16": 618.3336861577676,
+          "linear_RGB_interior_RMSE_DN16": 638.6266408181677,
+          "delta_compiled64": {
+            "rms_DN16": 13.57052448036082,
+            "max_DN16": 1464.1651582717896,
+            "channel_mean_DN16": [
+              -0.44560787006202607,
+              0.18671344546251498,
+              0.15445821529390075
+            ]
+          }
+        },
+        "compiled32": {
+          "srgb_psnr": 39.37580749323436,
+          "linear_RGB_seam_RMSE_DN16": 619.796583746526,
+          "linear_RGB_interior_RMSE_DN16": 638.7683271080377,
+          "delta_compiled64": {
+            "rms_DN16": 23.58904997181642,
+            "max_DN16": 2728.434929251671,
+            "channel_mean_DN16": [
+              0.9648328961753246,
+              -0.5299903387455808,
+              -0.5891308132595912
+            ]
+          }
+        }
+      },
+      "title": "File:Pepino de mar (Bohadschia argus), Anilao, Filipinas, 2023-08-22, DD 151.jpg"
+    }
+  ],
+  "seams": {
+    "iso400": {
+      "compiled48": {
+        "weak_response_pct": {
+          "value": 96.16365113833864,
+          "base": 96.0473363954397,
+          "mean_delta": 0.11631474289892907,
+          "lo": -0.1018875240996664,
+          "hi": 0.5429501946140647
+        },
+        "strong_response_pct": {
+          "value": 100.19773194339174,
+          "base": 100.20276802612277,
+          "mean_delta": -0.005036082731026663,
+          "lo": -0.21063545415091767,
+          "hi": 0.18334206148756493
+        },
+        "increment_RMS_DN16": {
+          "value": 86.31221626724144,
+          "base": 86.26141955135752,
+          "mean_delta": 0.050796715883915766,
+          "lo": -0.19254020101405445,
+          "hi": 0.18798726581823644
+        },
+        "flat_luma_RMS_DN16": {
+          "value": 6.717770025841429,
+          "base": 6.646327477156808,
+          "mean_delta": 0.0714425486846219,
+          "lo": -0.16775870801360515,
+          "hi": 0.24441505399106767
+        },
+        "flat_chroma_RMS_DN16": {
+          "value": 9.51811102739371,
+          "base": 9.377274302878657,
+          "mean_delta": 0.140836724515052,
+          "lo": -0.492721294140253,
+          "hi": 0.7191548376460144
+        },
+        "worst_flat_bias_DN16": {
+          "value": 8.362599651229234,
+          "base": 8.77099914289279,
+          "mean_delta": -0.408399491663557,
+          "lo": -4.741063988805362,
+          "hi": 0.8742076108794494
+        },
+        "gap_luma_RMS_DN16": {
+          "value": 58.79683350223311,
+          "base": 58.779905817697575,
+          "mean_delta": 0.01692768453553839,
+          "lo": -0.24460927517434072,
+          "hi": 0.21756628548142487
+        },
+        "weak_gap_error_DN16": {
+          "value": 2.2238870017612298,
+          "base": 2.1771300784678362,
+          "mean_delta": 0.04675692329339349,
+          "lo": -0.07681149570090584,
+          "hi": 0.14705877861240713
+        },
+        "paired_leaked_weak_DN16": {
+          "value": 3.19758365982474,
+          "base": 3.163489282997792,
+          "mean_delta": 0.034094376826947964,
+          "lo": -0.09176162086228246,
+          "hi": 0.13359583532283192
+        }
+      },
+      "compiled32": {
+        "weak_response_pct": {
+          "value": 96.31331312647497,
+          "base": 96.0473363954397,
+          "mean_delta": 0.2659767310352675,
+          "lo": -0.2264793892250907,
+          "hi": 1.184758179013187
+        },
+        "strong_response_pct": {
+          "value": 100.19465545291841,
+          "base": 100.20276802612277,
+          "mean_delta": -0.008112573204358616,
+          "lo": -0.20101348175687406,
+          "hi": 0.276152353782237
+        },
+        "increment_RMS_DN16": {
+          "value": 86.49332551349033,
+          "base": 86.26141955135752,
+          "mean_delta": 0.2319059621328042,
+          "lo": -0.2508724022111011,
+          "hi": 0.5450227368892939
+        },
+        "flat_luma_RMS_DN16": {
+          "value": 6.893218197888494,
+          "base": 6.646327477156808,
+          "mean_delta": 0.24689072073168639,
+          "lo": -0.08538421537524776,
+          "hi": 0.5696143603922312
+        },
+        "flat_chroma_RMS_DN16": {
+          "value": 9.793175032315624,
+          "base": 9.377274302878657,
+          "mean_delta": 0.41590072943696604,
+          "lo": -0.3056451920910277,
+          "hi": 1.3842290006038702
+        },
+        "worst_flat_bias_DN16": {
+          "value": 8.134956313927317,
+          "base": 8.77099914289279,
+          "mean_delta": -0.6360428289654741,
+          "lo": -8.448785973148158,
+          "hi": 1.688337220749215
+        },
+        "gap_luma_RMS_DN16": {
+          "value": 58.95680007566075,
+          "base": 58.779905817697575,
+          "mean_delta": 0.17689425796317515,
+          "lo": -0.32123545896055106,
+          "hi": 0.7556794146592196
+        },
+        "weak_gap_error_DN16": {
+          "value": 2.2428121117239592,
+          "base": 2.1771300784678362,
+          "mean_delta": 0.06568203325612289,
+          "lo": -0.0930936723821354,
+          "hi": 0.2523055594098227
+        },
+        "paired_leaked_weak_DN16": {
+          "value": 3.2864832591229534,
+          "base": 3.163489282997792,
+          "mean_delta": 0.1229939761251611,
+          "lo": -0.15929842025456553,
+          "hi": 0.3877952959204307
+        }
+      }
+    },
+    "iso6400": {
+      "compiled48": {
+        "weak_response_pct": {
+          "value": 39.04814692373051,
+          "base": 39.05516800783323,
+          "mean_delta": -0.007021084102717179,
+          "lo": -0.25772111229631633,
+          "hi": 0.3377314972814318
+        },
+        "strong_response_pct": {
+          "value": 73.09344642254135,
+          "base": 73.45039857581095,
+          "mean_delta": -0.3569521532696041,
+          "lo": -1.2862842018461436,
+          "hi": 0.42834626741559134
+        },
+        "increment_RMS_DN16": {
+          "value": 189.54310537396077,
+          "base": 189.58112706994416,
+          "mean_delta": -0.038021695983400626,
+          "lo": -0.8241793182782544,
+          "hi": 0.8121157155840706
+        },
+        "flat_luma_RMS_DN16": {
+          "value": 15.754850167651188,
+          "base": 15.468073799996834,
+          "mean_delta": 0.2867763676543554,
+          "lo": -0.8526222161878252,
+          "hi": 1.029212470089048
+        },
+        "flat_chroma_RMS_DN16": {
+          "value": 21.52790314386489,
+          "base": 21.201903493199435,
+          "mean_delta": 0.3259996506654565,
+          "lo": -2.0927432777765276,
+          "hi": 1.6131407424139645
+        },
+        "worst_flat_bias_DN16": {
+          "value": 21.09571029759871,
+          "base": 23.37594568382032,
+          "mean_delta": -2.280235386221608,
+          "lo": -9.49161704189903,
+          "hi": 1.4242695092359234
+        },
+        "gap_luma_RMS_DN16": {
+          "value": 153.5455048557527,
+          "base": 153.16229427487426,
+          "mean_delta": 0.3832105808784713,
+          "lo": -0.25576999583771,
+          "hi": 3.2883370912250314
+        },
+        "weak_gap_error_DN16": {
+          "value": 5.7893943122850375,
+          "base": 5.709172518108337,
+          "mean_delta": 0.08022179417670024,
+          "lo": -0.5556370574585898,
+          "hi": 0.5928206675066399
+        },
+        "paired_leaked_weak_DN16": {
+          "value": 8.18948520530741,
+          "base": 8.334083351226306,
+          "mean_delta": -0.14459814591889683,
+          "lo": -0.9514693469433908,
+          "hi": 0.2881609456537575
+        }
+      },
+      "compiled32": {
+        "weak_response_pct": {
+          "value": 39.460793928201895,
+          "base": 39.05516800783323,
+          "mean_delta": 0.40562592036866335,
+          "lo": -0.3602836104018614,
+          "hi": 1.3910919370907955
+        },
+        "strong_response_pct": {
+          "value": 72.96109864905692,
+          "base": 73.45039857581095,
+          "mean_delta": -0.48929992675402484,
+          "lo": -3.046241122480019,
+          "hi": 0.35738094239904683
+        },
+        "increment_RMS_DN16": {
+          "value": 190.26523429637746,
+          "base": 189.58112706994416,
+          "mean_delta": 0.6841072264332956,
+          "lo": -1.1695505927062584,
+          "hi": 2.4241104429835048
+        },
+        "flat_luma_RMS_DN16": {
+          "value": 16.46194508217363,
+          "base": 15.468073799996834,
+          "mean_delta": 0.9938712821767991,
+          "lo": -0.2962064554060113,
+          "hi": 3.7710569396007347
+        },
+        "flat_chroma_RMS_DN16": {
+          "value": 22.54969795275197,
+          "base": 21.201903493199435,
+          "mean_delta": 1.3477944595525344,
+          "lo": -1.498873221678842,
+          "hi": 3.485702367873202
+        },
+        "worst_flat_bias_DN16": {
+          "value": 22.060555918128493,
+          "base": 23.37594568382032,
+          "mean_delta": -1.3153897656918276,
+          "lo": -7.358930024323538,
+          "hi": 4.809278941234801
+        },
+        "gap_luma_RMS_DN16": {
+          "value": 153.64981565870448,
+          "base": 153.16229427487426,
+          "mean_delta": 0.48752138383023197,
+          "lo": -1.7970273666099388,
+          "hi": 3.2520083776775834
+        },
+        "weak_gap_error_DN16": {
+          "value": 5.763474083351595,
+          "base": 5.709172518108337,
+          "mean_delta": 0.054301565243258486,
+          "lo": -1.0066449212008521,
+          "hi": 1.2083456991689792
+        },
+        "paired_leaked_weak_DN16": {
+          "value": 8.292810235074457,
+          "base": 8.334083351226306,
+          "mean_delta": -0.04127311615184966,
+          "lo": -1.1956810372011626,
+          "hi": 1.2836710991842644
+        }
+      }
+    }
+  },
+  "receipts": {
+    "benchmark": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/benchmark.json",
+      "sha256": "8a2a6962729cb03ddc2b69a12667ebfaeac89c38cd27d4b45e57a2c4ee271669"
+    },
+    "full-review": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/full-review.json",
+      "sha256": "d6c9a4b1fa3d19ee2df51d852b27c7b92c46f329b1055e515765d1fbef81f821"
+    },
+    "quality": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/quality.json",
+      "sha256": "2380b7db7b94b892ff9cd04ce209d4dfcfa2bc689d7b2603b96fc0577e131130"
+    },
+    "seams": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/seams.json",
+      "sha256": "b0c91debfe704b720275275a4a71505ee6e46fc7e066225b075a2c3b491f7aed"
+    },
+    "visual-review": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/visual-review.json",
+      "sha256": "a61eea6d35b4a368592f6017806b538815b6a1744db26c07edb40189438448d8"
+    }
+  },
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/benchmark.py",
+      "sha256": "6709ea72230abc2064f1a45b4b3295c3c476164a67626100f0b323201eedc3b6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/review_geometry.py",
+      "sha256": "e679697d96165c29c388d38c698b8accd89d3f878bfbe8a7520a74b8b899a18d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/seams.py",
+      "sha256": "ca2ceade6556418d34aaef15915bb974bf60e73323803e3dbca6e094da07f170"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/prepare_views.py",
+      "sha256": "54b15b9ec8296f94839ceb85db8de58e8732560df865a2a4beaeda3f52839b5e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/record_visual.py",
+      "sha256": "9f2b5ea07936bac6ddfcf87801002f9c311a34a965f36401dad95ca086940300"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-overlap-v1/publish.py",
+      "sha256": "e8220f9f53ecfc784b4a4b0627a1f85d5d7a46dffc7e5b0744d791ffeba5c786"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-dino-v1/review.py",
+      "sha256": "ddc8d9c14d55f34fa12914e2a6164a9301893aab442ec4e7deb21dce6ce33e4d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-dino-v1/dino_review.py",
+      "sha256": "ddc8d9c14d55f34fa12914e2a6164a9301893aab442ec4e7deb21dce6ce33e4d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-dino-v1/dino_engine.py",
+      "sha256": "a82285dbcdd6e8d84065b28cb6bae16676e68ec434ba9e9bdaa77122f459bdbd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/full_quality.py",
+      "sha256": "b516174b9cd27d37e722bd4038a5ff21901229edc6f9b5cecdbcd2666f1b1b44"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/wires.py",
+      "sha256": "96a126c7be0b0333b66027c7352532d30b6491a7b38486c26edf5097e546e72b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-trt-tactics-v1/tactics.py",
+      "sha256": "cd3ffb0408d9dfa5ec03f5430543e2771a3064320e1d9462da5761b076df986b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/inference.py",
+      "sha256": "75592172984ac77b463b121a7fd2d6bfd954818a2bf0333643107f16e906445f"
+    }
+  ],
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-overlap-v1/manifest.json",
+    "sha256": "f931517d3e693071bdc36a9836b5c5bee626f81f0ff9019757a86485a5006e78"
+  },
+  "evidence": {
+    "path": "/home/dllu/proj/demosaic/docs/results/corpus100k-overlap-v1/evidence.tar.xz",
+    "sha256": "f15d12633e33797e2396b82591f5a43615ab84cc730d1b64a3ead7002e9fb085"
+  }
+}

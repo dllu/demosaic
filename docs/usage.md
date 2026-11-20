@@ -437,8 +437,11 @@ Weak-wire response and the native GFX crops stay visually close to FP32.
 Use `--tile 512 --overlap 64 --batch-size 4` to reproduce that geometry.
 `--batch-size 2` lowers peak PyTorch CUDA allocation from 2.12 to 1.24 GB
 on the 102 MP frame, with similar speed and small RGB16 differences.
-Larger tiles with less overlap change some clipped colors.
-[Tile settings and native evidence](corpus100k-fp16-throughput.md).
+Larger tiles with less overlap change some clipped colors. With 512-pixel
+tiles and the compiled FP16 engines, reducing overlap alone to 32 also
+produces larger changes around bright lights and seams.
+[Tile settings and native evidence](corpus100k-fp16-throughput.md) ·
+[Fixed-size overlap comparison](corpus100k-overlap.md).
 Device-resident blending and CUDA Graph replay take about the same time
 on 102 MP and roughly double peak CUDA allocation.
 Full-frame cuDNN search in FP16 gives no repeatable gain. Use the

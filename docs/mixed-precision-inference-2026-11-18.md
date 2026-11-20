@@ -27,6 +27,11 @@ are on two exact-target contexts. The [full DINO compilation follow-up](corpus10
 keeps normalization and residual arithmetic in FP32. It cuts resident
 DINO time by 35.3% and saves 4.1% in the paired 102 MP tile loop versus
 the TensorRT trunk with eager DINO.
+The [fixed-size overlap follow-up](corpus100k-overlap.md) finds a 16.5%
+paired tile-loop reduction for the compiled trunk and DINO versus eager
+FP16 at overlap 64. Reducing overlap to 32 saves another 8.9% and
+changes the full-frame tile origins. The follow-up checks those origins
+on highlights, exact wire gaps and the fine cab mesh.
 The [local 50k FP16 replay](local-50000-scoped.md#fp16-inference-at-fixed-geometry)
 also preserves the measured ISO6400 weak responses and both standing
 GFX crop sets. Resident 512-pixel batch-four forward time falls 6.19×

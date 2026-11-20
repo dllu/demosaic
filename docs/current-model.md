@@ -45,7 +45,12 @@ gain in a paired tile loop including transfer and blending. The full RGB16
 output differs by 0.544 DN16 RMS from IEEE FP32, and the fixed photo and
 camera means move by at most 0.00024 dB versus the trunk-only engine.
 Near-white background cases still show the largest photo differences.
-[Compiled DINO review](corpus100k-trt-dino.md).
+A new paired full-frame tile loop confirms a 16.5% reduction from
+compiling both networks at the same 512/64 geometry. Reducing overlap to
+32 saves another 8.9%, with larger changes at seams and around bright
+lights. The full-frame RMS difference rises to 11.50 DN16 versus the
+matched compiled 512/64 export. [Compiled DINO review](corpus100k-trt-dino.md) ·
+[Fixed-tile overlap review](corpus100k-overlap.md).
 [Tile geometry and TensorRT quality](corpus100k-fp16-throughput.md) ·
 [CUDA tile transport](corpus100k-device-tiles.md) ·
 [Full-frame cuDNN search](corpus100k-cudnn-fp16.md).
