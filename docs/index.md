@@ -81,6 +81,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [exterior RAW wire verification](wire-exterior-verification.md) ·
 [held-out wire-frequency refinement and left cab donors](wire-frequency-refinement.md) ·
 [directional support for interrupted weak wires](wire-segment-support.md) ·
+[measuring missing contrast along weak wires](wire-regional-amplitude.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [paired fine luminance and flat support](paired-luminance-detail.md) ·
 [exact orientation averaging](paired-head-symmetry.md) ·

@@ -63,6 +63,12 @@ have a tinted weak carrier. Two independent redraws per source and
 role use matched Bayer/camera transforms. Supplied geometry and rounded
 native-DFT guides isolate the local evidence test.
 
+A [later audit](wire-regional-amplitude.md#independent-partial-break-panel)
+verified zero source ID or full cache-hash overlap for all 48 photos.
+The original driver checked the cache-hash length against the photo-count
+constant and missed the hash check during capture. The audit used the
+original cohort bindings and preserved the earlier receipts.
+
 The full path uses the aligned-control EMA
 `e1e706a7c5a49da96dfb77a7779126504a2aa85d8626567a09d4690b0b30b9ec`
 over Corpus 100k and the V120 EMA comparison

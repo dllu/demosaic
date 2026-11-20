@@ -1002,6 +1002,14 @@ part of each phase cycle left uncovered by the front wire. It suppresses
 the additive fit's junction error on constructed occlusions. Uncertain
 local support and unsupported real exterior phases still limit delivery.
 
+The [regional Bayer contrast test](wire-regional-amplitude.md) keeps
+that support fixed and pools phase-compatible measurements along the
+wire. At equal correction energy, the independent ISO6400 preserved
+luma gain is 0.033 DN16 and the response interval spans zero. A
+wider amplitude cap improves the paired response and also brightens
+the overly regular cab lattice. The two directions still lack connected
+crossings in the left ROI.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

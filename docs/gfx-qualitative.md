@@ -15,6 +15,10 @@ historical boards. Use these reports for the current completed comparisons:
   reduce the building aperture's previous hard-gate correction from
   3.98 to 1.61 DN16 RGB RMS. The sky stays smooth and the coarse fence
   keeps its crossings.
+- [Regional wire contrast](wire-regional-amplitude.md#standing-gfx100s-comparisons)
+  reduces the building correction from 1.61 to 0.74 DN16 camera-RGB
+  RMS. The sky and foliage reproduce the parent. The coarse fence
+  retains its crossings, with slightly less contrast in the aperture.
 - [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons)
   keeps the main sky smooth and coarse crossings coherent. The support-only
   lift is largest in foliage, where small leaf subdivisions remain soft.

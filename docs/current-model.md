@@ -398,6 +398,11 @@ uniform delivery. At ISO6400, response falls 0.323 points and false
 projection rises 0.178 DN16. Both left-cab profiles receive small
 corrections without visible connected crossings. A known-break
 diagnostic adds just 0.55 ISO6400 response points at this lift strength.
+[Estimating contrast along the wire](wire-regional-amplitude.md) lowers
+preserved ISO6400 luma error by 0.033 DN16 at matched correction strength.
+The weak response rises 0.23 points with an interval spanning zero. A wider
+cap recovers 0.98 more points and strengthens the regular right cab patch.
+Fine cab crossings remain incomplete.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.
