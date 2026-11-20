@@ -45,6 +45,7 @@ Start with the [README](../README.md) for installation and inference.
 [Exterior phase to check weak Bayer detail](local-phase-extent.md) ·
 [Curved weak phase transport](local-curved-phase-transport.md) ·
 [Recovering weak contrast under a separate phase check](local-weak-contrast.md) ·
+[Nearby RAW phase when the distant check fails](local-near-phase.md) ·
 [Learned Bayer gains](local-bayer-gain.md) ·
 [Spatially varying Bayer carrier phase](local-carrier-envelope.md) ·
 [Pooled Bayer phase](local-pooled-carrier.md) ·

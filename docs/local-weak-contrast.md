@@ -2,6 +2,8 @@
 
 On 48 new ISO6400 photo-based fixtures, `weak-phase-contrast` recovers **0.921 percentage points** more faint contrast and lowers intact weak error by **0.694 DN16** versus the full weak posterior. Luma changes in true gaps rise from **0.046 to 0.056 DN16**. At equal added gap luma, the gain is **0.401 points**. All 48 ordinary-photo controls retain their parent pixels with their original RAW context. Both right cab crops use the existing phase-guard fallback and still lack fine crossings.
 
+The [nearby phase follow-up](local-near-phase.md) tests a closer RAW collar when the distant fit fails and changes both right cab views, with fine crossings still incomplete.
+
 ## What limits the correction
 
 The [weak posterior](local-conditional-posterior.md) first selects a delivery window from its presence probability. It then uses the same probability to scale the fitted amplitude and caps the update at the measured center amplitude. Across calibration and four evaluation panels the cap engages in **one of 1,634** admitted weak windows. Removing it leaves the new panel's response and gap scores identical. The median inclusion strength on admitted windows is 0.374 on that panel. Applying the full fitted amplitude to every admitted window without the exterior check gains 2.869 points and raises added gap luma from 0.046 to 0.166 DN16.

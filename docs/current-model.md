@@ -206,6 +206,12 @@ gains 0.921 weak-response points on 48 new ISO6400 photos, or 0.401 at equal
 added gap luma. The stricter fixed guard has lower gap luma at its original
 strength. Fine cab crossings remain incomplete.
 
+The opt-in [nearby phase fallback](local-near-phase.md) pools a 32-pixel
+RAW collar when distant phase fails. With shifted distant phase on 32 new
+photos it gains 0.719 response points over weak phase contrast, with 0.025
+DN16 lower mean added gap luma and an interval spanning zero. It changes
+both right cab views. Fine crossings remain incomplete.
+
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both
 phase estimates are available. Its taper adds 0.102 response points over

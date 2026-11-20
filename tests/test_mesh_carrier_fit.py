@@ -100,6 +100,7 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
         "weak-posterior",
         "weak-phase-guard",
         "weak-phase-contrast",
+        "weak-near-phase",
     ),
 )
 def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
@@ -134,7 +135,14 @@ def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
 
 @pytest.mark.parametrize(
     "method",
-    ("pooled", "pooled-color", "weak-posterior", "weak-phase-guard", "weak-phase-contrast"),
+    (
+        "pooled",
+        "pooled-color",
+        "weak-posterior",
+        "weak-phase-guard",
+        "weak-phase-contrast",
+        "weak-near-phase",
+    ),
 )
 def test_pooled_fit_requires_context_and_independent_donors(method):
     raw = scene_fixture()
@@ -208,6 +216,27 @@ def test_weak_phase_contrast_falls_back_to_guard_when_exterior_phase_is_unreliab
     contrast = refine_raw_mesh_carriers(*args, method="weak-phase-contrast", **kwargs)
     assert np.any(guarded != parent)
     np.testing.assert_array_equal(contrast, guarded)
+
+
+@pytest.mark.parametrize("pattern", tuple(PATTERNS))
+def test_near_phase_rejects_a_true_gap_inside_eligible_surroundings(pattern):
+    from demosaic._mesh_near_phase import _near_taper
+    from demosaic.mesh_carrier_fit import _positions
+
+    origin = (151, 149)
+    y, x = np.indices((480, 480), dtype=np.float64)
+    frequencies = np.array(((0.1171875, 0.07421875), (0.08984375, -0.072265625)))
+    strong = 0.014 * np.cos(2 * np.pi * (frequencies[0, 0] * x + frequencies[0, 1] * y))
+    weak = 0.006 * np.cos(2 * np.pi * (frequencies[1, 0] * x + frequencies[1, 1] * y) - 0.8)
+    inside = (x >= origin[0]) & (x < origin[0] + 160) & (y >= origin[1]) & (y < origin[1] + 160)
+    gap = inside & (abs(x - 230.5) < 29)
+    raw = pack(0.08 + strong + np.where(gap, 0, weak))
+    eligible, weight = _near_taper(
+        raw, origin, _positions(PATTERNS[pattern], *origin), frequencies, 1, 0.00128, 6.5536e-6
+    )
+    assert eligible.min() == 1
+    assert weight[:, :32].mean() > 0.9
+    assert weight[:, 68:92].mean() < 0.05
 
 
 def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():

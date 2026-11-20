@@ -135,6 +135,9 @@ RAW evidence. [Results and timing](local-phase-extent.md#packaged-crop-fit).
 `method="weak-phase-contrast"` uses the same inputs, with full fitted strength
 on the same admitted windows when the surrounding phase is reliable. It recovers
 more faint contrast on exact targets, with some increase in gap texture. [Results and timing](local-weak-contrast.md#packaged-crop-fit).
+`method="weak-near-phase"` uses the same inputs and pools the immediately
+surrounding 32 pixels when distant phase fails. It checks that predicted phase
+inside the existing weak windows. [Results and timing](local-near-phase.md#packaged-crop-fit).
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·

@@ -192,6 +192,9 @@ def refine_raw_mesh_carriers(
     The experimental `"weak-phase-contrast"` method uses full fitted strength
     on the same admitted windows when the exterior phase is reliable, with the
     same local taper and measured amplitude cap.
+    The experimental `"weak-near-phase"` method also verifies phase from a
+    32-pixel collar when the distant phase is unreliable. It keeps the same
+    weak-direction admission.
     Donor clearance defaults to zero for `"local64"` and 16 pixels for
     the other methods.
 
@@ -236,11 +239,12 @@ def refine_raw_mesh_carriers(
         "weak-posterior",
         "weak-phase-guard",
         "weak-phase-contrast",
+        "weak-near-phase",
     )
     if method not in methods:
         raise ValueError(f"method must be one of {methods}")
     pooled = method in ("pooled", "pooled-color")
-    phase_guarded = method in ("weak-phase-guard", "weak-phase-contrast")
+    phase_guarded = method in ("weak-phase-guard", "weak-phase-contrast", "weak-near-phase")
     weak_posterior = method == "weak-posterior" or phase_guarded
     needs_context = pooled or weak_posterior
     minimum_clearance = 0 if method == "local64" else _POOLED_HALO
@@ -294,7 +298,8 @@ def refine_raw_mesh_carriers(
                 read,
                 neutral / neutral[1],
                 guard_clearance=int(clearance) if phase_guarded else None,
-                full_weak_strength=method == "weak-phase-contrast",
+                full_weak_strength=method in ("weak-phase-contrast", "weak-near-phase"),
+                near_phase=method == "weak-near-phase",
             )
         if pooled:
             from ._mesh_pooled import _refine

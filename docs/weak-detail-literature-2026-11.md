@@ -1018,6 +1018,13 @@ at equal added gap luma on 48 new photos. Both right cab profiles still
 use the fixed fallback. In the planted-exterior mismatch control, its
 added RGB texture falls between the fixed guard and full weak posterior.
 
+The [nearby phase fallback](local-near-phase.md) pools an exterior collar
+along the weak wire and checks the predicted phase inside the delivery crop.
+On 32 new photo-based fixtures with identical noisy recipients and shifted
+distant phase, it gains 0.719 points over weak phase contrast and changes
+mean added gap luma by −0.025 DN16. The gap interval spans zero. The new
+mode uses nearby phase in both right cab views, with incomplete crossings.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

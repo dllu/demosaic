@@ -79,6 +79,7 @@ def _refine(
     *,
     guard_clearance=None,
     full_weak_strength=False,
+    near_phase=False,
 ):
     positions = _positions(colors, *origin)
     greens = tuple(_footprint(scene, origin, position) for position in positions)
@@ -100,6 +101,7 @@ def _refine(
         for plane, site in zip(greens, positions, strict=True)
     )
     taper = None
+    near_taper = None
     if first is not None and first == second:
         weak = 1 - first
         revised = _weak_correction(
@@ -123,6 +125,25 @@ def _refine(
                     corrections[weak],
                     full_strength=True,
                 )
+            elif near_phase:
+                from ._mesh_near_phase import _near_taper
+
+                near_taper = _near_taper(scene, origin, positions, frequencies, weak, shot, read)
+                if near_taper is not None:
+                    near_patches = _weak_correction(
+                        parent,
+                        wave,
+                        weak,
+                        positions,
+                        observed,
+                        shot,
+                        read,
+                        corrections[weak],
+                        full_strength=True,
+                    )
+                    near_detail = parent + _rgb(
+                        near_patches + corrections[1 - weak], neutral, parent.dtype
+                    )
         corrections[weak] = revised
     combined = corrections[0] + corrections[1]
     if taper is None and not combined.any():
@@ -130,4 +151,9 @@ def _refine(
     result = parent + _rgb(combined, neutral, parent.dtype)
     if taper is not None:
         result = (baseline + taper * (result.astype(np.float64) - baseline)).astype(parent.dtype)
+    if near_taper is not None:
+        area, weight = near_taper
+        mixed = (1 - area) * result + area * baseline
+        mixed += weight * (near_detail.astype(np.float64) - baseline)
+        result = mixed.astype(parent.dtype)
     return result if np.isfinite(result).all() else parent
