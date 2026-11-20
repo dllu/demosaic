@@ -385,6 +385,13 @@ affine and same-color RAW contrast on exterior texture. At ISO6400 the
 bounded lift adds 13.53 signed response points, with 1.44 DN16 more false
 strong-line RMS. It requires a proposed frequency and aperture. The
 right cab shows a clearer local grid that is too regular beside the reference.
+[Held-out frequency refinement](wire-frequency-refinement.md) lowers median
+ISO6400 rounded-guide error from 0.395 to 0.341 bins in the stronger
+direction. The same 42 true and six false calls remain. Bounded delivery
+adds 0.42 response points with 0.37 DN16 higher continuing-gap RMS
+versus the fixed guide. Both left-cab directions have exterior support
+with the archived donor pair, and local verification still leaves
+connected crossings missing.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

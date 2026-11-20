@@ -921,6 +921,16 @@ The bounded lift recovers 13.53 signed response points, with a positive
 false-detail tail and an overly regular local right-cab grid.
 [Exterior wire verification](wire-exterior-verification.md).
 
+The [held-out frequency adjustment](wire-frequency-refinement.md) tests
+169 local frequency pairs on separate exterior blocks. On a new 64-source
+panel, the stronger rounded guide moves from 0.395 to 0.341 bins of median
+error at ISO6400, with the same 42 true and six false calls. The half-bin
+radial stress retains mixed gains and larger false-projection tails.
+Both directions of the archived left-cab donor pair pass the exterior
+strength test. Local validation still leaves the crossings incomplete.
+This separates better exterior frequency estimates from evidence for
+the spatial extent and amplitude of the wire inside the query.
+
 Calibrate the complete selection-and-validation procedure on fresh exact flats
 and edge-only scenes, including the search over all candidates. Measure false
 activation per patch/frame, not just per chosen coefficient. Formal risk control

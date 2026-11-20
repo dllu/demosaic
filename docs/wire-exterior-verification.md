@@ -14,6 +14,11 @@ an overly regular grid and incomplete crossings elsewhere.
 [Sources and execution receipts](results/wire-blind-spot-v1/evidence.tar.xz) ·
 [Native boards and provenance](images/wire-blind-spot-v1/manifest.json).
 
+The [frequency-refinement follow-up](wire-frequency-refinement.md) measures
+rounded and displaced guides on a fresh panel and tests the prior exterior
+donor pair in the two empty left-cab cases. Better exterior frequency
+agreement gives small, mixed delivery changes.
+
 ## Background prediction from a separate set of samples
 
 Both checkerboard groups contain complete Bayer cells. For one score,

@@ -79,6 +79,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [factored luminance correction](local-factored-wire.md) ·
 [separate phase and support](local-wire-gate-support.md) ·
 [exterior RAW wire verification](wire-exterior-verification.md) ·
+[held-out wire-frequency refinement and left cab donors](wire-frequency-refinement.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [paired fine luminance and flat support](paired-luminance-detail.md) ·
 [exact orientation averaging](paired-head-symmetry.md) ·
