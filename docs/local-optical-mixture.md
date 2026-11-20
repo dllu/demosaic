@@ -62,6 +62,13 @@ launch receipt verifies the first 60 full-run updates against the
 frozen optical schedule. Training is running. Endpoint numerical and
 native-image reviews are pending.
 
+The [128-update development review](local-optical-mixture-128.md) finds
+0.247 points more weak response and 0.031 DN16 more false weak projection
+than the sharp regional control at σ 0.85. The response advantage is
+larger on sharp inputs. On the same blurred input, the mixed arm still
+recovers 0.586 points less than the Local 50k starting EMA. The training
+target audit counts 21 blurred wires in the validation period range.
+
 [Launch receipt](results/local-optical-mixture-v1/launch.json) ·
 [Frozen plan, sources and review scripts](results/local-optical-mixture-v1/launch-evidence.tar.xz) ·
 [Main standing GFX review map](gfx-qualitative.md) ·

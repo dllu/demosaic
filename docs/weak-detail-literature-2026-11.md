@@ -1227,6 +1227,11 @@ both blur widths. Keep sharp examples and a separate blur holdout in a
 matched augmentation test. The [mixed-optics continuation](local-optical-mixture.md)
 uses the same 1,024 ordered training sources as the sharp regional control
 and reserves 24 fresh backgrounds for the σ 0.85 comparison.
+The [128-update development review](local-optical-mixture-128.md) finds
+0.247 points more sharp-normalized weak response at that dose versus the
+matched regional control, with 0.031 DN16 higher false projection. The
+gain on sharp inputs is 0.381 points. The training audit finds only 21
+of 256 blurred wire groups in the test's 7.2–9.25-pixel period range.
 
 ### 7. Revisit the backbone and DINO role after these discriminating tests
 
