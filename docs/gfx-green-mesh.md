@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Multiple wide Bayer nominations](detail-phase-shortlist.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The second measured right direction passes at 20 of 25 nominal stations versus 4 with one nomination. Right diagonal texture changes subtly and fine crossings remain incomplete |
 | [Validated wide Bayer nominations](detail-crossfit-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. Calibrated changes to transferred left/right are 0.496/1.497 DN16 RGB RMS. Earlier measured right frequencies pass at 22/20 of 25 stations when supplied, versus 8/4 in the ordinary search. Fine crossings remain incomplete |
 | [Wider Bayer frequency nomination](detail-wide-phase.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The harmonic-aware lock changes the transferred left/right by 0.213/0.435 DN16 RGB RMS. Changes to existing diagonals are subtle and visible crossings remain incomplete |
 | [Reserved Bayer phase for weak-wire routing](detail-phase-routing.md#standing-gfx100s-comparisons) | Both ROIs, profiles and JPEGs viewed at ×4 and ×16. The full local check changes transferred left/right by 0.769/2.184 DN16 RGB RMS. Visible fine crossings remain incomplete |

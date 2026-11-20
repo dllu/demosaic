@@ -8,6 +8,11 @@ adds **0.097 DN16** in the absent weak direction inside true gaps, above
 the +0.050 calibration limit. The standing sky is pixel-identical to
 Local 50k and the fine cab crossings remain incomplete.
 
+A [shortlist and continuation follow-up](detail-phase-shortlist.md) finds
+the second measured right-cab direction at more native stations. It
+recovers less weak contrast at the calibrated strength, and visible
+fine crossings remain incomplete.
+
 ## Method and controls
 
 The [wider frequency search](detail-wide-phase.md) recovered weak-wire

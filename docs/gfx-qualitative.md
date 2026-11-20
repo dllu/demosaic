@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Multiple wide Bayer nominations](detail-phase-shortlist.md#standing-gfx100s-comparisons) produces the nominal sky exactly at both strengths. The calibrated continuation check changes the coarse fence by 1.840 DN16 RGB RMS and keeps its crossings connected.
+
 - [Validated wide Bayer nominations](detail-crossfit-phase.md#standing-gfx100s-comparisons) produces the Local 50k sky exactly at both strengths and changes the coarse fence by 4.770 DN16 RGB RMS at the calibrated strength. Crossings stay connected.
 
 - [Wider Bayer frequency nomination](detail-wide-phase.md#standing-gfx100s-comparisons) changes sky by 0.223 DN16 and the coarse fence by 1.118 DN16 RGB RMS at the harmonic-aware lock. The sky remains visually smooth and the coarse crossings stay connected.

@@ -140,6 +140,13 @@ optical fixtures. At equal response it reduces exact-flat error by
 and the fine cab crossings remain incomplete. Added weak-gap residue
 exceeds the calibration limit. [Validated wide Bayer nominations](detail-crossfit-phase.md).
 
+A three-candidate Bayer search increases nominal right-cab coverage
+of the second measured diagonal from 4 to 20 of 25 stations. Fine
+crossings remain incomplete. The guarded shortlist adds 0.562 contrast
+points with 0.012 DN16 weak residue in true gaps. The single nomination
+recovers more contrast and has lower gap residue on those same sources.
+[Multiple wide Bayer nominations](detail-phase-shortlist.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

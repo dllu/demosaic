@@ -1375,6 +1375,13 @@ calibration limit. Supplying earlier measured cab frequencies increases
 local admissions, implicating frequency nomination in the remaining real
 failure. [Validated wide Bayer nominations](detail-crossfit-phase.md).
 
+A three-candidate shortlist increases automatic verified coverage of
+the second nominal right cab direction from 4 to 20 of 25 stations.
+The checked correction gains 0.562 weak contrast points with +0.012 DN16
+weak-gap residue on 32 fresh wires. The single nomination gains 1.153
+with lower gap residue. Added real coverage still gives incomplete
+crossings. [Multiple wide Bayer nominations](detail-phase-shortlist.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,
