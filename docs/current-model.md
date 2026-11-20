@@ -62,6 +62,14 @@ compiled batch four. [Full-frame batch replay](corpus100k-fp16-batch.md).
 [CUDA tile transport](corpus100k-device-tiles.md) ·
 [Full-frame cuDNN search](corpus100k-cudnn-fp16.md).
 
+[Trained exterior scene gates](scene-detail-selector.md) recover
+0.189 fine-response points above Local 50k on 32 held photos and
+add 0.019 DN16 of exact-flat fine RMS. The earlier Bayer gate is
+quieter at equal response, and replacing exterior scene features
+with another photo changes little. Sharing the local encoder
+cuts median three-setting crop forward time from 524 to 495 ms
+with identical RGB in the audit.
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Trained exterior scene gate](scene-detail-selector.md#standing-gfx100s-comparisons) changes sky by 0.010 DN16 RGB RMS and coarse fence by 2.783 DN16 above Local 50k. Building and foliage change subtly and the coarse crossings stay connected.
+
 - [Color evidence for connected gaps](cfa-gap-support.md#standing-gfx100s-comparisons) returns the regional refit on sky, building and foliage. The locked color fit changes the coarse fence by 1.432 DN16 RGB RMS and retains connected crossings.
 
 - [Connected gap support](junction-occlusion.md#standing-gfx100s-comparisons) returns the regional refit on sky, building and foliage above Local 50k and Corpus 100k. On the coarse fence the connected affine change is 2.373 and 2.471 DN16 RGB RMS respectively, with continuous crossings.

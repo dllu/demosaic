@@ -13,6 +13,13 @@ The [junction follow-up](junction-regional-refit.md) projects the sharper
 branch onto an independently measured crossing band. A RAW-only
 refit attains similar junction error at matched contrast.
 
+The [trained selector follow-up](scene-detail-selector.md) fits
+matched local, pooled and spatial gates on 1,600 photos. Its aligned
+variant recovers less contrast than this rule, with a lower increment
+cost at the locked strengths. At matched contrast this rule keeps
+flatter cores. The follow-up also shares the local DINO encoding
+across the three settings with unchanged RGB in the audit.
+
 ## Same RAW, different conditioning
 
 All branches use Local 50k EMA SHA256

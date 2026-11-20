@@ -1265,6 +1265,13 @@ error proxy favors the much noisier 0.65× branch. A perturbation
 correction improves the proxy's relation to exact risk and still
 misclassifies many windows.
 
+[Trained exterior scene gates](scene-detail-selector.md) use 1,600
+source photos and learn gain separately from the detail proposal.
+Alignment gains 0.189 points over Local 50k with 0.019 DN16 more
+flat RMS. A different photo gives similar results. Supplied exact
+targets select 2.418 more points while lowering both fine-increment
+and flat error, indicating room to improve gain estimation.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

@@ -15,6 +15,11 @@ still leave weak crossings missing, with increment/colour costs. See the
 [coloured-wire](coloured-fine-wire-benchmark.md) reports; those outcomes strengthen
 the case for testing the missing scene information.
 
+The later [masked exterior selector](scene-detail-selector.md) trains
+matched local, pooled and spatial gain heads on 1,600 photos. It
+finds a small tradeoff on isolated natural detail, with similar
+results when the exterior comes from another held photo.
+
 ## What context should do
 
 A sky region and a fence beside a train should have different structure priors
