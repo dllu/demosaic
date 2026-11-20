@@ -1055,6 +1055,15 @@ False gap projection changes by 0.004 DN16. Median weak-carrier energy
 in a single Fourier pair falls from 63% on retained wires to 44% off
 grid, where the dense cosine prior recovers more intact detail.
 
+[Shifted Fourier grids](scene-staggered-phase.md) raise median
+best-pair coverage from 56% to 83% in the fresh clean-carrier
+test. On a second independent 24-photo panel, averaging the four
+grids lowers exact-flat RMS by 0.092 DN16 versus earlier radial,
+with similar intact response and false gap projection. Selecting on
+one donor split and validating on the other gives a lower mean
+fresh response. At equal correction energy both measured
+right-cab peaks gain, with no clear visual recovery of fine crossings.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

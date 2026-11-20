@@ -488,6 +488,11 @@ flat error. Fine cab crossings remain incomplete.
 the continuing wire with similar flat and false-gap errors on fresh
 off-grid fields. Dense cosine restores more intact detail. The
 nominal left cab remains mottled with incomplete crossings.
+[Shifted Fourier grids](scene-staggered-phase.md) improve clean
+off-grid spectral coverage and reduce the earlier radial filter's
+flat cost on two 24-photo panels. Fresh intact response stays close
+to earlier radial. Both measured right cab peaks gain at equal
+correction energy, with many fine crossings still missing.
 [Exterior-frequency wire colour](query-exterior-colour.md) recovers some
 weak-wire colour where a green-only fit abstains. Reserved Bayer samples
 confirm colour on five fresh high-noise fixtures. Small colour enters true

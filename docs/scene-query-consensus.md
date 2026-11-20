@@ -8,6 +8,10 @@ and flat error. The dense cosine filter still recovers substantially
 more intact wire, with more false projection. The real cab crossings
 remain incomplete.
 
+[Follow-up on shifted Fourier grids](scene-staggered-phase.md) measures
+best-pair coverage and evaluates the same radial control on 24 additional
+off-grid photo backgrounds.
+
 [Machine results](results/scene-query-consensus-v1/publication.json) ·
 [Frozen drivers and receipts](results/scene-query-consensus-v1/evidence.tar.xz) ·
 [Native provenance](images/scene-query-consensus-v1/manifest.json).
