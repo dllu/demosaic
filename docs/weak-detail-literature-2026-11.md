@@ -1033,6 +1033,14 @@ The full collar exceeds the held gap and flat-core budgets. Tracking each
 direction separately attributes most of the gap change to the continuing
 strand. The left cab's diagonals shift subtly while crossings remain incomplete.
 
+The [replicated phase study](local-replicated-phase.md) separates a held
+phase test from the interpolation that delivers it. Nearly all added
+missing-direction luma energy on its diagnostic panel sits within eight
+pixels of gap boundaries. Capping the correction by its own station
+reduces added missing-direction luma from 0.090 to 0.034 DN16 at matched
+recovery on 24 new photos. The crop option still recovers 1.084 additional
+contrast points over nearby phase. The fine cab changes are barely visible.
+
 ### 3. Model strong edges as competitors, and localize synthesis
 
 An affine background cannot explain a step edge. Its residual spectrum can

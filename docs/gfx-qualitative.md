@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Station-capped phase](local-replicated-phase.md#standing-gfx100s-comparisons) retains the smooth sky, building, foliage and connected coarse fence of nearby phase.
+
 - [Independent phase with ambiguous rank](local-unranked-phase.md#standing-gfx100s-comparisons) reproduces the smooth sky, building, foliage and connected coarse fence of nearby phase.
 
 - [Nearby RAW phase fallback](local-near-phase.md#standing-gfx100s-comparisons) returns Local 50k for sky, building and foliage. The eligible distant fit on the coarse fence keeps its connected crossings.

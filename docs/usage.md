@@ -138,6 +138,11 @@ more faint contrast on exact targets, with some increase in gap texture. [Result
 `method="weak-near-phase"` uses the same inputs and pools the immediately
 surrounding 32 pixels when distant phase fails. It checks that predicted phase
 inside the existing weak windows. [Results and timing](local-near-phase.md#packaged-crop-fit).
+
+`method="weak-replicated-phase"` uses the same inputs. When green rank is
+ambiguous it checks both directions with two-green and along-wire support.
+The local station limits the strength delivered to its pixels. [Results and timing](local-replicated-phase.md#packaged-crop-fit).
+
 [Regional color results and timing](cfa-regional-phase.md#packaged-crop-fit) ·
 [Green-only pooled results](local-pooled-carrier.md#packaged-crop-fit) ·
 [Ring prior results and timing](local-bayer-presence.md#use-the-crop-option) ·

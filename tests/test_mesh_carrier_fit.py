@@ -101,6 +101,7 @@ def test_frequency_donors_exclude_the_verification_halo(pattern):
         "weak-phase-guard",
         "weak-phase-contrast",
         "weak-near-phase",
+        "weak-replicated-phase",
     ),
 )
 def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
@@ -142,6 +143,7 @@ def test_contextual_weak_phase_on_an_odd_native_origin(pattern, method):
         "weak-phase-guard",
         "weak-phase-contrast",
         "weak-near-phase",
+        "weak-replicated-phase",
     ),
 )
 def test_pooled_fit_requires_context_and_independent_donors(method):
@@ -237,6 +239,70 @@ def test_near_phase_rejects_a_true_gap_inside_eligible_surroundings(pattern):
     assert eligible.min() == 1
     assert weight[:, :32].mean() > 0.9
     assert weight[:, 68:92].mean() < 0.05
+
+
+@pytest.mark.parametrize("pattern", tuple(PATTERNS))
+def test_replicated_phase_requires_two_aligned_stations_and_caps_their_extent(pattern):
+    from demosaic._mesh_near_phase import _replicated_taper
+    from demosaic.mesh_carrier_fit import _positions
+
+    origin = (151, 149)
+    x0, y0 = origin
+    y, x = np.indices((480, 480), dtype=np.float64)
+    frequencies = np.asarray(((0.115, 0.074), (0.089, -0.079)))
+    phase = 2 * np.pi * (x[..., None] * frequencies[:, 0] + y[..., None] * frequencies[:, 1])
+    strong, weak = (0.018 * np.cos(phase + (0.8, -0.7))).transpose(2, 0, 1)
+    crop = np.s_[y0 : y0 + 160, x0 : x0 + 160]
+    upper = np.s_[y0 + 64 : y0 + 80, x0 + 64 : x0 + 80]
+    lower = np.s_[y0 + 80 : y0 + 96, x0 + 80 : x0 + 96]
+    raw = 0.09 + strong + weak
+    raw[crop] -= weak[crop]
+    raw[upper] += weak[upper]
+    positions = _positions(PATTERNS[pattern], *origin)
+
+    def strength(mosaic):
+        return _replicated_taper(pack(mosaic), origin, positions, frequencies, 1, 0.0001, 6e-7)
+
+    assert not strength(raw).any()
+    raw[lower] += weak[lower]
+    weight = strength(raw)
+    allowed = np.zeros_like(weight, dtype=bool)
+    allowed[64:80, 64:80] = True
+    allowed[80:96, 80:96] = True
+    assert weight[72, 72] > 0.8
+    assert weight[88, 88] > 0.8
+    assert not weight[~allowed].any()
+
+    # A second station with only one supporting green cannot validate the pair.
+    row, column = positions[0]
+    raw[lower][row::2, column::2] -= weak[lower][row::2, column::2]
+    assert not strength(raw).any()
+
+
+@pytest.mark.parametrize("pattern", tuple(PATTERNS))
+def test_replicated_phase_recovers_both_equally_ranked_wires(pattern):
+    y, x = np.indices((480, 480), dtype=np.float64)
+    raw = (
+        0.08
+        + 0.003 * np.cos(2 * np.pi * (0.1171875 * x + 0.07421875 * y) + 0.8)
+        + 0.003 * np.cos(2 * np.pi * (0.08984375 * x - 0.072265625 * y) - 0.9)
+    ).astype(np.float32)
+    context = np.full((3, 192, 192), 0.08, dtype=np.float32)
+    parent = context[:, 16:-16, 16:-16]
+    arguments = (parent, pack(raw), PATTERNS[pattern], (151, 149, 160, 160))
+    options = {
+        "shot": 0.00128,
+        "read": 6.5536e-6,
+        "white_balance": np.ones(3),
+        "camera_to_srgb": np.eye(3),
+        "parent_context": context,
+    }
+    baseline = refine_raw_mesh_carriers(*arguments, method="weak-near-phase", **options)
+    revised = refine_raw_mesh_carriers(*arguments, method="weak-replicated-phase", **options)
+    target = raw[165:293, 167:295]
+    baseline_error = np.mean((baseline[:, 16:-16, 16:-16] - target) ** 2)
+    revised_error = np.mean((revised[:, 16:-16, 16:-16] - target) ** 2)
+    assert revised_error < 0.8 * baseline_error
 
 
 def test_pooled_color_keeps_flat_green_when_red_and_blue_have_carriers():

@@ -1,4 +1,4 @@
-"""Apply a local ring prior only to the weaker measured mesh direction."""
+"""Apply a local ring prior to measured mesh directions."""
 
 import numpy as np
 from scipy.special import expit
@@ -66,6 +66,31 @@ def _weak_correction(
     return np.where(selected[:, None, None], revised, previous)
 
 
+def _replicated_directions(
+    parent, scene, origin, frequencies, wave, positions, observed, corrections, shot, read, neutral
+):
+    from ._mesh_near_phase import _replicated_taper
+
+    delta = np.zeros_like(parent, dtype=np.float64)
+    for direction, previous in enumerate(corrections):
+        revised = _weak_correction(
+            parent, wave, direction, positions, observed, shot, read, previous, full_strength=True
+        )
+        change = revised - previous
+        if not change.any():
+            continue
+        weight = _replicated_taper(scene, origin, positions, frequencies, direction, shot, read)
+        if weight is not None:
+            delta += weight * _rgb(change, neutral, np.float64)
+
+    combined = sum(corrections)
+    baseline = parent + _rgb(combined, neutral, parent.dtype) if combined.any() else parent
+    if not delta.any():
+        return baseline
+    full = (baseline.astype(np.float64) + delta).astype(parent.dtype)
+    return (baseline + 0.95 * (full.astype(np.float64) - baseline)).astype(parent.dtype)
+
+
 def _refine(
     parent,
     context,
@@ -80,6 +105,7 @@ def _refine(
     guard_clearance=None,
     full_weak_strength=False,
     near_phase=False,
+    replicated_phase=False,
 ):
     positions = _positions(colors, *origin)
     greens = tuple(_footprint(scene, origin, position) for position in positions)
@@ -100,6 +126,21 @@ def _refine(
         _dominant(*_measure_nodes(plane, guides, site, shot, read))
         for plane, site in zip(greens, positions, strict=True)
     )
+    if replicated_phase and (first is None or first != second):
+        result = _replicated_directions(
+            parent,
+            scene,
+            origin,
+            frequencies,
+            wave,
+            positions,
+            observed,
+            corrections,
+            shot,
+            read,
+            neutral,
+        )
+        return result if np.isfinite(result).all() else parent
     taper = None
     near_taper = None
     if first is not None and first == second:

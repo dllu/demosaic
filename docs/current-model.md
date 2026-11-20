@@ -212,11 +212,13 @@ photos it gains 0.719 response points over weak phase contrast, with 0.025
 DN16 lower mean added gap luma and an interval spanning zero. It changes
 both right cab views. Fine crossings remain incomplete.
 
-[Independent direction checks](local-unranked-phase.md) recover 0.863
-second-direction response points on 32 new photo fixtures with similar wire
-amplitudes. The collar exceeds the quiet and gap budgets; most added gap
-luma follows the strand that remains present. Both left cab crops change
-subtly and crossings remain incomplete.
+The opt-in [replicated phase fit](local-replicated-phase.md) checks both
+directions when the green lattices disagree. Its station cap gains 1.084
+second-direction points on 24 new near-balanced fixtures and lowers added
+missing-direction luma from 0.090 to 0.034 DN16 at equal recovery. Its
+fallback takes about 52 ms when it changes the crop. The fine left cab
+barely changes and crossings remain incomplete. The [earlier independent
+check](local-unranked-phase.md) had a larger flat-core ripple.
 
 [Curved phase transport](local-curved-phase-transport.md) predicts the
 known weak phase much more accurately on 24 new curved fixtures when both

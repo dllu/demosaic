@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Station-capped phase](local-replicated-phase.md#standing-gfx100s-comparisons) | Both ROIs and profiles reviewed at ×4 and ×16 with AHD and camera JPEGs. Left changes by 0.072 DN16 RGB RMS nominal and 0.041 transferred versus nearby phase. Right reproduces nearby phase and fine crossings remain incomplete |
 | [Independent phase with ambiguous rank](local-unranked-phase.md#standing-gfx100s-comparisons) | Both ROIs and profiles reviewed at ×4 and ×16. Left changes by 1.42 DN16 RGB RMS nominal and 1.37 transferred versus nearby phase, with incomplete crossings. Right reproduces nearby phase |
 | [Nearby RAW phase fallback](local-near-phase.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed at ×4 and ×16 with AHD and both JPEGs. The right crop changes by 2.44 DN16 RGB RMS nominal and 1.60 transferred versus weak phase contrast. Weak diagonal contrast shifts locally, with incomplete crossings and mottle |
 | [Weak phase contrast](local-weak-contrast.md#standing-gfx100s-comparisons) | Both ROIs and noise profiles reviewed at ×4 and ×16 with AHD and both JPEGs. Both right crops reproduce the fixed guard because the donor phase is inconsistent. Fine crossings remain incomplete |

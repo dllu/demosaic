@@ -2,6 +2,10 @@
 
 On 32 new ISO6400 photo-based tests, checking each wire direction independently gained **0.863 percentage points** of second-direction contrast over [nearby phase](local-near-phase.md). The intact error fell **1.366 DN16**. Five draws changed inside true gaps. The change there was mainly along the continuing strand, with a small rise in false projection along the missing strand. The collar also added a faint ripple on one flat-core draw. Both left cab views changed subtly, with incomplete crossings. The experiment uses frozen weights and is available as a research replay.
 
+The [replicated phase follow-up](local-replicated-phase.md) adds a separate
+along-wire check and a within-station delivery limit, with new exact-gap
+calibration and a frozen source-disjoint confirmation.
+
 ## Separate direction evidence from crop-wide rank
 
 Nearby phase currently applies its conditional posterior only when both green lattices rank the same direction at least 25% higher by median estimated power. On the standing left cab, one green ranks the positive diagonal higher and the other ranks the negative diagonal higher. This study holds the exterior frequency nomination and neural parent fixed. When the rank is ambiguous, it fits both directions separately, conditioning each on the other direction and the smooth background. The full conditional fit uses the original amplitude cap. Each proposed update is measured relative to the existing combined correction.
