@@ -208,14 +208,45 @@ The replay took 242.21 s wall with concurrent inference running.
 [Camera summary](results/local-regional-wire-camera-v1/publication.json) ·
 [Per-case camera evidence](results/local-regional-wire-camera-v1/evidence.tar.xz).
 
+## Fixed photo panel
+
+The final CUDA IEEE FP32 EMAs complete the fixed 427-photo panel.
+Scores balance sources over seven conditions and four Bayer layouts
+(11,956 observations per model). V120, Corpus 100k and Local 50k
+scores come from the matching canonical receipts. The 427-photo
+means exclude the 16 synthetic samples in the general suite.
+The full collection session took 7,137.47 seconds with concurrent
+GPU work and the matching camera cases already recorded. That is
+evaluation wall time.
+
+| EMA | Source-balanced sRGB PSNR |
+| --- | ---: |
+| V120 | 37.04008 dB |
+| Corpus 100k | 37.24747 dB |
+| Local 50k | 37.27953 dB |
+| Whole core | 37.24230 dB |
+| Regional | 37.24266 dB |
+
+Regional minus whole core is +0.00037 dB [−0.00128, +0.00144].
+The regional model loses 0.03686 dB versus Local 50k
+[−0.04264, −0.03162] and gains 0.20258 dB versus V120
+[+0.18937, +0.21494]. Its −0.00481 dB versus Corpus 100k has
+an interval spanning zero [−0.01779, +0.00732].
+Regional improves the highlight condition by 0.00987 dB versus
+whole core, yet its highlight mean remains 0.08501 dB below
+Local 50k. Regional trails Local 50k in all seven condition means.
+Intervals use 10,000 paired source resamples.
+[Primary publication](results/local-regional-wire-primary-v1/publication.json) ·
+[Paired results by condition](results/local-regional-wire-primary-v1/paired.json) ·
+[Paired analysis source](results/local-regional-wire-primary-v1/paired-evidence.tar.xz) ·
+[Canonical cases](results/local-regional-wire-primary-v1/evidence.tar.xz).
+
 ## Review status and evidence
 
-Training, scoped numerical scoring, native inspection and both fixed
-camera panels are complete.
-The scoped review took 215.04 seconds wall across all inputs and rendering
-under concurrent GPU work. The full 427-photo collection is running on
-both final EMA checkpoints identified above. That panel has no result
-for either arm yet.
+Training, scoped numerical scoring, native inspection, the fixed
+427-photo panel and both fixed camera panels are complete for both
+final EMAs. The scoped review took 215.04 seconds wall across all
+inputs and rendering under concurrent GPU work.
 [Comparable PSNR history](performance-history.md).
 
 [Native provenance](images/local-regional-wire-v1/step-1024/manifest.json) ·

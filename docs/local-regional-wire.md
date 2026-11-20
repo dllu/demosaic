@@ -6,6 +6,8 @@ averaged away by a whole-crop loss. Both arms also get explicit
 supervision where that direction is absent. The
 [1,024-update endpoint review](local-regional-wire-1024.md) finds lower
 continuing-strand error and weaker second-direction response. The
+[fixed photo panel](local-regional-wire-1024.md#fixed-photo-panel)
+places both final EMAs about 0.037 dB below Local 50k. The
 [512-update review](local-regional-wire-512.md) and
 [128-update review](local-regional-wire-128.md) retain earlier checkpoints.
 [Launch receipt](results/local-regional-wire-v1/launch.json) ·

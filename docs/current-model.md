@@ -134,7 +134,9 @@ Natural fine-increment error falls 0.218 DN16 with similar response.
 Wire exact-flat RMS is 2.065 DN16 higher than Local 50k. The transferred
 right cab shows a stronger first diagonal and incomplete crossings.
 Regional gains 0.01553 dB unseen and loses 0.00689 dB known versus
-Local 50k. Both arms use the Local 50k inference path.
+Local 50k and loses 0.03686 dB on 427 photos. The whole-core
+arm loses 0.03723 dB on those photos. Both use the Local 50k
+inference path.
 
 The [mixed-optics endpoint](local-optical-mixture-1024.md) lowers
 fixed natural fine-flat RMS by 0.085 DN16 and raises fine-increment
