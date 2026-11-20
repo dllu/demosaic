@@ -3,6 +3,8 @@
 **Review map updated November 20, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Weak-wire proposal headroom](detail-directional-proposal.md#standing-gfx100s-comparisons) changes sky by 0.014 DN16 and coarse fence by 0.483 DN16 RGB RMS above the earlier Bayer blend. Sky remains smooth and coarse crossings stay connected.
+
 - [Bayer routing across contrast levels](detail-regime-router.md#standing-gfx100s-comparisons) changes sky by 0.153 DN16 and the coarse fence by 1.735 DN16 RGB RMS above Local 50k. Native sky stays smooth and coarse crossings are connected.
 
 - [Weak-detail training across redraws](detail-redraw-gate.md#standing-gfx100s-comparisons) changes the sky by 0.260 DN16 RGB RMS above Local 50k. The sky still looks smooth, foliage gains subtle definition and the coarse crossings remain connected.

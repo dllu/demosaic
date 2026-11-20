@@ -94,6 +94,15 @@ regimes. The faintest half and planted wires lose some response, and real
 cab crossing changes are subtle. The mixture remains experimental.
 [Bayer routing across contrast levels](detail-regime-router.md).
 
+An exact-target test finds more intact-wire headroom in the Local 50k
+conditioning proposals than the observed gates can use. Adding a
+directional RAW residual lowers the exact-fit error by a further
+1.31 DN16 at two additional contrast points. Practical proposals add
+little contrast and raise intact error on the off-grid replay. The
+parent-phase proposal adds 0.081 faint natural points with 0.005 DN16
+more exact-flat RMS over the Bayer blend.
+[Weak-wire proposal headroom](detail-directional-proposal.md).
+
 A [conditioning sweep on Local 50k](context-conditioned-detail.md)
 finds that supplying 65% of the physical variance adds visible texture to
 quiet regions. A bounded three-forward blend retains about 0.65 points of

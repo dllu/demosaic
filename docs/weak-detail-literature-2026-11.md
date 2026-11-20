@@ -1322,6 +1322,15 @@ is lower than the best fixed mixture. Moving the local descriptors
 lowers response. The faintest half and planted wires still lose
 contrast. [Bayer routing across contrast levels](detail-regime-router.md).
 
+An exact-target diagnostic changes gains on the same 32-pixel
+delivery grid and compares a directional Bayer residual in the
+proposal set. At two extra response points the old proposals can
+lower intact error 4.352 DN16. The directional basis lowers it
+5.665 DN16 under the same response requirement. In actual use,
+the parent-phase deficit gains 0.102 wire points with 0.305 DN16
+more intact error. The best-case fit has access to exact targets
+and measures intact error. [Weak-wire proposal headroom](detail-directional-proposal.md).
+
 In the completed full-trunk redraw study, averaging the signed increment
 before applying its loss raises response and lowers the error shared
 across redraws. For an individual restoration under independent noise,

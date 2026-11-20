@@ -10,6 +10,12 @@ blend recovers 0.159 points. The gain changes sign on the
 weakest half and the planted wires. The real fine cab mesh
 still has incomplete crossings.
 
+The follow-up measures the exact-target gain ceiling of the two
+proposals and adds a directional Bayer residual. It lowers the
+attainable intact error at equal response. The locked analytic
+rule uses little of that headroom.
+[Weak-wire proposal headroom](detail-directional-proposal.md).
+
 ## Mix the frozen outputs at the gain stations
 
 The previous Local 50k gain heads traded contrast against
