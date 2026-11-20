@@ -1216,6 +1216,16 @@ phase, pre-binning geometry and sharp fine targets must survive. Rendered and
 native RAW optics or remove every JPEG/ISP artifact. Do not simply blur all
 training targets; that could teach more attenuation.
 
+The [pre-Bayer optical replay](sensor-optical-transfer.md) tested five
+frozen EMAs on the same 32 off-grid backgrounds at two added blur widths.
+With shared photon counts and read noise across doses, Local 50k recovered
+22.44%, 18.99% and 14.59% of the original sharp weak signal at σ 0, 0.55
+and 0.85 native pixels. It also recovered a smaller fraction of the signal
+available after blur. Regional supervision kept lower continuing-strand
+error than whole-core supervision and recovered less of the weak strand at
+both blur widths. Keep sharp examples and a separate blur holdout in a
+matched augmentation test.
+
 ### 7. Revisit the backbone and DINO role after these discriminating tests
 
 Use one modern supervised comparison—e.g. a NAFNet/Restormer-style native RAW

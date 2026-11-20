@@ -33,7 +33,8 @@ Start with the [README](../README.md) for installation and inference.
 
 [Weak-detail literature](weak-detail-literature-2026-11.md) ·
 [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) ·
-[Training scale review](training-scale-pipeline-review-2026-11-17.md).
+[Training scale review](training-scale-pipeline-review-2026-11-17.md) ·
+[Weak-wire sensitivity to optical blur](sensor-optical-transfer.md).
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·
